@@ -76,26 +76,57 @@ const { pathToFileURL } = require('node:url');
       assert.equal(await page.locator('#team-experience').getAttribute('data-phase'),'after');
       const brokenAnchors = await page.locator('a[href^="#"]').evaluateAll(links => links.filter(link => !document.getElementById(link.hash.slice(1))).map(link => link.hash));
       assert.deepEqual(brokenAnchors, []);
+      assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto', 'Reduced motion disables smooth anchor scrolling');
+      const checkAnchorHeading = async id => {
+        const position = await page.evaluate(id => {
+          const section = document.getElementById(id);
+          const heading = section.querySelector('.overline, .eyebrow');
+          return { top: heading.getBoundingClientRect().top, headerBottom: document.querySelector('.site-header').getBoundingClientRect().bottom };
+        }, id);
+        const gap = position.top - position.headerBottom;
+        assert(gap >= -1, `Anchor content hidden behind header at ${id}/${width}px: ${JSON.stringify(position)}`);
+        assert(gap <= (width > 900 ? 80 : 55), `Anchor spacing too large at ${id}/${width}px: ${JSON.stringify(position)}`);
+      };
+      await page.locator('.skip-link').focus();
+      await page.keyboard.press('Enter');
+      assert.equal(new URL(page.url()).hash, '#main');
+      await checkAnchorHeading('main');
+      await page.locator('.site-header .brand').click();
+      await checkAnchorHeading('inicio');
+      for (const id of ['solucoes', 'metodo', 'processos', 'simulador', 'faq', 'contato']) {
+        await page.evaluate(id => { location.hash = id; }, id);
+        await checkAnchorHeading(id);
+      }
       const overflowing = await page.locator('body *').evaluateAll(elements => elements.filter(el => {
         const r = el.getBoundingClientRect();
         return r.width && (r.right > innerWidth + 1 || r.left < -1) && getComputedStyle(el).position !== 'fixed' && !el.closest('[aria-hidden="true"]');
       }).map(el => el.className));
       assert.deepEqual(overflowing, [], `Overflow at ${width}px`);
       if (width === 390) {
-        await page.locator('#menu-btn').focus();
-        await page.keyboard.press('Enter');
-        assert.equal(await page.locator('#menu-btn').getAttribute('aria-expanded'), 'true');
-        await page.locator('#nav a[href="#processos"]').click();
-        assert.equal(await page.locator('#menu-btn').getAttribute('aria-expanded'), 'false');
+        for (const id of ['solucoes', 'metodo', 'processos', 'simulador', 'faq', 'contato']) {
+          await page.locator('#menu-btn').focus();
+          await page.keyboard.press('Enter');
+          assert.equal(await page.locator('#menu-btn').getAttribute('aria-expanded'), 'true');
+          await page.locator(`#nav a[href="#${id}"]`).click();
+          assert.equal(await page.locator('#menu-btn').getAttribute('aria-expanded'), 'false');
+          await checkAnchorHeading(id);
+        }
         await page.locator('#menu-btn').click();
         await page.keyboard.press('Escape');
         assert.equal(await page.locator('#menu-btn').getAttribute('aria-expanded'), 'false');
         assert(await page.locator('#menu-btn').evaluate(el => el === document.activeElement));
       }
       if (width === 1440) {
+        for (const link of await page.locator('.site-footer nav a[href^="#"]').all()) {
+          await link.scrollIntoViewIfNeeded();
+          const id = (await link.getAttribute('href')).slice(1);
+          await link.click();
+          await checkAnchorHeading(id);
+        }
         for (const button of await page.locator('.solution-cta').all()) {
           await button.click();
           assert.equal(await page.locator('#lead-interest').inputValue(), await button.getAttribute('data-solution'));
+          await checkAnchorHeading('contato');
         }
         for (const link of await page.locator('[data-interest]').all()) {
           await link.click();
