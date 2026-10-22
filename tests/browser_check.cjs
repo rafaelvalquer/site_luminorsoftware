@@ -19,7 +19,7 @@ const { pathToFileURL } = require('node:url');
       await page.goto(pathToFileURL(resolve(root, 'PREVIA_AUTONOMA.html')).href);
       await page.locator('#cookies-reject').click();
       assert(await page.locator('#cookie-banner').isHidden());
-      assert.equal(await page.locator('h1').innerText(), 'Entendemos seu processo.\nCriamos a solução.\nAutomatizamos sua rotina.');
+      assert.equal(await page.locator('h1').innerText(), 'Automação de processos e sistemas sob medida para sua empresa');
       assert.equal(await page.locator('.process-flow li').count(), 4);
       assert.equal(await page.locator('.method-grid article').count(), 4);
       assert.equal(await page.locator('.example-card').count(), 3);

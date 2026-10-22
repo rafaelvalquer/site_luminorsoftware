@@ -3,11 +3,14 @@
   "private": true,
   "version": "2.0.0",
   "type": "module",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node server/index.js",
     "dev": "node --watch server/index.js",
-    "test": "node --test tests/*.test.js"
+    "test": "node --test tests/*.test.js",
+    "build": "node scripts/build_seo.mjs"
   },
   "description": "Novo site institucional da Luminor Software, com exemplos de automação sob medida e API local de leads, sem dependências externas."
 }

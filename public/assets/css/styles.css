@@ -85,6 +85,7 @@ svg.icon{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;s
 .text-action:hover{gap:17px}
 .text-action .icon{width:17px}
 .solution-cta{margin-top:auto;text-align:left}
+.service-page-link{font-size:12px;margin:0 0 18px;align-self:flex-start}
 .solution-bottom{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-top:25px}
 .solution-bottom>span{font-size:10px;color:var(--muted);letter-spacing:.13em}
 .solution-bottom a{font-size:12px;color:var(--brand);display:flex;align-items:center;gap:11px}

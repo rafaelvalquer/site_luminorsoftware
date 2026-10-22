@@ -17,6 +17,9 @@ logo=(p/'public/assets/img/luminor-logo.png').read_bytes()
 html=html.replace('src="/assets/img/luminor-logo.png"', 'src="data:image/png;base64,'+base64.b64encode(logo).decode('ascii')+'"')
 html=html.replace('</main>','<section id="politica-demonstracao" class="wrap preview-privacy"><strong>Política de privacidade da demonstração</strong><p>Ao preencher o formulário, o WhatsApp abre com a mensagem pronta. Os dados só são enviados quando você confirma no WhatsApp. A política preliminar está em <code>public/privacidade.html</code> e requer validação jurídica antes da publicação.</p></section></main>')
 html=html.replace('name="robots" content="index,follow"','name="robots" content="noindex,nofollow"')
+import re
+html=re.sub(r'\s*<link rel="canonical" href="https://luminorsoftware\.com\.br/">', '', html)
+html=re.sub(r'\s*<meta property="og:url" content="https://luminorsoftware\.com\.br/">', '', html)
 out=p/'PREVIA_AUTONOMA.html'
 out.write_text(html, encoding='utf-8')
 print(str(out),out.stat().st_size)

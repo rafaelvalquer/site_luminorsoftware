@@ -36,8 +36,11 @@ async function requestHandler(req,res){const url=new URL(req.url||'/',`http://${
  if(req.method!=='GET'&&req.method!=='HEAD')return send(res,405,{error:'Método não permitido'});
  let requested;try{requested=decodeURIComponent(path)}catch{return send(res,400,{error:'URL inválida'})}
  const target=resolve(root,'.'+requested);const rel=relative(root,target);if(rel.startsWith('..')||rel.includes('..'+sep)||extname(target)&&!allowedExt.has(extname(target)))return send(res,403,{error:'Acesso negado'});
- let file=requested==='/'?join(root,'index.html'):target;let body;let statusCode=200;try{body=await readFile(file)}catch{statusCode=404;file=join(root,'404.html');body=await readFile(file)}
- const type=mime[extname(file)]||'application/octet-stream';res.writeHead(statusCode,{'Content-Type':type,'Cache-Control':extname(file)==='.html'?'no-cache':'public, max-age=86400'});if(req.method==='HEAD')return res.end();res.end(body)
+ if(requested!=='/'&&requested.endsWith('/')){const canonicalPath=requested.replace(/\/+$/,'');return res.writeHead(308,{Location:`${canonicalPath}${url.search}`,'Cache-Control':'public, max-age=86400'}).end()}
+ if(requested.endsWith('.html')&&requested!=='/index.html'){const canonicalPath=requested.slice(0,-5);return res.writeHead(308,{Location:`${canonicalPath||'/'}${url.search}`,'Cache-Control':'public, max-age=86400'}).end()}
+ let file=requested==='/'?join(root,'index.html'):target;let body;
+ try{body=await readFile(file)}catch{if(!extname(target)){try{file=target+'.html';await stat(file)}catch{try{file=join(target,'index.html');await stat(file)}catch{file=join(root,'404.html');return res.writeHead(404,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-cache'}).end(await readFile(file))}}}else{file=join(root,'404.html');return res.writeHead(404,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-cache'}).end(await readFile(file))}body=await readFile(file)}
+ const type=mime[extname(file)]||'application/octet-stream';res.writeHead(200,{'Content-Type':type,'Cache-Control':extname(file)==='.html'?'no-cache':'public, max-age=86400'});if(req.method==='HEAD')return res.end();res.end(body)
 }
 export const server=createServer((req,res)=>{requestHandler(req,res).catch(err=>{console.error('request error',err);if(!res.headersSent)send(res,500,{error:'Erro interno'});else res.end()})});
 if(process.argv[1]&&fileURLToPath(import.meta.url)===resolve(process.argv[1]))server.listen(port,'0.0.0.0',()=>console.log(`Luminor em http://localhost:${port}`));

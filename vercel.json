@@ -1,7 +1,17 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "",
+  "buildCommand": "node scripts/build_seo.mjs",
   "installCommand": "",
-  "outputDirectory": "public"
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.luminorsoftware.com.br" }],
+      "destination": "https://luminorsoftware.com.br/:path*",
+      "permanent": true
+    }
+  ]
 }
