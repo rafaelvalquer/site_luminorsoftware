@@ -1,9 +1,8 @@
-/* Configuração: preencha SOMENTE com informações reais, validadas pela empresa.
-   Não há números de WhatsApp/e-mails fictícios no projeto. */
+/* Canais comerciais informados pela empresa. */
 window.LUMINOR_CONFIG = Object.freeze({
   companyName: 'Luminor Software',
-  contactEmail: '',                   // Ex.: comercial@dominio-verificado.com
-  whatsappE164: '',                  // Ex.: 5511999999999, sem + (somente número autorizado)
+  contactEmail: 'rafael.valquer@gmail.com',
+  whatsappE164: '5511999890795',     // WhatsApp no formato internacional, sem +
   legalName: '',                     // Razão social
   cnpj: '',                          // Dados reais
   analyticsId: '',                   // ID GA4 real opcional; carregado SOMENTE após consentimento
