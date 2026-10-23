@@ -756,6 +756,7 @@ body{line-height:1.5}
 .team-experience[data-phase=after] .office-connections path{animation:flow 1.4s linear infinite}
 .team-experience[data-phase=after] .screen-content{animation:screen-work 1.4s ease-in-out infinite alternate}
 .team-experience[data-phase=after] .team-hub .hub-check{animation:hub-pulse 1.2s ease-in-out infinite alternate}
+.team-experience[data-playing=false] *{animation-play-state:paused!important}
 .paper-2{transition-delay:.15s}.paper-3{transition-delay:.3s}.paper-4{transition-delay:.45s}.paper-5{transition-delay:.6s}
 @keyframes av-hop{0%,100%{transform:translateY(0) scale(1.06,.9) rotate(-4deg)}50%{transform:translateY(-7px) scale(.95,1.07) rotate(4deg)}}
 @keyframes av-head-wobble{0%,100%{transform:translate(-1px,1px)}50%{transform:translate(1px,-1px)}}

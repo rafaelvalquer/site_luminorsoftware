@@ -201,6 +201,7 @@ const { pathToFileURL } = require('node:url');
     await animated.waitForTimeout(250);
     assert.notEqual(start,await animated.locator('.person-1').evaluate(el=>getComputedStyle(el).transform));
     await animated.locator('#team-play').click();
+    assert.equal(await animated.locator('.person-1').evaluate(el=>getComputedStyle(el).animationPlayState),'paused','Pausing the team scene freezes CSS animations');
     const paused=await animated.locator('.person-1').evaluate(el=>getComputedStyle(el).transform);
     await animated.waitForTimeout(300);
     assert.equal(paused,await animated.locator('.person-1').evaluate(el=>getComputedStyle(el).transform));
