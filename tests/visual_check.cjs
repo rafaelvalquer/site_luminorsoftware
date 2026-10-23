@@ -41,10 +41,10 @@ async function checkContrast(page, state) {
   try {
     for (const width of [390, 1440]) {
       const page = await browser.newPage({ viewport: { width, height: 1000 }, reducedMotion: 'reduce' });
-      let responseStatus = 500;
+      let apiLeadCalls = 0;
       await page.route('http://luminor.test/**', route => {
         const path = new URL(route.request().url()).pathname;
-        if (path === '/api/leads') return route.fulfill({ status: responseStatus, contentType: 'application/json', body: JSON.stringify(responseStatus === 201 ? { ok: true, id: 'teste-visual' } : { error: 'Falha simulada para QA.' }) });
+        if (path === '/api/leads') { apiLeadCalls++; return route.fulfill({ status: 404, contentType: 'application/json', body: '{"error":"API não configurada"}' }); }
         const file = resolve(root, 'public', path === '/' ? 'index.html' : '.' + path);
         const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'application/javascript', '.svg': 'image/svg+xml' };
         return route.fulfill({ contentType: types[extname(file)] || 'text/plain', body: readFileSync(file) });
@@ -82,13 +82,13 @@ async function checkContrast(page, state) {
       await page.locator('#lead-phone').fill('11999999999');
       await page.locator('#lead-problem').fill('Consolidar as planilhas da equipe toda semana.');
       await page.locator('#lead-consent').check();
+      await page.evaluate(()=>document.addEventListener('click',e=>{if(e.target.closest('a[href^="https://wa.me/"]'))e.preventDefault()},true));
       await page.locator('#submit-lead').click();
-      await page.waitForFunction(() => document.querySelector('#form-status').textContent.includes('Falha simulada'));
-      await checkContrast(page, `API error ${width}`);
-      responseStatus = 201;
-      await page.locator('#submit-lead').click();
-      await page.waitForFunction(() => document.querySelector('#form-status').classList.contains('ok'));
-      await checkContrast(page, `success ${width}`);
+      await page.waitForFunction(() => document.querySelector('#form-status').textContent.includes('só será enviada quando você revisar e confirmar no WhatsApp'));
+      assert.match(await page.locator('#form-status a').getAttribute('href'),/^https:\/\/wa\.me\//);
+      assert.equal(apiLeadCalls,0,'Static form does not post to the local leads API');
+      assert.equal(await page.locator('#form-status').evaluate(el=>el.textContent.includes('lead enviado')),false,'WhatsApp opening is not treated as a confirmed lead');
+      await checkContrast(page, `WhatsApp prepared ${width}`);
       await page.locator('#contato').screenshot({ path: resolve(root, `screenshots/Luminor_Claro_Formulario_${width}.png`) });
       await page.keyboard.press('Tab');
       await page.locator('#demo-play').focus();

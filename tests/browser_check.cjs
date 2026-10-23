@@ -15,9 +15,11 @@ const { pathToFileURL } = require('node:url');
   try {
     for (const width of [320, 375, 390, 768, 900, 1024, 1440]) {
       const page = await browser.newPage({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
+      let gaRequests=0;
+      await page.route('https://www.googletagmanager.com/**',route=>{gaRequests++;return route.abort()});
       page.on('pageerror', error => errors.push(error.message));
       await page.goto(pathToFileURL(resolve(root, 'PREVIA_AUTONOMA.html')).href);
-      await page.locator('#cookies-reject').click();
+      if(width===320){await page.locator('#cookies-reject').focus();await page.keyboard.press('Enter')}else await page.locator('#cookies-reject').click();
       assert(await page.locator('#cookie-banner').isHidden());
       assert.equal(await page.locator('h1').innerText(), 'Automação de processos e sistemas sob medida para sua empresa');
       assert.equal(await page.locator('.process-flow li').count(), 4);
@@ -147,6 +149,21 @@ const { pathToFileURL } = require('node:url');
         await page.locator('#automation-demo').screenshot({ path: resolve(root, 'screenshots', `Luminor_Automacao_${width}.png`) });
         await page.evaluate(() => scrollTo(0, 0));
         await page.screenshot({ path: resolve(root, 'screenshots', width === 390 ? 'Luminor_Mobile.png' : 'Luminor_Desktop.png'), fullPage: true });
+      }
+      if(width===390){
+        assert.equal(gaRequests,0,'Rejecting metrics sends no Analytics requests');
+        await page.evaluate(()=>{window.LUMINOR_CONFIG={...window.LUMINOR_CONFIG,analyticsId:'G-TEST12345'}});
+        await page.locator('#cookie-settings').click();
+        assert(await page.locator('#cookie-banner').isVisible(),'Preferences can be reopened');
+        await page.locator('#cookies-accept').focus();await page.keyboard.press('Enter');
+        await page.waitForFunction(()=>window.LuminorAnalytics.isActive());
+        await page.waitForFunction(()=>document.querySelector('#luminor-ga4'));
+        assert.equal(gaRequests,1,'Analytics starts after keyboard acceptance');
+        await page.locator('#cookie-settings').click();
+        await page.locator('#cookies-reject').focus();await page.keyboard.press('Enter');
+        await page.waitForFunction(()=>!window.LuminorAnalytics.isActive());
+        assert.equal(await page.locator('#luminor-ga4').count(),0,'Revocation removes the tag');
+        assert.equal(gaRequests,1,'Revocation makes no additional Analytics request');
       }
       console.log(`${width}px: conteúdo, âncoras e layout OK`);
       await page.close();

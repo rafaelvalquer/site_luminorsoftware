@@ -1,0 +1,33 @@
+{
+  "reportedAt": "2026-10-22T17:03:56-03:00",
+  "source": "PageSpeed Insights",
+  "reportUrl": "https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fluminorsoftware.com.br%2F",
+  "url": "https://luminorsoftware.com.br/",
+  "productionVersion": "V0.4",
+  "strategy": "mobile",
+  "lighthouseVersion": "13.5.0",
+  "emulatedDevice": "Moto G Power",
+  "networkProfile": "4G lento",
+  "fieldData": null,
+  "scores": {
+    "performance": 98,
+    "accessibility": 100,
+    "bestPractices": 100,
+    "seo": 100
+  },
+  "metrics": {
+    "firstContentfulPaintSeconds": 0.9,
+    "largestContentfulPaintSeconds": 1.2,
+    "totalBlockingTimeMs": 0,
+    "cumulativeLayoutShift": 0,
+    "speedIndexSeconds": 3.9
+  },
+  "opportunities": [
+    "Render-blocking requests: estimated 300 ms savings",
+    "Image delivery: estimated 33 KiB savings",
+    "Forced reflow",
+    "Network dependency tree",
+    "Optimize DOM size"
+  ],
+  "scopeNote": "Single-page initial-load Lighthouse lab result for the deployed V0.4 homepage. No CrUX field data was available. This does not measure the un-deployed local changes."
+}

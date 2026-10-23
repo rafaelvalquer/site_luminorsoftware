@@ -1,0 +1,2 @@
+reported_at,source,report_url,url,production_version,lighthouse_version,device,performance,accessibility,best_practices,seo,fcp_seconds,lcp_seconds,tbt_ms,cls,speed_index_seconds,field_data,notes
+2026-10-22T17:03:56-03:00,PageSpeed Insights,https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fluminorsoftware.com.br%2F,https://luminorsoftware.com.br/,V0.4,13.5.0,Moto G Power emulado com 4G lento,98,100,100,100,0.9,1.2,0,0,3.9,Nenhum dado,"Lab Lighthouse; render-blocking requests estimated 300 ms; image delivery opportunity 33 KiB"

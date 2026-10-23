@@ -767,3 +767,5 @@ body{line-height:1.5}
 @keyframes av-focus{from{transform:translate(2px,1px) rotate(5deg)}to{transform:translate(3px,2px) rotate(8deg)}}
 @keyframes flow{to{stroke-dashoffset:-22}}
 @media(prefers-reduced-motion:reduce){.person-body,.av-head,.person-shadow,.av-badge,.work-devices,.screen-content,.office-connections path{animation:none!important;transition:none!important}.team-experience[data-phase=before] .badge-warn,.team-experience[data-phase=after] .badge-ok{opacity:1;transform:none}}
+
+.cookie-settings-link{color:var(--brand);border:0;background:none;padding:0;font:inherit;cursor:pointer;text-align:left}.cookie-settings-link:focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:3px}

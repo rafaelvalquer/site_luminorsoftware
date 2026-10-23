@@ -16,3 +16,21 @@ jobs:
           node-version: 20
       - run: npm test
       - run: npm run build
+  browser:
+    runs-on: ubuntu-latest
+    needs: seo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install pinned browser test runtime
+        run: npm install --no-save --no-package-lock playwright@1.62.1
+      - name: Install Chromium
+        run: npx playwright install chromium --with-deps
+      - name: Check consent across public pages
+        run: node tests/site_consent_browser.cjs
+      - name: Check responsive flows and motion preferences
+        run: node tests/browser_check.cjs
+      - name: Check contrast and accessible states
+        run: node tests/visual_check.cjs

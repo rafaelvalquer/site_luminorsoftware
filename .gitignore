@@ -5,3 +5,5 @@ data/*.jsonl
 .DS_Store
 playwright-report/
 test-results/
+reports/seo-production.json
+reports/seo-production.json

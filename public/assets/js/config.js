@@ -5,5 +5,5 @@ window.LUMINOR_CONFIG = Object.freeze({
   whatsappE164: '5511999890795',     // WhatsApp no formato internacional, sem +
   legalName: '',                     // Razão social
   cnpj: '',                          // Dados reais
-  analyticsId: '',                   // ID GA4 real opcional; carregado SOMENTE após consentimento
+  analyticsId: 'G-VWCKL7GFG2',        // GA4; carregado SOMENTE após consentimento válido
 });
