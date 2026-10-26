@@ -12,6 +12,18 @@
       "has": [{ "type": "host", "value": "www.luminorsoftware.com.br" }],
       "destination": "https://luminorsoftware.com.br/:path*",
       "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "luminorpay.com.br" }],
+      "destination": "https://luminorsoftware.com.br/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.luminorpay.com.br" }],
+      "destination": "https://luminorsoftware.com.br/:path*",
+      "statusCode": 301
     }
   ],
   "headers": [
