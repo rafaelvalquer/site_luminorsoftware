@@ -8,7 +8,7 @@
   function ensureUI(){
     if(!document.querySelector('#cookie-banner')){
       const banner=document.createElement('section');banner.id='cookie-banner';banner.className='cookie-banner';banner.hidden=true;banner.setAttribute('aria-label','Preferências de métricas');
-      banner.innerHTML='<p>As métricas opcionais só são ativadas se você autorizar. Você pode alterar sua escolha a qualquer momento. <a href="/privacidade.html">Saiba mais</a>.</p><div><button class="btn btn-secondary" id="cookies-reject" type="button">Somente essenciais</button><button class="btn btn-primary" id="cookies-accept" type="button">Aceitar métricas</button></div>';
+      banner.innerHTML='<p>As métricas opcionais só são ativadas se você autorizar. Você pode alterar sua escolha a qualquer momento. <a href="/privacidade">Saiba mais</a>.</p><div><button class="btn btn-secondary" id="cookies-reject" type="button">Somente essenciais</button><button class="btn btn-primary" id="cookies-accept" type="button">Aceitar métricas</button></div>';
       document.body.append(banner);
     }
     if(!document.querySelector('#cookie-settings')){
