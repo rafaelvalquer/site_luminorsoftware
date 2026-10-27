@@ -839,3 +839,24 @@ main{counter-reset:secao}
 .faq-more-actions{display:flex;align-items:center;flex-wrap:wrap;gap:14px 20px}
 .faq-more .btn{min-height:46px}
 @media(prefers-reduced-motion:reduce){.announcement,.announcement .icon,.solution-card::before{transition:none}}
+
+/* Selo do hero, gradiente nos destaques e botões com profundidade. */
+:root{--brand-azure:#0A72D6;--text-gradient:linear-gradient(90deg,var(--brand) 0%,var(--brand-azure) 100%)}
+.hero-copy .hero-badge{width:fit-content;max-width:100%;gap:10px;padding:5px 16px 5px 5px;border:1px solid var(--brand-border);border-radius:100px;background:rgba(255,255,255,.88);box-shadow:var(--shadow-sm),inset 0 1px 0 #FFF;letter-spacing:.16em}
+.hero-badge-icon{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:linear-gradient(180deg,#2C6CF2,var(--brand));color:var(--on-brand);box-shadow:0 3px 8px -2px rgba(21,94,239,.55);flex-shrink:0}
+.hero-badge-icon .icon{width:13px;height:13px;fill:currentColor;stroke-width:1.2}
+@media(max-width:900px){.hero-copy .hero-badge{margin-inline:auto}}
+@media(max-width:620px){.hero-copy .hero-badge{gap:8px;padding-right:13px;font-size:10px;letter-spacing:.12em;line-height:1.4;text-align:left}}
+/* O tom final mantém contraste de 4,5:1 sobre o fundo claro, como o resto do texto. */
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+.gradient-text{background-image:var(--text-gradient);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.gradient-text::selection{-webkit-text-fill-color:var(--text)}
+}
+@media(forced-colors:active){.gradient-text{background:none;-webkit-text-fill-color:currentColor}}
+.btn{transition:transform .18s,background-color .18s,border-color .18s,box-shadow .18s}
+.btn-primary,.btn-light{background-color:var(--brand);background-image:linear-gradient(180deg,#2C6CF2 0%,var(--brand) 52%,#1252D6 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.24),inset 0 -1px 0 rgba(10,37,99,.22),0 1px 2px rgba(18,75,197,.22),0 10px 22px -10px rgba(21,94,239,.7)}
+.btn-primary:hover,.btn-light:hover{background-color:var(--brand-hover);background-image:linear-gradient(180deg,var(--brand) 0%,var(--brand-hover) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 0 rgba(10,37,99,.25),0 2px 4px rgba(18,75,197,.2),0 16px 28px -12px rgba(21,94,239,.75)}
+.btn-secondary{box-shadow:inset 0 -1px 0 rgba(23,43,77,.05),0 1px 2px rgba(23,43,77,.06)}
+.btn .icon{transition:transform .18s}
+.btn:hover .icon{transform:translateX(2px)}
+@media(prefers-reduced-motion:reduce){.btn .icon{transition:none}.btn:hover .icon{transform:none}}
