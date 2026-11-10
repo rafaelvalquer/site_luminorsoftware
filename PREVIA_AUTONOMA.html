@@ -966,6 +966,11 @@ main{counter-reset:secao}
 .contact h2{font-size:clamp(30px,3vw,42px)}
 
 </style>
+  <style>
+/* Experiências interativas da página inicial: fluxo de automação, painel e arquitetura de integrações.
+   Carregado depois de styles.css; usa os mesmos tokens da identidade V3. */
+
+</style>
   <script>
 /* Canais comerciais informados pela empresa. */
 window.LUMINOR_CONFIG = Object.freeze({
@@ -1108,72 +1113,7 @@ window.LUMINOR_CONFIG = Object.freeze({
     window.matchMedia('(min-width:901px)').addEventListener('change',e=>{if(e.matches)menuClose()});
   }
 
-  function setupAutomationDemo() {
-    const root=$('#automation-demo');if(!root)return;
-    const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
-    const scenarios={
-      planilhas:{file:'controle_pedidos.xlsx',source:'Planilhas',result:'Aplicação',message:'Dados consolidados. Equipe no controle.',columns:['Pedido','Valor','Situação'],rows:[['#1048','R$ 320','Conferir'],['#1049','R$ 180','Copiar'],['#1050','R$ 460','Atualizar']],gain:'As planilhas viram uma visão clara da operação. Explore o dashboard.'},
-      documentos:{file:'documentos_da_equipe',source:'Documentos',result:'Registros',message:'Informações extraídas. Revisão pela equipe.',gain:'Cada documento encontra seu lugar. Selecione um cartão para ver os dados.'},
-      atendimento:{file:'mensagens_de_clientes',source:'WhatsApp',result:'Equipe',message:'Solicitações organizadas. Contexto com a equipe.',gain:'Conversas viram tickets com contexto e responsável. Explore os filtros.'}
-    };
-    const documents=[
-      {id:'nf208',title:'Nota fiscal 208',category:'Nota fiscal',stage:0,fields:[['Fornecedor','Empresa A'],['Valor','R$ 320,00'],['Próxima etapa','Extrair informações']]},
-      {id:'contrato',title:'Contrato comercial',category:'Contrato',stage:0,fields:[['Cliente','Empresa B'],['Vigência','12 meses'],['Próxima etapa','Revisar cláusulas']]},
-      {id:'nf209',title:'Nota fiscal 209',category:'Nota fiscal',stage:1,fields:[['Fornecedor','Empresa C'],['Valor','R$ 180,00'],['Próxima etapa','Conferência humana']]},
-      {id:'recibo',title:'Recibo de serviço',category:'Comprovante',stage:2,fields:[['Prestador','Empresa D'],['Valor','R$ 460,00'],['Situação','Classificado e organizado']]},
-      {id:'pedido',title:'Pedido de compra',category:'Pedido',stage:2,fields:[['Código','PC 1050'],['Área','Operação'],['Situação','Classificado e organizado']]}
-    ];
-    const tickets=[{id:'1048',title:'Acompanhar pedido',owner:'Ana',status:'pendentes',label:'Pendente',initial:'A'}, {id:'1049',title:'Agendar uma visita',owner:'Bruno',status:'andamento',label:'Em andamento',initial:'B'}, {id:'1050',title:'Dúvida sobre pagamento',owner:'Carla',status:'resolvidos',label:'Resolvido',initial:'C'}, {id:'1051',title:'Solicitar orçamento',owner:'Ana',status:'pendentes',label:'Pendente',initial:'A'}];
-    const captions=['Informações espalhadas e a mesma tarefa feita várias vezes.','A Luminor entende a rotina e mapeia as etapas que se repetem.','Criamos um fluxo sob medida que conecta dados, ferramentas e pessoas.'];
-    const outcome=$('#scenario-outcome');
-    let selected='planilhas',step=0,playing=false,timer=null,touched=false,period='semana',documentId=null,ticketFilter='todos';
-    function resultHeader(title,subtitle){return `<div class="outcome-heading"><div><span class="outcome-kicker">RESULTADO POSSÍVEL</span><h3>${title}</h3></div>${icon('check')}</div><p class="outcome-subtitle">${subtitle}</p>`}
-    function renderOutcome(){
-      if(selected==='planilhas'){
-        const month=period==='mes',values=month?[74,59,39]:[18,14,8],total=values.reduce((a,b)=>a+b,0);
-        const points=month?'8,112 40,99 73,105 106,76 139,83 172,53 205,63 238,27 272,12':'8,112 52,95 96,103 140,69 184,76 228,39 272,30';
-        outcome.innerHTML=resultHeader('Da planilha à visão do negócio','Dados reunidos em uma aplicação criada para sua operação.')+`<div class="dashboard-controls" role="group" aria-label="Período do dashboard"><button type="button" data-period="semana" aria-pressed="${!month}">Semana</button><button type="button" data-period="mes" aria-pressed="${month}">Mês</button></div><div class="dashboard-kpis"><div><span>Pedidos reunidos</span><strong>${total}</strong></div><div><span>Em análise</span><strong>${month?14:6}</strong></div><div><span>Fontes conectadas</span><strong>03</strong></div></div><div class="dashboard-charts"><div class="evolution-chart"><h4>Evolução de pedidos</h4><svg viewBox="0 0 280 135" role="img" aria-label="Evolução dos pedidos no período: ${month?'mês':'semana'}"><path class="chart-grid" d="M8 20H272M8 65H272M8 112H272"/><polygon class="chart-area" points="8,125 ${points} 272,125"/><polyline class="chart-line" points="${points}" pathLength="1"/></svg><div class="chart-axis"><span>${month?'Dia 1':'Seg'}</span><span>${month?'Dia 30':'Dom'}</span></div></div><div class="category-chart"><h4>Por área</h4>${['Comercial','Operação','Financeiro'].map((name,i)=>`<div class="category-bar"><span>${name}</span><strong>${values[i]}</strong><i style="--bar-width:${Math.round(values[i]/values[0]*100)}%"></i></div>`).join('')}</div></div><p class="outcome-note">Período selecionado: ${month?'mês':'semana'}</p>`;
-      }else if(selected==='documentos'){
-        const doc=documents.find(d=>d.id===documentId);
-        outcome.innerHTML=resultHeader('Documentos com lugar e contexto','Um canvas para acompanhar cada etapa da organização.')+`<div class="document-canvas">${['Recebidos','Em análise','Organizados'].map((name,i)=>`<section class="document-column"><h4><span class="column-dot dot-${i}"></span>${name}<small>${documents.filter(d=>d.stage===i).length}</small></h4>${documents.filter(d=>d.stage===i).map(d=>`<button type="button" class="document-card" data-document="${d.id}" aria-pressed="${d.id===documentId}" aria-controls="document-detail">${icon('layer')}<strong>${d.title}</strong><span>${d.category}</span></button>`).join('')}</section>`).join('')}</div><div id="document-detail" class="document-detail" role="status">${doc?`<strong>${doc.title}</strong><dl><div><dt>Categoria</dt><dd>${doc.category}</dd></div>${doc.fields.map(([key,value])=>`<div><dt>${key}</dt><dd>${value}</dd></div>`).join('')}</dl>`:'<span>Selecione um documento para explorar suas informações.</span>'}</div><p class="outcome-note">Extração e revisão configuradas para cada processo</p>`;
-      }else{
-        const filtered=tickets.filter(t=>ticketFilter==='todos'||t.status===ticketFilter);
-        outcome.innerHTML=resultHeader('Cada conversa vira uma próxima ação','Tickets organizados, com responsável e situação visíveis.')+`<div class="ticket-filters" role="group" aria-label="Filtrar tickets por status">${[['todos','Todos'],['pendentes','Pendentes'],['andamento','Em andamento'],['resolvidos','Resolvidos']].map(([key,label])=>`<button type="button" data-ticket-filter="${key}" aria-pressed="${ticketFilter===key}">${label}</button>`).join('')}</div><ul class="ticket-list" aria-label="Tickets de atendimento">${filtered.map(t=>`<li class="ticket-row"><span class="ticket-avatar" aria-hidden="true">${t.initial}</span><div><span class="ticket-id">#${t.id} · WhatsApp</span><strong>${t.title}</strong><small>Responsável: ${t.owner}</small></div><span class="ticket-status status-${t.status}">${t.label}</span></li>`).join('')}</ul><p class="outcome-note" role="status">${filtered.length} ticket${filtered.length===1?'':'s'} neste filtro</p>`;
-      }
-    }
-    function playLabel(){root.dataset.playing=String(playing);$('#demo-play-label').textContent=playing?'Pausar':step===3?'Rever transformação':step===0?'Ver transformação':'Continuar';$('#demo-play').setAttribute('aria-label',playing?'Pausar transformação':step===3?'Rever transformação':step===0?'Reproduzir transformação':'Continuar transformação');$('#demo-play>span').textContent=playing?'Ⅱ':step===3?'↻':'▶'}
-    function pause(){clearTimeout(timer);playing=false;playLabel()}
-    function setStep(next){step=next;root.dataset.step=String(step);outcome.hidden=step!==3;$$('[data-demo-step]',root).forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.demoStep)===step)));$('#demo-stage-copy').textContent=step===3?scenarios[selected].gain:captions[step];playLabel()}
-    function schedule(){timer=setTimeout(()=>{if(step<3){setStep(step+1);schedule()}else pause()},1800)}
-    function play(){if(motion.matches){setStep(3);pause();return}if(step===3)setStep(0);playing=true;playLabel();schedule()}
-    function choose(name){
-      pause();selected=name;root.dataset.scenario=name;period='semana';documentId=null;ticketFilter='todos';const scenario=scenarios[name];
-      $$('[data-demo-scenario]',root).forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.demoScenario===name)));
-      $('#demo-source-name').textContent=scenario.file;$('#demo-node-source').textContent=scenario.source;$('#demo-node-result').textContent=scenario.result;$('#demo-result').textContent=scenario.message;
-      if(name==='planilhas'){
-        const cells=['','A','B','C','1',...scenario.columns,...scenario.rows.flatMap((row,i)=>[String(i+2),...row])];
-        $('.sheet-grid',root).innerHTML=cells.map((cell,i)=>`<span class="${i>7&&i%4===3?'cell-wait':''}">${safeText(cell)}</span>`).join('');
-      }
-      $('#manual-preview').innerHTML=name==='documentos'?['Notas fiscais','Contrato_final_v3.pdf','Recibos','Pedido de compra'].map((label,i)=>`<div class="loose-document loose-${i}">${icon('layer')}<strong>${label}</strong><span>Conferir e organizar</span></div>`).join(''):name==='atendimento'?['Olá! Cadê meu pedido?','Pode agendar uma visita?','Preciso de um orçamento.','Alguém já respondeu?'].map((label,i)=>`<div class="loose-message loose-${i}">${icon('message')}<span>${label}</span></div>`).join(''):'';
-      renderOutcome();setStep(0);
-    }
-    outcome.addEventListener('click',event=>{
-      const button=event.target.closest('button');if(!button)return;
-      let selector;if(button.dataset.period){period=button.dataset.period;selector=`[data-period="${period}"]`}
-      else if(button.dataset.document){documentId=button.dataset.document;selector=`[data-document="${documentId}"]`}
-      else if(button.dataset.ticketFilter){ticketFilter=button.dataset.ticketFilter;selector=`[data-ticket-filter="${ticketFilter}"]`}
-      else return;
-      renderOutcome();$(selector,outcome).focus({preventScroll:true});
-    });
-    $$('[data-demo-scenario]',root).forEach(button=>button.addEventListener('click',()=>{touched=true;choose(button.dataset.demoScenario)}));
-    $$('[data-demo-step]',root).forEach(button=>button.addEventListener('click',()=>{touched=true;pause();setStep(Number(button.dataset.demoStep))}));
-    $('#demo-play').addEventListener('click',()=>{touched=true;if(playing)pause();else play()});
-    document.addEventListener('visibilitychange',()=>{if(document.hidden)pause()});
-    motion.addEventListener('change',()=>{if(motion.matches)pause()});
-    const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting){pause();continue}if(entry.intersectionRatio>=.35&&!touched&&!motion.matches){touched=true;play()}}},{threshold:[0,.35]});
-    choose('planilhas');observer.observe(root);
-  }
-
+  // O exemplo interativo do hero (#automation-demo) vive em assets/js/experiences/.
   function setupTeamExperience(){
     const root=$('#team-experience');if(!root)return;
     const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -1213,10 +1153,334 @@ window.LUMINOR_CONFIG = Object.freeze({
   }
   // Sombra sutil no cabeçalho fixo depois que a página rola.
   function setupHeaderShadow(){const header=$('.site-header');if(!header)return;const update=()=>header.classList.toggle('is-scrolled',window.scrollY>8);update();window.addEventListener('scroll',update,{passive:true})}
-  function init(){const year=$('#year');if(year)year.textContent=new Date().getFullYear();if($('#menu-btn')&&$('#nav'))setupNav();setupHeaderShadow();setupAutomationDemo();setupTeamExperience();setupSolutionActions();setupContacts();setupForm()}
+  function init(){const year=$('#year');if(year)year.textContent=new Date().getFullYear();if($('#menu-btn')&&$('#nav'))setupNav();setupHeaderShadow();setupTeamExperience();setupSolutionActions();setupContacts();setupForm()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 
+</script>
+  <script>
+(() => {
+'use strict';
+const __module_public_assets_js_experiences_scenarios_js = (() => {
+// Dados demonstrativos dos cenários do exemplo interativo. Nenhum registro representa cliente real.
+
+const FLOW_SCENARIOS = {
+  planilhas: { file: 'controle_pedidos.xlsx', source: 'Planilhas', result: 'Aplicação', message: 'Dados consolidados. Equipe no controle.', columns: ['Pedido', 'Valor', 'Situação'], rows: [['#1048', 'R$ 320', 'Conferir'], ['#1049', 'R$ 180', 'Copiar'], ['#1050', 'R$ 460', 'Atualizar']], gain: 'As planilhas viram uma visão clara da operação. Explore o dashboard.' },
+  documentos: { file: 'documentos_da_equipe', source: 'Documentos', result: 'Registros', message: 'Informações extraídas. Revisão pela equipe.', gain: 'Cada documento encontra seu lugar. Selecione um cartão para ver os dados.' },
+  atendimento: { file: 'mensagens_de_clientes', source: 'WhatsApp', result: 'Equipe', message: 'Solicitações organizadas. Contexto com a equipe.', gain: 'Conversas viram tickets com contexto e responsável. Explore os filtros.' },
+};
+
+const FLOW_CAPTIONS = [
+  'Informações espalhadas e a mesma tarefa feita várias vezes.',
+  'A Luminor entende a rotina e mapeia as etapas que se repetem.',
+  'Criamos um fluxo sob medida que conecta dados, ferramentas e pessoas.',
+];
+
+const DOCUMENTS = [
+  { id: 'nf208', title: 'Nota fiscal 208', category: 'Nota fiscal', stage: 0, fields: [['Fornecedor', 'Empresa A'], ['Valor', 'R$ 320,00'], ['Próxima etapa', 'Extrair informações']] },
+  { id: 'contrato', title: 'Contrato comercial', category: 'Contrato', stage: 0, fields: [['Cliente', 'Empresa B'], ['Vigência', '12 meses'], ['Próxima etapa', 'Revisar cláusulas']] },
+  { id: 'nf209', title: 'Nota fiscal 209', category: 'Nota fiscal', stage: 1, fields: [['Fornecedor', 'Empresa C'], ['Valor', 'R$ 180,00'], ['Próxima etapa', 'Conferência humana']] },
+  { id: 'recibo', title: 'Recibo de serviço', category: 'Comprovante', stage: 2, fields: [['Prestador', 'Empresa D'], ['Valor', 'R$ 460,00'], ['Situação', 'Classificado e organizado']] },
+  { id: 'pedido', title: 'Pedido de compra', category: 'Pedido', stage: 2, fields: [['Código', 'PC 1050'], ['Área', 'Operação'], ['Situação', 'Classificado e organizado']] },
+];
+
+const TICKETS = [
+  { id: '1048', title: 'Acompanhar pedido', owner: 'Ana', status: 'pendentes', label: 'Pendente', initial: 'A' },
+  { id: '1049', title: 'Agendar uma visita', owner: 'Bruno', status: 'andamento', label: 'Em andamento', initial: 'B' },
+  { id: '1050', title: 'Dúvida sobre pagamento', owner: 'Carla', status: 'resolvidos', label: 'Resolvido', initial: 'C' },
+  { id: '1051', title: 'Solicitar orçamento', owner: 'Ana', status: 'pendentes', label: 'Pendente', initial: 'A' },
+];
+
+return { FLOW_SCENARIOS, FLOW_CAPTIONS, DOCUMENTS, TICKETS };
+})();
+const __module_public_assets_js_experiences_dom_js = (() => {
+// Auxiliares de DOM das experiências. Todo conteúdo dinâmico entra como texto, nunca como HTML.
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+const $ = (query, root = document) => root.querySelector(query);
+const $$ = (query, root = document) => Array.from(root.querySelectorAll(query));
+
+function apply(node, attrs) {
+  for (const [key, value] of Object.entries(attrs)) {
+    if (value === false || value === null || value === undefined) continue;
+    if (key === 'class') node.setAttribute('class', value);
+    else if (key === 'text') node.textContent = String(value);
+    else if (key === 'dataset') Object.assign(node.dataset, value);
+    else if (key === 'style') for (const [prop, val] of Object.entries(value)) node.style.setProperty(prop, String(val));
+    else node.setAttribute(key, value === true ? '' : String(value));
+  }
+  return node;
+}
+
+function append(node, children) {
+  for (const child of children.flat(Infinity)) {
+    if (child === null || child === undefined || child === false) continue;
+    node.append(typeof child === 'object' ? child : document.createTextNode(String(child)));
+  }
+  return node;
+}
+
+/** Cria um elemento HTML: el('button', { type: 'button', text: 'Ok' }). */
+function el(tag, attrs = {}, ...children) {
+  return append(apply(document.createElement(tag), attrs), children);
+}
+
+/** Cria um elemento SVG. */
+function svg(tag, attrs = {}, ...children) {
+  return append(apply(document.createElementNS(SVG_NS, tag), attrs), children);
+}
+
+/** Ícone do sprite da página (#i-*), decorativo. */
+function icon(id, className = 'icon') {
+  return svg('svg', { class: className, 'aria-hidden': 'true' }, svg('use', { href: `#i-${id}` }));
+}
+
+/**
+ * Substitui o conteúdo de um contêiner preservando o foco do teclado:
+ * o elemento focado é reencontrado pelo mesmo data-focus-key depois da troca.
+ */
+function replaceChildrenKeepingFocus(container, ...children) {
+  const active = document.activeElement;
+  const key = container.contains(active) ? active?.dataset?.focusKey : null;
+  container.replaceChildren(...children.flat(Infinity).filter(Boolean));
+  if (key) container.querySelector(`[data-focus-key="${CSS.escape(key)}"]`)?.focus({ preventScroll: true });
+}
+
+/** Formata reais sem depender da localidade do navegador. */
+function money(value) {
+  const [int, cents] = Number(value).toFixed(2).split('.');
+  return `R$ ${int.replace(/\B(?=(\d{3})+(?!\d))/g, '.')},${cents}`;
+}
+
+return { $, $$, el, svg, icon, replaceChildrenKeepingFocus, money };
+})();
+const __module_public_assets_js_experiences_motion_js = (() => {
+// Utilitários de movimento compartilhados pelas experiências interativas.
+// Nada aqui toca no DOM durante a importação, para que a lógica possa ser testada no Node.
+
+/** Media query de movimento reduzido (ou null fora do navegador). */
+function reducedMotionQuery() {
+  return typeof window !== 'undefined' && window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+}
+
+/** true quando a pessoa pediu menos movimento no sistema. */
+function prefersReducedMotion() {
+  return Boolean(reducedMotionQuery()?.matches);
+}
+
+/**
+ * Temporizadores rastreados: cada sequência nova cancela a anterior, e clear()
+ * garante que nenhum timeout continue ativo depois de uma pausa ou desmontagem.
+ */
+function createTimers() {
+  const ids = new Set();
+  return {
+    after(ms, fn) {
+      const id = setTimeout(() => { ids.delete(id); fn(); }, ms);
+      ids.add(id);
+      return id;
+    },
+    /** Agenda passos [atraso acumulado, função] e cancela qualquer sequência em curso. */
+    sequence(steps) {
+      this.clear();
+      let at = 0;
+      for (const [delay, fn] of steps) { at += delay; this.after(at, fn); }
+    },
+    clear() {
+      for (const id of ids) clearTimeout(id);
+      ids.clear();
+    },
+    pending() { return ids.size; },
+  };
+}
+
+/** Registra ouvintes e observadores para liberar tudo de uma vez ao desmontar. */
+function createLifecycle() {
+  const cleanups = [];
+  return {
+    add(fn) { cleanups.push(fn); return fn; },
+    listen(target, type, fn, options) {
+      target.addEventListener(type, fn, options);
+      cleanups.push(() => target.removeEventListener(type, fn, options));
+    },
+    /** Pausa quando a aba perde visibilidade. */
+    onPageHidden(fn) {
+      this.listen(document, 'visibilitychange', () => { if (document.hidden) fn(); });
+    },
+    /** Avisa quando a preferência de movimento muda durante a visita. */
+    onMotionChange(fn) {
+      const query = reducedMotionQuery();
+      if (query) this.listen(query, 'change', () => fn(query.matches));
+    },
+    /** Observa a entrada e a saída da área visível, sem medir posições durante a rolagem. */
+    observe(element, fn, thresholds = [0, 0.35]) {
+      if (!('IntersectionObserver' in window)) return;
+      const observer = new IntersectionObserver(entries => entries.forEach(fn), { threshold: thresholds });
+      observer.observe(element);
+      cleanups.push(() => observer.disconnect());
+    },
+    destroy() { while (cleanups.length) cleanups.pop()(); },
+  };
+}
+
+/** Pausa ou retoma as animações CSS/Web Animations dentro de um elemento. */
+function setAnimationsPaused(root, paused) {
+  if (!root.getAnimations) return;
+  for (const animation of root.getAnimations({ subtree: true })) paused ? animation.pause() : animation.play();
+}
+
+return { reducedMotionQuery, prefersReducedMotion, createTimers, createLifecycle, setAnimationsPaused };
+})();
+const __module_public_assets_js_experiences_automation_flow_js = (() => {
+// Exemplo interativo do hero (#automation-demo): da rotina manual ao resultado.
+const { FLOW_SCENARIOS, FLOW_CAPTIONS } = __module_public_assets_js_experiences_scenarios_js;
+const { $, $$ } = __module_public_assets_js_experiences_dom_js;
+const { createTimers, createLifecycle, reducedMotionQuery } = __module_public_assets_js_experiences_motion_js;
+
+const iconHTML = id => `<svg class="icon" aria-hidden="true"><use href="#i-${id}"></use></svg>`;
+const safeText = s => String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+
+function setupAutomationFlow(root, { outcome }) {
+  const life = createLifecycle();
+  const timers = createTimers();
+  const motion = reducedMotionQuery();
+  let selected = 'planilhas', step = 0, playing = false, touched = false;
+
+  function playLabel() {
+    root.dataset.playing = String(playing);
+    $('#demo-play-label').textContent = playing ? 'Pausar' : step === 3 ? 'Rever transformação' : step === 0 ? 'Ver transformação' : 'Continuar';
+    $('#demo-play').setAttribute('aria-label', playing ? 'Pausar transformação' : step === 3 ? 'Rever transformação' : step === 0 ? 'Reproduzir transformação' : 'Continuar transformação');
+    $('#demo-play>span').textContent = playing ? 'Ⅱ' : step === 3 ? '↻' : '▶';
+  }
+  function pause() { timers.clear(); playing = false; playLabel(); }
+  function setStep(next) {
+    step = next;
+    root.dataset.step = String(step);
+    $('#scenario-outcome').hidden = step !== 3;
+    $$('[data-demo-step]', root).forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.demoStep) === step)));
+    $('#demo-stage-copy').textContent = step === 3 ? FLOW_SCENARIOS[selected].gain : FLOW_CAPTIONS[step];
+    playLabel();
+  }
+  function schedule() { timers.after(1800, () => { if (step < 3) { setStep(step + 1); schedule(); } else pause(); }); }
+  function play() {
+    if (motion?.matches) { setStep(3); pause(); return; }
+    if (step === 3) setStep(0);
+    playing = true; playLabel(); schedule();
+  }
+  function choose(name) {
+    pause();
+    selected = name;
+    root.dataset.scenario = name;
+    const scenario = FLOW_SCENARIOS[name];
+    $$('[data-demo-scenario]', root).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.demoScenario === name)));
+    $('#demo-source-name').textContent = scenario.file;
+    $('#demo-node-source').textContent = scenario.source;
+    $('#demo-node-result').textContent = scenario.result;
+    $('#demo-result').textContent = scenario.message;
+    if (name === 'planilhas') {
+      const cells = ['', 'A', 'B', 'C', '1', ...scenario.columns, ...scenario.rows.flatMap((row, i) => [String(i + 2), ...row])];
+      $('.sheet-grid', root).innerHTML = cells.map((cell, i) => `<span class="${i > 7 && i % 4 === 3 ? 'cell-wait' : ''}">${safeText(cell)}</span>`).join('');
+    }
+    $('#manual-preview').innerHTML = name === 'documentos'
+      ? ['Notas fiscais', 'Contrato_final_v3.pdf', 'Recibos', 'Pedido de compra'].map((label, i) => `<div class="loose-document loose-${i}">${iconHTML('layer')}<strong>${label}</strong><span>Conferir e organizar</span></div>`).join('')
+      : name === 'atendimento'
+        ? ['Olá! Cadê meu pedido?', 'Pode agendar uma visita?', 'Preciso de um orçamento.', 'Alguém já respondeu?'].map((label, i) => `<div class="loose-message loose-${i}">${iconHTML('message')}<span>${label}</span></div>`).join('')
+        : '';
+    outcome.setScenario(name);
+    setStep(0);
+  }
+
+  $$('[data-demo-scenario]', root).forEach(button => life.listen(button, 'click', () => { touched = true; choose(button.dataset.demoScenario); }));
+  $$('[data-demo-step]', root).forEach(button => life.listen(button, 'click', () => { touched = true; pause(); setStep(Number(button.dataset.demoStep)); }));
+  life.listen($('#demo-play'), 'click', () => { touched = true; if (playing) pause(); else play(); });
+  life.onPageHidden(pause);
+  life.onMotionChange(reduced => { if (reduced) pause(); });
+  life.observe(root, entry => {
+    if (!entry.isIntersecting) { pause(); return; }
+    if (entry.intersectionRatio >= 0.35 && !touched && !motion?.matches) { touched = true; play(); }
+  });
+  choose('planilhas');
+
+  return {
+    pendingTimers: () => timers.pending(),
+    destroy() { timers.clear(); life.destroy(); outcome.destroy(); },
+  };
+}
+
+return { setupAutomationFlow };
+})();
+const __module_public_assets_js_experiences_dashboard_js = (() => {
+// Resultado de cada cenário na última etapa do exemplo (#scenario-outcome).
+const { DOCUMENTS, TICKETS } = __module_public_assets_js_experiences_scenarios_js;
+
+const iconHTML = id => `<svg class="icon" aria-hidden="true"><use href="#i-${id}"></use></svg>`;
+
+function resultHeader(title, subtitle) {
+  return `<div class="outcome-heading"><div><span class="outcome-kicker">RESULTADO POSSÍVEL</span><h3>${title}</h3></div>${iconHTML('check')}</div><p class="outcome-subtitle">${subtitle}</p>`;
+}
+
+function createCompactOutcome(outcome) {
+  let selected = 'planilhas', period = 'semana', documentId = null, ticketFilter = 'todos';
+
+  function render() {
+    if (selected === 'planilhas') {
+      const month = period === 'mes', values = month ? [74, 59, 39] : [18, 14, 8], total = values.reduce((a, b) => a + b, 0);
+      const points = month ? '8,112 40,99 73,105 106,76 139,83 172,53 205,63 238,27 272,12' : '8,112 52,95 96,103 140,69 184,76 228,39 272,30';
+      outcome.innerHTML = resultHeader('Da planilha à visão do negócio', 'Dados reunidos em uma aplicação criada para sua operação.') + `<div class="dashboard-controls" role="group" aria-label="Período do dashboard"><button type="button" data-period="semana" aria-pressed="${!month}">Semana</button><button type="button" data-period="mes" aria-pressed="${month}">Mês</button></div><div class="dashboard-kpis"><div><span>Pedidos reunidos</span><strong>${total}</strong></div><div><span>Em análise</span><strong>${month ? 14 : 6}</strong></div><div><span>Fontes conectadas</span><strong>03</strong></div></div><div class="dashboard-charts"><div class="evolution-chart"><h4>Evolução de pedidos</h4><svg viewBox="0 0 280 135" role="img" aria-label="Evolução dos pedidos no período: ${month ? 'mês' : 'semana'}"><path class="chart-grid" d="M8 20H272M8 65H272M8 112H272"/><polygon class="chart-area" points="8,125 ${points} 272,125"/><polyline class="chart-line" points="${points}" pathLength="1"/></svg><div class="chart-axis"><span>${month ? 'Dia 1' : 'Seg'}</span><span>${month ? 'Dia 30' : 'Dom'}</span></div></div><div class="category-chart"><h4>Por área</h4>${['Comercial', 'Operação', 'Financeiro'].map((name, i) => `<div class="category-bar"><span>${name}</span><strong>${values[i]}</strong><i style="--bar-width:${Math.round(values[i] / values[0] * 100)}%"></i></div>`).join('')}</div></div><p class="outcome-note">Período selecionado: ${month ? 'mês' : 'semana'}</p>`;
+    } else if (selected === 'documentos') {
+      const doc = DOCUMENTS.find(d => d.id === documentId);
+      outcome.innerHTML = resultHeader('Documentos com lugar e contexto', 'Um canvas para acompanhar cada etapa da organização.') + `<div class="document-canvas">${['Recebidos', 'Em análise', 'Organizados'].map((name, i) => `<section class="document-column"><h4><span class="column-dot dot-${i}"></span>${name}<small>${DOCUMENTS.filter(d => d.stage === i).length}</small></h4>${DOCUMENTS.filter(d => d.stage === i).map(d => `<button type="button" class="document-card" data-document="${d.id}" aria-pressed="${d.id === documentId}" aria-controls="document-detail">${iconHTML('layer')}<strong>${d.title}</strong><span>${d.category}</span></button>`).join('')}</section>`).join('')}</div><div id="document-detail" class="document-detail" role="status">${doc ? `<strong>${doc.title}</strong><dl><div><dt>Categoria</dt><dd>${doc.category}</dd></div>${doc.fields.map(([key, value]) => `<div><dt>${key}</dt><dd>${value}</dd></div>`).join('')}</dl>` : '<span>Selecione um documento para explorar suas informações.</span>'}</div><p class="outcome-note">Extração e revisão configuradas para cada processo</p>`;
+    } else {
+      const filtered = TICKETS.filter(t => ticketFilter === 'todos' || t.status === ticketFilter);
+      outcome.innerHTML = resultHeader('Cada conversa vira uma próxima ação', 'Tickets organizados, com responsável e situação visíveis.') + `<div class="ticket-filters" role="group" aria-label="Filtrar tickets por status">${[['todos', 'Todos'], ['pendentes', 'Pendentes'], ['andamento', 'Em andamento'], ['resolvidos', 'Resolvidos']].map(([key, label]) => `<button type="button" data-ticket-filter="${key}" aria-pressed="${ticketFilter === key}">${label}</button>`).join('')}</div><ul class="ticket-list" aria-label="Tickets de atendimento">${filtered.map(t => `<li class="ticket-row"><span class="ticket-avatar" aria-hidden="true">${t.initial}</span><div><span class="ticket-id">#${t.id} · WhatsApp</span><strong>${t.title}</strong><small>Responsável: ${t.owner}</small></div><span class="ticket-status status-${t.status}">${t.label}</span></li>`).join('')}</ul><p class="outcome-note" role="status">${filtered.length} ticket${filtered.length === 1 ? '' : 's'} neste filtro</p>`;
+    }
+  }
+
+  function onClick(event) {
+    const button = event.target.closest('button');
+    if (!button) return;
+    let selector;
+    if (button.dataset.period) { period = button.dataset.period; selector = `[data-period="${period}"]`; }
+    else if (button.dataset.document) { documentId = button.dataset.document; selector = `[data-document="${documentId}"]`; }
+    else if (button.dataset.ticketFilter) { ticketFilter = button.dataset.ticketFilter; selector = `[data-ticket-filter="${ticketFilter}"]`; }
+    else return;
+    render();
+    outcome.querySelector(selector).focus({ preventScroll: true });
+  }
+  outcome.addEventListener('click', onClick);
+
+  return {
+    setScenario(name) { selected = name; period = 'semana'; documentId = null; ticketFilter = 'todos'; render(); },
+    destroy() { outcome.removeEventListener('click', onClick); },
+  };
+}
+
+return { createCompactOutcome };
+})();
+const __module_public_assets_js_experiences_index_js = (() => {
+// Ponto de entrada das experiências interativas da página inicial (módulo nativo).
+const { setupAutomationFlow } = __module_public_assets_js_experiences_automation_flow_js;
+const { createCompactOutcome } = __module_public_assets_js_experiences_dashboard_js;
+
+const mounted = [];
+
+function init() {
+  const flowRoot = document.getElementById('automation-demo');
+  const outcomeRoot = document.getElementById('scenario-outcome');
+  if (flowRoot && outcomeRoot) mounted.push(setupAutomationFlow(flowRoot, { outcome: createCompactOutcome(outcomeRoot) }));
+
+  // Leitura para testes e depuração: quantos temporizadores seguem ativos.
+  window.LuminorExperiences = Object.freeze({
+    pendingTimers: () => mounted.reduce((sum, item) => sum + item.pendingTimers(), 0),
+  });
+}
+
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+else init();
+
+return {  };
+})();
+})();
 </script>
 </head>
 <body data-page-type="home">
@@ -1244,7 +1508,7 @@ window.LUMINOR_CONFIG = Object.freeze({
   <a class="announcement" href="/conteudos/identificar-processos-para-automatizar"><span class="announcement-tag">Novo conteúdo</span><span class="announcement-text">Como identificar processos para automatizar</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
   <header class="site-header" id="topo">
     <div class="nav-shell wrap">
-      <a href="#inicio" class="brand" aria-label="Luminor Software — início"><img class="brand-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMxLjYxIDAgMTMxLjc4IDEwMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJMdW1pbm9yIFNvZnR3YXJlIj48dGl0bGU+THVtaW5vciBTb2Z0d2FyZTwvdGl0bGU+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJsbS1hIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjE0OCIgeTE9IjIiIHgyPSIyNCIgeTI9IjcyIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMEM4RDAiLz48c3RvcCBvZmZzZXQ9Ii41IiBzdG9wLWNvbG9yPSIjNkE1NUVDIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjQzIzQkU2Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImxtLWIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMTcwIiB5MT0iMzAiIHgyPSI0OCIgeTI9Ijk4Ij48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyRjZDRjAiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzZDMkJEOSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzRBMkZFMCIvPjwvbGluZWFyR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJsbS1jIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTc0IDcuNTFBMjAgMjAgMCAwIDEgODkuNjEgMEwxMjkuNjkgMEExMCAxMCAwIDAgMSAxMzcuNSAxNi4yNUwxMzQuOSAxOS41QTQgNCAwIDAgMCAxMzguMDIgMjZMMTUzLjM5IDI2QTEwIDEwIDAgMCAxIDE2MS4yIDQyLjI1TDEyMSA5Mi40OUEyMCAyMCAwIDAgMSAxMDUuMzkgMTAwTDYzLjgxIDEwMEExMCAxMCAwIDAgMSA1NiA4My43NUw1OC42IDgwLjVBNCA0IDAgMCAwIDU1LjQ4IDc0TDQxLjYxIDc0QTEwIDEwIDAgMCAxIDMzLjggNTcuNzVaTTk5Ljg2IDI4LjVBNC41IDQuNSAwIDAgMCA5Ni4zNSAzMC4xOUw2OS41NSA2My42OUE0LjUgNC41IDAgMCAwIDczLjA2IDcxTDk0LjA0IDcxQTQuNSA0LjUgMCAwIDAgOTcuNTUgNjkuMzFMMTI0LjM1IDM1LjgxQTQuNSA0LjUgMCAwIDAgMTIwLjg0IDI4LjVaIi8+PC9jbGlwUGF0aD48L2RlZnM+PHBhdGggZmlsbD0idXJsKCNsbS1hKSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNzQgNy41MUEyMCAyMCAwIDAgMSA4OS42MSAwTDEyOS42OSAwQTEwIDEwIDAgMCAxIDEzNy41IDE2LjI1TDEzNC45IDE5LjVBNCA0IDAgMCAwIDEzOC4wMiAyNkwxNTMuMzkgMjZBMTAgMTAgMCAwIDEgMTYxLjIgNDIuMjVMMTIxIDkyLjQ5QTIwIDIwIDAgMCAxIDEwNS4zOSAxMDBMNjMuODEgMTAwQTEwIDEwIDAgMCAxIDU2IDgzLjc1TDU4LjYgODAuNUE0IDQgMCAwIDAgNTUuNDggNzRMNDEuNjEgNzRBMTAgMTAgMCAwIDEgMzMuOCA1Ny43NVpNOTkuODYgMjguNUE0LjUgNC41IDAgMCAwIDk2LjM1IDMwLjE5TDY5LjU1IDYzLjY5QTQuNSA0LjUgMCAwIDAgNzMuMDYgNzFMOTQuMDQgNzFBNC41IDQuNSAwIDAgMCA5Ny41NSA2OS4zMUwxMjQuMzUgMzUuODFBNC41IDQuNSAwIDAgMCAxMjAuODQgMjguNVoiLz48cGF0aCBmaWxsPSJ1cmwoI2xtLWIpIiBjbGlwLXBhdGg9InVybCgjbG0tYykiIGQ9Ik0xMjkuNyAyNkwxODYuMiAyNkwxMTcuNCAxMTJMMzMuNCAxMTJMNjMuOCA3NEw2My43IDcxTDEzMC4yIDI4LjVaIi8+PC9zdmc+Cg==" alt="" width="40" height="30"><span>Luminor<span class="brand-light"> Software</span></span></a>
+      <a href="#inicio" class="brand" aria-label="Luminor Software — início"><img class="brand-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMxLjYxIDAgMTMxLjc4IDEwMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJMdW1pbm9yIFNvZnR3YXJlIj48dGl0bGU+THVtaW5vciBTb2Z0d2FyZTwvdGl0bGU+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJsbS1hIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjE0OCIgeTE9IjIiIHgyPSIyNCIgeTI9IjcyIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMEM4RDAiLz48c3RvcCBvZmZzZXQ9Ii41IiBzdG9wLWNvbG9yPSIjNkE1NUVDIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjQzIzQkU2Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImxtLWIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMTcwIiB5MT0iMzAiIHgyPSI0OCIgeTI9Ijk4Ij48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyRjZDRjAiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzZDMkJEOSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzRBMkZFMCIvPjwvbGluZWFyR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJsbS1jIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTc0IDcuNTFBMjAgMjAgMCAwIDEgODkuNjEgMEwxMjkuNjkgMEExMCAxMCAwIDAgMSAxMzcuNSAxNi4yNUwxMzQuOSAxOS41QTQgNCAwIDAgMCAxMzguMDIgMjZMMTUzLjM5IDI2QTEwIDEwIDAgMCAxIDE2MS4yIDQyLjI1TDEyMSA5Mi40OUEyMCAyMCAwIDAgMSAxMDUuMzkgMTAwTDYzLjgxIDEwMEExMCAxMCAwIDAgMSA1NiA4My43NUw1OC42IDgwLjVBNCA0IDAgMCAwIDU1LjQ4IDc0TDQxLjYxIDc0QTEwIDEwIDAgMCAxIDMzLjggNTcuNzVaTTk5Ljg2IDI4LjVBNC41IDQuNSAwIDAgMCA5Ni4zNSAzMC4xOUw2OS41NSA2My42OUE0LjUgNC41IDAgMCAwIDczLjA2IDcxTDk0LjA0IDcxQTQuNSA0LjUgMCAwIDAgOTcuNTUgNjkuMzFMMTI0LjM1IDM1LjgxQTQuNSA0LjUgMCAwIDAgMTIwLjg0IDI4LjVaIi8+PC9jbGlwUGF0aD48L2RlZnM+PHBhdGggZmlsbD0idXJsKCNsbS1hKSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNzQgNy41MUEyMCAyMCAwIDAgMSA4OS42MSAwTDEyOS42OSAwQTEwIDEwIDAgMCAxIDEzNy41IDE2LjI1TDEzNC45IDE5LjVBNCA0IDAgMCAwIDEzOC4wMiAyNkwxNTMuMzkgMjZBMTAgMTAgMCAwIDEgMTYxLjIgNDIuMjVMMTIxIDkyLjQ5QTIwIDIwIDAgMCAxIDEwNS4zOSAxMDBMNjMuODEgMTAwQTEwIDEwIDAgMCAxIDU2IDgzLjc1TDU4LjYgODAuNUE0IDQgMCAwIDAgNTUuNDggNzRMNDEuNjEgNzRBMTAgMTAgMCAwIDEgMzMuOCA1Ny43NVpNOTkuODYgMjguNUE0LjUgNC41IDAgMCAwIDk2LjM1IDMwLjE5TDY5LjU1IDYzLjY5QTQuNSA0LjUgMCAwIDAgNzMuMDYgNzFMOTQuMDQgNzFBNC41IDQuNSAwIDAgMCA5Ny41NSA2OS4zMUwxMjQuMzUgMzUuODFBNC41IDQuNSAwIDAgMCAxMjAuODQgMjguNVoiLz48cGF0aCBmaWxsPSJ1cmwoI2xtLWIpIiBjbGlwLXBhdGg9InVybCgjbG0tYykiIGQ9Ik0xMjkuNyAyNkwxODYuMiAyNkwxMTcuNCAxMTJMMzMuNCAxMTJMNjMuOCA3NEw2My43IDcxTDEzMC4yIDI4LjVaIi8+PC9zdmc+DQo=" alt="" width="40" height="30"><span>Luminor<span class="brand-light"> Software</span></span></a>
       <nav id="nav" class="nav-links" aria-label="Navegação principal">
         <a href="#solucoes">Soluções</a><a href="#metodo">Como funciona</a><a href="#processos">Exemplos</a><a href="#diferenciais">Sobre</a><a href="#contato">Contato</a>
         <a href="#contato" class="mobile-nav-cta" data-event="click_diagnostico" data-cta-location="mobile_nav">Conversar sobre meu negócio <svg class="icon"><use href="#i-arrow"/></svg></a>
@@ -1336,7 +1600,7 @@ window.LUMINOR_CONFIG = Object.freeze({
     <section id="contato" class="contact section-pad"><div class="wrap contact-layout"><div class="contact-copy"><div class="overline"><span class="mini-line"></span> VAMOS CONVERSAR?</div><h2>Conte o que está tomando tempo da sua equipe. <span class="gradient-text">Vamos encontrar uma solução.</span></h2><p>Diga qual tarefa se repete e quais ferramentas vocês usam. A conversa continua pelo WhatsApp.</p><div class="contact-feature"><span class="circle-check"><svg class="icon"><use href="#i-check"/></svg></span> Diagnóstico orientado ao seu problema</div><div class="contact-feature"><span class="circle-check"><svg class="icon"><use href="#i-check"/></svg></span> Mapeamento de tarefas repetitivas</div><div class="contact-feature"><span class="circle-check"><svg class="icon"><use href="#i-check"/></svg></span> Conversa sobre uma solução sob medida</div><div id="business-contact" class="contact-info"><strong>Informações comerciais</strong><p>Fale com a Luminor pelo WhatsApp ou escreva para <a href="mailto:rafael.valquer@gmail.com">rafael.valquer@gmail.com</a>.</p></div></div><div class="form-box"><div class="form-heading"><div><small>INICIAR CONVERSA</small><h3>Solicitar diagnóstico</h3></div><span>↗</span></div><form id="lead-form" method="post" action="/contato" novalidate><div class="honeypot" aria-hidden="true"><label for="website">Não preencha este campo</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div><div class="form-row"><div class="field"><label for="lead-name">Seu nome *</label><input id="lead-name" name="name" autocomplete="name" maxlength="100" required placeholder="Como podemos chamar você?"></div><div class="field"><label for="lead-company">Empresa *</label><input id="lead-company" name="company" autocomplete="organization" maxlength="120" required placeholder="Nome da empresa"></div></div><div class="form-row"><div class="field"><label for="lead-phone">WhatsApp com DDD *</label><input id="lead-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" required placeholder="(11) 99999-9999"></div><div class="field"><label for="lead-email">E-mail (opcional)</label><input id="lead-email" name="email" type="email" autocomplete="email" maxlength="160" placeholder="voce@empresa.com.br"></div></div><div class="field"><label for="lead-interest">Qual processo você quer melhorar?</label><select id="lead-interest" name="interest"><option value="Ainda estou avaliando">Ainda estou avaliando</option><option>Automação de processos internos</option><option>Sistemas sob medida</option><option>Integração de sistemas</option><option>Atendimento pelo WhatsApp</option><option>Outro processo</option></select></div><div class="field"><label for="lead-problem">Como esse processo funciona hoje? *</label><textarea id="lead-problem" name="problem" rows="4" maxlength="1500" required placeholder="Ex.: minha equipe atualiza o estoque em várias planilhas e isso gera retrabalho..."></textarea></div><div class="consent-line"><input type="checkbox" id="lead-consent" name="consent" required><label for="lead-consent">Autorizo o uso dos dados acima para resposta a esta solicitação, conforme a <a href="#politica-demonstracao" target="_blank" rel="noopener">Política de Privacidade</a>.</label></div><button id="submit-lead" type="button" class="btn btn-primary btn-block">Continuar pelo WhatsApp <svg class="icon"><use href="#i-arrow-up"/></svg></button><div id="form-status" class="form-status" role="status" aria-live="polite"></div><small class="form-note">* Campos obrigatórios. O WhatsApp abrirá com a mensagem preenchida; revise e toque em Enviar para concluir.</small></form><noscript><p>O formulário precisa de JavaScript. Como alternativa, envie um e-mail para <a href="mailto:rafael.valquer@gmail.com">rafael.valquer@gmail.com</a>. O envio pelo WhatsApp só acontece quando você confirma a mensagem no aplicativo.</p></noscript></div></div></section>
   <section id="politica-demonstracao" class="wrap preview-privacy"><strong>Política de privacidade da demonstração</strong><p>Ao preencher o formulário, o WhatsApp abre com a mensagem pronta. Os dados só são enviados quando você confirma no WhatsApp. A política preliminar está em <code>public/privacidade.html</code> e requer validação jurídica antes da publicação.</p></section></main>
 
-  <footer class="site-footer"><div class="wrap"><div class="footer-top"><div class="footer-brand"><a class="brand" href="#inicio" aria-label="Luminor Software — voltar ao início"><img class="brand-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMxLjYxIDAgMTMxLjc4IDEwMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJMdW1pbm9yIFNvZnR3YXJlIj48dGl0bGU+THVtaW5vciBTb2Z0d2FyZTwvdGl0bGU+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJsbS1hIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjE0OCIgeTE9IjIiIHgyPSIyNCIgeTI9IjcyIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMEM4RDAiLz48c3RvcCBvZmZzZXQ9Ii41IiBzdG9wLWNvbG9yPSIjNkE1NUVDIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjQzIzQkU2Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImxtLWIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMTcwIiB5MT0iMzAiIHgyPSI0OCIgeTI9Ijk4Ij48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyRjZDRjAiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzZDMkJEOSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzRBMkZFMCIvPjwvbGluZWFyR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJsbS1jIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTc0IDcuNTFBMjAgMjAgMCAwIDEgODkuNjEgMEwxMjkuNjkgMEExMCAxMCAwIDAgMSAxMzcuNSAxNi4yNUwxMzQuOSAxOS41QTQgNCAwIDAgMCAxMzguMDIgMjZMMTUzLjM5IDI2QTEwIDEwIDAgMCAxIDE2MS4yIDQyLjI1TDEyMSA5Mi40OUEyMCAyMCAwIDAgMSAxMDUuMzkgMTAwTDYzLjgxIDEwMEExMCAxMCAwIDAgMSA1NiA4My43NUw1OC42IDgwLjVBNCA0IDAgMCAwIDU1LjQ4IDc0TDQxLjYxIDc0QTEwIDEwIDAgMCAxIDMzLjggNTcuNzVaTTk5Ljg2IDI4LjVBNC41IDQuNSAwIDAgMCA5Ni4zNSAzMC4xOUw2OS41NSA2My42OUE0LjUgNC41IDAgMCAwIDczLjA2IDcxTDk0LjA0IDcxQTQuNSA0LjUgMCAwIDAgOTcuNTUgNjkuMzFMMTI0LjM1IDM1LjgxQTQuNSA0LjUgMCAwIDAgMTIwLjg0IDI4LjVaIi8+PC9jbGlwUGF0aD48L2RlZnM+PHBhdGggZmlsbD0idXJsKCNsbS1hKSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNzQgNy41MUEyMCAyMCAwIDAgMSA4OS42MSAwTDEyOS42OSAwQTEwIDEwIDAgMCAxIDEzNy41IDE2LjI1TDEzNC45IDE5LjVBNCA0IDAgMCAwIDEzOC4wMiAyNkwxNTMuMzkgMjZBMTAgMTAgMCAwIDEgMTYxLjIgNDIuMjVMMTIxIDkyLjQ5QTIwIDIwIDAgMCAxIDEwNS4zOSAxMDBMNjMuODEgMTAwQTEwIDEwIDAgMCAxIDU2IDgzLjc1TDU4LjYgODAuNUE0IDQgMCAwIDAgNTUuNDggNzRMNDEuNjEgNzRBMTAgMTAgMCAwIDEgMzMuOCA1Ny43NVpNOTkuODYgMjguNUE0LjUgNC41IDAgMCAwIDk2LjM1IDMwLjE5TDY5LjU1IDYzLjY5QTQuNSA0LjUgMCAwIDAgNzMuMDYgNzFMOTQuMDQgNzFBNC41IDQuNSAwIDAgMCA5Ny41NSA2OS4zMUwxMjQuMzUgMzUuODFBNC41IDQuNSAwIDAgMCAxMjAuODQgMjguNVoiLz48cGF0aCBmaWxsPSJ1cmwoI2xtLWIpIiBjbGlwLXBhdGg9InVybCgjbG0tYykiIGQ9Ik0xMjkuNyAyNkwxODYuMiAyNkwxMTcuNCAxMTJMMzMuNCAxMTJMNjMuOCA3NEw2My43IDcxTDEzMC4yIDI4LjVaIi8+PC9zdmc+Cg==" alt="" width="45" height="34"><span>Luminor<span class="brand-light"> Software</span></span></a><p>Entendemos seu processo. Criamos a solução. Automatizamos sua rotina.</p><ul class="footer-contact"><li><a href="mailto:rafael.valquer@gmail.com">rafael.valquer@gmail.com</a></li><li><a href="https://wa.me/5511999890795" target="_blank" rel="noopener noreferrer" data-whatsapp data-cta-location="footer">WhatsApp (11) 99989-0795</a></li></ul></div><nav class="footer-col" aria-label="Navegação do rodapé"><p class="footer-title">Navegação</p><a href="#solucoes">Soluções</a><a href="#metodo">Como funciona</a><a href="#processos">Exemplos</a><a href="#diferenciais">Sobre</a><a href="#faq">Dúvidas</a><a href="#contato">Contato</a></nav><nav class="footer-col" aria-label="Soluções"><p class="footer-title">Soluções</p><a href="/servicos/automacao-de-processos">Automação de processos</a><a href="/servicos/chatbot-whatsapp">Chatbot para WhatsApp</a><a href="/servicos/integracao-de-sistemas">Integração de sistemas</a><a href="/servicos/sistemas-sob-medida">Sistemas sob medida</a></nav><nav class="footer-col" aria-label="Segmentos e conteúdos"><p class="footer-title">Segmentos</p><a href="/segmentos/automacao-para-escritorios-de-advocacia">Escritórios de advocacia</a><a href="/segmentos/automacao-para-escritorios-de-contabilidade">Escritórios de contabilidade</a><a href="/segmentos/automacao-financeira-e-administrativa">Financeiro e administrativo</a><a href="/segmentos/chatbot-whatsapp-para-pequenas-empresas">Pequenas empresas</a><a href="/conteudos">Conteúdos</a></nav></div><div class="footer-bottom"><span>© <span id="year">2026</span> Luminor Software. Todos os direitos reservados.</span><div><a href="#politica-demonstracao">Privacidade</a><button type="button" id="cookie-settings">Preferências de cookies</button></div><span>Desenvolvido para evoluir.</span></div></div></footer>
+  <footer class="site-footer"><div class="wrap"><div class="footer-top"><div class="footer-brand"><a class="brand" href="#inicio" aria-label="Luminor Software — voltar ao início"><img class="brand-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMxLjYxIDAgMTMxLjc4IDEwMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJMdW1pbm9yIFNvZnR3YXJlIj48dGl0bGU+THVtaW5vciBTb2Z0d2FyZTwvdGl0bGU+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJsbS1hIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjE0OCIgeTE9IjIiIHgyPSIyNCIgeTI9IjcyIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMEM4RDAiLz48c3RvcCBvZmZzZXQ9Ii41IiBzdG9wLWNvbG9yPSIjNkE1NUVDIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjQzIzQkU2Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImxtLWIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMTcwIiB5MT0iMzAiIHgyPSI0OCIgeTI9Ijk4Ij48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyRjZDRjAiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzZDMkJEOSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzRBMkZFMCIvPjwvbGluZWFyR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJsbS1jIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTc0IDcuNTFBMjAgMjAgMCAwIDEgODkuNjEgMEwxMjkuNjkgMEExMCAxMCAwIDAgMSAxMzcuNSAxNi4yNUwxMzQuOSAxOS41QTQgNCAwIDAgMCAxMzguMDIgMjZMMTUzLjM5IDI2QTEwIDEwIDAgMCAxIDE2MS4yIDQyLjI1TDEyMSA5Mi40OUEyMCAyMCAwIDAgMSAxMDUuMzkgMTAwTDYzLjgxIDEwMEExMCAxMCAwIDAgMSA1NiA4My43NUw1OC42IDgwLjVBNCA0IDAgMCAwIDU1LjQ4IDc0TDQxLjYxIDc0QTEwIDEwIDAgMCAxIDMzLjggNTcuNzVaTTk5Ljg2IDI4LjVBNC41IDQuNSAwIDAgMCA5Ni4zNSAzMC4xOUw2OS41NSA2My42OUE0LjUgNC41IDAgMCAwIDczLjA2IDcxTDk0LjA0IDcxQTQuNSA0LjUgMCAwIDAgOTcuNTUgNjkuMzFMMTI0LjM1IDM1LjgxQTQuNSA0LjUgMCAwIDAgMTIwLjg0IDI4LjVaIi8+PC9jbGlwUGF0aD48L2RlZnM+PHBhdGggZmlsbD0idXJsKCNsbS1hKSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNzQgNy41MUEyMCAyMCAwIDAgMSA4OS42MSAwTDEyOS42OSAwQTEwIDEwIDAgMCAxIDEzNy41IDE2LjI1TDEzNC45IDE5LjVBNCA0IDAgMCAwIDEzOC4wMiAyNkwxNTMuMzkgMjZBMTAgMTAgMCAwIDEgMTYxLjIgNDIuMjVMMTIxIDkyLjQ5QTIwIDIwIDAgMCAxIDEwNS4zOSAxMDBMNjMuODEgMTAwQTEwIDEwIDAgMCAxIDU2IDgzLjc1TDU4LjYgODAuNUE0IDQgMCAwIDAgNTUuNDggNzRMNDEuNjEgNzRBMTAgMTAgMCAwIDEgMzMuOCA1Ny43NVpNOTkuODYgMjguNUE0LjUgNC41IDAgMCAwIDk2LjM1IDMwLjE5TDY5LjU1IDYzLjY5QTQuNSA0LjUgMCAwIDAgNzMuMDYgNzFMOTQuMDQgNzFBNC41IDQuNSAwIDAgMCA5Ny41NSA2OS4zMUwxMjQuMzUgMzUuODFBNC41IDQuNSAwIDAgMCAxMjAuODQgMjguNVoiLz48cGF0aCBmaWxsPSJ1cmwoI2xtLWIpIiBjbGlwLXBhdGg9InVybCgjbG0tYykiIGQ9Ik0xMjkuNyAyNkwxODYuMiAyNkwxMTcuNCAxMTJMMzMuNCAxMTJMNjMuOCA3NEw2My43IDcxTDEzMC4yIDI4LjVaIi8+PC9zdmc+DQo=" alt="" width="45" height="34"><span>Luminor<span class="brand-light"> Software</span></span></a><p>Entendemos seu processo. Criamos a solução. Automatizamos sua rotina.</p><ul class="footer-contact"><li><a href="mailto:rafael.valquer@gmail.com">rafael.valquer@gmail.com</a></li><li><a href="https://wa.me/5511999890795" target="_blank" rel="noopener noreferrer" data-whatsapp data-cta-location="footer">WhatsApp (11) 99989-0795</a></li></ul></div><nav class="footer-col" aria-label="Navegação do rodapé"><p class="footer-title">Navegação</p><a href="#solucoes">Soluções</a><a href="#metodo">Como funciona</a><a href="#processos">Exemplos</a><a href="#diferenciais">Sobre</a><a href="#faq">Dúvidas</a><a href="#contato">Contato</a></nav><nav class="footer-col" aria-label="Soluções"><p class="footer-title">Soluções</p><a href="/servicos/automacao-de-processos">Automação de processos</a><a href="/servicos/chatbot-whatsapp">Chatbot para WhatsApp</a><a href="/servicos/integracao-de-sistemas">Integração de sistemas</a><a href="/servicos/sistemas-sob-medida">Sistemas sob medida</a></nav><nav class="footer-col" aria-label="Segmentos e conteúdos"><p class="footer-title">Segmentos</p><a href="/segmentos/automacao-para-escritorios-de-advocacia">Escritórios de advocacia</a><a href="/segmentos/automacao-para-escritorios-de-contabilidade">Escritórios de contabilidade</a><a href="/segmentos/automacao-financeira-e-administrativa">Financeiro e administrativo</a><a href="/segmentos/chatbot-whatsapp-para-pequenas-empresas">Pequenas empresas</a><a href="/conteudos">Conteúdos</a></nav></div><div class="footer-bottom"><span>© <span id="year">2026</span> Luminor Software. Todos os direitos reservados.</span><div><a href="#politica-demonstracao">Privacidade</a><button type="button" id="cookie-settings">Preferências de cookies</button></div><span>Desenvolvido para evoluir.</span></div></div></footer>
   <div class="cookie-banner" id="cookie-banner" hidden><p>As métricas opcionais só são ativadas se você autorizar. Você pode alterar sua escolha a qualquer momento. <a href="#politica-demonstracao">Saiba mais</a>.</p><div><button class="btn btn-secondary" id="cookies-reject">Somente essenciais</button><button class="btn btn-primary" id="cookies-accept">Aceitar métricas</button></div></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>

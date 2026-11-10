@@ -18,72 +18,7 @@
     window.matchMedia('(min-width:901px)').addEventListener('change',e=>{if(e.matches)menuClose()});
   }
 
-  function setupAutomationDemo() {
-    const root=$('#automation-demo');if(!root)return;
-    const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
-    const scenarios={
-      planilhas:{file:'controle_pedidos.xlsx',source:'Planilhas',result:'Aplicação',message:'Dados consolidados. Equipe no controle.',columns:['Pedido','Valor','Situação'],rows:[['#1048','R$ 320','Conferir'],['#1049','R$ 180','Copiar'],['#1050','R$ 460','Atualizar']],gain:'As planilhas viram uma visão clara da operação. Explore o dashboard.'},
-      documentos:{file:'documentos_da_equipe',source:'Documentos',result:'Registros',message:'Informações extraídas. Revisão pela equipe.',gain:'Cada documento encontra seu lugar. Selecione um cartão para ver os dados.'},
-      atendimento:{file:'mensagens_de_clientes',source:'WhatsApp',result:'Equipe',message:'Solicitações organizadas. Contexto com a equipe.',gain:'Conversas viram tickets com contexto e responsável. Explore os filtros.'}
-    };
-    const documents=[
-      {id:'nf208',title:'Nota fiscal 208',category:'Nota fiscal',stage:0,fields:[['Fornecedor','Empresa A'],['Valor','R$ 320,00'],['Próxima etapa','Extrair informações']]},
-      {id:'contrato',title:'Contrato comercial',category:'Contrato',stage:0,fields:[['Cliente','Empresa B'],['Vigência','12 meses'],['Próxima etapa','Revisar cláusulas']]},
-      {id:'nf209',title:'Nota fiscal 209',category:'Nota fiscal',stage:1,fields:[['Fornecedor','Empresa C'],['Valor','R$ 180,00'],['Próxima etapa','Conferência humana']]},
-      {id:'recibo',title:'Recibo de serviço',category:'Comprovante',stage:2,fields:[['Prestador','Empresa D'],['Valor','R$ 460,00'],['Situação','Classificado e organizado']]},
-      {id:'pedido',title:'Pedido de compra',category:'Pedido',stage:2,fields:[['Código','PC 1050'],['Área','Operação'],['Situação','Classificado e organizado']]}
-    ];
-    const tickets=[{id:'1048',title:'Acompanhar pedido',owner:'Ana',status:'pendentes',label:'Pendente',initial:'A'}, {id:'1049',title:'Agendar uma visita',owner:'Bruno',status:'andamento',label:'Em andamento',initial:'B'}, {id:'1050',title:'Dúvida sobre pagamento',owner:'Carla',status:'resolvidos',label:'Resolvido',initial:'C'}, {id:'1051',title:'Solicitar orçamento',owner:'Ana',status:'pendentes',label:'Pendente',initial:'A'}];
-    const captions=['Informações espalhadas e a mesma tarefa feita várias vezes.','A Luminor entende a rotina e mapeia as etapas que se repetem.','Criamos um fluxo sob medida que conecta dados, ferramentas e pessoas.'];
-    const outcome=$('#scenario-outcome');
-    let selected='planilhas',step=0,playing=false,timer=null,touched=false,period='semana',documentId=null,ticketFilter='todos';
-    function resultHeader(title,subtitle){return `<div class="outcome-heading"><div><span class="outcome-kicker">RESULTADO POSSÍVEL</span><h3>${title}</h3></div>${icon('check')}</div><p class="outcome-subtitle">${subtitle}</p>`}
-    function renderOutcome(){
-      if(selected==='planilhas'){
-        const month=period==='mes',values=month?[74,59,39]:[18,14,8],total=values.reduce((a,b)=>a+b,0);
-        const points=month?'8,112 40,99 73,105 106,76 139,83 172,53 205,63 238,27 272,12':'8,112 52,95 96,103 140,69 184,76 228,39 272,30';
-        outcome.innerHTML=resultHeader('Da planilha à visão do negócio','Dados reunidos em uma aplicação criada para sua operação.')+`<div class="dashboard-controls" role="group" aria-label="Período do dashboard"><button type="button" data-period="semana" aria-pressed="${!month}">Semana</button><button type="button" data-period="mes" aria-pressed="${month}">Mês</button></div><div class="dashboard-kpis"><div><span>Pedidos reunidos</span><strong>${total}</strong></div><div><span>Em análise</span><strong>${month?14:6}</strong></div><div><span>Fontes conectadas</span><strong>03</strong></div></div><div class="dashboard-charts"><div class="evolution-chart"><h4>Evolução de pedidos</h4><svg viewBox="0 0 280 135" role="img" aria-label="Evolução dos pedidos no período: ${month?'mês':'semana'}"><path class="chart-grid" d="M8 20H272M8 65H272M8 112H272"/><polygon class="chart-area" points="8,125 ${points} 272,125"/><polyline class="chart-line" points="${points}" pathLength="1"/></svg><div class="chart-axis"><span>${month?'Dia 1':'Seg'}</span><span>${month?'Dia 30':'Dom'}</span></div></div><div class="category-chart"><h4>Por área</h4>${['Comercial','Operação','Financeiro'].map((name,i)=>`<div class="category-bar"><span>${name}</span><strong>${values[i]}</strong><i style="--bar-width:${Math.round(values[i]/values[0]*100)}%"></i></div>`).join('')}</div></div><p class="outcome-note">Período selecionado: ${month?'mês':'semana'}</p>`;
-      }else if(selected==='documentos'){
-        const doc=documents.find(d=>d.id===documentId);
-        outcome.innerHTML=resultHeader('Documentos com lugar e contexto','Um canvas para acompanhar cada etapa da organização.')+`<div class="document-canvas">${['Recebidos','Em análise','Organizados'].map((name,i)=>`<section class="document-column"><h4><span class="column-dot dot-${i}"></span>${name}<small>${documents.filter(d=>d.stage===i).length}</small></h4>${documents.filter(d=>d.stage===i).map(d=>`<button type="button" class="document-card" data-document="${d.id}" aria-pressed="${d.id===documentId}" aria-controls="document-detail">${icon('layer')}<strong>${d.title}</strong><span>${d.category}</span></button>`).join('')}</section>`).join('')}</div><div id="document-detail" class="document-detail" role="status">${doc?`<strong>${doc.title}</strong><dl><div><dt>Categoria</dt><dd>${doc.category}</dd></div>${doc.fields.map(([key,value])=>`<div><dt>${key}</dt><dd>${value}</dd></div>`).join('')}</dl>`:'<span>Selecione um documento para explorar suas informações.</span>'}</div><p class="outcome-note">Extração e revisão configuradas para cada processo</p>`;
-      }else{
-        const filtered=tickets.filter(t=>ticketFilter==='todos'||t.status===ticketFilter);
-        outcome.innerHTML=resultHeader('Cada conversa vira uma próxima ação','Tickets organizados, com responsável e situação visíveis.')+`<div class="ticket-filters" role="group" aria-label="Filtrar tickets por status">${[['todos','Todos'],['pendentes','Pendentes'],['andamento','Em andamento'],['resolvidos','Resolvidos']].map(([key,label])=>`<button type="button" data-ticket-filter="${key}" aria-pressed="${ticketFilter===key}">${label}</button>`).join('')}</div><ul class="ticket-list" aria-label="Tickets de atendimento">${filtered.map(t=>`<li class="ticket-row"><span class="ticket-avatar" aria-hidden="true">${t.initial}</span><div><span class="ticket-id">#${t.id} · WhatsApp</span><strong>${t.title}</strong><small>Responsável: ${t.owner}</small></div><span class="ticket-status status-${t.status}">${t.label}</span></li>`).join('')}</ul><p class="outcome-note" role="status">${filtered.length} ticket${filtered.length===1?'':'s'} neste filtro</p>`;
-      }
-    }
-    function playLabel(){root.dataset.playing=String(playing);$('#demo-play-label').textContent=playing?'Pausar':step===3?'Rever transformação':step===0?'Ver transformação':'Continuar';$('#demo-play').setAttribute('aria-label',playing?'Pausar transformação':step===3?'Rever transformação':step===0?'Reproduzir transformação':'Continuar transformação');$('#demo-play>span').textContent=playing?'Ⅱ':step===3?'↻':'▶'}
-    function pause(){clearTimeout(timer);playing=false;playLabel()}
-    function setStep(next){step=next;root.dataset.step=String(step);outcome.hidden=step!==3;$$('[data-demo-step]',root).forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.demoStep)===step)));$('#demo-stage-copy').textContent=step===3?scenarios[selected].gain:captions[step];playLabel()}
-    function schedule(){timer=setTimeout(()=>{if(step<3){setStep(step+1);schedule()}else pause()},1800)}
-    function play(){if(motion.matches){setStep(3);pause();return}if(step===3)setStep(0);playing=true;playLabel();schedule()}
-    function choose(name){
-      pause();selected=name;root.dataset.scenario=name;period='semana';documentId=null;ticketFilter='todos';const scenario=scenarios[name];
-      $$('[data-demo-scenario]',root).forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.demoScenario===name)));
-      $('#demo-source-name').textContent=scenario.file;$('#demo-node-source').textContent=scenario.source;$('#demo-node-result').textContent=scenario.result;$('#demo-result').textContent=scenario.message;
-      if(name==='planilhas'){
-        const cells=['','A','B','C','1',...scenario.columns,...scenario.rows.flatMap((row,i)=>[String(i+2),...row])];
-        $('.sheet-grid',root).innerHTML=cells.map((cell,i)=>`<span class="${i>7&&i%4===3?'cell-wait':''}">${safeText(cell)}</span>`).join('');
-      }
-      $('#manual-preview').innerHTML=name==='documentos'?['Notas fiscais','Contrato_final_v3.pdf','Recibos','Pedido de compra'].map((label,i)=>`<div class="loose-document loose-${i}">${icon('layer')}<strong>${label}</strong><span>Conferir e organizar</span></div>`).join(''):name==='atendimento'?['Olá! Cadê meu pedido?','Pode agendar uma visita?','Preciso de um orçamento.','Alguém já respondeu?'].map((label,i)=>`<div class="loose-message loose-${i}">${icon('message')}<span>${label}</span></div>`).join(''):'';
-      renderOutcome();setStep(0);
-    }
-    outcome.addEventListener('click',event=>{
-      const button=event.target.closest('button');if(!button)return;
-      let selector;if(button.dataset.period){period=button.dataset.period;selector=`[data-period="${period}"]`}
-      else if(button.dataset.document){documentId=button.dataset.document;selector=`[data-document="${documentId}"]`}
-      else if(button.dataset.ticketFilter){ticketFilter=button.dataset.ticketFilter;selector=`[data-ticket-filter="${ticketFilter}"]`}
-      else return;
-      renderOutcome();$(selector,outcome).focus({preventScroll:true});
-    });
-    $$('[data-demo-scenario]',root).forEach(button=>button.addEventListener('click',()=>{touched=true;choose(button.dataset.demoScenario)}));
-    $$('[data-demo-step]',root).forEach(button=>button.addEventListener('click',()=>{touched=true;pause();setStep(Number(button.dataset.demoStep))}));
-    $('#demo-play').addEventListener('click',()=>{touched=true;if(playing)pause();else play()});
-    document.addEventListener('visibilitychange',()=>{if(document.hidden)pause()});
-    motion.addEventListener('change',()=>{if(motion.matches)pause()});
-    const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting){pause();continue}if(entry.intersectionRatio>=.35&&!touched&&!motion.matches){touched=true;play()}}},{threshold:[0,.35]});
-    choose('planilhas');observer.observe(root);
-  }
-
+  // O exemplo interativo do hero (#automation-demo) vive em assets/js/experiences/.
   function setupTeamExperience(){
     const root=$('#team-experience');if(!root)return;
     const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -123,6 +58,6 @@
   }
   // Sombra sutil no cabeçalho fixo depois que a página rola.
   function setupHeaderShadow(){const header=$('.site-header');if(!header)return;const update=()=>header.classList.toggle('is-scrolled',window.scrollY>8);update();window.addEventListener('scroll',update,{passive:true})}
-  function init(){const year=$('#year');if(year)year.textContent=new Date().getFullYear();if($('#menu-btn')&&$('#nav'))setupNav();setupHeaderShadow();setupAutomationDemo();setupTeamExperience();setupSolutionActions();setupContacts();setupForm()}
+  function init(){const year=$('#year');if(year)year.textContent=new Date().getFullYear();if($('#menu-btn')&&$('#nav'))setupNav();setupHeaderShadow();setupTeamExperience();setupSolutionActions();setupContacts();setupForm()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
