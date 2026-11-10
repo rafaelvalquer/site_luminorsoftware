@@ -56,6 +56,9 @@ export function buildStandalone() {
   html = replaceAll(html, '<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">', '');
   html = replaceAll(html, 'href="/assets/img/favicon-192.png"', `href="data:image/png;base64,${base64('public/assets/img/favicon-192.png')}"`);
   html = replaceAll(html, 'src="/assets/img/luminor-symbol.svg"', `src="data:image/svg+xml;base64,${base64('public/assets/img/luminor-symbol.svg')}"`);
+  // Capturas das demonstrações: só a versão menor, embutida, para a prévia abrir sem servidor.
+  html = html.replace(/ srcset="[^"]*\/assets\/img\/demos\/[^"]*"/g, '');
+  html = html.replace(/src="\/assets\/img\/demos\/([\w-]+\.webp)"/g, (_, file) => `src="data:image/webp;base64,${base64(`public/assets/img/demos/${file}`)}"`);
   html = replaceAll(html, '</main>', '<section id="politica-demonstracao" class="wrap preview-privacy"><strong>Política de privacidade da demonstração</strong><p>Ao preencher o formulário, o WhatsApp abre com a mensagem pronta. Os dados só são enviados quando você confirma no WhatsApp. A política preliminar está em <code>public/privacidade.html</code> e requer validação jurídica antes da publicação.</p></section></main>');
   html = replaceAll(html, 'name="robots" content="index,follow"', 'name="robots" content="noindex,nofollow"');
   html = html.replace(/\s*<link rel="canonical" href="https:\/\/luminorsoftware\.com\.br\/">/g, '');

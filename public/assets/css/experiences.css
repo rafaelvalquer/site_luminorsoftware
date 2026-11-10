@@ -393,8 +393,15 @@ button.lab-node:hover{border-color:rgba(255,255,255,.36)}
 .solutions .solution-card .service-page-link{position:static;margin:auto 6px 0;color:var(--brand)}
 .solutions .solution-card .service-page-link::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit}
 .solutions .solution-card:focus-within{border-color:var(--brand)}
-.solution-visual{position:relative;display:grid;place-items:center;aspect-ratio:16/10;margin-bottom:18px;border-radius:14px;background-color:var(--brand-soft);overflow:hidden}
-.solution-visual .solution-icon{width:56px;height:56px;border-radius:16px;background:var(--surface);border-color:var(--brand-border)}
+/* Captura da demonstração dentro de uma pequena janela de aplicativo. */
+.app-shot{position:relative;margin:0 0 20px;border:1px solid var(--border);border-radius:14px;background-color:var(--surface-alt);overflow:hidden}
+.app-shot-bar{display:flex;align-items:center;gap:5px;height:22px;padding:0 10px;border-bottom:1px solid var(--border);background-color:var(--surface)}
+.app-shot-bar i{width:7px;height:7px;border-radius:50%;background-color:#D9D4E4}
+.app-shot img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:left top;transition:transform .4s ease}
+.solutions .solution-card:hover .app-shot img{transform:scale(1.025)}
+.app-shot .solution-icon{position:absolute;right:10px;bottom:10px;z-index:1;width:40px;height:40px;border-radius:12px;background:var(--surface);border-color:var(--brand-border);box-shadow:var(--shadow-sm)}
+.app-shot .solution-icon .icon{width:19px;height:19px}
+@media(prefers-reduced-motion:reduce){.app-shot img{transition:none}.solutions .solution-card:hover .app-shot img{transform:none}}
 .solutions .solution-card:hover .solution-icon{background:var(--surface);border-color:var(--brand-border);color:var(--brand)}
 
 /* Galeria de demonstrações */
