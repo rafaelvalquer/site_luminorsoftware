@@ -52,8 +52,6 @@ svg.icon{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;s
 .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brand);box-shadow:var(--shadow-sm);flex-shrink:0}
 .announcement{height:35px;display:flex;gap:12px;align-items:center;justify-content:center;background:var(--surface);color:var(--brand);border-bottom:1px solid var(--border);letter-spacing:.19em;font-size:10px;font-weight:750}
 .announcement .status-dot{width:5px;height:5px}
-.announcement-spacer{display:none}
-.announcement-right{display:none}
 .site-header{position:sticky;top:0;z-index:80;background:var(--surface);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
 .nav-shell{height:83px;display:flex;align-items:center;justify-content:space-between;gap:22px}
 .brand{display:inline-flex;align-items:center;gap:12px;font-size:20px;font-weight:740;letter-spacing:-.045em;white-space:nowrap}
@@ -89,21 +87,10 @@ svg.icon{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;s
 .hero h1{font-size:clamp(55px,5.55vw,88px);line-height:1.045;letter-spacing:-.065em;margin:28px 0 26px;font-weight:770}
 .hero-lead{color:var(--muted);font-size:18px;line-height:1.75;max-width:560px}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
-.hero-footer{display:flex;align-items:center;gap:15px;margin-top:55px}
-.avatars{display:flex;padding-left:10px}
-.avatars span{width:39px;height:39px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:2px solid var(--bg);margin-left:-10px;color:var(--brand)}
-.avatars .icon{width:18px}
-.hero-footer p{font-size:12px;color:var(--dim);line-height:1.7;margin:0}
-.hero-footer strong{color:var(--text);font-weight:600}
-.hero-strip{display:flex;justify-content:space-between;margin-top:110px;border-top:1px solid var(--border);padding-top:26px;color:var(--muted);font-size:10px;letter-spacing:.15em;gap:15px}
-.hero-strip span{color:var(--brand);margin-right:12px}
 .solutions{background:var(--surface)}
 .solutions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .solution-card{border:1px solid var(--border);border-radius:19px;background:var(--surface);padding:27px;display:flex;flex-direction:column;position:relative;min-width:0;transition:transform .2s,border-color .2s}
 .solution-card:hover{transform:translateY(-4px);border-color:var(--border)}
-.solution-card.featured{background:var(--surface);border-color:var(--border)}
-.solution-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.solution-head>span{font-size:10px;font-weight:740;letter-spacing:.11em;color:var(--muted)}
 .solution-icon{width:49px;height:49px;background:var(--surface);color:var(--brand);display:grid;place-items:center;border:1px solid var(--border);border-radius:13px}
 .solution-icon .icon{width:23px;height:23px}
 .solution-card h3{font-size:27px;line-height:1.16;letter-spacing:-.04em;margin:0 0 13px}
@@ -115,28 +102,12 @@ svg.icon{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;s
 .text-action .icon{width:17px}
 .solution-cta{margin-top:auto;text-align:left}
 .service-page-link{font-size:12px;margin:0 0 18px;align-self:flex-start}
-.solution-bottom{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-top:25px}
-.solution-bottom>span{font-size:10px;color:var(--muted);letter-spacing:.13em}
-.solution-bottom a{font-size:12px;color:var(--brand);display:flex;align-items:center;gap:11px}
-.solution-bottom .icon{width:16px}
 .method{background:var(--surface)}
-.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
-.method-grid article{border-top:1px solid var(--border);padding-top:25px;min-height:220px}
 .method-index{color:var(--brand);font-size:13px;font-weight:680}
-.method-icon{color:var(--muted);margin-top:35px}
-.method-icon .icon{width:27px;height:27px}
-.method-grid h3{font-size:25px;letter-spacing:-.035em;margin:15px 0 9px}
-.method-grid p{color:var(--muted);line-height:1.7;font-size:14px;max-width:295px}.contact-copy>p{font-size:17px;color:var(--muted);line-height:1.83;max-width:505px}
+.contact-copy>p{font-size:17px;color:var(--muted);line-height:1.83;max-width:505px}
 .btn-block{width:100%}
-.trust{background:var(--surface)}
-.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.trust-grid article{padding:30px;background:var(--surface);border:1px solid var(--border);border-radius:16px}
-.trust-grid .icon{width:31px;height:31px;color:var(--brand)}
-.trust-grid h3{margin:28px 0 10px;font-size:20px}
-.trust-grid p{font-size:13px;line-height:1.83;color:var(--muted)}
 .faq{background:var(--surface)}
 .faq-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:8%}
-.faq-intro{color:var(--muted);line-height:1.8;max-width:410px;font-size:16px;margin:24px 0}
 .faq-items details{border-bottom:1px solid var(--border)}
 .faq-items summary{cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;font-weight:680;font-size:14px;list-style:none}
 .faq-items summary::-webkit-details-marker{display:none}
@@ -146,14 +117,9 @@ svg.icon{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;s
 .contact{background:var(--surface)}
 .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:9%;align-items:start}
 .contact-copy{padding-top:30px}
-.contact-feature{display:flex;align-items:center;gap:11px;font-size:13px;color:var(--text);margin-top:18px}
-.contact-feature:first-of-type{margin-top:35px}
-.circle-check{border-radius:50%;background:var(--surface);color:var(--brand);width:23px;height:23px;display:grid;place-items:center}
-.circle-check .icon{width:14px;height:14px}
 .contact-info{margin-top:42px;border-top:1px solid var(--border);padding-top:22px}
 .contact-info strong{font-size:13px}
 .contact-info p{font-size:13px;color:var(--muted)}
-.confirm{color:var(--muted)}
 .form-box{padding:32px;background:var(--surface);border:1px solid var(--border);border-radius:19px;box-shadow:var(--shadow-sm)}
 .form-heading{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:24px;margin-bottom:23px}
 .form-heading small{color:var(--brand);font-size:10px;letter-spacing:.14em;font-weight:750}
@@ -232,10 +198,9 @@ svg.icon{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;s
 .hero h1{font-size:clamp(51px,8.5vw,80px)}
 .hero-lead{margin-inline:auto}
 .hero-copy .eyebrow{justify-content:center}
-.hero-actions,.hero-footer{justify-content:center}
-.hero-strip{margin-top:110px}
-.solutions-grid,.method-grid,.trust-grid{grid-template-columns:1fr 1fr}
-.solution-card:last-child,.method-grid article:last-child,.trust-grid article:last-child{grid-column:span 2}
+.hero-actions{justify-content:center}
+.solutions-grid{grid-template-columns:1fr 1fr}
+.solution-card:last-child{grid-column:span 2}
 .section-heading{align-items:flex-start;flex-direction:column;gap:20px}
 .section-heading>p{max-width:610px}.faq-layout,.contact-layout{grid-template-columns:1fr;gap:55px}
 .contact-copy{padding-top:0}
@@ -255,22 +220,15 @@ svg.icon{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;s
 .hero-lead{font-size:15px}
 .hero-actions{flex-direction:column;align-items:stretch}
 .hero-actions .btn{width:100%}
-.hero-footer{margin-top:35px}
-.hero-strip{margin-top:85px;flex-wrap:wrap;justify-content:center;text-align:center;gap:14px;font-size:9px}
-.hero-strip>div{width:100%}
 .section-pad{padding-block:75px}
 .section-heading h2,.method h2,.faq h2,.contact h2{font-size:clamp(34px,9vw,44px)}
 .section-heading{margin-bottom:35px}
 .section-heading>p{font-size:14px}
-.solutions-grid,.method-grid,.trust-grid{grid-template-columns:1fr}
-.solution-card:last-child,.method-grid article:last-child,.trust-grid article:last-child{grid-column:auto}
+.solutions-grid{grid-template-columns:1fr}
+.solution-card:last-child{grid-column:auto}
 .solution-card{padding:24px}
 .solution-card h3{font-size:26px}
 .solution-card>p{min-height:0}
-.solution-bottom{flex-direction:column;align-items:flex-start}
-.method-grid{gap:26px}
-.method-grid article{min-height:0}
-.method-icon{margin-top:24px}
 .form-box{padding:21px}
 .form-row{grid-template-columns:1fr;gap:0}
 .form-heading h3{font-size:23px}
@@ -296,7 +254,6 @@ svg.icon{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;s
 @media(max-width:900px){.faq-layout,.contact-layout{grid-template-columns:minmax(0,1fr)}
 }
 
-
 /* Process-led presentation */
 .hero h1{font-size:clamp(42px,4.5vw,66px);line-height:1.1}
 
@@ -308,55 +265,21 @@ svg.icon{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;s
 
 .solution-card h3{margin-top:32px;min-height:62px}
 
-.method-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:25px}
-
-.method-grid h3{font-size:22px}
-
-.process-examples{background:var(--surface)}
-
-.examples-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-
-.example-card{padding:28px;border:1px solid var(--border);border-radius:18px;background:var(--surface);display:flex;flex-direction:column;min-width:0}
-
-.example-index{color:var(--brand);font-size:10px;letter-spacing:.15em}
-
-.example-card h3{font-size:24px;letter-spacing:-.035em;margin:18px 0 25px}
-
-.example-card h4{font-size:12px;margin:0 0 10px;color:var(--text)}
-
-.example-card p{font-size:14px;line-height:1.8;color:var(--muted);margin:0}
-
-.example-before{padding-bottom:24px;border-bottom:1px solid var(--border)}
-
-.example-after{padding:24px 0 30px}
-
-.example-after h4{color:var(--brand)}
-
-.example-card .text-action{margin-top:auto}
-
-.examples-note{font-size:12px;color:var(--muted);line-height:1.7;margin-top:23px}
-
 @media(max-width:1100px){.nav-links{gap:17px}
 .nav-shell{gap:15px}
-.method-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-.method-grid article:last-child{grid-column:auto}
 }
 
 @media(max-width:900px){.hero-layout{grid-template-columns:minmax(0,1fr);gap:50px}
 .process-visual{width:min(100%,620px);margin:auto}
-.examples-grid{grid-template-columns:minmax(0,1fr)}
-.example-card{padding:28px}
 .hero h1{font-size:clamp(42px,7vw,64px)}
 }
 
 @media(max-width:620px){.hero h1{font-size:clamp(34px,8.7vw,52px)}
 .process-visual{padding:23px 20px}
 .process-caption{font-size:9px;letter-spacing:.08em}
-.method-grid{grid-template-columns:minmax(0,1fr)}
 .solution-card h3{min-height:0}
 .hero-actions .btn{white-space:normal;text-align:center}
 }
-
 
 /* Interactive journey: from spreadsheets to an automated process. */
 .process-visual{padding:25px;overflow:hidden;position:relative;background:var(--surface)}
@@ -395,9 +318,6 @@ svg.icon{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;s
 
 .sheet-cursor span{font-size:8px;border:1px solid var(--border);background:var(--surface);padding:5px;border-radius:4px}
 
-
-
-
 .workflow-preview{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:15px;opacity:0;transform:translateY(15px);transition:opacity .65s,transform .65s}
 
 .workflow-label{font-size:8px;letter-spacing:.09em;color:var(--muted);margin-bottom:21px}
@@ -420,13 +340,9 @@ svg.icon{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;s
 
 .process-visual[data-step="1"] .sheet-preview{filter:blur(2px);transform:scale(.94) rotate(0)}
 
-
 .process-visual[data-step="2"] .sheet-preview,.process-visual[data-step="3"] .sheet-preview{opacity:0;transform:translateX(-45px) scale(.8);filter:blur(5px)}
 
 .process-visual[data-step="2"] .workflow-preview,.process-visual[data-step="3"] .workflow-preview{opacity:1;transform:translateY(0)}
-
-
-
 
 .process-visual[data-playing="true"] .flow-connector i{opacity:1;animation:data-packet 1.4s linear infinite}
 
@@ -481,7 +397,6 @@ to{left:100%}
 @media(prefers-reduced-motion:reduce){.process-visual *, .process-visual *:before{animation:none!important;transition:none!important}
 }
 
-
 /* Light surfaces and clear hierarchy. */
 body{line-height:1.5}
 
@@ -511,29 +426,19 @@ body{line-height:1.5}
 
 .section-heading h2,.method h2,.faq h2,.contact h2{letter-spacing:-.04em;font-weight:700;line-height:1.12}
 
-.avatars span{background:var(--brand-soft)}
-
-.hero-footer strong{color:var(--text)}
-
-.hero-strip{margin-top:70px;padding-bottom:16px}
-
-.solutions,.process-examples,.trust,.contact{background:var(--surface-alt)}
+.solutions,.contact{background:var(--surface-alt)}
 
 .method,.faq{background:var(--surface)}
 
 .contact{background:var(--hero-gradient)}
 
-.solution-card,.solution-card.featured,.example-card,.trust-grid article{background:var(--surface);border-color:var(--border);box-shadow:var(--shadow-sm);padding:30px}
-
-.solution-card.featured{border-color:var(--brand-border)}
+.solution-card{background:var(--surface);border-color:var(--border);box-shadow:var(--shadow-sm);padding:30px}
 
 .solution-card:hover{border-color:var(--brand);box-shadow:var(--shadow)}
 
-.solution-icon,.chips span,.circle-check{background:var(--brand-soft);border-color:var(--border);color:var(--brand)}
+.solution-icon,.chips span{background:var(--brand-soft);border-color:var(--border);color:var(--brand)}
 
-.method-grid article{border-color:var(--brand-border)}
-
-.method-icon{color:var(--brand)}.form-box{background:var(--surface);border-color:var(--border);box-shadow:var(--shadow)}
+.form-box{background:var(--surface);border-color:var(--border);box-shadow:var(--shadow)}
 
 .field input,.field select,.field textarea{background:var(--surface);color:var(--text);border-color:var(--control-border)}
 
@@ -544,8 +449,6 @@ body{line-height:1.5}
 .form-status.ok{background:var(--success-soft);color:var(--success);border-color:var(--success)}
 
 .form-status.error{background:var(--error-soft);color:var(--error);border-color:var(--error)}
-
-.confirm{color:var(--warning)}
 
 .site-footer{background:var(--surface);border-color:var(--border)}
 
@@ -588,7 +491,6 @@ body{line-height:1.5}
 
 .sheet-cursor{color:var(--warning)}
 
-
 .workflow-node>.icon{background:var(--surface);color:var(--brand);border-color:var(--brand-border)}
 
 .workflow-node.core>.icon{background:var(--brand-soft);color:var(--brand);border-color:var(--brand)}
@@ -630,11 +532,9 @@ body{line-height:1.5}
 }
 
 @media(max-width:620px){.hero{padding-top:36px}
-.solution-card,.example-card,.trust-grid article{padding:24px}
-.hero-strip{margin-top:55px}
+.solution-card{padding:24px}
 .whatsapp-floating{right:12px;bottom:12px;padding:11px 14px}
 }
-
 
 /* Scenario-specific outcomes. One stable stage, three very different destinations. */
 [hidden]{display:none!important}
@@ -678,124 +578,27 @@ body{line-height:1.5}
 @keyframes draw-chart{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
 @keyframes result-arrive{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
 /* Five people, a shared flow, and a calmer way to work. */
-.team-section{background:var(--surface)}
-.team-experience{border:1px solid var(--border);border-radius:24px;background:var(--surface-alt);box-shadow:var(--shadow-sm);overflow:hidden}
-.team-scene-header{padding:26px 30px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.team-scene-kicker{font-size:10px;letter-spacing:.12em;color:var(--brand);font-weight:750}.team-scene-header h3{font-size:28px;letter-spacing:-.035em;margin:10px 0 0;line-height:1.2}
-.team-scene{position:relative;max-width:1000px;margin:12px auto 0;padding:0 10px}.team-illustration{display:block;width:100%;height:auto;overflow:hidden}.office-floor{fill:var(--surface);stroke:var(--border)}.office-grid{color:var(--border);opacity:.7}
-.chaos-paths path{fill:none;stroke:var(--warning);stroke-width:1.5;stroke-dasharray:6 8;opacity:.22}.office-zones rect{fill:var(--brand-soft);stroke:var(--border)}.office-zones,.office-desks,.office-connections,.focus-badges{opacity:0;transition:opacity 1s}
-.office-connections path{fill:none;stroke:var(--brand-border);stroke-width:2;stroke-dasharray:5 6}.team-hub rect{fill:var(--brand-soft);stroke:var(--brand);stroke-width:1.5}.team-hub path{fill:none;stroke:var(--brand);stroke-width:3;stroke-linecap:round}.team-hub circle{fill:var(--success)}.team-hub{opacity:.22;transition:opacity 1s,transform 1s;transform-origin:400px 185px;transform:scale(.9)}
-.paper{transform-box:fill-box;transition:transform 1.7s,opacity 1.5s}.paper rect{fill:var(--surface);stroke:var(--control-border);stroke-width:1.5}.paper path{stroke:var(--brand-border);stroke-width:2;fill:none}.paper-1{transform:translate(270px,65px) rotate(-9deg)}.paper-2{transform:translate(660px,190px) rotate(10deg)}.paper-3{transform:translate(60px,255px) rotate(-12deg)}.paper-4{transform:translate(420px,275px) rotate(8deg)}.paper-5{transform:translate(95px,135px) rotate(15deg)}
-.chaos-bubbles{transition:opacity .5s}.chaos-bubbles rect{fill:var(--warning-soft);stroke:var(--border)}.chaos-bubbles text,.focus-badges text{text-anchor:middle;font-size:11px;fill:var(--warning);font-family:inherit}.focus-badges rect{fill:var(--success-soft);stroke:var(--border)}.focus-badges text{fill:var(--success);font-size:10px}
-.office-desks rect{fill:var(--brand-soft);stroke:var(--brand-border);stroke-width:1.5}.office-desks path{stroke:var(--control-border);stroke-width:2;fill:none}.office-desks .monitor{fill:var(--surface);stroke:var(--brand);stroke-width:1.5}
-.team-person{transform:translate(var(--start-x),var(--start-y))}.person-1{--start-x:180px;--start-y:160px;--end-x:155px;--end-y:94px;--shirt:#7C45E0}.person-2{--start-x:520px;--start-y:115px;--end-x:640px;--end-y:94px;--shirt:#4F5BEA}.person-3{--start-x:330px;--start-y:250px;--end-x:155px;--end-y:274px;--shirt:#A27BF0}.person-4{--start-x:630px;--start-y:235px;--end-x:640px;--end-y:274px;--shirt:#2A9DB8}.person-5{--start-x:430px;--start-y:80px;--end-x:400px;--end-y:299px;--shirt:#8E5CEB}
-.team-experience[data-phase=before] .team-person{animation:team-roam var(--pace,3.8s) cubic-bezier(.45,.05,.55,.95) infinite}
-.team-experience:not([data-phase=before]) .team-person{transform:translate(var(--end-x),var(--end-y))}
-.team-experience:not([data-phase=before]) .office-zones,.team-experience:not([data-phase=before]) .office-desks,.team-experience:not([data-phase=before]) .office-connections{opacity:1}
-.team-experience:not([data-phase=before]) .team-hub{opacity:1;transform:scale(1)}
-.team-experience:not([data-phase=before]) .chaos-paths,.team-experience:not([data-phase=before]) .chaos-bubbles{opacity:0}
-.team-experience:not([data-phase=before]) .paper{transform:translate(370px,165px) scale(.2);opacity:0}
-.team-experience[data-phase=transition] .team-hub{animation:hub-pulse 1s ease-in-out infinite alternate}
-.team-experience[data-phase=after] .focus-badges{opacity:1}
-.team-experience[data-playing=false] *, .team-experience[data-playing=false] *:before{animation-play-state:paused!important}
 
-.team-hub-label{position:absolute;left:50%;top:58%;transform:translateX(-50%);color:var(--brand);font-size:8px;letter-spacing:.08em;opacity:0;transition:opacity .6s;white-space:nowrap}.team-experience:not([data-phase=before]) .team-hub-label{opacity:1}
-.team-controls{display:flex;align-items:center;gap:20px;padding:18px 30px;border-top:1px solid var(--border);background:var(--surface)}.team-controls>div{display:flex;gap:5px;flex-shrink:0}.team-controls button[data-team-state]{font-size:12px;padding:10px 17px;border:1px solid var(--control-border);background:var(--surface);color:var(--muted);border-radius:8px}.team-controls button[aria-pressed=true]{background:var(--brand);color:var(--on-brand);border-color:var(--brand);font-weight:750;box-shadow:inset 0 -3px var(--brand-deep)}.team-controls p{flex:1;font-size:12px;line-height:1.7;margin:0;color:var(--muted)}.team-controls .demo-play{font-size:12px;padding:10px 14px}
-.team-benefits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px;margin-top:32px}.team-benefits>div{border-left:2px solid var(--brand-border);padding:8px 22px}.team-benefits .icon{color:var(--brand);display:block;margin-bottom:12px}.team-benefits strong{font-size:16px;letter-spacing:-.02em}.team-benefits p{font-size:13px;color:var(--muted);line-height:1.7;margin:7px 0 0}
-.team-bottom{display:flex;align-items:center;justify-content:space-between;gap:25px;margin-top:35px}.team-bottom p{font-size:12px;line-height:1.7;color:var(--muted);max-width:480px;margin:0}
-@keyframes team-roam{
-0%,100%{transform:translate(var(--start-x),var(--start-y))}
-20%{transform:translate(calc(var(--start-x) + var(--route-x)*.5),calc(var(--start-y) + var(--route-y)*.3))}
-40%{transform:translate(calc(var(--start-x) + var(--route-x)),calc(var(--start-y) + var(--route-y)))}
-60%{transform:translate(calc(var(--start-x) + var(--route-x)*.3),calc(var(--start-y) - var(--route-y)*.5))}
-80%{transform:translate(calc(var(--start-x) - var(--route-x)*.5),calc(var(--start-y) + var(--route-y)*.35))}
-}
-@keyframes team-run{from{transform:rotate(-25deg)}to{transform:rotate(25deg)}}
-@keyframes team-type{from{transform:translateY(0)}to{transform:translateY(2px)}}
-@keyframes team-type-left{from{transform:translateY(2px)}to{transform:translateY(0)}}
-@keyframes hub-pulse{from{opacity:.55}to{opacity:1}}
 @media(max-width:1100px) and (min-width:901px){.scenario-outcome{inset:12px}.outcome-heading h3{font-size:17px}.document-card{padding:6px}.document-card strong{font-size:9px}.ticket-status{font-size:7px;padding:3px}.ticket-row{padding:8px;gap:6px}.ticket-row strong{font-size:10px}.dashboard-kpis>div{padding:8px}.dashboard-kpis span{font-size:8px}}
-@media(max-width:620px){.transformation-stage{height:445px}.scenario-outcome{inset:12px}.outcome-heading h3{font-size:18px}.outcome-subtitle{font-size:10px}.dashboard-kpis>div{padding:8px}.dashboard-kpis span{font-size:9px}.dashboard-kpis strong{font-size:22px}.dashboard-charts{gap:7px;grid-template-columns:1.2fr 1fr}.dashboard-charts>div{padding:8px}.category-bar{font-size:8px}.document-column{padding:7px 4px}.document-column h4{font-size:8px}.document-card{padding:6px;min-height:85px}.document-card strong{font-size:9px}.document-card>span{font-size:8px}.document-detail{min-height:104px}.ticket-row{padding:9px 7px;gap:7px}.ticket-status{font-size:7px;padding:4px}.ticket-row strong{font-size:10px}.ticket-avatar{width:22px;height:22px;font-size:9px}.ticket-filters button{padding:6px;font-size:9px}.team-scene-header{padding:22px 20px 0;flex-direction:column;gap:12px}.team-scene-header .demo-label{margin-left:0}.team-scene-header h3{font-size:24px}.team-scene-kicker{font-size:8px;letter-spacing:.06em}.team-scene{padding:0;margin-top:15px;overflow:hidden}.team-illustration{width:120%;max-width:none;margin-left:-10%}.team-hub-label{font-size:6px;top:59%}.team-controls{flex-wrap:wrap;padding:17px 20px;gap:14px}.team-controls p{flex-basis:100%;order:3;font-size:11px}.team-controls .demo-play{margin-left:auto;font-size:10px;padding:10px}.team-controls button[data-team-state]{font-size:11px;padding:9px 11px}.team-benefits{grid-template-columns:1fr;gap:18px;margin-top:25px}.team-benefits>div{padding:5px 17px}.team-benefits .icon{display:inline-block;width:18px;height:18px;margin:0 7px -3px 0}.team-benefits strong{font-size:15px}.team-benefits p{margin-left:29px}.team-bottom{flex-direction:column;align-items:stretch;gap:20px}.team-bottom .btn{white-space:normal;text-align:center}.team-bottom p{font-size:11px}.loose-document{font-size:10px;padding:12px}.sheet-preview{inset:90px 12px auto}.sheet-toolbar{font-size:9px}.sheet-grid{font-size:9px}.workflow-label{font-size:8px}.workflow-result{font-size:10px}.workflow-node{font-size:10px}.workflow-node>.icon{width:45px;height:45px;padding:11px}}
-@media(max-width:365px){.team-controls{gap:10px;padding:16px 12px}.team-controls button[data-team-state]{padding:9px}.team-controls .demo-play{padding:9px;font-size:9px}.ticket-status{font-size:7px;white-space:normal;max-width:57px}.outcome-heading h3{font-size:16px}.document-detail{padding:8px}.document-detail dd{font-size:8px}.document-detail dt{font-size:8px}.dashboard-charts h4{font-size:9px}}
-@media(prefers-reduced-motion:reduce){.team-experience *,.scenario-outcome *{animation:none!important;transition:none!important}.team-experience[data-phase=before] .team-person{transform:translate(var(--start-x),var(--start-y))}.team-experience[data-phase=after] .team-person{transform:translate(var(--end-x),var(--end-y))}}
+@media(max-width:620px){.transformation-stage{height:445px}.scenario-outcome{inset:12px}.outcome-heading h3{font-size:18px}.outcome-subtitle{font-size:10px}.dashboard-kpis>div{padding:8px}.dashboard-kpis span{font-size:9px}.dashboard-kpis strong{font-size:22px}.dashboard-charts{gap:7px;grid-template-columns:1.2fr 1fr}.dashboard-charts>div{padding:8px}.category-bar{font-size:8px}.document-column{padding:7px 4px}.document-column h4{font-size:8px}.document-card{padding:6px;min-height:85px}.document-card strong{font-size:9px}.document-card>span{font-size:8px}.document-detail{min-height:104px}.ticket-row{padding:9px 7px;gap:7px}.ticket-status{font-size:7px;padding:4px}.ticket-row strong{font-size:10px}.ticket-avatar{width:22px;height:22px;font-size:9px}.ticket-filters button{padding:6px;font-size:9px}.loose-document{font-size:10px;padding:12px}.sheet-preview{inset:90px 12px auto}.sheet-toolbar{font-size:9px}.sheet-grid{font-size:9px}.workflow-label{font-size:8px}.workflow-result{font-size:10px}.workflow-node{font-size:10px}.workflow-node>.icon{width:45px;height:45px;padding:11px}}
+@media(max-width:365px){.ticket-status{font-size:7px;white-space:normal;max-width:57px}.outcome-heading h3{font-size:16px}.document-detail{padding:8px}.document-detail dd{font-size:8px}.document-detail dt{font-size:8px}.dashboard-charts h4{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.scenario-outcome *{animation:none!important;transition:none!important}}
 .transformation-stage{height:auto;min-height:410px}
 .scenario-outcome{position:relative;inset:auto;padding:15px}
 @media(max-width:620px){.transformation-stage{height:auto;min-height:445px}.scenario-outcome{inset:auto;padding:12px}}
 
 /* Larger characters, independent running routes and a readable focused work posture. */
-.team-hub-label{top:33%}
-.person-1{--route-x:90px;--route-y:50px;--pace:4.4s}
-.person-2{--route-x:-105px;--route-y:45px;--pace:3.6s}
-.person-3{--route-x:100px;--route-y:-48px;--pace:4.1s}
-.person-4{--route-x:-80px;--route-y:45px;--pace:3.9s}
-.person-5{--start-y:112px;--route-x:105px;--route-y:24px;--pace:3.3s}
-.office-desks .monitor{fill:var(--surface-alt);stroke:var(--brand-border);opacity:.6}
-.work-devices{opacity:0;transition:opacity 1s}
-.team-experience:not([data-phase=before]) .work-devices{opacity:1}
-.work-screen{fill:var(--surface);stroke:var(--brand);stroke-width:1.5}
-.screen-content{fill:none;stroke:var(--brand);stroke-width:2;stroke-linecap:round}
-.screen-stand{fill:none;stroke:var(--control-border);stroke-width:2}
-.work-keyboard{fill:var(--brand-soft);stroke:var(--control-border);stroke-width:1}
-.keyboard-keys{fill:none;stroke:var(--brand);stroke-width:1;stroke-dasharray:2 2}
-.team-experience[data-phase=after] .screen-content{animation:screen-work 2s ease-in-out infinite alternate}
-@keyframes running-body{from{transform:translateY(0) rotate(-3deg)}to{transform:translateY(-3px) rotate(3deg)}}
-@keyframes focused-breath{from{transform:translateY(0)}to{transform:translateY(-.7px)}}
-@keyframes screen-work{from{opacity:.6}to{opacity:1}}
-@media(prefers-reduced-motion:reduce){.person-body,.work-devices,.screen-content{animation:none!important;transition:none!important}}
 
 /* 3D glossy avatars (head sphere + dome body) */
-.person-scale{transform:translateY(-16px) scale(1.7)}
-.av-fill{fill:var(--shirt)}
-.av-shade{fill:url(#av-shade-g)}
-.av-light{fill:url(#av-light-g)}
-.av-shine{fill:#fff;opacity:.7}.av-shine.soft{opacity:.28}
-.person-shadow{fill:#160B2E;opacity:.18;transform-box:fill-box;transform-origin:center}
-.av-head,.av-torso,.person-body{transform-box:view-box}
-.av-badge{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.4)}
-.av-badge circle{stroke:var(--surface);stroke-width:1.5}
-.badge-warn circle{fill:#E8A317}.badge-warn text{fill:#fff;font-size:10px;font-weight:800;text-anchor:middle;font-family:inherit}
-.badge-ok circle{fill:var(--success)}.badge-ok path{fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.person-1{--route-x:90px;--route-y:50px;--pace:4.4s}
-.person-2{--route-x:-105px;--route-y:45px;--pace:3.6s}
-.person-3{--route-x:100px;--route-y:-48px;--pace:4.1s}
-.person-4{--route-x:-80px;--route-y:45px;--pace:3.9s}
-.person-5{--start-y:112px;--route-x:105px;--route-y:24px;--pace:3.3s}
 /* before: bouncing run with squash & stretch, shadow in sync, interruption badges */
-.team-experience[data-phase=before] .person-body{transform-origin:0 28px;animation:av-hop .36s ease-in-out infinite}
-.team-experience[data-phase=before] .av-head{transform-origin:0 -4px;animation:av-head-wobble .36s ease-in-out infinite}
-.team-experience[data-phase=before] .person-shadow{animation:av-shadow .36s ease-in-out infinite}
-.team-experience[data-phase=before] .badge-warn{animation:badge-pop 1.5s ease-in-out infinite}
-.team-experience[data-phase=before] .person-2 .badge-warn{animation-delay:-.4s}.team-experience[data-phase=before] .person-3 .badge-warn{animation-delay:-.8s}.team-experience[data-phase=before] .person-4 .badge-warn{animation-delay:-1.1s}.team-experience[data-phase=before] .person-5 .badge-warn{animation-delay:-.2s}
-.person-2 .person-body,.person-2 .av-head,.person-2 .person-shadow{animation-delay:-.1s!important}
-.person-3 .person-body,.person-3 .av-head,.person-3 .person-shadow{animation-delay:-.2s!important}
-.person-4 .person-body,.person-4 .av-head,.person-4 .person-shadow{animation-delay:-.05s!important}
-.person-5 .person-body,.person-5 .av-head,.person-5 .person-shadow{animation-delay:-.15s!important}
 /* transition: arrive with a little settle bounce */
-.team-experience[data-phase=transition] .person-body{transform-origin:0 28px;animation:av-settle 1.1s ease-out 1.6s both}
 /* after: calm breathing, head leans toward the screen, confirmation badge */
-.team-experience[data-phase=after] .person-body{transform-origin:0 28px;animation:av-breath 3s ease-in-out infinite alternate}
-.team-experience[data-phase=after] .av-head{transform-origin:0 -4px;animation:av-focus 3.2s ease-in-out infinite alternate}
-.team-experience[data-phase=after] .badge-ok{animation:badge-in .6s cubic-bezier(.3,1.6,.5,1) both}
-.team-experience[data-phase=after] .person-2 .badge-ok{animation-delay:.15s}.team-experience[data-phase=after] .person-3 .badge-ok{animation-delay:.3s}.team-experience[data-phase=after] .person-4 .badge-ok{animation-delay:.45s}.team-experience[data-phase=after] .person-5 .badge-ok{animation-delay:.6s}
-.team-experience[data-phase=after] .office-connections path{animation:flow 1.4s linear infinite}
-.team-experience[data-phase=after] .screen-content{animation:screen-work 1.4s ease-in-out infinite alternate}
-.team-experience[data-phase=after] .team-hub .hub-check{animation:hub-pulse 1.2s ease-in-out infinite alternate}
-.team-experience[data-playing=false] *{animation-play-state:paused!important}
-.paper-2{transition-delay:.15s}.paper-3{transition-delay:.3s}.paper-4{transition-delay:.45s}.paper-5{transition-delay:.6s}
-@keyframes av-hop{0%,100%{transform:translateY(0) scale(1.06,.9) rotate(-4deg)}50%{transform:translateY(-7px) scale(.95,1.07) rotate(4deg)}}
-@keyframes av-head-wobble{0%,100%{transform:translate(-1px,1px)}50%{transform:translate(1px,-1px)}}
-@keyframes av-shadow{0%,100%{transform:scale(1.1);opacity:.22}50%{transform:scale(.7);opacity:.1}}
-@keyframes badge-pop{0%,100%{opacity:0;transform:scale(.4) translateY(4px)}20%,70%{opacity:1;transform:scale(1) translateY(0)}}
-@keyframes badge-in{from{opacity:0;transform:scale(.3) translateY(6px)}to{opacity:1;transform:scale(1)}}
-@keyframes av-settle{0%{transform:scale(1,1)}25%{transform:translateY(-8px) scale(.94,1.1)}55%{transform:scale(1.1,.88)}80%{transform:scale(.98,1.03)}100%{transform:scale(1)}}
-@keyframes av-breath{from{transform:scale(1,1)}to{transform:scale(1.02,.98)}}
-@keyframes av-focus{from{transform:translate(2px,1px) rotate(5deg)}to{transform:translate(3px,2px) rotate(8deg)}}
+
 @keyframes flow{to{stroke-dashoffset:-22}}
-@media(prefers-reduced-motion:reduce){.person-body,.av-head,.person-shadow,.av-badge,.work-devices,.screen-content,.office-connections path{animation:none!important;transition:none!important}.team-experience[data-phase=before] .badge-warn,.team-experience[data-phase=after] .badge-ok{opacity:1;transform:none}}
 
 .cookie-settings-link{color:var(--brand);border:0;background:none;padding:0;font:inherit;cursor:pointer;text-align:left}.cookie-settings-link:focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:3px}
 
 /* Cena da equipe legível no celular e botão flutuante que não cobre o conteúdo. */
-@media(max-width:620px){.chaos-bubbles,.focus-badges,.team-hub-label{display:none}}
 .whatsapp-floating{display:inline-flex;align-items:center;gap:8px;transition:opacity .25s,transform .25s,visibility .25s}
 .whatsapp-floating .icon{width:18px;height:18px}
 .whatsapp-floating.is-hidden{opacity:0;visibility:hidden;transform:translateY(12px);pointer-events:none}
@@ -813,10 +616,6 @@ main{counter-reset:secao}
 @media(max-width:620px){.section-pad::after{top:22px;left:18px;font-size:10px}.hero.section-pad::after{display:none}}
 
 /* Microcopy abaixo dos botões do hero. */
-.hero-note{display:flex;flex-wrap:wrap;list-style:none;margin:16px 0 0;padding:0;font-size:12px;line-height:1.6;color:var(--muted)}
-.hero-note li+li::before{content:"·";content:"·"/"";margin:0 10px;color:var(--control-border)}
-@media(max-width:900px){.hero-note{justify-content:center}}
-@media(max-width:620px){.hero-note{flex-direction:column;align-items:center}.hero-note li+li::before{display:none}}
 
 /* Faixa do topo como link para o conteúdo mais recente. */
 .announcement{gap:10px;padding-inline:18px;text-transform:uppercase;transition:background .2s}
@@ -831,12 +630,12 @@ main{counter-reset:secao}
 /* Cards de solução preenchidos com o gradiente da marca no hover. */
 .solution-card::before{content:"";position:absolute;inset:-1px;z-index:0;border-radius:inherit;background:linear-gradient(150deg,var(--brand) 0%,var(--brand-deep) 100%);opacity:0;transition:opacity .25s;pointer-events:none}
 .solution-card>*{position:relative;z-index:1}
-.solution-card h3,.solution-card>p,.solution-head>span,.solution-card .text-action,.solution-icon,.solution-card .chips span{transition:color .25s,background-color .25s,border-color .25s}
+.solution-card h3,.solution-card>p,.solution-card .text-action,.solution-icon,.solution-card .chips span{transition:color .25s,background-color .25s,border-color .25s}
 @media(hover:hover){
 .solution-card:hover::before{opacity:1}
 .solution-card:hover{border-color:var(--brand-deep)}
 .solution-card:hover h3,.solution-card:hover .text-action{color:var(--on-brand)}
-.solution-card:hover>p,.solution-card:hover .solution-head>span{color:var(--brand-soft)}
+.solution-card:hover>p{color:var(--brand-soft)}
 .solution-card:hover .solution-icon{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.32);color:var(--on-brand)}
 .solution-card:hover .chips span{background:transparent;border-color:rgba(255,255,255,.4);color:var(--on-brand)}
 .solution-card:hover :focus-visible{outline-color:var(--on-brand)}
@@ -877,7 +676,7 @@ main{counter-reset:secao}
 .hero h1{font-size:clamp(38px,3.9vw,56px);font-weight:700;letter-spacing:-.04em;line-height:1.08}
 @media(min-width:901px){.hero-layout{align-items:start}.hero-copy{padding-top:28px}}
 .section-heading h2,.method h2,.faq h2,.contact h2{font-size:clamp(32px,3.7vw,48px);font-weight:700;letter-spacing:-.035em;line-height:1.1}
-.solution-card h3,.example-card h3{font-weight:700}
+.solution-card h3{font-weight:700}
 @media(max-width:620px){.hero h1{font-size:clamp(36px,9.6vw,42px)}.section-heading h2,.method h2,.faq h2,.contact h2{font-size:clamp(30px,8.4vw,36px)}}
 
 /* Cabeçalho: símbolo novo e sombra sutil depois da rolagem. */
@@ -892,7 +691,6 @@ main{counter-reset:secao}
 .process-caption .status-dot{background:var(--accent)}
 .flow-connector{background:linear-gradient(90deg,var(--brand-border),var(--accent))}
 .flow-connector i{background:var(--accent);box-shadow:0 0 0 3px rgba(0,200,208,.2)}
-.method-icon,.trust-grid .icon{color:var(--brand)}
 
 /* Soluções: quatro cards com problema comum, solução e página correspondente. */
 .solutions-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -900,34 +698,13 @@ main{counter-reset:secao}
 .solution-card:last-child{grid-column:auto}
 .solution-card .service-page-link{margin-top:auto}
 .solution-card .solution-cta{margin-top:0}
-.solution-problem{margin:0 0 14px;padding:11px 13px;border-radius:12px;background:var(--surface-alt);font-size:13px;line-height:1.55;color:var(--muted);transition:background-color .25s,color .25s}
-.solution-problem strong{display:block;margin-bottom:3px;font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--text)}
-.solution-card:hover .solution-problem{background:rgba(255,255,255,.1);color:var(--brand-soft)}
-.solution-card:hover .solution-problem strong{color:var(--on-brand)}
 @media(max-width:1100px){.solutions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.solutions-grid{grid-template-columns:minmax(0,1fr)}.solution-card h3{min-height:0}}
 
 /* Como funciona: as quatro etapas viram uma jornada ligada por uma linha. */
-@media(min-width:901px){
-.method-grid{position:relative}
-.method-grid::before{content:"";position:absolute;left:0;right:0;top:8px;height:2px;border-radius:2px;background:var(--signature);opacity:.4}
-.method-grid article{position:relative;border-top:0;padding-top:36px}
-.method-grid article::before{content:"";position:absolute;top:1px;left:0;width:16px;height:16px;box-sizing:border-box;border-radius:50%;border:3px solid var(--brand);background:var(--surface);box-shadow:0 0 0 5px var(--surface)}
-.method-grid article:last-child::before{border-color:var(--accent-text)}
-}
 .method-index{color:var(--brand)}
 
 /* Exemplos: antes e depois lado a lado, sempre identificados como ilustrativos. */
-.examples-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-.example-card h3{margin:14px 0 20px;font-size:22px}
-.example-before,.example-after{display:grid;gap:6px}
-.example-card h4{display:inline-flex;align-items:center;gap:8px;margin:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
-.example-card h4::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--control-border)}
-.example-after h4{color:var(--brand)}
-.example-after h4::before{background:var(--accent)}
-.example-after p{color:var(--text)}
-.examples-note small{display:block;margin-top:6px;font-size:12px;color:var(--muted)}
-@media(max-width:760px){.examples-grid{grid-template-columns:minmax(0,1fr)}}
 
 /* Portfólio: componente pronto, publicado só com projetos autorizados e dados comprovados. */
 .portfolio-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
@@ -1065,11 +842,8 @@ main{counter-reset:secao}
 .no-explore .outcome-explore{display:none}
 
 /* Painel completo em <dialog>: faixa escura com os controles e corpo claro com os dados. */
-.dashboard-dialog{width:min(1120px,calc(100vw - 32px));max-width:none;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);margin:auto;padding:0;border:0;border-radius:20px;background-color:var(--surface-alt);color:var(--text);box-shadow:0 40px 120px -30px rgba(22,11,46,.6);overflow:hidden}
-.dashboard-dialog::backdrop{background:rgba(22,11,46,.64)}
-.dash-shell{max-height:inherit;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
-.dash-titlebar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px 8px;background-color:var(--brand-dark);color:#FFFFFF}
-.dash-intro{padding:0 24px 4px;background-color:var(--brand-dark);color:#FFFFFF}
+.dashboard-panel{position:relative;background-color:var(--surface-alt);color:var(--text)}
+.dash-titlebar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;padding:18px 24px 6px;background-color:var(--brand-dark);color:#FFFFFF}
 .dash-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-bottom:8px}
 .dash-badge{padding:4px 10px;border-radius:100px;background-color:var(--accent);color:var(--brand-dark);font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .dash-sync{display:inline-flex;align-items:center;gap:7px;font-size:11px;color:rgba(255,255,255,.8)}
@@ -1077,12 +851,8 @@ main{counter-reset:secao}
 .dash-sync-dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--accent);opacity:0}
 .dash-sync.is-syncing .dash-sync-dot::after{animation:sync-pulse .8s ease-out}
 @keyframes sync-pulse{from{opacity:.75;transform:scale(1)}to{opacity:0;transform:scale(3.2)}}
-.dash-titlebar h2{margin:0;font-size:clamp(20px,3vw,30px);line-height:1.15;letter-spacing:-.03em;color:#FFFFFF}
-.dash-intro p{margin:0;max-width:62ch;font-size:13px;line-height:1.55;color:rgba(255,255,255,.78)}
-.dash-close{display:grid;place-items:center;flex-shrink:0;width:40px;height:40px;border:1px solid rgba(255,255,255,.28);border-radius:50%;background:transparent;color:#FFFFFF;transition:background-color .18s}
-.dash-close:hover{background-color:rgba(255,255,255,.12)}
-.dash-close .icon{width:16px;height:16px}
-.dash-toolbar{position:sticky;top:0;z-index:2;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:12px 24px 16px;background-color:var(--brand-dark)}
+.dash-titlebar h3{margin:0;font-size:clamp(20px,2.4vw,26px);line-height:1.15;letter-spacing:-.03em;color:#FFFFFF}
+.dash-toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:12px 24px 16px;background-color:var(--brand-dark)}
 .dash-tabs,.dash-period{display:flex;gap:4px;padding:4px;border:1px solid rgba(255,255,255,.16);border-radius:100px;background-color:rgba(255,255,255,.07)}
 .dash-tabs button,.dash-period button{min-height:34px;padding:0 14px;border:0;border-radius:100px;background:transparent;color:rgba(255,255,255,.85);font-size:12px;font-weight:700;transition:background-color .18s,color .18s}
 .dash-tabs button:hover,.dash-period button:hover{background-color:rgba(255,255,255,.1)}
@@ -1099,7 +869,7 @@ main{counter-reset:secao}
 .dash-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:14px;margin-bottom:14px}
 .dash-card{min-width:0;padding:18px;border:1px solid var(--border);border-radius:14px;background-color:var(--surface)}
 .dash-card-head{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px 14px;margin-bottom:14px}
-.dash-card h3{margin:0;font-size:15px;letter-spacing:-.01em}
+.dash-card h4{margin:0;font-size:15px;letter-spacing:-.01em}
 .dash-sub{margin:4px 0 0;font-size:12px;color:var(--muted)}
 
 /* Barras por dia: a altura vem de --v (0 a 1) e anima só com transform. */
@@ -1164,7 +934,7 @@ main{counter-reset:secao}
 
 @media(min-width:760px){
   .dash-row{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) 104px minmax(150px,auto);grid-template-areas:"id meta value tags" "title meta value tags"}
-  .dashboard-dialog:not([data-scenario=planilhas]) .dash-row{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(150px,auto);grid-template-areas:"id meta tags" "title meta tags"}
+  .dashboard-panel:not([data-scenario=planilhas]) .dash-row{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(150px,auto);grid-template-areas:"id meta tags" "title meta tags"}
 }
 @media(max-width:820px){.dash-grid{grid-template-columns:1fr}}
 @media(max-width:480px){
@@ -1172,12 +942,7 @@ main{counter-reset:secao}
   .dash-tags{justify-content:flex-start;margin-top:5px}
 }
 @media(max-width:700px){
-  .dashboard-dialog{width:100vw;height:100vh;height:100dvh;max-height:100vh;max-height:100dvh;border-radius:0}
-  /* No celular a barra do título fica fixa no topo, com o botão de fechar sempre à mão. */
-  .dash-titlebar{position:sticky;top:0;z-index:3;padding:12px 16px}
-  .dash-close{width:38px;height:38px}
-  .dash-intro{padding:0 16px 4px}
-  .dash-intro p{font-size:12px}
+  .dash-titlebar{padding:14px 16px 4px}
   .dash-toolbar{position:static;padding:10px 16px 14px}
   .dash-tabs{flex:1 1 100%}
   .dash-tabs button{flex:1;padding:0 6px}
@@ -1192,7 +957,7 @@ main{counter-reset:secao}
   .dash-footer{flex-direction:column;align-items:stretch;padding:14px 16px 20px}
   .dash-footer .btn{white-space:normal;text-align:center}
 }
-@media(prefers-reduced-motion:reduce){.dashboard-dialog *,.dashboard-dialog *::after{animation:none!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){.dashboard-panel *,.dashboard-panel *::after{animation:none!important;transition:none!important}}
 
 /* ===== Experiência 03 — laboratório de integrações (área escura) ===== */
 .integrations-lab{isolation:isolate;overflow:hidden;background-color:var(--brand-dark);color:#FFFFFF}
@@ -1325,6 +1090,178 @@ button.lab-node:hover{border-color:rgba(255,255,255,.36)}
   .lab-message{min-height:calc(6em + 13px)}
 }
 @media(prefers-reduced-motion:reduce){.integrations-lab *,.integrations-lab *::after{animation:none!important;transition:none!important}.lab-node[data-state=processing]{transform:none}}
+
+/* ===== V4 — homepage visual-first ===== */
+
+/* Hero: mensagem em 40%, demonstração em 60% no desktop. */
+@media(min-width:1101px){
+  #inicio .hero-layout{grid-template-columns:minmax(0,4.4fr) minmax(0,5.6fr);gap:48px}
+  #inicio .hero-actions{gap:10px}
+  #inicio .hero-actions .btn{padding:0 18px}
+}
+.hero-note{display:flex;flex-wrap:wrap;gap:6px 18px;margin:20px 0 0;padding:0;list-style:none;font-size:13px;color:var(--muted)}
+.hero-note li{display:inline-flex;align-items:center;gap:8px}
+.hero-note li::before{content:"";flex-shrink:0;width:6px;height:6px;border-radius:50%;background-color:var(--accent)}
+@media(max-width:900px){.hero-note{justify-content:center}}
+.faq-intro{max-width:36ch;margin:18px 0 0;font-size:15px;line-height:1.6;color:var(--muted)}
+.contact-checklist{display:grid;gap:10px;margin:26px 0 0;padding:0;list-style:none}
+.contact-checklist li{display:flex;align-items:center;gap:11px;font-size:15px;font-weight:600}
+.contact-checklist li::before{content:"✓";display:grid;place-items:center;flex-shrink:0;width:24px;height:24px;border-radius:50%;background-color:var(--brand-soft);color:var(--brand);font-size:12px;font-weight:800}
+@media(min-width:901px) and (max-width:1100px){#inicio .hero-layout{grid-template-columns:minmax(0,4.5fr) minmax(0,5.5fr);gap:36px}}
+#inicio h1{font-size:clamp(36px,3.5vw,52px)}
+#inicio .hero-lead{font-size:clamp(16px,1.25vw,18px);line-height:1.65;max-width:34ch}
+#inicio .hero-actions{flex-wrap:wrap}
+@media(max-width:620px){#inicio h1{font-size:clamp(32px,9vw,40px)}}
+
+/* Soluções: imagem, nome, uma frase e link. Hover discreto, sem preenchimento colorido. */
+.solutions .solution-card{padding:16px 16px 22px;border-radius:20px;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.solutions .solution-card::before{display:none}
+.solutions .solution-card:hover{transform:translateY(-3px);border-color:var(--brand-border);box-shadow:var(--shadow)}
+.solutions .solution-card:hover h3,.solutions .solution-card:hover .text-action{color:inherit}
+.solutions .solution-card:hover>p{color:var(--muted)}
+.solutions .solution-card h3{margin:0 6px 8px;min-height:0;font-size:21px}
+.solutions .solution-card>p{margin:0 6px 18px;font-size:14.5px;line-height:1.6;min-height:0}
+.solutions .solution-card .service-page-link{position:static;margin:auto 6px 0;color:var(--brand)}
+.solutions .solution-card .service-page-link::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit}
+.solutions .solution-card:focus-within{border-color:var(--brand)}
+.solution-visual{position:relative;display:grid;place-items:center;aspect-ratio:16/10;margin-bottom:18px;border-radius:14px;background-color:var(--brand-soft);overflow:hidden}
+.solution-visual .solution-icon{width:56px;height:56px;border-radius:16px;background:var(--surface);border-color:var(--brand-border)}
+.solutions .solution-card:hover .solution-icon{background:var(--surface);border-color:var(--brand-border);color:var(--brand)}
+
+/* Galeria de demonstrações */
+.tech-gallery{background-color:var(--surface-alt)}
+.gallery-tabs{display:flex;gap:6px;width:max-content;max-width:100%;margin:0 0 22px;padding:6px;border:1px solid var(--border);border-radius:100px;background-color:var(--surface)}
+.gallery-tabs[hidden]{display:none}
+.gallery-tabs button{display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0 18px;border:0;border-radius:100px;background:transparent;color:var(--text);font-size:14px;font-weight:650;white-space:nowrap;transition:background-color .18s,color .18s}
+.gallery-tabs button:hover{background-color:var(--brand-soft)}
+.gallery-tabs button[aria-selected=true]{background-color:var(--brand-dark);color:#FFFFFF}
+.gallery-tabs button:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.gallery-tabs .icon{width:17px;height:17px;flex-shrink:0}
+.gallery-panel[hidden]{display:none}
+.gallery-panel:focus-visible{outline:3px solid var(--brand);outline-offset:6px;border-radius:20px}
+.gallery:not(.is-ready) .gallery-panel+.gallery-panel{margin-top:56px}
+.panel-intro{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 32px;margin-bottom:16px}
+.panel-intro p{margin:0;max-width:64ch;font-size:15px;line-height:1.6;color:var(--muted)}
+.panel-intro .text-action{flex-shrink:0}
+@media(max-width:620px){
+  .gallery-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;border-radius:16px}
+  .gallery-tabs button{justify-content:center;min-height:52px;padding:6px 8px;border-radius:12px;font-size:12.5px;line-height:1.2;white-space:normal;text-align:center}
+  .gallery-tabs .icon{display:none}
+}
+
+/* Janela de aplicativo usada nas demonstrações e nas capturas */
+.app-window{position:relative;isolation:isolate;border:1px solid var(--border);border-radius:20px;background-color:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+.app-window-bar{display:flex;align-items:center;gap:7px;height:40px;padding:0 16px;border-bottom:1px solid var(--border);background-color:var(--surface-alt);font-size:12px;font-weight:650;color:var(--muted)}
+.app-window-bar i{flex-shrink:0;width:10px;height:10px;border-radius:50%;background-color:#D9D4E4}
+.app-window-bar span{min-width:0;margin-left:10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.app-window-dark{border-color:#2A1D4A;background-color:var(--brand-dark)}
+.app-window-dark .app-window-bar{border-color:rgba(255,255,255,.1);background-color:#1A0F33;color:rgba(255,255,255,.8)}
+.app-window-dark .app-window-bar i{background-color:rgba(255,255,255,.22)}
+.app-window .lab{border:0;border-radius:0}
+.app-window .dashboard-panel{border-radius:0}
+
+/* Demonstração: automação de processos */
+.runner{padding:20px 24px 22px;background-color:var(--surface)}
+.runner-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;margin-bottom:18px}
+.runner-counters{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+.runner-counters div{min-width:104px;padding:8px 14px;border:1px solid var(--border);border-radius:12px;background-color:var(--surface)}
+.runner-counters dt{font-size:11px;font-weight:650;color:var(--muted)}
+.runner-counters dd{margin:2px 0 0;font-size:22px;font-weight:750;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--text)}
+.runner-counters [data-kind=review] dd{color:var(--warning)}
+.runner-actions{display:flex;flex-wrap:wrap;gap:8px}
+.runner-actions[hidden]{display:none}
+.runner-run,.runner-restart{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:100px;font-size:13px;font-weight:700;transition:background-color .18s,border-color .18s,transform .18s}
+.runner-run{min-width:13.5em;border:0;background-color:var(--brand);color:#FFFFFF}
+.runner-run:hover{background-color:var(--brand-hover)}
+.runner-restart{border:1px solid var(--control-border);background-color:var(--surface);color:var(--text)}
+.runner-restart[aria-disabled=true]{opacity:.55;cursor:not-allowed}
+.runner-run:focus-visible,.runner-restart:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.runner-board{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr) minmax(0,1.1fr);gap:14px}
+.runner-col{position:relative;min-width:0;padding:14px;border:1px solid var(--border);border-radius:16px;background-color:var(--surface-alt)}
+.runner-col+.runner-col::before{content:"";position:absolute;top:50%;left:-14px;width:14px;height:2px;background-color:var(--accent)}
+.runner-col-label{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.runner-col-label .icon{width:15px;height:15px;color:var(--brand)}
+.runner-items,.runner-rules,.runner-rows{margin:0;padding:0;list-style:none}
+.runner-items li{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:6px;padding:9px 12px;border:1px solid var(--border);border-radius:10px;background-color:var(--surface);font-size:13px;transition:transform .25s ease,opacity .25s ease,border-color .25s ease}
+.runner-items li span{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.runner-items li[data-state=processing]{border-color:var(--brand);transform:translateX(4px);box-shadow:0 0 0 3px rgba(108,43,217,.12)}
+.runner-items li[data-state=done],.runner-items li[data-state=review]{opacity:.5}
+.runner-current{display:grid;gap:9px;margin-bottom:12px;padding:12px 14px;border-radius:12px;background-color:var(--brand-dark);color:#FFFFFF}
+.runner-current-name{font-size:14px;font-weight:700}
+.runner-bar{height:4px;border-radius:4px;background-color:rgba(255,255,255,.18);overflow:hidden}
+.runner-bar i{display:block;height:100%;background-color:var(--accent);transform:scaleX(0);transform-origin:left}
+.runner[data-state=processing] .runner-bar i{animation:runner-fill .62s linear forwards}
+.runner[data-state=finished] .runner-bar i{transform:none}
+.runner-rules li{display:flex;align-items:center;gap:9px;padding:7px 0;font-size:13px;color:var(--muted)}
+.runner-rules li::before{content:"";flex-shrink:0;width:16px;height:16px;border:2px solid var(--control-border);border-radius:50%;background-color:var(--surface)}
+.runner[data-state=processing] .runner-rules li{color:var(--text)}
+.runner[data-state=processing] .runner-rules li::before{animation:runner-rule .62s steps(1) both}
+.runner[data-state=processing] .runner-rules li:nth-child(2)::before{animation-delay:.18s}
+.runner[data-state=processing] .runner-rules li:nth-child(3)::before{animation-delay:.36s}
+.runner[data-state=finished] .runner-rules li::before{border-color:var(--accent);background-color:var(--accent)}
+.runner-rows li{display:grid;grid-template-columns:minmax(0,1fr) auto 5.6em;align-items:center;gap:10px;margin-bottom:6px;padding:8px 10px 8px 12px;border:1px solid var(--border);border-radius:10px;background-color:var(--surface);font-size:13px;font-variant-numeric:tabular-nums;transition:opacity .3s ease,transform .3s ease}
+.runner-rows li span:first-child{font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.runner-rows li[data-state=empty]{border-style:dashed;background-color:transparent}
+.runner-rows li[data-state=empty]>*{visibility:hidden}
+.runner-pill{justify-self:end;padding:3px 9px;border-radius:100px;background-color:var(--success-soft);color:var(--success);font-size:11px;font-weight:750}
+.runner-rows li[data-kind=review] .runner-pill{background-color:var(--warning-soft);color:var(--warning)}
+.runner-message{min-height:calc(3em + 2px);margin:14px 0 0;font-size:14px;line-height:1.5;color:var(--text)}
+@keyframes runner-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes runner-rule{from{border-color:var(--control-border);background-color:var(--surface)}to{border-color:var(--accent);background-color:var(--accent)}}
+@media(max-width:900px){
+  .runner-board{grid-template-columns:minmax(0,1fr)}
+  .runner-col+.runner-col::before{top:-14px;left:50%;width:2px;height:14px}
+  .runner-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .runner-items li{margin:0}
+}
+@media(max-width:620px){
+  .runner{padding:16px}
+  .runner-counters{width:100%}
+  .runner-counters div{flex:1;min-width:0;padding:8px 10px}
+  .runner-actions{width:100%}
+  .runner-run{flex:1;min-width:0}
+  .runner-items{grid-template-columns:minmax(0,1fr)}
+  .runner-message{min-height:calc(4.5em + 2px)}
+}
+@media(prefers-reduced-motion:reduce){.runner *,.runner *::before{animation:none!important;transition:none!important}.runner-items li[data-state=processing]{transform:none}}
+
+/* Como funciona: trilha visual de 4 etapas */
+.method-track{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin:0;padding:0;list-style:none}
+.method-track::before,.method-track::after{content:"";position:absolute;top:27px;left:28px;right:calc((100% - 84px) / 4 - 28px);height:2px;background-color:var(--border)}
+.method-track::after{background-color:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 1.1s ease}
+.method-track.is-visible::after,.no-reveal .method-track::after{transform:none}
+.method-track li{position:relative;z-index:1;min-width:0}
+.method-node{display:grid;place-items:center;width:56px;height:56px;border:1px solid var(--brand-border);border-radius:16px;background-color:var(--surface);color:var(--brand);box-shadow:var(--shadow-sm);transition:border-color .3s ease,box-shadow .3s ease}
+.method-node .icon{width:24px;height:24px}
+.method-track.is-visible .method-node{border-color:var(--brand);box-shadow:0 0 0 4px var(--brand-soft)}
+.method-track.is-visible li:nth-child(2) .method-node{transition-delay:.25s}
+.method-track.is-visible li:nth-child(3) .method-node{transition-delay:.5s}
+.method-track.is-visible li:nth-child(4) .method-node{transition-delay:.75s}
+.method-track .method-index{display:block;margin:20px 0 4px;font-size:12px;font-weight:750;letter-spacing:.08em}
+.method-track h3{margin:0 0 8px;font-size:22px;letter-spacing:-.025em}
+.method-track p{margin:0;max-width:30ch;font-size:14.5px;line-height:1.6;color:var(--muted)}
+.method-principles{display:flex;flex-wrap:wrap;gap:10px;margin:48px 0 0;padding:0;list-style:none}
+.method-principles li{display:inline-flex;align-items:center;gap:9px;padding:10px 16px;border:1px solid var(--border);border-radius:100px;background-color:var(--surface);font-size:13.5px;font-weight:620;color:var(--text)}
+.method-principles .icon{width:17px;height:17px;color:var(--brand)}
+@media(max-width:900px){
+  .method-track{grid-template-columns:minmax(0,1fr);gap:22px}
+  .method-track::before,.method-track::after{top:28px;bottom:28px;left:27px;right:auto;width:2px;height:auto}
+  .method-track::after{transform:scaleY(0);transform-origin:top}
+  .method-track li{display:grid;grid-template-columns:56px minmax(0,1fr);column-gap:18px}
+  .method-node{grid-row:span 3}
+  .method-track .method-index{margin:4px 0 2px}
+}
+@media(max-width:620px){.method-principles li{width:100%}}
+
+/* Entrada suave dos cartões ao rolar (só transform e opacidade; desligada com movimento reduzido). */
+.has-reveal [data-reveal]{opacity:.55;transform:translateY(14px);transition:opacity .45s ease,transform .45s ease}
+.has-reveal [data-reveal].is-visible{opacity:1;transform:none}
+.has-reveal .solutions .solution-card[data-reveal].is-visible:hover{transform:translateY(-3px)}
+@media(prefers-reduced-motion:reduce){
+  .has-reveal [data-reveal]{opacity:1;transform:none;transition:none}
+  .method-track::after{transform:none;transition:none}
+  .method-node,.solutions .solution-card{transition:none}
+}
 
 </style>
   <script>
@@ -1469,33 +1406,7 @@ window.LUMINOR_CONFIG = Object.freeze({
     window.matchMedia('(min-width:901px)').addEventListener('change',e=>{if(e.matches)menuClose()});
   }
 
-  // O exemplo interativo do hero (#automation-demo) vive em assets/js/experiences/.
-  function setupTeamExperience(){
-    const root=$('#team-experience');if(!root)return;
-    const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
-    const phases=['before','transition','after'];let index=0,playing=false,touched=false,timer=null,travel=[];
-    const copy={before:['Muita correria. Pouca clareza.','Informações dispersas, interrupções e tarefas repetitivas.','Cinco pessoas lidam com planilhas, mensagens e documentos espalhados.'],transition:['A rotina começa a se conectar.','As informações convergem para um fluxo de automação sob medida.','Documentos e solicitações convergem para uma automação central; as pessoas encontram suas estações.'],after:['Cada pessoa sabe onde focar.','Informação organizada, rotinas automatizadas e equipe com foco.','Cinco pessoas trabalham em estações organizadas e conectadas a uma automação central.']};
-    function controls(){root.dataset.playing=String(playing);$('#team-play').innerHTML=playing?'Pausar <span aria-hidden="true">Ⅱ</span>':index===2?'Rever mudança <span aria-hidden="true">↻</span>':index===0?'Ver a mudança <span aria-hidden="true">▶</span>':'Continuar <span aria-hidden="true">▶</span>';$$('[data-team-state]',root).forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.teamState===phases[index])))}
-    function setPhase(next){
-      const people=$$('.team-person',root),from=people.map(person=>getComputedStyle(person).transform);
-      travel.forEach(animation=>animation.cancel());travel=[];
-      index=next;const phase=phases[index];root.dataset.phase=phase;
-      $('#team-scene-title').textContent=copy[phase][0];$('#team-status').textContent=copy[phase][1];$('#team-scene').setAttribute('aria-label',copy[phase][2]);controls();
-      // Start at the exact position reached while running; no snap back to the route origin.
-      if(next===1&&playing&&!motion.matches){
-        travel=people.map((person,i)=>person.animate([{transform:from[i]},{transform:getComputedStyle(person).transform}],{duration:2700,easing:'cubic-bezier(.22,.7,.2,1)'}));
-      }
-    }
-    function pause(){clearTimeout(timer);playing=false;controls();root.getAnimations({subtree:true}).forEach(animation=>{animation.pause();animation.currentTime=animation.currentTime})}
-    function schedule(){timer=setTimeout(()=>{if(index<2){setPhase(index+1);schedule()}else pause()},index===0?4400:index===1?3100:4600)}
-    function play(){if(motion.matches){setPhase(2);pause();return}if(index===2)setPhase(0);playing=true;controls();root.getAnimations({subtree:true}).forEach(animation=>animation.play());schedule()}
-    $$('[data-team-state]',root).forEach(b=>b.addEventListener('click',()=>{touched=true;pause();setPhase(b.dataset.teamState==='before'?0:2)}));
-    $('#team-play').addEventListener('click',()=>{touched=true;if(playing)pause();else play()});
-    document.addEventListener('visibilitychange',()=>{if(document.hidden)pause()});
-    motion.addEventListener('change',()=>{if(motion.matches)pause()});
-    const observer=new IntersectionObserver(entries=>{for(const e of entries){if(!e.isIntersecting){pause();continue}if(e.intersectionRatio>=.35&&!touched&&!motion.matches){touched=true;play()}}},{threshold:[0,.35]});observer.observe(root);setPhase(0);
-  }
-
+  // As demonstrações interativas da homepage vivem em assets/js/experiences/.
   function setupSolutionActions(){$$('.solution-cta').forEach(btn=>btn.addEventListener('click',()=>{const name=btn.dataset.solution;$('#lead-interest').value=name;state.lastInterest=name;$('#contato').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});showToast('Selecionado: '+name)}));$$('[data-interest]').forEach(btn=>btn.addEventListener('click',()=>{$('#lead-interest').value=btn.dataset.interest}))}
   function validateLead(data){const errors=[];if(data.name.trim().length<2)errors.push('Informe seu nome.');if(data.company.trim().length<2)errors.push('Informe sua empresa.');const digits=data.phone.replace(/\D/g,'');if(digits.length<10||digits.length>13)errors.push('Informe um telefone com DDD válido.');if(data.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))errors.push('E-mail inválido.');if(data.problem.trim().length<12)errors.push('Descreva o desafio com pelo menos 12 caracteres.');if(!data.consent)errors.push('Autorize o uso dos dados para resposta.');return errors}
   function setupForm(){const form=$('#lead-form');if(!form)return;const status=$('#form-status');$('#submit-lead')?.addEventListener('click',()=>form.requestSubmit());form.addEventListener('submit',e=>{e.preventDefault();const fd=new FormData(form);const data={name:String(fd.get('name')||''),company:String(fd.get('company')||''),phone:String(fd.get('phone')||''),email:String(fd.get('email')||''),interest:String(fd.get('interest')||''),problem:String(fd.get('problem')||''),consent:fd.get('consent')==='on'};const errors=validateLead(data);status.className='form-status '+(errors.length?'error':'');status.textContent=errors.join(' ');if(errors.length){document.dispatchEvent(new CustomEvent('luminor:form-validation-error'));return}
@@ -1509,7 +1420,12 @@ window.LUMINOR_CONFIG = Object.freeze({
   }
   // Sombra sutil no cabeçalho fixo depois que a página rola.
   function setupHeaderShadow(){const header=$('.site-header');if(!header)return;const update=()=>header.classList.toggle('is-scrolled',window.scrollY>8);update();window.addEventListener('scroll',update,{passive:true})}
-  function init(){const year=$('#year');if(year)year.textContent=new Date().getFullYear();if($('#menu-btn')&&$('#nav'))setupNav();setupHeaderShadow();setupTeamExperience();setupSolutionActions();setupContacts();setupForm()}
+  // Entrada suave dos cartões e da trilha do método ao entrarem na tela (só transform e opacidade).
+  function setupReveal(){const cards=$$('.solutions .solution-card,.method-principles'),track=$('.method-track');const all=[...cards,track].filter(Boolean);if(!all.length)return;
+    if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){all.forEach(el=>el.classList.add('is-visible'));return}
+    document.documentElement.classList.add('has-reveal');cards.forEach((el,i)=>{el.setAttribute('data-reveal','');el.style.transitionDelay=(i%4)*70+'ms'});
+    const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting)continue;const el=entry.target;el.classList.add('is-visible');observer.unobserve(el);if(el.hasAttribute('data-reveal'))setTimeout(()=>{el.style.transitionDelay=''},900)}},{threshold:.15});all.forEach(el=>observer.observe(el))}
+  function init(){const year=$('#year');if(year)year.textContent=new Date().getFullYear();if($('#menu-btn')&&$('#nav'))setupNav();setupHeaderShadow();setupReveal();setupSolutionActions();setupContacts();setupForm()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 
@@ -2117,7 +2033,8 @@ return { FLOW_LAST_STEP, STEP_DURATIONS, AUTOMATION_PHASES, initialFlowState, fl
 })();
 const __module_public_assets_js_experiences_dashboard_js = (() => {
 // Experiência 02 — painel interativo.
-// Resultado compacto na última etapa do fluxo (#scenario-outcome) e painel completo em <dialog>.
+// Resultado compacto na última etapa do fluxo (#scenario-outcome) e painel completo na galeria
+// de demonstrações (#dashboard-panel). O mesmo controlador também funciona dentro de um <dialog>.
 // Indicadores, gráficos e lista saem sempre de computeMetrics(), a mesma fonte de dados.
 const { computeMetrics, getDashboard, todayRecords, recordDetails, statusLabel, formatMoney, PERIODS, LAST_DAY } = __module_public_assets_js_experiences_scenarios_js;
 const { $, $$, el, svg, icon, replaceChildrenKeepingFocus } = __module_public_assets_js_experiences_dom_js;
@@ -2145,7 +2062,7 @@ function createCompactOutcome(outcome, { onExplore = () => {} } = {}) {
   ];
   const footer = (note, noteAttrs = {}) => el('div', { class: 'outcome-footer' },
     el('p', { class: 'outcome-note', ...noteAttrs, text: note }),
-    el('button', { type: 'button', class: 'outcome-explore', 'data-dashboard-open': true, 'data-focus-key': 'explore', 'aria-haspopup': 'dialog' }, 'Explorar o painel', icon('arrow')));
+    el('button', { type: 'button', class: 'outcome-explore', 'data-dashboard-open': true, 'data-focus-key': 'explore' }, 'Ver painel completo', icon('arrow')));
 
   function planilhas() {
     const metrics = computeMetrics('planilhas', { period });
@@ -2234,8 +2151,9 @@ function createCompactOutcome(outcome, { onExplore = () => {} } = {}) {
   };
 }
 
-// ===== Painel completo (<dialog>) =====
-function createDashboardDialog(dialog, { track = () => {} } = {}) {
+// ===== Painel completo (na página ou em <dialog>) =====
+function createDashboardPanel(dialog, { track = () => {} } = {}) {
+  const modal = typeof dialog.showModal === 'function';
   const body = $('#dashboard-app', dialog);
   const sync = $('[data-dash-sync]', dialog);
   const state = { scenario: 'planilhas', period: 'semana', category: 'todas', status: 'todos', selected: null, limit: LIST_PAGE };
@@ -2270,13 +2188,13 @@ function createDashboardDialog(dialog, { track = () => {} } = {}) {
       parts.kpis,
       el('div', { class: 'dash-grid' },
         el('section', { class: 'dash-card dash-chart', 'aria-labelledby': 'dash-chart-title' },
-          el('div', { class: 'dash-card-head' }, el('div', {}, el('h3', { id: 'dash-chart-title', text: d.chartTitle }), parts.chartSub)),
+          el('div', { class: 'dash-card-head' }, el('div', {}, el('h4', { id: 'dash-chart-title', text: d.chartTitle }), parts.chartSub)),
           parts.chart, parts.axis),
         el('section', { class: 'dash-card dash-distribution', 'aria-labelledby': 'dash-dist-title' },
-          el('div', { class: 'dash-card-head' }, el('h3', { id: 'dash-dist-title', text: d.distributionTitle }), parts.distClear),
+          el('div', { class: 'dash-card-head' }, el('h4', { id: 'dash-dist-title', text: d.distributionTitle }), parts.distClear),
           parts.distribution)),
       el('section', { class: 'dash-card dash-records', 'aria-labelledby': 'dash-list-title' },
-        el('div', { class: 'dash-card-head' }, el('h3', { id: 'dash-list-title', text: `Lista de ${d.noun[1]}` }), parts.chips),
+        el('div', { class: 'dash-card-head' }, el('h4', { id: 'dash-list-title', text: `Lista de ${d.noun[1]}` }), parts.chips),
         parts.summary, parts.list, parts.more),
     );
     fresh = true;
@@ -2403,15 +2321,15 @@ function createDashboardDialog(dialog, { track = () => {} } = {}) {
   const filterEvent = action => track('dashboard_filter', { scenario: state.scenario, component: 'dashboard', action });
 
   function onClick(event) {
-    if (event.target === dialog) { close(); return; }
+    if (modal && event.target === dialog) { close(); return; }
     const control = event.target.closest('button,a');
     if (!control || !dialog.contains(control)) return;
     const d = dashboard();
-    if (control.hasAttribute('data-dash-close')) { close(); return; }
+    if (modal && control.hasAttribute('data-dash-close')) { close(); return; }
     if (control.hasAttribute('data-dash-cta')) {
       const interest = document.getElementById('lead-interest');
       if (interest) interest.value = d.interest;
-      close({ restoreFocus: false });
+      if (modal) close({ restoreFocus: false });
       return;
     }
     if (control.dataset.dashScenario) {
@@ -2463,13 +2381,12 @@ function createDashboardDialog(dialog, { track = () => {} } = {}) {
     opener = from;
     state.period = Object.hasOwn(PERIODS, period) ? period : 'semana';
     setScenario(scenario);
-    if (!dialog.open) dialog.showModal();
-    $('[data-dash-close]', dialog)?.focus();
+    if (modal && !dialog.open) { dialog.showModal(); $('[data-dash-close]', dialog)?.focus(); }
   }
 
   function close({ restoreFocus = true } = {}) {
     if (!restoreFocus) opener = null;
-    if (dialog.open) dialog.close();
+    if (modal && dialog.open) dialog.close();
   }
 
   // Esc fecha pelo próprio <dialog>; em todos os casos o foco volta para quem abriu o painel.
@@ -2479,17 +2396,19 @@ function createDashboardDialog(dialog, { track = () => {} } = {}) {
   }
 
   dialog.addEventListener('click', onClick);
-  dialog.addEventListener('close', onClose);
+  if (modal) dialog.addEventListener('close', onClose);
+  // Na página o painel fica sempre montado; no <dialog> ele é montado ao abrir.
+  else setScenario(state.scenario);
 
   return {
     open,
     close,
-    getState: () => ({ ...state, open: dialog.open }),
-    destroy() { dialog.removeEventListener('click', onClick); dialog.removeEventListener('close', onClose); if (dialog.open) dialog.close(); },
+    getState: () => ({ ...state, open: modal ? dialog.open : true }),
+    destroy() { dialog.removeEventListener('click', onClick); dialog.removeEventListener('close', onClose); if (modal && dialog.open) dialog.close(); },
   };
 }
 
-return { createCompactOutcome, createDashboardDialog };
+return { createCompactOutcome, createDashboardPanel };
 })();
 const __module_public_assets_js_experiences_integrations_js = (() => {
 // Experiência 03 — laboratório de integrações (#integracoes-lab).
@@ -2735,49 +2654,295 @@ function setupIntegrationLab(root, { track = () => {} } = {}) {
   return {
     getState: () => ({ example: key, selected, mode, frame: index, status: current().status, record: current().record }),
     pendingTimers: () => timers.pending(),
+    /** Conclui na hora uma simulação em andamento (aba trocada ou página oculta). */
+    finish,
     destroy() { timers.clear(); lifecycle.destroy(); },
   };
 }
 
 return { NODE_STATES, RECORD_STATES, FRAME_DURATIONS, INTEGRATION_EXAMPLES, getExample, idleFrame, simulationFrames, setupIntegrationLab };
 })();
+const __module_public_assets_js_experiences_gallery_js = (() => {
+// Galeria "Veja a tecnologia funcionando." — abas acessíveis (padrão WAI-ARIA tabs).
+// Sem JavaScript, os três painéis aparecem um abaixo do outro e as abas ficam ocultas.
+const { $, $$ } = __module_public_assets_js_experiences_dom_js;
+const { createLifecycle } = __module_public_assets_js_experiences_motion_js;
+
+const GALLERY_TABS = ['automacao', 'gestao', 'integracao'];
+
+/** Próxima aba para uma tecla de navegação (ou null se a tecla não navega). */
+function nextTab(current, key, tabs = GALLERY_TABS) {
+  const i = tabs.indexOf(current);
+  if (key === 'ArrowRight') return tabs[(i + 1) % tabs.length];
+  if (key === 'ArrowLeft') return tabs[(i - 1 + tabs.length) % tabs.length];
+  if (key === 'Home') return tabs[0];
+  if (key === 'End') return tabs[tabs.length - 1];
+  return null;
+}
+
+function setupGallery(root, { track = () => {}, onChange = () => {} } = {}) {
+  const life = createLifecycle();
+  const tabs = $$('[data-gallery-tab]', root);
+  const panels = $$('[data-gallery-panel]', root);
+  let active = tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.galleryTab || GALLERY_TABS[0];
+
+  function render() {
+    for (const tab of tabs) {
+      const selected = tab.dataset.galleryTab === active;
+      tab.setAttribute('aria-selected', String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+    }
+    for (const panel of panels) panel.hidden = panel.dataset.galleryPanel !== active;
+    root.dataset.active = active;
+  }
+
+  /** Mostra uma aba; com focus=true o foco vai para o botão da aba. */
+  function show(name, { focus = false, source = 'api' } = {}) {
+    if (!GALLERY_TABS.includes(name)) return;
+    const changed = name !== active;
+    active = name;
+    render();
+    if (focus) $(`[data-gallery-tab="${name}"]`, root)?.focus();
+    if (changed) {
+      onChange(name);
+      if (source === 'user') track('demo_scenario_select', { scenario: name, component: 'gallery', action: 'tab' });
+    }
+  }
+
+  for (const tab of tabs) {
+    life.listen(tab, 'click', () => show(tab.dataset.galleryTab, { source: 'user' }));
+    life.listen(tab, 'keydown', event => {
+      const next = nextTab(active, event.key, tabs.map(t => t.dataset.galleryTab));
+      if (!next) return;
+      event.preventDefault();
+      show(next, { focus: true, source: 'user' });
+    });
+  }
+
+  $('[data-gallery-js]', root)?.removeAttribute('hidden');
+  root.classList.add('is-ready');
+  render();
+
+  return {
+    show,
+    panel: name => panels.find(panel => panel.dataset.galleryPanel === name) || null,
+    getState: () => ({ active }),
+    destroy() { life.destroy(); },
+  };
+}
+
+return { GALLERY_TABS, nextTab, setupGallery };
+})();
+const __module_public_assets_js_experiences_process_runner_js = (() => {
+// Demonstração "Automação de processos": documentos saem da origem, passam pelas regras e
+// chegam ao controle financeiro. Os textos ficam no HTML; aqui só mudam estados e contadores.
+const { $, $$ } = __module_public_assets_js_experiences_dom_js;
+const { createTimers, createLifecycle, reducedMotionQuery } = __module_public_assets_js_experiences_motion_js;
+
+/** Duração de cada quadro (ms): conferência do documento e lançamento no destino. */
+const RUNNER_FRAME_MS = 620;
+
+/** Estado vazio: nada processado. */
+function runnerIdle(count) {
+  return { current: -1, phase: 'idle', items: Array(count).fill('waiting'), rows: Array(count).fill('empty'), done: 0, review: 0 };
+}
+
+/**
+ * Quadros da execução (puros e testáveis). Cada documento passa por "processing" e termina
+ * em "done" ou "review" (quando o índice está em reviewSet).
+ */
+function runnerFrames(count, reviewSet = new Set()) {
+  const frames = [];
+  let frame = runnerIdle(count);
+  for (let i = 0; i < count; i++) {
+    frame = { ...frame, current: i, phase: 'processing', items: frame.items.map((s, j) => (j === i ? 'processing' : s)) };
+    frames.push(frame);
+    const result = reviewSet.has(i) ? 'review' : 'done';
+    frame = {
+      ...frame,
+      phase: i === count - 1 ? 'finished' : 'moving',
+      items: frame.items.map((s, j) => (j === i ? result : s)),
+      rows: frame.rows.map((s, j) => (j === i ? result : s)),
+      done: frame.done + (result === 'done' ? 1 : 0),
+      review: frame.review + (result === 'review' ? 1 : 0),
+    };
+    frames.push(frame);
+  }
+  return frames;
+}
+
+function setupProcessRunner(root, { track = () => {} } = {}) {
+  const life = createLifecycle();
+  const timers = createTimers();
+  const motion = reducedMotionQuery();
+  const items = $$('[data-runner-item]', root);
+  const rows = $$('[data-runner-row]', root);
+  const reviewSet = new Set(items.filter(item => item.dataset.review).map(item => Number(item.dataset.runnerItem)));
+  const frames = runnerFrames(items.length, reviewSet);
+  const run = $('#runner-run', root);
+  const restart = $('#runner-restart', root);
+  const message = $('#runner-message', root);
+  const status = $('#runner-status', root);
+  const nameOf = i => $('strong', items[i])?.textContent || '';
+  let index = -1; // último quadro aplicado
+  let playing = false;
+  let userRun = false;
+
+  function apply(frame) {
+    items.forEach((item, i) => { item.dataset.state = frame.items[i]; });
+    rows.forEach((row, i) => { row.dataset.state = frame.rows[i]; });
+    $('[data-runner-count="done"]', root).textContent = String(frame.done);
+    $('[data-runner-count="review"]', root).textContent = String(frame.review);
+    root.dataset.state = frame.phase;
+    $('#runner-current', root).textContent = frame.current < 0 ? 'Aguardando execução' : frame.phase === 'finished' ? 'Execução concluída' : nameOf(frame.current);
+    const last = frame.current >= 0 ? items[frame.current] : null;
+    message.textContent = frame.phase === 'idle'
+      ? `${items.length} documentos aguardando. Execute a automação para ver cada etapa.`
+      : frame.phase === 'finished'
+        ? `${frame.done} lançados automaticamente e ${frame.review} enviado para revisão da equipe.`
+        : frame.phase === 'processing'
+          ? `Conferindo ${nameOf(frame.current)}: leitura, valor, vencimento e classificação.`
+          : last?.dataset.review
+            ? `${nameOf(frame.current)} foi para revisão: ${last.dataset.review}`
+            : `${nameOf(frame.current)} lançado no controle financeiro.`;
+  }
+
+  function controls() {
+    const finished = index === frames.length - 1;
+    root.dataset.playing = String(playing);
+    $('#runner-run-label', root).textContent = playing ? 'Pausar' : finished ? 'Executar novamente' : index >= 0 ? 'Continuar' : 'Executar automação';
+    $('span[aria-hidden]', run).textContent = playing ? 'Ⅱ' : finished ? '↻' : '▶';
+    restart.setAttribute('aria-disabled', String(index < 0 && !playing));
+  }
+
+  function step() {
+    index += 1;
+    apply(frames[index]);
+    if (index === frames.length - 1) {
+      playing = false;
+      status.textContent = message.textContent;
+      if (userRun) { userRun = false; track('demo_flow_complete', { scenario: 'documentos_financeiros', component: 'process_runner' }); }
+    } else timers.after(RUNNER_FRAME_MS, step);
+    controls();
+  }
+
+  function reset() {
+    timers.clear();
+    playing = false;
+    index = -1;
+    apply(runnerIdle(items.length));
+    controls();
+  }
+
+  function finish() {
+    timers.clear();
+    playing = false;
+    index = frames.length - 1;
+    apply(frames[index]);
+    status.textContent = message.textContent;
+    controls();
+  }
+
+  function pause() {
+    if (!playing) return;
+    timers.clear();
+    playing = false;
+    controls();
+  }
+
+  function play(action) {
+    if (index === frames.length - 1) reset();
+    userRun = true;
+    track('demo_flow_start', { scenario: 'documentos_financeiros', component: 'process_runner', action });
+    if (motion?.matches) { finish(); userRun = false; return; }
+    playing = true;
+    status.textContent = 'Execução iniciada.';
+    controls();
+    timers.after(index < 0 ? 120 : RUNNER_FRAME_MS, step);
+  }
+
+  life.listen(run, 'click', () => (playing ? pause() : play(index >= 0 && index < frames.length - 1 ? 'resume' : 'play')));
+  life.listen(restart, 'click', () => {
+    if (restart.getAttribute('aria-disabled') === 'true') return;
+    reset();
+    play('restart');
+  });
+  life.onPageHidden(pause);
+  life.onMotionChange(reduced => { if (reduced && playing) finish(); });
+  life.observe(root, entry => { if (!entry.isIntersecting) pause(); }, [0]);
+
+  $('[data-runner-js]', root)?.removeAttribute('hidden');
+  reset();
+
+  return {
+    getState: () => ({ index, playing, frames: frames.length, state: root.dataset.state }),
+    pendingTimers: () => timers.pending(),
+    pause,
+    destroy() { timers.clear(); life.destroy(); },
+  };
+}
+
+return { RUNNER_FRAME_MS, runnerIdle, runnerFrames, setupProcessRunner };
+})();
 const __module_public_assets_js_experiences_index_js = (() => {
-// Ponto de entrada das experiências interativas da página inicial (módulo nativo).
+// Ponto de entrada das experiências interativas da homepage (módulos ES nativos, sem build).
 const { setupAutomationFlow } = __module_public_assets_js_experiences_automation_flow_js;
-const { createCompactOutcome, createDashboardDialog } = __module_public_assets_js_experiences_dashboard_js;
+const { createCompactOutcome, createDashboardPanel } = __module_public_assets_js_experiences_dashboard_js;
 const { setupIntegrationLab } = __module_public_assets_js_experiences_integrations_js;
+const { setupGallery } = __module_public_assets_js_experiences_gallery_js;
+const { setupProcessRunner } = __module_public_assets_js_experiences_process_runner_js;
+const { prefersReducedMotion } = __module_public_assets_js_experiences_motion_js;
 
 const controllers = {};
 
-/** Eventos de uso das demonstrações; analytics.js decide se envia (consentimento e lista permitida). */
 function track(name, params = {}) {
-  try { window.LuminorAnalytics?.track(name, { page_type: 'home', ...params }); } catch { /* métricas nunca quebram a página */ }
+  try { window.LuminorAnalytics?.track(name, { page_type: 'home', ...params }); } catch {}
+}
+
+/** Leva a pessoa do resultado compacto do hero ao painel completo da galeria. */
+function exploreDashboard({ scenario, period }) {
+  const { gallery, dashboard } = controllers;
+  gallery.show('gestao');
+  dashboard.open({ scenario, period });
+  const panel = gallery.panel('gestao');
+  panel.scrollIntoView({ behavior: prefersReducedMotion() ? 'instant' : 'smooth', block: 'start' });
+  const title = document.getElementById('dashboard-title');
+  title.tabIndex = -1;
+  title.focus({ preventScroll: true });
 }
 
 function init() {
-  // Uma única montagem por página, mesmo que o módulo seja avaliado de novo.
   if (window.LuminorExperiences) return;
-
-  const dialogRoot = document.getElementById('dashboard-dialog');
-  if (dialogRoot && typeof dialogRoot.showModal === 'function') controllers.dashboard = createDashboardDialog(dialogRoot, { track });
+  const galleryRoot = document.getElementById('tech-gallery');
+  const panelRoot = document.getElementById('dashboard-panel');
+  if (panelRoot) controllers.dashboard = createDashboardPanel(panelRoot, { track });
+  const runnerRoot = document.getElementById('process-runner');
+  if (runnerRoot) controllers.runner = setupProcessRunner(runnerRoot, { track });
+  const labRoot = document.getElementById('integration-lab');
+  if (labRoot) controllers.lab = setupIntegrationLab(labRoot, { track });
+  if (galleryRoot) {
+    controllers.gallery = setupGallery(galleryRoot, {
+      track,
+      // Uma demonstração que sai de cena não continua rodando escondida.
+      onChange() { controllers.runner?.pause(); controllers.lab?.finish(); },
+    });
+  }
 
   const flowRoot = document.getElementById('automation-demo');
   const outcomeRoot = document.getElementById('scenario-outcome');
   if (flowRoot && outcomeRoot) {
-    const onExplore = controllers.dashboard ? options => controllers.dashboard.open(options) : undefined;
-    controllers.flow = setupAutomationFlow(flowRoot, { outcome: createCompactOutcome(outcomeRoot, { onExplore }), track });
-    if (!controllers.dashboard) outcomeRoot.classList.add('no-explore');
+    const canExplore = controllers.gallery && controllers.dashboard;
+    controllers.flow = setupAutomationFlow(flowRoot, { outcome: createCompactOutcome(outcomeRoot, { onExplore: canExplore ? exploreDashboard : undefined }), track });
+    if (!canExplore) outcomeRoot.classList.add('no-explore');
   }
 
-  const labRoot = document.getElementById('integration-lab');
-  if (labRoot) controllers.lab = setupIntegrationLab(labRoot, { track });
-
-  // Leitura para testes e depuração: estado das experiências e temporizadores ainda ativos.
   window.LuminorExperiences = Object.freeze({
     pendingTimers: () => Object.values(controllers).reduce((sum, item) => sum + (item.pendingTimers?.() ?? 0), 0),
     flowState: () => controllers.flow?.getState(),
     dashboardState: () => controllers.dashboard?.getState(),
     labState: () => controllers.lab?.getState(),
+    runnerState: () => controllers.runner?.getState(),
+    galleryState: () => controllers.gallery?.getState(),
   });
 }
 
@@ -2816,10 +2981,10 @@ return {  };
     <div class="nav-shell wrap">
       <a href="#inicio" class="brand" aria-label="Luminor Software — início"><img class="brand-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMxLjYxIDAgMTMxLjc4IDEwMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJMdW1pbm9yIFNvZnR3YXJlIj48dGl0bGU+THVtaW5vciBTb2Z0d2FyZTwvdGl0bGU+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJsbS1hIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjE0OCIgeTE9IjIiIHgyPSIyNCIgeTI9IjcyIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMEM4RDAiLz48c3RvcCBvZmZzZXQ9Ii41IiBzdG9wLWNvbG9yPSIjNkE1NUVDIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjQzIzQkU2Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImxtLWIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMTcwIiB5MT0iMzAiIHgyPSI0OCIgeTI9Ijk4Ij48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyRjZDRjAiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzZDMkJEOSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzRBMkZFMCIvPjwvbGluZWFyR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJsbS1jIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTc0IDcuNTFBMjAgMjAgMCAwIDEgODkuNjEgMEwxMjkuNjkgMEExMCAxMCAwIDAgMSAxMzcuNSAxNi4yNUwxMzQuOSAxOS41QTQgNCAwIDAgMCAxMzguMDIgMjZMMTUzLjM5IDI2QTEwIDEwIDAgMCAxIDE2MS4yIDQyLjI1TDEyMSA5Mi40OUEyMCAyMCAwIDAgMSAxMDUuMzkgMTAwTDYzLjgxIDEwMEExMCAxMCAwIDAgMSA1NiA4My43NUw1OC42IDgwLjVBNCA0IDAgMCAwIDU1LjQ4IDc0TDQxLjYxIDc0QTEwIDEwIDAgMCAxIDMzLjggNTcuNzVaTTk5Ljg2IDI4LjVBNC41IDQuNSAwIDAgMCA5Ni4zNSAzMC4xOUw2OS41NSA2My42OUE0LjUgNC41IDAgMCAwIDczLjA2IDcxTDk0LjA0IDcxQTQuNSA0LjUgMCAwIDAgOTcuNTUgNjkuMzFMMTI0LjM1IDM1LjgxQTQuNSA0LjUgMCAwIDAgMTIwLjg0IDI4LjVaIi8+PC9jbGlwUGF0aD48L2RlZnM+PHBhdGggZmlsbD0idXJsKCNsbS1hKSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNzQgNy41MUEyMCAyMCAwIDAgMSA4OS42MSAwTDEyOS42OSAwQTEwIDEwIDAgMCAxIDEzNy41IDE2LjI1TDEzNC45IDE5LjVBNCA0IDAgMCAwIDEzOC4wMiAyNkwxNTMuMzkgMjZBMTAgMTAgMCAwIDEgMTYxLjIgNDIuMjVMMTIxIDkyLjQ5QTIwIDIwIDAgMCAxIDEwNS4zOSAxMDBMNjMuODEgMTAwQTEwIDEwIDAgMCAxIDU2IDgzLjc1TDU4LjYgODAuNUE0IDQgMCAwIDAgNTUuNDggNzRMNDEuNjEgNzRBMTAgMTAgMCAwIDEgMzMuOCA1Ny43NVpNOTkuODYgMjguNUE0LjUgNC41IDAgMCAwIDk2LjM1IDMwLjE5TDY5LjU1IDYzLjY5QTQuNSA0LjUgMCAwIDAgNzMuMDYgNzFMOTQuMDQgNzFBNC41IDQuNSAwIDAgMCA5Ny41NSA2OS4zMUwxMjQuMzUgMzUuODFBNC41IDQuNSAwIDAgMCAxMjAuODQgMjguNVoiLz48cGF0aCBmaWxsPSJ1cmwoI2xtLWIpIiBjbGlwLXBhdGg9InVybCgjbG0tYykiIGQ9Ik0xMjkuNyAyNkwxODYuMiAyNkwxMTcuNCAxMTJMMzMuNCAxMTJMNjMuOCA3NEw2My43IDcxTDEzMC4yIDI4LjVaIi8+PC9zdmc+DQo=" alt="" width="40" height="30"><span>Luminor<span class="brand-light"> Software</span></span></a>
       <nav id="nav" class="nav-links" aria-label="Navegação principal">
-        <a href="#solucoes">Soluções</a><a href="#metodo">Como funciona</a><a href="#processos">Exemplos</a><a href="#diferenciais">Sobre</a><a href="#contato">Contato</a>
-        <a href="#contato" class="mobile-nav-cta" data-event="click_diagnostico" data-cta-location="mobile_nav">Conversar sobre meu negócio <svg class="icon"><use href="#i-arrow"/></svg></a>
+        <a href="#solucoes">Soluções</a><a href="#demonstracoes">Demonstrações</a><a href="#metodo">Como funciona</a><a href="#faq">Dúvidas</a><a href="#contato">Contato</a>
+        <a href="#contato" class="mobile-nav-cta" data-event="click_diagnostico" data-cta-location="mobile_nav">Falar com a Luminor <svg class="icon"><use href="#i-arrow"/></svg></a>
       </nav>
-      <a class="btn btn-light header-cta" href="#contato" data-event="click_diagnostico" data-cta-location="header">Conversar sobre meu negócio <svg class="icon"><use href="#i-arrow-up"/></svg></a>
+      <a class="btn btn-light header-cta" href="#contato" data-event="click_diagnostico" data-cta-location="header">Falar com a Luminor <svg class="icon"><use href="#i-arrow-up"/></svg></a>
       <button id="menu-btn" class="menu-button" aria-controls="nav" aria-expanded="false" aria-label="Abrir menu"><svg class="icon icon-menu"><use href="#i-menu"/></svg><svg class="icon icon-close"><use href="#i-close"/></svg></button>
     </div>
   </header>
@@ -2829,12 +2994,11 @@ return {  };
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="wrap hero-layout">
         <div class="hero-copy">
-          <div class="eyebrow hero-badge"><span class="hero-badge-icon" aria-hidden="true"><svg class="icon"><use href="#i-bolt"/></svg></span>TECNOLOGIA SOB MEDIDA PARA SUA EMPRESA</div>
-          <h1>Seu negócio cresce. <span class="gradient-text">Seus processos precisam acompanhar.</span></h1>
-          <p class="hero-lead">Desenvolvemos sistemas sob medida, automações e integrações que reduzem tarefas manuais e deixam sua operação mais organizada.</p>
-          <div class="hero-actions"><a href="#contato" class="btn btn-primary" data-event="click_diagnostico" data-cta-location="hero">Quero automatizar meu negócio <svg class="icon"><use href="#i-arrow-up"/></svg></a><a href="#metodo" class="btn btn-secondary">Veja como funciona <svg class="icon"><use href="#i-arrow"/></svg></a></div>
+          <div class="eyebrow hero-badge"><span class="hero-badge-icon" aria-hidden="true"><svg class="icon"><use href="#i-bolt"/></svg></span>SOFTWARE E AUTOMAÇÃO SOB MEDIDA</div>
+          <h1>Sistemas e automações que <span class="gradient-text">simplificam seu negócio.</span></h1>
+          <p class="hero-lead">Transformamos tarefas repetitivas, planilhas e processos manuais em soluções fáceis de usar.</p>
+          <div class="hero-actions"><a href="#contato" class="btn btn-primary" data-event="click_diagnostico" data-cta-location="hero">Quero automatizar meu negócio <svg class="icon"><use href="#i-arrow-up"/></svg></a><a href="#demonstracoes" class="btn btn-secondary">Ver soluções na prática <svg class="icon"><use href="#i-arrow"/></svg></a></div>
           <ul class="hero-note"><li>Conversa direto pelo WhatsApp</li><li>Proposta depois de entender seu processo</li></ul>
-          <div class="hero-footer"><div class="avatars" aria-hidden="true"><span><svg class="icon"><use href="#i-grid"/></svg></span><span><svg class="icon"><use href="#i-bot"/></svg></span><span><svg class="icon"><use href="#i-layer"/></svg></span></div><p>Do problema à solução.<br><strong>Tecnologia construída para sua operação.</strong></p></div>
         </div>
         <section class="process-visual" id="automation-demo" data-step="0" data-state="idle" data-playing="false" aria-labelledby="automation-title">
           <div class="process-caption"><span class="status-dot"></span> DA SUA ROTINA À AUTOMAÇÃO <span class="demo-label">INTERATIVO</span></div>
@@ -2857,150 +3021,199 @@ return {  };
             <li><button type="button" data-demo-step="3" aria-pressed="false"><span>04</span>Resultado</button></li>
           </ol>
           <div class="demo-narrative"><p id="demo-stage-copy" role="status">Informações espalhadas e a mesma tarefa feita várias vezes.</p><div class="demo-controls"><button type="button" class="demo-play" id="demo-play" aria-label="Reproduzir transformação"><span aria-hidden="true">▶</span> <span id="demo-play-label">Ver transformação</span></button><button type="button" class="demo-restart" id="demo-restart" aria-label="Reiniciar a transformação do começo"><span aria-hidden="true">↺</span> <span>Reiniciar</span></button></div></div>
-          <p class="process-footnote">Explore as etapas e descubra um resultado diferente em cada cenário. Dados ilustrativos de soluções sob medida.</p>
+          <p class="process-footnote">Simulação com dados ilustrativos.</p>
           <noscript><p>Planilhas podem virar dashboards; documentos, um canvas organizado; e mensagens, uma lista de tickets. Ative o JavaScript para explorar os exemplos.</p></noscript>
         </section>
       </div>
-      <div class="wrap hero-strip"><div><span>01 /</span> CONTROLE DE PROCESSOS</div><div><span>02 /</span> INTEGRAÇÕES INTELIGENTES</div><div><span>03 /</span> MENOS TRABALHO REPETITIVO</div></div>
     </section>
 
-    <section id="solucoes" class="solutions section-pad"><div class="wrap"><div class="section-heading"><div><div class="overline"><span class="mini-line"></span> O QUE RESOLVEMOS</div><h2>O problema muda.<br><span class="muted">A solução acompanha.</span></h2></div><p>Não é sobre encaixar sua empresa em um software pronto. É sobre criar a tecnologia certa para a rotina que você precisa melhorar.</p></div>
-      <div class="solutions-grid"><article class="solution-card" data-solution="Automação de processos internos"><div class="solution-head"><div class="solution-icon"><svg class="icon"><use href="#i-gear"/></svg></div><span>01 — PROCESSOS</span></div><h3>Automação de processos</h3><div class="solution-problem"><strong>Problema comum</strong>A equipe lança os mesmos dados em vários lugares e refaz conferências.</div><p>Eliminamos tarefas repetitivas, lançamentos manuais e retrabalho com fluxos que seguem as regras do seu processo.</p><a class="text-action service-page-link" href="/servicos/automacao-de-processos">Ver automação de processos <svg class="icon"><use href="#i-arrow"/></svg></a><button class="text-action solution-cta" data-solution="Automação de processos internos">Quero resolver isso <svg class="icon"><use href="#i-arrow-up"/></svg></button></article><article class="solution-card" data-solution="Sistemas sob medida"><div class="solution-head"><div class="solution-icon"><svg class="icon"><use href="#i-grid"/></svg></div><span>02 — SISTEMAS</span></div><h3>Sistemas sob medida</h3><div class="solution-problem"><strong>Problema comum</strong>Pedidos, estoque e relatórios ficam espalhados em planilhas.</div><p>Aplicações personalizadas para vendas, operação, estoque, relatórios e gestão, com os acessos que sua equipe precisa.</p><a class="text-action service-page-link" href="/servicos/sistemas-sob-medida">Ver sistemas sob medida <svg class="icon"><use href="#i-arrow"/></svg></a><button class="text-action solution-cta" data-solution="Sistemas sob medida">Quero resolver isso <svg class="icon"><use href="#i-arrow-up"/></svg></button></article><article class="solution-card" data-solution="Integração de sistemas"><div class="solution-head"><div class="solution-icon"><svg class="icon"><use href="#i-layer"/></svg></div><span>03 — INTEGRAÇÕES</span></div><h3>Integração de sistemas</h3><div class="solution-problem"><strong>Problema comum</strong>Informações são copiadas à mão de uma ferramenta para outra.</div><p>Conectamos as ferramentas que você já usa para evitar a duplicação manual de informações.</p><a class="text-action service-page-link" href="/servicos/integracao-de-sistemas">Ver integração de sistemas <svg class="icon"><use href="#i-arrow"/></svg></a><button class="text-action solution-cta" data-solution="Integração de sistemas">Quero resolver isso <svg class="icon"><use href="#i-arrow-up"/></svg></button></article><article class="solution-card" data-solution="Atendimento pelo WhatsApp"><div class="solution-head"><div class="solution-icon"><svg class="icon"><use href="#i-message"/></svg></div><span>04 — ATENDIMENTO</span></div><h3>Atendimento automatizado</h3><div class="solution-problem"><strong>Problema comum</strong>Mensagens se perdem e ninguém sabe quem já respondeu o cliente.</div><p>Organizamos mensagens, solicitações e rotinas do WhatsApp, com encaminhamento para a pessoa certa da equipe.</p><a class="text-action service-page-link" href="/servicos/chatbot-whatsapp">Ver chatbots para WhatsApp <svg class="icon"><use href="#i-arrow"/></svg></a><button class="text-action solution-cta" data-solution="Atendimento pelo WhatsApp">Quero resolver isso <svg class="icon"><use href="#i-arrow-up"/></svg></button></article></div><div class="solution-bottom"><span>CADA EMPRESA TEM UM PROCESSO. CADA SOLUÇÃO É SOB MEDIDA.</span><a href="#contato" data-event="click_diagnostico" data-cta-location="solutions">Seu processo é diferente? Vamos entender <svg class="icon"><use href="#i-arrow"/></svg></a></div>
+    <section id="solucoes" class="solutions section-pad"><div class="wrap">
+      <div class="section-heading"><div><div class="overline"><span class="mini-line"></span> SOLUÇÕES</div><h2>Tecnologia criada<br><span class="muted">para a sua rotina.</span></h2></div><p>Cada solução nasce do processo da empresa, com as ferramentas que a equipe já usa.</p></div>
+      <div class="solutions-grid">
+        <article class="solution-card" data-solution="Automação de processos internos"><div class="solution-visual" data-shot="automacao"><div class="solution-icon"><svg class="icon" aria-hidden="true"><use href="#i-gear"/></svg></div></div><h3>Automação</h3><p>Elimine tarefas repetitivas e reduza o retrabalho da equipe com fluxos que seguem as regras do processo.</p><a class="text-action service-page-link" href="/servicos/automacao-de-processos">Ver automação de processos <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></article>
+        <article class="solution-card" data-solution="Sistemas sob medida"><div class="solution-visual" data-shot="sistemas"><div class="solution-icon"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg></div></div><h3>Sistemas sob medida</h3><p>Tenha uma aplicação criada para a rotina da sua empresa, com os acessos que cada pessoa precisa.</p><a class="text-action service-page-link" href="/servicos/sistemas-sob-medida">Ver sistemas sob medida <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></article>
+        <article class="solution-card" data-solution="Integração de sistemas"><div class="solution-visual" data-shot="integracoes"><div class="solution-icon"><svg class="icon" aria-hidden="true"><use href="#i-layer"/></svg></div></div><h3>Integrações</h3><p>Conecte suas ferramentas e evite digitar a mesma informação várias vezes em sistemas diferentes.</p><a class="text-action service-page-link" href="/servicos/integracao-de-sistemas">Ver integração de sistemas <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></article>
+        <article class="solution-card" data-solution="Atendimento pelo WhatsApp"><div class="solution-visual" data-shot="atendimento"><div class="solution-icon"><svg class="icon" aria-hidden="true"><use href="#i-message"/></svg></div></div><h3>Atendimento</h3><p>Organize solicitações e automatize etapas do contato com clientes, inclusive pelo WhatsApp.</p><a class="text-action service-page-link" href="/servicos/chatbot-whatsapp">Ver chatbots para WhatsApp <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></article>
+      </div>
     </div></section>
 
-    <section id="integracoes-lab" class="integrations-lab section-pad" aria-labelledby="integrations-title">
-      <div class="wrap">
-        <div class="section-heading">
-          <div><div class="overline"><span class="mini-line"></span> LABORATÓRIO DE INTEGRAÇÕES</div><h2 id="integrations-title">Seus sistemas podem<br><span class="lab-accent">trabalhar juntos.</span></h2></div>
-          <p>Conectamos ferramentas e informações para evitar retrabalho e criar processos mais organizados.</p>
+    <section id="demonstracoes" class="tech-gallery section-pad" aria-labelledby="gallery-title"><div class="wrap">
+      <div class="section-heading"><div><div class="overline"><span class="mini-line"></span> DEMONSTRAÇÕES</div><h2 id="gallery-title">Veja a tecnologia<br><span class="gradient-text">funcionando.</span></h2></div><p>Simulações interativas com dados fictícios, no formato das soluções que desenvolvemos. Escolha um exemplo e execute.</p></div>
+      <div class="gallery" id="tech-gallery">
+        <div class="gallery-tabs" role="tablist" aria-label="Demonstrações" data-gallery-js hidden>
+          <button type="button" role="tab" id="tab-automacao" aria-controls="panel-automacao" aria-selected="true" data-gallery-tab="automacao"><svg class="icon" aria-hidden="true"><use href="#i-gear"/></svg>Automação de processos</button>
+          <button type="button" role="tab" id="tab-gestao" aria-controls="panel-gestao" aria-selected="false" tabindex="-1" data-gallery-tab="gestao"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg>Sistema de gestão</button>
+          <button type="button" role="tab" id="tab-integracao" aria-controls="integracoes-lab" aria-selected="false" tabindex="-1" data-gallery-tab="integracao"><svg class="icon" aria-hidden="true"><use href="#i-layer"/></svg>Integração de sistemas</button>
         </div>
-        <div class="lab" id="integration-lab" data-example="financeiro" data-state="waiting" data-mode="idle">
-          <div class="lab-top">
-            <div class="lab-examples" role="group" aria-label="Exemplos de integração" data-lab-js>
-              <button type="button" data-lab-example="financeiro" aria-pressed="true" aria-label="Pedidos para o financeiro">Pedidos → Financeiro</button>
-              <button type="button" data-lab-example="clientes" aria-pressed="false" aria-label="Clientes para o CRM">Clientes → CRM</button>
-              <button type="button" data-lab-example="estoque" aria-pressed="false" aria-label="Pedidos para o estoque">Pedidos → Estoque</button>
-              <button type="button" data-lab-example="formulario" aria-pressed="false" aria-label="Formulário para o sistema interno">Formulário → Sistema interno</button>
-              <button type="button" data-lab-example="documentos" aria-pressed="false" aria-label="Documentos para a organização de registros">Documentos → Registros</button>
-            </div>
-            <span class="demo-label lab-label">SIMULAÇÃO</span>
-          </div>
-          <ol class="lab-diagram" aria-label="Caminho da informação">
-            <li class="lab-step"><div class="lab-node" data-lab-node="0" data-state="waiting"><span class="lab-node-icon"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg></span><span class="lab-node-role">Origem</span><strong class="lab-node-name">Sistema de pedidos</strong><span class="lab-node-function">Registra cada venda</span><span class="lab-node-state"><i aria-hidden="true"></i><span>Aguardando</span></span></div></li>
-            <li class="lab-step"><span class="lab-link" data-lab-link="0" data-state="idle" aria-hidden="true"><svg class="lab-wire" focusable="false"><line class="wire-h" x1="0" y1="50%" x2="100%" y2="50%"/><line class="wire-v" x1="50%" y1="0" x2="50%" y2="100%"/></svg><i class="lab-pulse"></i></span><div class="lab-node" data-lab-node="1" data-kind="core" data-state="waiting"><span class="lab-node-icon"><svg class="icon" aria-hidden="true"><use href="#i-gear"/></svg></span><span class="lab-node-role">Regras</span><strong class="lab-node-name">Automação Luminor</strong><span class="lab-node-function">Valida e organiza os dados</span><span class="lab-node-state"><i aria-hidden="true"></i><span>Aguardando</span></span></div></li>
-            <li class="lab-step"><span class="lab-link" data-lab-link="1" data-state="idle" aria-hidden="true"><svg class="lab-wire" focusable="false"><line class="wire-h" x1="0" y1="50%" x2="100%" y2="50%"/><line class="wire-v" x1="50%" y1="0" x2="50%" y2="100%"/></svg><i class="lab-pulse"></i></span><div class="lab-node" data-lab-node="2" data-state="waiting"><span class="lab-node-icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span><span class="lab-node-role">Destino</span><strong class="lab-node-name">Controle financeiro</strong><span class="lab-node-function">Registra o valor a receber</span><span class="lab-node-state"><i aria-hidden="true"></i><span>Aguardando</span></span></div></li>
-            <li class="lab-step"><span class="lab-link" data-lab-link="2" data-state="idle" aria-hidden="true"><svg class="lab-wire" focusable="false"><line class="wire-h" x1="0" y1="50%" x2="100%" y2="50%"/><line class="wire-v" x1="50%" y1="0" x2="50%" y2="100%"/></svg><i class="lab-pulse"></i></span><div class="lab-node" data-lab-node="3" data-state="waiting"><span class="lab-node-icon"><svg class="icon" aria-hidden="true"><use href="#i-trend"/></svg></span><span class="lab-node-role">Consulta</span><strong class="lab-node-name">Relatórios</strong><span class="lab-node-function">Mostra a visão consolidada</span><span class="lab-node-state"><i aria-hidden="true"></i><span>Aguardando</span></span></div></li>
-          </ol>
-          <div class="lab-bottom">
-            <section class="lab-card lab-detail" id="lab-detail" aria-label="Detalhes da etapa selecionada">
-              <span class="lab-kicker">REGRAS · O QUE ACONTECE AQUI</span>
-              <h3>Automação Luminor</h3>
-              <dl><div><dt>Recebe</dt><dd>Cliente, itens, valor e forma de pagamento do pedido.</dd></div><div><dt>Transforma</dt><dd>Confere o valor e monta o lançamento a receber no formato do financeiro.</dd></div><div><dt>Envia para</dt><dd>Lançamento para o controle financeiro.</dd></div><div><dt>Validações</dt><dd>Valor maior que zero, cliente cadastrado e pedido ainda não lançado.</dd></div></dl>
-            </section>
-            <section class="lab-card lab-sim" aria-labelledby="lab-sim-title">
-              <div class="lab-sim-head">
-                <h3 id="lab-sim-title">Simulação passo a passo</h3>
-                <p class="lab-record"><span>Registro: <strong id="lab-record-name">Pedido #1050 · R$ 460,00</strong></span> <span id="lab-record-state" class="lab-record-state" data-state="waiting">Aguardando envio</span></p>
-              </div>
-              <div class="lab-actions" data-lab-js>
-                <button type="button" id="lab-run" class="lab-run">Simular integração</button>
-                <button type="button" id="lab-failure" class="lab-fail">Ver como uma falha é tratada</button>
-              </div>
-              <div class="lab-layers">
-                <ol id="lab-timeline" class="lab-layer lab-timeline" aria-label="Etapas do registro">
-                  <li data-lab-row="0" data-state="waiting"><span class="lab-row-mark" aria-hidden="true"></span><span>Pedido #1050 confirmado no sistema de pedidos.</span></li>
-                  <li data-lab-row="1" data-state="waiting"><span class="lab-row-mark" aria-hidden="true"></span><span>Automação confere o valor e monta o lançamento.</span></li>
-                  <li data-lab-row="2" data-state="waiting"><span class="lab-row-mark" aria-hidden="true"></span><span>Controle financeiro registra o valor a receber.</span></li>
-                  <li data-lab-row="3" data-state="waiting"><span class="lab-row-mark" aria-hidden="true"></span><span>Relatórios atualizados com o novo pedido.</span></li>
-                </ol>
-                <div class="lab-layer lab-failure" aria-labelledby="lab-failure-title">
-                  <h4 id="lab-failure-title">Como uma falha pode ser tratada</h4>
-                  <ul>
-                    <li>O destino não respondeu, então o registro não é descartado.</li>
-                    <li>Ele fica marcado como pendente, com o motivo anotado.</li>
-                    <li>Uma nova tentativa pode ser agendada, por exemplo após 1, 5 e 15 minutos.</li>
-                    <li>Se a falha continuar, alguém da equipe é avisado para agir.</li>
-                  </ul>
-                  <button type="button" id="lab-retry" class="lab-retry" aria-disabled="true">Simular nova tentativa</button>
+
+        <div class="gallery-panel" id="panel-automacao" role="tabpanel" aria-labelledby="tab-automacao" data-gallery-panel="automacao">
+          <div class="panel-intro"><p>Documentos recebidos são lidos, conferidos e lançados no controle financeiro. O que foge da regra vai para revisão.</p><a class="text-action" href="#contato" data-interest="Automação de processos internos" data-event="click_diagnostico" data-cta-location="demo_automation">Quero automatizar algo assim <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+          <div class="app-window">
+            <div class="app-window-bar" aria-hidden="true"><i></i><i></i><i></i><span>Automação · Documentos financeiros</span></div>
+            <div class="runner" id="process-runner" data-state="idle">
+              <div class="runner-head">
+                <dl class="runner-counters">
+                  <div><dt>Recebidos</dt><dd data-runner-count="received">5</dd></div>
+                  <div><dt>Lançados</dt><dd data-runner-count="done">0</dd></div>
+                  <div data-kind="review"><dt>Para revisão</dt><dd data-runner-count="review">0</dd></div>
+                </dl>
+                <div class="runner-actions" data-runner-js hidden>
+                  <button type="button" class="runner-run" id="runner-run"><span aria-hidden="true">▶</span> <span id="runner-run-label">Executar automação</span></button>
+                  <button type="button" class="runner-restart" id="runner-restart" aria-disabled="true"><span aria-hidden="true">↺</span> Reiniciar</button>
                 </div>
               </div>
-              <p id="lab-message" class="lab-message">Escolha uma ação para ver o caminho da informação.</p>
-              <p id="lab-status" class="lab-sr" role="status"></p>
-            </section>
+              <div class="runner-board">
+                <div class="runner-col">
+                  <p class="runner-col-label"><svg class="icon" aria-hidden="true"><use href="#i-message"/></svg>Origem · e-mail de documentos</p>
+                  <ol class="runner-items" aria-label="Documentos recebidos">
+                    <li data-runner-item="0" data-state="waiting"><strong>NF 2231</strong><span>Fornecedor Alfa</span></li>
+                    <li data-runner-item="1" data-state="waiting"><strong>Pedido 1051</strong><span>Loja Centro</span></li>
+                    <li data-runner-item="2" data-state="waiting"><strong>Boleto 778</strong><span>Conta de energia</span></li>
+                    <li data-runner-item="3" data-state="waiting" data-review="Valor diferente do pedido de compra."><strong>NF 2232</strong><span>Fornecedor Beta</span></li>
+                    <li data-runner-item="4" data-state="waiting"><strong>Pedido 1052</strong><span>Loja virtual</span></li>
+                  </ol>
+                </div>
+                <div class="runner-col runner-core">
+                  <p class="runner-col-label"><svg class="icon" aria-hidden="true"><use href="#i-gear"/></svg>Automação · regras</p>
+                  <div class="runner-current" aria-hidden="true"><span class="runner-current-name" id="runner-current">Aguardando execução</span><span class="runner-bar"><i></i></span></div>
+                  <ol class="runner-rules" aria-label="Regras aplicadas a cada documento">
+                    <li data-runner-rule="0">Ler os dados do documento</li>
+                    <li data-runner-rule="1">Conferir valor e vencimento</li>
+                    <li data-runner-rule="2">Classificar e lançar</li>
+                  </ol>
+                </div>
+                <div class="runner-col">
+                  <p class="runner-col-label"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Destino · controle financeiro</p>
+                  <ol class="runner-rows" aria-label="Lançamentos no controle financeiro">
+                    <li data-runner-row="0" data-state="empty"><span>NF 2231</span><span>R$ 1.240,00</span><span class="runner-pill">Lançado</span></li>
+                    <li data-runner-row="1" data-state="empty"><span>Pedido 1051</span><span>R$ 460,00</span><span class="runner-pill">Lançado</span></li>
+                    <li data-runner-row="2" data-state="empty"><span>Boleto 778</span><span>R$ 389,90</span><span class="runner-pill">Lançado</span></li>
+                    <li data-runner-row="3" data-state="empty" data-kind="review"><span>NF 2232</span><span>R$ 2.115,00</span><span class="runner-pill">Revisar</span></li>
+                    <li data-runner-row="4" data-state="empty"><span>Pedido 1052</span><span>R$ 180,00</span><span class="runner-pill">Lançado</span></li>
+                  </ol>
+                </div>
+              </div>
+              <p class="runner-message" id="runner-message">5 documentos aguardando. Execute a automação para ver cada etapa.</p>
+              <p class="lab-sr" id="runner-status" role="status"></p>
+            </div>
           </div>
-          <p class="lab-note">Simulação educativa com dados fictícios, sem conexão com sistemas reais. Validações, novas tentativas e acompanhamento de falhas são definidos em cada projeto, de acordo com o processo e as ferramentas envolvidas.</p>
-          <noscript><p class="lab-note">Outros exemplos: cadastro de clientes para o CRM, pedidos para o estoque, formulário para o sistema interno e documentos para a organização de registros.</p></noscript>
+        </div>
+
+        <div class="gallery-panel" id="panel-gestao" role="tabpanel" aria-labelledby="tab-gestao" data-gallery-panel="gestao">
+          <div class="panel-intro"><p>Indicadores, gráfico e registros vêm da mesma base. Filtre por período, situação ou categoria.</p><a class="text-action" href="#contato" data-interest="Sistemas sob medida" data-event="click_diagnostico" data-cta-location="demo_gallery_dashboard">Quero um sistema assim <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+          <div class="app-window">
+            <div class="app-window-bar" aria-hidden="true"><i></i><i></i><i></i><span>Sistema de gestão · Painel</span></div>
+            <div class="dashboard-panel" id="dashboard-panel" data-scenario="planilhas">
+              <div class="dash-titlebar"><h3 id="dashboard-title">Controle de pedidos</h3><div class="dash-meta"><span class="dash-badge">Dados demonstrativos</span><span class="dash-sync" data-dash-sync><span class="dash-sync-dot" aria-hidden="true"></span>Atualização simulada · dia 30</span></div></div>
+              <div class="dash-toolbar">
+                <div class="dash-tabs" role="group" aria-label="Processo exibido no painel">
+                  <button type="button" data-dash-scenario="planilhas" aria-pressed="true">Pedidos</button>
+                  <button type="button" data-dash-scenario="documentos" aria-pressed="false">Documentos</button>
+                  <button type="button" data-dash-scenario="atendimento" aria-pressed="false">Atendimento</button>
+                </div>
+                <div class="dash-period" role="group" aria-label="Período">
+                  <button type="button" data-dash-period="semana" aria-pressed="true">Semana</button>
+                  <button type="button" data-dash-period="mes" aria-pressed="false">Mês</button>
+                </div>
+              </div>
+              <div id="dashboard-app" class="dash-body"><noscript><p class="dash-noscript">Ative o JavaScript para explorar o painel.</p></noscript></div>
+              <div class="dash-footer">
+                <p>Nenhum número representa resultado de cliente. Cada painel é definido a partir do processo da empresa.</p>
+                <a class="btn btn-primary" href="#contato" data-dash-cta data-event="click_diagnostico" data-cta-location="demo_dashboard">Quero um painel para meu processo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-panel" id="integracoes-lab" role="tabpanel" aria-labelledby="tab-integracao" data-gallery-panel="integracao">
+          <div class="panel-intro"><p>Selecione uma etapa para ver o que ela recebe, transforma e envia. Simule também uma falha.</p><a class="text-action" href="#contato" data-interest="Integração de sistemas" data-event="click_diagnostico" data-cta-location="demo_integrations">Quero integrar meus sistemas <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+          <div class="app-window app-window-dark integrations-lab">
+            <div class="app-window-bar" aria-hidden="true"><i></i><i></i><i></i><span>Integrações · Caminho da informação</span></div>
+            <div class="lab" id="integration-lab" data-example="financeiro" data-state="waiting" data-mode="idle">
+              <div class="lab-top">
+                <div class="lab-examples" role="group" aria-label="Exemplos de integração" data-lab-js>
+                  <button type="button" data-lab-example="financeiro" aria-pressed="true" aria-label="Pedidos para o financeiro">Pedidos → Financeiro</button>
+                  <button type="button" data-lab-example="clientes" aria-pressed="false" aria-label="Clientes para o CRM">Clientes → CRM</button>
+                  <button type="button" data-lab-example="estoque" aria-pressed="false" aria-label="Pedidos para o estoque">Pedidos → Estoque</button>
+                  <button type="button" data-lab-example="formulario" aria-pressed="false" aria-label="Formulário para o sistema interno">Formulário → Sistema interno</button>
+                  <button type="button" data-lab-example="documentos" aria-pressed="false" aria-label="Documentos para a organização de registros">Documentos → Registros</button>
+                </div>
+                <span class="demo-label lab-label">SIMULAÇÃO</span>
+              </div>
+              <ol class="lab-diagram" aria-label="Caminho da informação">
+                <li class="lab-step"><div class="lab-node" data-lab-node="0" data-state="waiting"><span class="lab-node-icon"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg></span><span class="lab-node-role">Origem</span><strong class="lab-node-name">Sistema de pedidos</strong><span class="lab-node-function">Registra cada venda</span><span class="lab-node-state"><i aria-hidden="true"></i><span>Aguardando</span></span></div></li>
+                <li class="lab-step"><span class="lab-link" data-lab-link="0" data-state="idle" aria-hidden="true"><svg class="lab-wire" focusable="false"><line class="wire-h" x1="0" y1="50%" x2="100%" y2="50%"/><line class="wire-v" x1="50%" y1="0" x2="50%" y2="100%"/></svg><i class="lab-pulse"></i></span><div class="lab-node" data-lab-node="1" data-kind="core" data-state="waiting"><span class="lab-node-icon"><svg class="icon" aria-hidden="true"><use href="#i-gear"/></svg></span><span class="lab-node-role">Regras</span><strong class="lab-node-name">Automação Luminor</strong><span class="lab-node-function">Valida e organiza os dados</span><span class="lab-node-state"><i aria-hidden="true"></i><span>Aguardando</span></span></div></li>
+                <li class="lab-step"><span class="lab-link" data-lab-link="1" data-state="idle" aria-hidden="true"><svg class="lab-wire" focusable="false"><line class="wire-h" x1="0" y1="50%" x2="100%" y2="50%"/><line class="wire-v" x1="50%" y1="0" x2="50%" y2="100%"/></svg><i class="lab-pulse"></i></span><div class="lab-node" data-lab-node="2" data-state="waiting"><span class="lab-node-icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span><span class="lab-node-role">Destino</span><strong class="lab-node-name">Controle financeiro</strong><span class="lab-node-function">Registra o valor a receber</span><span class="lab-node-state"><i aria-hidden="true"></i><span>Aguardando</span></span></div></li>
+                <li class="lab-step"><span class="lab-link" data-lab-link="2" data-state="idle" aria-hidden="true"><svg class="lab-wire" focusable="false"><line class="wire-h" x1="0" y1="50%" x2="100%" y2="50%"/><line class="wire-v" x1="50%" y1="0" x2="50%" y2="100%"/></svg><i class="lab-pulse"></i></span><div class="lab-node" data-lab-node="3" data-state="waiting"><span class="lab-node-icon"><svg class="icon" aria-hidden="true"><use href="#i-trend"/></svg></span><span class="lab-node-role">Consulta</span><strong class="lab-node-name">Relatórios</strong><span class="lab-node-function">Mostra a visão consolidada</span><span class="lab-node-state"><i aria-hidden="true"></i><span>Aguardando</span></span></div></li>
+              </ol>
+              <div class="lab-bottom">
+                <section class="lab-card lab-detail" id="lab-detail" aria-label="Detalhes da etapa selecionada">
+                  <span class="lab-kicker">REGRAS · O QUE ACONTECE AQUI</span>
+                  <h3>Automação Luminor</h3>
+                  <dl><div><dt>Recebe</dt><dd>Cliente, itens, valor e forma de pagamento do pedido.</dd></div><div><dt>Transforma</dt><dd>Confere o valor e monta o lançamento a receber no formato do financeiro.</dd></div><div><dt>Envia para</dt><dd>Lançamento para o controle financeiro.</dd></div><div><dt>Validações</dt><dd>Valor maior que zero, cliente cadastrado e pedido ainda não lançado.</dd></div></dl>
+                </section>
+                <section class="lab-card lab-sim" aria-labelledby="lab-sim-title">
+                  <div class="lab-sim-head">
+                    <h3 id="lab-sim-title">Simulação passo a passo</h3>
+                    <p class="lab-record"><span>Registro: <strong id="lab-record-name">Pedido #1050 · R$ 460,00</strong></span> <span id="lab-record-state" class="lab-record-state" data-state="waiting">Aguardando envio</span></p>
+                  </div>
+                  <div class="lab-actions" data-lab-js>
+                    <button type="button" id="lab-run" class="lab-run">Simular integração</button>
+                    <button type="button" id="lab-failure" class="lab-fail">Ver como uma falha é tratada</button>
+                  </div>
+                  <div class="lab-layers">
+                    <ol id="lab-timeline" class="lab-layer lab-timeline" aria-label="Etapas do registro">
+                      <li data-lab-row="0" data-state="waiting"><span class="lab-row-mark" aria-hidden="true"></span><span>Pedido #1050 confirmado no sistema de pedidos.</span></li>
+                      <li data-lab-row="1" data-state="waiting"><span class="lab-row-mark" aria-hidden="true"></span><span>Automação confere o valor e monta o lançamento.</span></li>
+                      <li data-lab-row="2" data-state="waiting"><span class="lab-row-mark" aria-hidden="true"></span><span>Controle financeiro registra o valor a receber.</span></li>
+                      <li data-lab-row="3" data-state="waiting"><span class="lab-row-mark" aria-hidden="true"></span><span>Relatórios atualizados com o novo pedido.</span></li>
+                    </ol>
+                    <div class="lab-layer lab-failure" aria-labelledby="lab-failure-title">
+                      <h4 id="lab-failure-title">Como uma falha pode ser tratada</h4>
+                      <ul>
+                        <li>O destino não respondeu, então o registro não é descartado.</li>
+                        <li>Ele fica marcado como pendente, com o motivo anotado.</li>
+                        <li>Uma nova tentativa pode ser agendada, por exemplo após 1, 5 e 15 minutos.</li>
+                        <li>Se a falha continuar, alguém da equipe é avisado para agir.</li>
+                      </ul>
+                      <button type="button" id="lab-retry" class="lab-retry" aria-disabled="true">Simular nova tentativa</button>
+                    </div>
+                  </div>
+                  <p id="lab-message" class="lab-message">Escolha uma ação para ver o caminho da informação.</p>
+                  <p id="lab-status" class="lab-sr" role="status"></p>
+                </section>
+              </div>
+              <p class="lab-note">Simulação educativa com dados fictícios, sem conexão com sistemas reais. Validações, novas tentativas e acompanhamento de falhas são definidos em cada projeto, de acordo com o processo e as ferramentas envolvidas.</p>
+              <noscript><p class="lab-note">Outros exemplos: cadastro de clientes para o CRM, pedidos para o estoque, formulário para o sistema interno e documentos para a organização de registros.</p></noscript>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
-
-    <section id="metodo" class="method section-pad"><div class="wrap"><div class="section-heading"><div><div class="overline"><span class="mini-line"></span> COMO FUNCIONA</div><h2>Primeiro, seu processo.<br><span class="gradient-text">Depois, a tecnologia.</span></h2></div><p>A solução nasce do entendimento do seu negócio. Mapeamos a rotina e construímos o que faz sentido para quem trabalha nela.</p></div><div class="method-grid"><article><span class="method-index">01</span><div class="method-icon"><svg class="icon"><use href="#i-message"/></svg></div><h3>Entendemos seu negócio</h3><p>Conhecemos a rotina, as pessoas envolvidas, as ferramentas e os gargalos do dia a dia.</p></article><article><span class="method-index">02</span><div class="method-icon"><svg class="icon"><use href="#i-grid"/></svg></div><h3>Identificamos o que pode melhorar</h3><p>Mapeamos as tarefas manuais e definimos onde automação, sistema ou integração fazem diferença.</p></article><article><span class="method-index">03</span><div class="method-icon"><svg class="icon"><use href="#i-gear"/></svg></div><h3>Desenvolvemos a solução</h3><p>Construímos a aplicação, a automação ou a integração de acordo com o processo e o escopo combinado.</p></article><article><span class="method-index">04</span><div class="method-icon"><svg class="icon"><use href="#i-check"/></svg></div><h3>Implantamos e acompanhamos</h3><p>Testamos o fluxo, orientamos quem vai usar e acompanhamos os ajustes depois da entrega.</p></article></div></div></section>
-    <section id="processos" class="process-examples section-pad"><div class="wrap"><div class="section-heading"><div><div class="overline"><span class="mini-line"></span> EXEMPLOS PRÁTICOS</div><h2>O que se repete aí<br><span class="muted">pode virar automação.</span></h2></div><p>Situações comuns no dia a dia de uma empresa e o que cada uma pode virar quando o processo ganha a ferramenta certa.</p></div><div class="examples-grid"><article class="example-card"><span class="example-index">EXEMPLO 01</span><h3>Pedidos</h3><div class="example-before"><h4>Antes</h4><p>Pedidos registrados manualmente, entre mensagens, cadernos e planilhas.</p></div><div class="example-after"><h4>Depois</h4><p>Sistema de pedidos centralizado, com situação e histórico de cada venda.</p></div><a class="text-action" href="#contato" data-interest="Sistemas sob medida">Tenho um processo assim <svg class="icon"><use href="#i-arrow"/></svg></a></article><article class="example-card"><span class="example-index">EXEMPLO 02</span><h3>Relatórios</h3><div class="example-before"><h4>Antes</h4><p>Relatórios montados à mão em planilhas, toda semana, a partir de várias fontes.</p></div><div class="example-after"><h4>Depois</h4><p>Painel com os dados organizados e atualizados para acompanhar a operação.</p></div><a class="text-action" href="#contato" data-interest="Automação de processos internos">Tenho um processo assim <svg class="icon"><use href="#i-arrow"/></svg></a></article><article class="example-card"><span class="example-index">EXEMPLO 03</span><h3>Informações entre sistemas</h3><div class="example-before"><h4>Antes</h4><p>Informações copiadas de uma plataforma para outra, com risco de erro e atraso.</p></div><div class="example-after"><h4>Depois</h4><p>Integração automatizada que envia os dados para onde precisam estar.</p></div><a class="text-action" href="#contato" data-interest="Integração de sistemas">Tenho um processo assim <svg class="icon"><use href="#i-arrow"/></svg></a></article><article class="example-card"><span class="example-index">EXEMPLO 04</span><h3>Atendimento</h3><div class="example-before"><h4>Antes</h4><p>Atendimento sem organização: pedidos de clientes se perdem nas conversas.</p></div><div class="example-after"><h4>Depois</h4><p>Solicitações registradas com histórico e uma pessoa responsável por cada uma.</p></div><a class="text-action" href="#contato" data-interest="Atendimento pelo WhatsApp">Tenho um processo assim <svg class="icon"><use href="#i-arrow"/></svg></a></article></div><p class="examples-note">Reconheceu alguma dessas situações? Conte como o trabalho acontece na sua empresa.<small>Exemplos ilustrativos. Não representam resultados de clientes específicos.</small></p></div></section>
-    <!-- Portfólio: publicar somente projetos com autorização de divulgação, capturas reais e resultados comprovados.
-         Para ativar, mova o conteúdo do template para fora dele e preencha um .portfolio-card por projeto. -->
-    <template id="portfolio-template"><section id="projetos" class="portfolio section-pad"><div class="wrap"><div class="section-heading"><div><div class="overline"><span class="mini-line"></span> PROJETOS DESENVOLVIDOS</div><h2>Soluções em uso<br><span class="muted">no dia a dia de quem trabalha.</span></h2></div><p>Projetos publicados com autorização dos clientes.</p></div><div class="portfolio-grid"><article class="portfolio-card"><figure class="portfolio-shot"><img src="" alt="" loading="lazy" width="1600" height="1000"></figure><div class="portfolio-body"><span class="portfolio-tag">Categoria do negócio</span><h3>Nome do projeto</h3><dl><div><dt>Problema</dt><dd></dd></div><div><dt>Solução</dt><dd></dd></div></dl><ul class="portfolio-features"><li></li></ul><p class="portfolio-result"></p></div></article></div></div></section></template>
-
-    <section id="simulador" class="team-section section-pad"><div class="wrap"><div class="section-heading"><div><div class="overline"><span class="mini-line"></span> SUA EQUIPE, COM MAIS FOCO</div><h2>Do corre-corre<br><span class="gradient-text">ao trabalho com foco.</span></h2></div><p>Quando a informação se organiza e o que se repete vira automação, sua equipe pode se concentrar no que precisa de atenção humana.</p></div>
-      <div class="team-experience" id="team-experience" data-phase="before" data-playing="false">
-        <div class="team-scene-header"><div><span class="team-scene-kicker">UMA ROTINA, DUAS FORMAS DE TRABALHAR</span><h3 id="team-scene-title">Muita correria. Pouca clareza.</h3></div><span class="demo-label">ANTES E DEPOIS</span></div>
-        <div class="team-scene" role="img" aria-label="Cinco pessoas lidam com planilhas, mensagens e documentos espalhados." id="team-scene">
-          <svg viewBox="0 0 800 390" aria-hidden="true" class="team-illustration"><defs><linearGradient id="av-light-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".62"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient><radialGradient id="av-shade-g" cx=".38" cy=".3" r=".85"><stop offset=".45" stop-color="#160b2e" stop-opacity="0"/><stop offset="1" stop-color="#160b2e" stop-opacity=".38"/></radialGradient><pattern id="office-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="currentColor"/></pattern></defs>
-            <rect class="office-floor" x="18" y="18" width="764" height="354" rx="28"/>
-            <rect class="office-grid" x="18" y="18" width="764" height="354" rx="28" fill="url(#office-grid)"/>
-            <g class="chaos-paths"><path d="M100 110 Q700 30 600 290T230 100 M200 300 Q20 20 690 160 M140 210 Q500 370 720 70"/></g>
-            <g class="office-zones"><rect x="55" y="55" width="205" height="105" rx="18"/><rect x="540" y="55" width="205" height="105" rx="18"/><rect x="55" y="240" width="205" height="105" rx="18"/><rect x="540" y="240" width="205" height="105" rx="18"/><rect x="300" y="265" width="200" height="90" rx="18"/></g>
-            <g class="office-connections"><path d="M160 125 400 185 640 125 M160 300 400 185 640 300 M400 310V185"/></g>
-            <g class="team-hub"><rect x="330" y="145" width="140" height="75" rx="20"/><circle cx="353" cy="166" r="4"/><path d="M348 183h24m-24 8h18 M399 167h44m-44 12h32m-32 12h38"/><path class="hub-check" d="m386 201 5 5 9-11"/></g>
-            <g class="paper paper-1"><rect x="0" y="0" width="58" height="44" rx="7"/><path d="M9 12h39M9 22h39M9 32h26M24 8v28"/></g><g class="paper paper-2"><rect width="58" height="44" rx="7"/><path d="M9 12h39M9 22h31M9 32h25"/></g><g class="paper paper-3"><rect width="58" height="44" rx="7"/><path d="M9 12h39M9 22h39M9 32h26M24 8v28"/></g>
-            <g class="paper paper-4"><rect width="58" height="44" rx="7"/><path d="M9 12h39M9 22h31M9 32h25"/></g><g class="paper paper-5"><rect width="58" height="44" rx="7"/><path d="M9 12h39M9 22h39M9 32h26M24 8v28"/></g>
-            <g class="chaos-bubbles"><g transform="translate(40 30)"><rect width="135" height="28" rx="14"/><text x="67" y="18">Qual é a versão?</text></g><g transform="translate(618 28)"><rect width="160" height="28" rx="14"/><text x="80" y="18">Quem ficou com isso?</text></g><g transform="translate(295 325)"><rect width="170" height="28" rx="14"/><text x="85" y="18">Cadê aquele arquivo?</text></g></g>
-            <g class="office-desks"><g transform="translate(155 130)"><rect x="-48" y="-4" width="96" height="12" rx="5"/><path d="M-38 8V29M38 8V29"/><rect class="monitor" x="-23" y="-37" width="46" height="29" rx="4"/></g><g transform="translate(640 130)"><rect x="-48" y="-4" width="96" height="12" rx="5"/><path d="M-38 8V29M38 8V29"/><rect class="monitor" x="-23" y="-37" width="46" height="29" rx="4"/></g><g transform="translate(155 310)"><rect x="-48" y="-4" width="96" height="12" rx="5"/><path d="M-38 8V29M38 8V29"/><rect class="monitor" x="-23" y="-37" width="46" height="29" rx="4"/></g><g transform="translate(640 310)"><rect x="-48" y="-4" width="96" height="12" rx="5"/><path d="M-38 8V29M38 8V29"/><rect class="monitor" x="-23" y="-37" width="46" height="29" rx="4"/></g><g transform="translate(400 335)"><rect x="-48" y="-4" width="96" height="12" rx="5"/><path d="M-38 8V29M38 8V29"/><rect class="monitor" x="-23" y="-37" width="46" height="29" rx="4"/></g></g>
-            <g class="team-person person-1"><g class="person-scale"><ellipse class="person-shadow" cx="0" cy="29" rx="21" ry="5"/><g class="person-body"><g class="av-torso"><path class="av-fill" d="M-22 25C-22 6-12-3 0-3S22 6 22 25Q0 31-22 25Z"/><path class="av-shade" d="M-22 25C-22 6-12-3 0-3S22 6 22 25Q0 31-22 25Z"/><path class="av-light" d="M-22 25C-22 6-12-3 0-3S22 6 22 25Q0 31-22 25Z"/><ellipse class="av-shine" cx="9" cy="8" rx="5.5" ry="2.2" transform="rotate(-38 9 8)"/><ellipse class="av-shine soft" cx="-10" cy="14" rx="7" ry="2.5" transform="rotate(-24 -10 14)"/></g><g class="av-head"><circle class="av-fill" cx="0" cy="-17" r="13"/><circle class="av-shade" cx="0" cy="-17" r="13"/><circle class="av-light" cx="0" cy="-17" r="13"/><ellipse class="av-shine" cx="5" cy="-24" rx="4.2" ry="2" transform="rotate(35 5 -24)"/><ellipse class="av-shine soft" cx="-6" cy="-14" rx="3.2" ry="5" transform="rotate(25 -6 -14)"/></g></g><g class="av-badge badge-warn"><circle cx="17" cy="-32" r="7.5"/><text x="17" y="-29">!</text></g><g class="av-badge badge-ok"><circle cx="17" cy="-32" r="7.5"/><path d="m13.5-32 2.7 2.8 4.6-5.4"/></g></g></g><g class="team-person person-2"><g class="person-scale"><ellipse class="person-shadow" cx="0" cy="29" rx="21" ry="5"/><g class="person-body"><g class="av-torso"><path class="av-fill" d="M-22 25C-22 6-12-3 0-3S22 6 22 25Q0 31-22 25Z"/><path class="av-shade" d="M-22 25C-22 6-12-3 0-3S22 6 22 25Q0 31-22 25Z"/><path class="av-light" d="M-22 25C-22 6-12-3 0-3S22 6 22 25Q0 31-22 25Z"/><ellipse class="av-shine" cx="9" cy="8" rx="5.5" ry="2.2" transform="rotate(-38 9 8)"/><ellipse class="av-shine soft" cx="-10" cy="14" rx="7" ry="2.5" transform="rotate(-24 -10 14)"/></g><g class="av-head"><circle class="av-fill" cx="0" cy="-17" r="13"/><circle class="av-shade" cx="0" cy="-17" r="13"/><circle class="av-light" cx="0" cy="-17" r="13"/><ellipse class="av-shine" cx="5" cy="-24" rx="4.2" ry="2" transform="rotate(35 5 -24)"/><ellipse class="av-shine soft" cx="-6" cy="-14" rx="3.2" ry="5" transform="rotate(25 -6 -14)"/></g></g><g class="av-badge badge-warn"><circle cx="17" cy="-32" r="7.5"/><text x="17" y="-29">?</text></g><g class="av-badge badge-ok"><circle cx="17" cy="-32" r="7.5"/><path d="m13.5-32 2.7 2.8 4.6-5.4"/></g></g></g><g class="team-person person-3"><g class="person-scale"><ellipse class="person-shadow" cx="0" cy="29" rx="21" ry="5"/><g class="person-body"><g class="av-torso"><path class="av-fill" d="M-22 25C-22 6-12-3 0-3S22 6 22 25Q0 31-22 25Z"/><path class="av-shade" d="M-22 25C-22 6-12-3 0-3S22 6 22 25Q0 31-22 25Z"/><path class="av-light" d="M-22 25C-22 6-12-3 0-3S22 6 22 25Q0 31-22 25Z"/><ellipse class="av-shine" cx="9" cy="8" rx="5.5" ry="2.2" transform="rotate(-38 9 8)"/><ellipse class="av-shine soft" cx="-10" cy="14" rx="7" ry="2.5" transform="rotate(-24 -10 14)"/></g><g class="av-head"><circle class="av-fill" cx="0" cy="-17" r="13"/><circle class="av-shade" cx="0" cy="-17" r="13"/><circle class="av-light" cx="0" cy="-17" r="13"/><ellipse class="av-shine" cx="5" cy="-24" rx="4.2" ry="2" transform="rotate(35 5 -24)"/><ellipse class="av-shine soft" cx="-6" cy="-14" rx="3.2" ry="5" transform="rotate(25 -6 -14)"/></g></g><g class="av-badge badge-warn"><circle cx="17" cy="-32" r="7.5"/><text x="17" y="-29">!</text></g><g class="av-badge badge-ok"><circle cx="17" cy="-32" r="7.5"/><path d="m13.5-32 2.7 2.8 4.6-5.4"/></g></g></g><g class="team-person person-4"><g class="person-scale"><ellipse class="person-shadow" cx="0" cy="29" rx="21" ry="5"/><g class="person-body"><g class="av-torso"><path class="av-fill" d="M-22 25C-22 6-12-3 0-3S22 6 22 25Q0 31-22 25Z"/><path class="av-shade" d="M-22 25C-22 6-12-3 0-3S22 6 22 25Q0 31-22 25Z"/><path class="av-light" d="M-22 25C-22 6-12-3 0-3S22 6 22 25Q0 31-22 25Z"/><ellipse class="av-shine" cx="9" cy="8" rx="5.5" ry="2.2" transform="rotate(-38 9 8)"/><ellipse class="av-shine soft" cx="-10" cy="14" rx="7" ry="2.5" transform="rotate(-24 -10 14)"/></g><g class="av-head"><circle class="av-fill" cx="0" cy="-17" r="13"/><circle class="av-shade" cx="0" cy="-17" r="13"/><circle class="av-light" cx="0" cy="-17" r="13"/><ellipse class="av-shine" cx="5" cy="-24" rx="4.2" ry="2" transform="rotate(35 5 -24)"/><ellipse class="av-shine soft" cx="-6" cy="-14" rx="3.2" ry="5" transform="rotate(25 -6 -14)"/></g></g><g class="av-badge badge-warn"><circle cx="17" cy="-32" r="7.5"/><text x="17" y="-29">?</text></g><g class="av-badge badge-ok"><circle cx="17" cy="-32" r="7.5"/><path d="m13.5-32 2.7 2.8 4.6-5.4"/></g></g></g><g class="team-person person-5"><g class="person-scale"><ellipse class="person-shadow" cx="0" cy="29" rx="21" ry="5"/><g class="person-body"><g class="av-torso"><path class="av-fill" d="M-22 25C-22 6-12-3 0-3S22 6 22 25Q0 31-22 25Z"/><path class="av-shade" d="M-22 25C-22 6-12-3 0-3S22 6 22 25Q0 31-22 25Z"/><path class="av-light" d="M-22 25C-22 6-12-3 0-3S22 6 22 25Q0 31-22 25Z"/><ellipse class="av-shine" cx="9" cy="8" rx="5.5" ry="2.2" transform="rotate(-38 9 8)"/><ellipse class="av-shine soft" cx="-10" cy="14" rx="7" ry="2.5" transform="rotate(-24 -10 14)"/></g><g class="av-head"><circle class="av-fill" cx="0" cy="-17" r="13"/><circle class="av-shade" cx="0" cy="-17" r="13"/><circle class="av-light" cx="0" cy="-17" r="13"/><ellipse class="av-shine" cx="5" cy="-24" rx="4.2" ry="2" transform="rotate(35 5 -24)"/><ellipse class="av-shine soft" cx="-6" cy="-14" rx="3.2" ry="5" transform="rotate(25 -6 -14)"/></g></g><g class="av-badge badge-warn"><circle cx="17" cy="-32" r="7.5"/><text x="17" y="-29">!</text></g><g class="av-badge badge-ok"><circle cx="17" cy="-32" r="7.5"/><path d="m13.5-32 2.7 2.8 4.6-5.4"/></g></g></g><g class="work-devices"><g transform="translate(155 130)"><rect class="work-screen" x="14" y="-40" width="47" height="31" rx="4"/><path class="screen-content" d="M21-31h23m-23 7h32m-32 7h17"/><path class="screen-stand" d="M37-9v7m-9 0h18"/><rect class="work-keyboard" x="-14" y="-1" width="41" height="6" rx="2"/><path class="keyboard-keys" d="M-9 2h30"/></g><g transform="translate(640 130)"><rect class="work-screen" x="14" y="-40" width="47" height="31" rx="4"/><path class="screen-content" d="M21-31h23m-23 7h32m-32 7h17"/><path class="screen-stand" d="M37-9v7m-9 0h18"/><rect class="work-keyboard" x="-14" y="-1" width="41" height="6" rx="2"/><path class="keyboard-keys" d="M-9 2h30"/></g><g transform="translate(155 310)"><rect class="work-screen" x="14" y="-40" width="47" height="31" rx="4"/><path class="screen-content" d="M21-31h23m-23 7h32m-32 7h17"/><path class="screen-stand" d="M37-9v7m-9 0h18"/><rect class="work-keyboard" x="-14" y="-1" width="41" height="6" rx="2"/><path class="keyboard-keys" d="M-9 2h30"/></g><g transform="translate(640 310)"><rect class="work-screen" x="14" y="-40" width="47" height="31" rx="4"/><path class="screen-content" d="M21-31h23m-23 7h32m-32 7h17"/><path class="screen-stand" d="M37-9v7m-9 0h18"/><rect class="work-keyboard" x="-14" y="-1" width="41" height="6" rx="2"/><path class="keyboard-keys" d="M-9 2h30"/></g><g transform="translate(400 335)"><rect class="work-screen" x="14" y="-40" width="47" height="31" rx="4"/><path class="screen-content" d="M21-31h23m-23 7h32m-32 7h17"/><path class="screen-stand" d="M37-9v7m-9 0h18"/><rect class="work-keyboard" x="-14" y="-1" width="41" height="6" rx="2"/><path class="keyboard-keys" d="M-9 2h30"/></g></g><g class="focus-badges"><g transform="translate(75 162)"><rect width="115" height="25" rx="12"/><text x="57" y="16">Dados reunidos ✓</text></g><g transform="translate(555 162)"><rect width="150" height="25" rx="12"/><text x="75" y="16">Atendimento com foco ✓</text></g><g transform="translate(307 356)"><rect width="186" height="25" rx="12"/><text x="93" y="16">Rotinas automatizadas ✓</text></g></g>
-          </svg>
-          <div class="team-hub-label">AUTOMAÇÃO SOB MEDIDA</div>
-        </div>
-        <div class="team-controls"><div role="group" aria-label="Compare a rotina da equipe"><button type="button" data-team-state="before" aria-pressed="true">Antes</button><button type="button" data-team-state="after" aria-pressed="false">Depois</button></div><p id="team-status" role="status">Informações dispersas, interrupções e tarefas repetitivas.</p><button type="button" class="demo-play" id="team-play">Ver a mudança <span aria-hidden="true">▶</span></button></div>
-      </div>
-      <div class="team-benefits"><div><svg class="icon"><use href="#i-layer"/></svg><strong>Informações centralizadas</strong><p>Todo mundo encontra o que precisa.</p></div><div><svg class="icon"><use href="#i-gear"/></svg><strong>Menos tarefas repetitivas</strong><p>A automação cuida das etapas combinadas.</p></div><div><svg class="icon"><use href="#i-check"/></svg><strong>Equipe com foco</strong><p>Mais atenção às decisões e às pessoas.</p></div></div>
-      <div class="team-bottom"><p>Toda mudança começa pelo entendimento da sua rotina.</p><a href="#contato" class="btn btn-primary" data-interest="Automação de processos internos">Quero organizar minha operação <svg class="icon"><use href="#i-arrow-up"/></svg></a></div>
     </div></section>
 
-    <section id="diferenciais" class="trust section-pad"><div class="wrap"><div class="section-heading"><div><div class="overline"><span class="mini-line"></span> SOBRE A LUMINOR</div><h2>O software precisa<br><span class="muted">funcionar para quem usa.</span></h2></div><p>A Luminor Software desenvolve sistemas, automações e integrações a partir da rotina de cada empresa. Da primeira conversa à implantação, seguimos estes critérios em cada projeto.</p></div><div class="trust-grid"><article><svg class="icon"><use href="#i-shield"/></svg><h3>Dados sob controle</h3><p>Cada projeto prevê permissões de acesso, proteção das informações e responsabilidades sobre os dados, de acordo com a necessidade do sistema.</p></article><article><svg class="icon"><use href="#i-cpu"/></svg><h3>Integrações planejadas</h3><p>Mapeamos as ferramentas existentes e avaliamos as possibilidades técnicas de conexão antes da implementação.</p></article><article><svg class="icon"><use href="#i-trend"/></svg><h3>Resultado verificável</h3><p>Definimos objetivos e critérios de aceite antes do desenvolvimento, para que seja possível avaliar o que melhorou.</p></article></div></div></section>
+    <template id="portfolio-template"><section id="projetos" class="portfolio section-pad"><div class="wrap"><div class="section-heading"><div><div class="overline"><span class="mini-line"></span> PROJETOS DESENVOLVIDOS</div><h2>Soluções em uso<br><span class="muted">no dia a dia de quem trabalha.</span></h2></div><p>Projetos publicados com autorização dos clientes.</p></div><div class="portfolio-grid"><article class="portfolio-card"><figure class="portfolio-shot"><img src="" alt="" loading="lazy" width="1600" height="1000"></figure><div class="portfolio-body"><span class="portfolio-tag">Categoria do negócio</span><h3>Nome do projeto</h3><dl><div><dt>Problema</dt><dd></dd></div><div><dt>Solução</dt><dd></dd></div></dl><ul class="portfolio-features"><li></li></ul><p class="portfolio-result"></p></div></article></div></div></section></template>
 
-    <section id="faq" class="faq section-pad"><div class="wrap faq-layout"><div><div class="overline"><span class="mini-line"></span> PERGUNTAS FREQUENTES</div><h2>Algumas dúvidas<br><span class="muted">antes de começar.</span></h2><p class="faq-intro">Para qualquer outra questão, nosso diagnóstico inicial é o melhor lugar para conversar sobre o seu cenário.</p></div><div class="faq-items"><details><summary>Como começa um projeto com a Luminor? <svg class="icon"><use href="#i-arrowdown"/></svg></summary><p>Começamos entendendo como sua empresa trabalha: etapas, ferramentas e tarefas que consomem tempo. A partir desse diagnóstico, definimos o que automatizar e criamos uma proposta sob medida.</p></details><details><summary>A Luminor oferece uma plataforma pronta? <svg class="icon"><use href="#i-arrowdown"/></svg></summary><p>Desenvolvemos a solução a partir do processo da sua empresa. Ela pode ser uma automação, uma integração ou uma aplicação sob medida, conforme a necessidade identificada.</p></details><details><summary>Preciso trocar os sistemas que já utilizo? <svg class="icon"><use href="#i-arrowdown"/></svg></summary><p>Não necessariamente. Avaliamos as ferramentas e planilhas existentes e as possibilidades de integração para aproveitar o que já faz parte da sua operação.</p></details><details><summary>Vocês transformam planilhas em aplicações? <svg class="icon"><use href="#i-arrowdown"/></svg></summary><p>Sim. Entendemos o papel das planilhas na rotina, organizamos os dados e desenvolvemos uma aplicação com as funções e os acessos necessários para sua equipe.</p></details><details><summary>O que pode ser automatizado no WhatsApp? <svg class="icon"><use href="#i-arrowdown"/></svg></summary><p>Perguntas frequentes, coleta de informações, triagem e encaminhamento para a equipe são alguns exemplos. Os fluxos e as integrações são definidos para cada empresa, considerando as ferramentas disponíveis e as regras do canal.</p></details><details><summary>Quanto custa e quanto tempo leva? <svg class="icon"><use href="#i-arrowdown"/></svg></summary><p>O investimento e o prazo dependem do processo, das integrações e do escopo. Após entender a operação, definimos a proposta, a implantação e as necessidades de manutenção.</p></details><div class="faq-more"><div><h3>Ainda tem dúvidas?</h3><p>Conte seu cenário e conversamos sobre o seu caso.</p></div><div class="faq-more-actions"><a class="btn btn-primary" href="https://wa.me/5511999890795?text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20automa%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-whatsapp data-cta-location="faq">Falar pelo WhatsApp <svg class="icon"><use href="#i-arrow-up"/></svg></a><a href="#contato" class="text-action" data-event="click_diagnostico" data-cta-location="faq">Usar o formulário <svg class="icon"><use href="#i-arrow"/></svg></a></div></div></div></div></section>
+    <section id="metodo" class="method section-pad"><div class="wrap">
+      <div class="section-heading"><div><div class="overline"><span class="mini-line"></span> COMO FUNCIONA</div><h2>Do diagnóstico<br><span class="gradient-text">à rotina automatizada.</span></h2></div><p>A Luminor Software desenvolve cada solução a partir da rotina da empresa: primeiro o processo, depois a tecnologia.</p></div>
+      <ol class="method-track">
+        <li><span class="method-node" aria-hidden="true"><svg class="icon"><use href="#i-message"/></svg></span><span class="method-index">01</span><h3>Entender</h3><p>Conhecemos a rotina, as pessoas e as ferramentas envolvidas.</p></li>
+        <li><span class="method-node" aria-hidden="true"><svg class="icon"><use href="#i-grid"/></svg></span><span class="method-index">02</span><h3>Mapear</h3><p>Definimos o que automatizar, integrar ou transformar em sistema.</p></li>
+        <li><span class="method-node" aria-hidden="true"><svg class="icon"><use href="#i-gear"/></svg></span><span class="method-index">03</span><h3>Desenvolver</h3><p>Construímos a solução de acordo com o escopo combinado.</p></li>
+        <li><span class="method-node" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span><span class="method-index">04</span><h3>Implantar</h3><p>Testamos, orientamos a equipe e acompanhamos os ajustes.</p></li>
+      </ol>
+      <ul class="method-principles" aria-label="Critérios em cada projeto">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Acessos e dados sob controle</li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-cpu"/></svg>Integrações avaliadas antes de começar</li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-trend"/></svg>Critérios de aceite definidos</li>
+      </ul>
+    </div></section>
 
-    <section id="contato" class="contact section-pad"><div class="wrap contact-layout"><div class="contact-copy"><div class="overline"><span class="mini-line"></span> VAMOS CONVERSAR?</div><h2>Conte o que está tomando tempo da sua equipe. <span class="gradient-text">Vamos encontrar uma solução.</span></h2><p>Diga qual tarefa se repete e quais ferramentas vocês usam. A conversa continua pelo WhatsApp.</p><div class="contact-feature"><span class="circle-check"><svg class="icon"><use href="#i-check"/></svg></span> Diagnóstico orientado ao seu problema</div><div class="contact-feature"><span class="circle-check"><svg class="icon"><use href="#i-check"/></svg></span> Mapeamento de tarefas repetitivas</div><div class="contact-feature"><span class="circle-check"><svg class="icon"><use href="#i-check"/></svg></span> Conversa sobre uma solução sob medida</div><div id="business-contact" class="contact-info"><strong>Informações comerciais</strong><p>Fale com a Luminor pelo WhatsApp ou escreva para <a href="mailto:rafael.valquer@gmail.com">rafael.valquer@gmail.com</a>.</p></div></div><div class="form-box"><div class="form-heading"><div><small>INICIAR CONVERSA</small><h3>Solicitar diagnóstico</h3></div><span>↗</span></div><form id="lead-form" method="post" action="/contato" novalidate><div class="honeypot" aria-hidden="true"><label for="website">Não preencha este campo</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div><div class="form-row"><div class="field"><label for="lead-name">Seu nome *</label><input id="lead-name" name="name" autocomplete="name" maxlength="100" required placeholder="Como podemos chamar você?"></div><div class="field"><label for="lead-company">Empresa *</label><input id="lead-company" name="company" autocomplete="organization" maxlength="120" required placeholder="Nome da empresa"></div></div><div class="form-row"><div class="field"><label for="lead-phone">WhatsApp com DDD *</label><input id="lead-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" required placeholder="(11) 99999-9999"></div><div class="field"><label for="lead-email">E-mail (opcional)</label><input id="lead-email" name="email" type="email" autocomplete="email" maxlength="160" placeholder="voce@empresa.com.br"></div></div><div class="field"><label for="lead-interest">Qual processo você quer melhorar?</label><select id="lead-interest" name="interest"><option value="Ainda estou avaliando">Ainda estou avaliando</option><option>Automação de processos internos</option><option>Sistemas sob medida</option><option>Integração de sistemas</option><option>Atendimento pelo WhatsApp</option><option>Outro processo</option></select></div><div class="field"><label for="lead-problem">Como esse processo funciona hoje? *</label><textarea id="lead-problem" name="problem" rows="4" maxlength="1500" required placeholder="Ex.: minha equipe atualiza o estoque em várias planilhas e isso gera retrabalho..."></textarea></div><div class="consent-line"><input type="checkbox" id="lead-consent" name="consent" required><label for="lead-consent">Autorizo o uso dos dados acima para resposta a esta solicitação, conforme a <a href="#politica-demonstracao" target="_blank" rel="noopener">Política de Privacidade</a>.</label></div><button id="submit-lead" type="button" class="btn btn-primary btn-block">Continuar pelo WhatsApp <svg class="icon"><use href="#i-arrow-up"/></svg></button><div id="form-status" class="form-status" role="status" aria-live="polite"></div><small class="form-note">* Campos obrigatórios. O WhatsApp abrirá com a mensagem preenchida; revise e toque em Enviar para concluir.</small></form><noscript><p>O formulário precisa de JavaScript. Como alternativa, envie um e-mail para <a href="mailto:rafael.valquer@gmail.com">rafael.valquer@gmail.com</a>. O envio pelo WhatsApp só acontece quando você confirma a mensagem no aplicativo.</p></noscript></div></div></section>
-    <dialog id="dashboard-dialog" class="dashboard-dialog" aria-labelledby="dashboard-title" aria-describedby="dashboard-desc">
-      <div class="dash-shell">
-        <header class="dash-titlebar">
-          <h2 id="dashboard-title">Controle de pedidos</h2>
-          <button type="button" class="dash-close" data-dash-close aria-label="Fechar o painel"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
-        </header>
-        <div class="dash-intro">
-          <div class="dash-meta"><span class="dash-badge">Dados demonstrativos</span><span class="dash-sync" data-dash-sync><span class="dash-sync-dot" aria-hidden="true"></span>Atualização simulada · dia 30</span></div>
-          <p id="dashboard-desc">Exemplo de painel montado a partir das informações de um processo. Os números são fictícios e mudam com os filtros.</p>
-        </div>
-        <div class="dash-toolbar">
-          <div class="dash-tabs" role="group" aria-label="Processo exibido no painel">
-            <button type="button" data-dash-scenario="planilhas" aria-pressed="true">Pedidos</button>
-            <button type="button" data-dash-scenario="documentos" aria-pressed="false">Documentos</button>
-            <button type="button" data-dash-scenario="atendimento" aria-pressed="false">Atendimento</button>
-          </div>
-          <div class="dash-period" role="group" aria-label="Período">
-            <button type="button" data-dash-period="semana" aria-pressed="true">Semana</button>
-            <button type="button" data-dash-period="mes" aria-pressed="false">Mês</button>
-          </div>
-        </div>
-        <div id="dashboard-app" class="dash-body"></div>
-        <footer class="dash-footer">
-          <p>Simulação com dados fictícios. Nenhum número representa resultado de cliente; cada painel é definido a partir do processo da empresa.</p>
-          <a class="btn btn-primary" href="#contato" data-dash-cta data-event="click_diagnostico" data-cta-location="demo_dashboard">Quero um painel para meu processo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        </footer>
-      </div>
-    </dialog>
+    <section id="faq" class="faq section-pad"><div class="wrap faq-layout"><div><div class="overline"><span class="mini-line"></span> PERGUNTAS FREQUENTES</div><h2>Dúvidas<br><span class="muted">antes de começar.</span></h2><p class="faq-intro">Não encontrou sua dúvida? Conte seu cenário pelo formulário ou pelo WhatsApp.</p></div><div class="faq-items"><details><summary>Como começa um projeto com a Luminor? <svg class="icon"><use href="#i-arrowdown"/></svg></summary><p>Começamos entendendo como sua empresa trabalha: etapas, ferramentas e tarefas que consomem tempo. A partir desse diagnóstico, definimos o que automatizar e criamos uma proposta sob medida.</p></details><details><summary>A Luminor oferece uma plataforma pronta? <svg class="icon"><use href="#i-arrowdown"/></svg></summary><p>Desenvolvemos a solução a partir do processo da sua empresa. Ela pode ser uma automação, uma integração ou uma aplicação sob medida, conforme a necessidade identificada.</p></details><details><summary>Preciso trocar os sistemas que já utilizo? <svg class="icon"><use href="#i-arrowdown"/></svg></summary><p>Não necessariamente. Avaliamos as ferramentas e planilhas existentes e as possibilidades de integração para aproveitar o que já faz parte da sua operação.</p></details><details><summary>Vocês transformam planilhas em aplicações? <svg class="icon"><use href="#i-arrowdown"/></svg></summary><p>Sim. Entendemos o papel das planilhas na rotina, organizamos os dados e desenvolvemos uma aplicação com as funções e os acessos necessários para sua equipe.</p></details><details><summary>O que pode ser automatizado no WhatsApp? <svg class="icon"><use href="#i-arrowdown"/></svg></summary><p>Perguntas frequentes, coleta de informações, triagem e encaminhamento para a equipe são alguns exemplos. Os fluxos e as integrações são definidos para cada empresa, considerando as ferramentas disponíveis e as regras do canal.</p></details><details><summary>Quanto custa e quanto tempo leva? <svg class="icon"><use href="#i-arrowdown"/></svg></summary><p>O investimento e o prazo dependem do processo, das integrações e do escopo. Após entender a operação, definimos a proposta, a implantação e as necessidades de manutenção.</p></details><div class="faq-more"><div><h3>Ainda tem dúvidas?</h3></div><div class="faq-more-actions"><a class="btn btn-primary" href="https://wa.me/5511999890795?text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20automa%C3%A7%C3%A3o%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-whatsapp data-cta-location="faq">Falar pelo WhatsApp <svg class="icon"><use href="#i-arrow-up"/></svg></a><a href="#contato" class="text-action" data-event="click_diagnostico" data-cta-location="faq">Usar o formulário <svg class="icon"><use href="#i-arrow"/></svg></a></div></div></div></div></section>
+
+    <section id="contato" class="contact section-pad"><div class="wrap contact-layout"><div class="contact-copy"><div class="overline"><span class="mini-line"></span> VAMOS CONVERSAR?</div><h2>Qual tarefa está tomando tempo <span class="gradient-text">da sua equipe?</span></h2><p>Conte seu desafio. Vamos avaliar uma solução sob medida.</p><ul class="contact-checklist" aria-label="O que ajuda a começar"><li>Qual tarefa se repete na rotina</li><li>Quais ferramentas e planilhas a equipe usa</li><li>Onde a informação costuma se perder</li></ul><div id="business-contact" class="contact-info"><strong>Informações comerciais</strong><p>Fale com a Luminor pelo WhatsApp ou escreva para <a href="mailto:rafael.valquer@gmail.com">rafael.valquer@gmail.com</a>.</p></div></div><div class="form-box"><div class="form-heading"><div><small>INICIAR CONVERSA</small><h3>Solicitar diagnóstico</h3></div><span>↗</span></div><form id="lead-form" method="post" action="/contato" novalidate><div class="honeypot" aria-hidden="true"><label for="website">Não preencha este campo</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div><div class="form-row"><div class="field"><label for="lead-name">Seu nome *</label><input id="lead-name" name="name" autocomplete="name" maxlength="100" required placeholder="Como podemos chamar você?"></div><div class="field"><label for="lead-company">Empresa *</label><input id="lead-company" name="company" autocomplete="organization" maxlength="120" required placeholder="Nome da empresa"></div></div><div class="form-row"><div class="field"><label for="lead-phone">WhatsApp com DDD *</label><input id="lead-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" required placeholder="(11) 99999-9999"></div><div class="field"><label for="lead-email">E-mail (opcional)</label><input id="lead-email" name="email" type="email" autocomplete="email" maxlength="160" placeholder="voce@empresa.com.br"></div></div><div class="field"><label for="lead-interest">Qual processo você quer melhorar?</label><select id="lead-interest" name="interest"><option value="Ainda estou avaliando">Ainda estou avaliando</option><option>Automação de processos internos</option><option>Sistemas sob medida</option><option>Integração de sistemas</option><option>Atendimento pelo WhatsApp</option><option>Outro processo</option></select></div><div class="field"><label for="lead-problem">Como esse processo funciona hoje? *</label><textarea id="lead-problem" name="problem" rows="4" maxlength="1500" required placeholder="Ex.: minha equipe atualiza o estoque em várias planilhas e isso gera retrabalho..."></textarea></div><div class="consent-line"><input type="checkbox" id="lead-consent" name="consent" required><label for="lead-consent">Autorizo o uso dos dados acima para resposta a esta solicitação, conforme a <a href="#politica-demonstracao" target="_blank" rel="noopener">Política de Privacidade</a>.</label></div><button id="submit-lead" type="button" class="btn btn-primary btn-block">Falar com a Luminor <svg class="icon"><use href="#i-arrow-up"/></svg></button><div id="form-status" class="form-status" role="status" aria-live="polite"></div><small class="form-note">* Campos obrigatórios. O WhatsApp abrirá com a mensagem preenchida; revise e toque em Enviar para concluir.</small></form><noscript><p>O formulário precisa de JavaScript. Como alternativa, envie um e-mail para <a href="mailto:rafael.valquer@gmail.com">rafael.valquer@gmail.com</a>. O envio pelo WhatsApp só acontece quando você confirma a mensagem no aplicativo.</p></noscript></div></div></section>
   <section id="politica-demonstracao" class="wrap preview-privacy"><strong>Política de privacidade da demonstração</strong><p>Ao preencher o formulário, o WhatsApp abre com a mensagem pronta. Os dados só são enviados quando você confirma no WhatsApp. A política preliminar está em <code>public/privacidade.html</code> e requer validação jurídica antes da publicação.</p></section></main>
 
-  <footer class="site-footer"><div class="wrap"><div class="footer-top"><div class="footer-brand"><a class="brand" href="#inicio" aria-label="Luminor Software — voltar ao início"><img class="brand-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMxLjYxIDAgMTMxLjc4IDEwMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJMdW1pbm9yIFNvZnR3YXJlIj48dGl0bGU+THVtaW5vciBTb2Z0d2FyZTwvdGl0bGU+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJsbS1hIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjE0OCIgeTE9IjIiIHgyPSIyNCIgeTI9IjcyIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMEM4RDAiLz48c3RvcCBvZmZzZXQ9Ii41IiBzdG9wLWNvbG9yPSIjNkE1NUVDIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjQzIzQkU2Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImxtLWIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMTcwIiB5MT0iMzAiIHgyPSI0OCIgeTI9Ijk4Ij48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyRjZDRjAiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzZDMkJEOSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzRBMkZFMCIvPjwvbGluZWFyR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJsbS1jIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTc0IDcuNTFBMjAgMjAgMCAwIDEgODkuNjEgMEwxMjkuNjkgMEExMCAxMCAwIDAgMSAxMzcuNSAxNi4yNUwxMzQuOSAxOS41QTQgNCAwIDAgMCAxMzguMDIgMjZMMTUzLjM5IDI2QTEwIDEwIDAgMCAxIDE2MS4yIDQyLjI1TDEyMSA5Mi40OUEyMCAyMCAwIDAgMSAxMDUuMzkgMTAwTDYzLjgxIDEwMEExMCAxMCAwIDAgMSA1NiA4My43NUw1OC42IDgwLjVBNCA0IDAgMCAwIDU1LjQ4IDc0TDQxLjYxIDc0QTEwIDEwIDAgMCAxIDMzLjggNTcuNzVaTTk5Ljg2IDI4LjVBNC41IDQuNSAwIDAgMCA5Ni4zNSAzMC4xOUw2OS41NSA2My42OUE0LjUgNC41IDAgMCAwIDczLjA2IDcxTDk0LjA0IDcxQTQuNSA0LjUgMCAwIDAgOTcuNTUgNjkuMzFMMTI0LjM1IDM1LjgxQTQuNSA0LjUgMCAwIDAgMTIwLjg0IDI4LjVaIi8+PC9jbGlwUGF0aD48L2RlZnM+PHBhdGggZmlsbD0idXJsKCNsbS1hKSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNzQgNy41MUEyMCAyMCAwIDAgMSA4OS42MSAwTDEyOS42OSAwQTEwIDEwIDAgMCAxIDEzNy41IDE2LjI1TDEzNC45IDE5LjVBNCA0IDAgMCAwIDEzOC4wMiAyNkwxNTMuMzkgMjZBMTAgMTAgMCAwIDEgMTYxLjIgNDIuMjVMMTIxIDkyLjQ5QTIwIDIwIDAgMCAxIDEwNS4zOSAxMDBMNjMuODEgMTAwQTEwIDEwIDAgMCAxIDU2IDgzLjc1TDU4LjYgODAuNUE0IDQgMCAwIDAgNTUuNDggNzRMNDEuNjEgNzRBMTAgMTAgMCAwIDEgMzMuOCA1Ny43NVpNOTkuODYgMjguNUE0LjUgNC41IDAgMCAwIDk2LjM1IDMwLjE5TDY5LjU1IDYzLjY5QTQuNSA0LjUgMCAwIDAgNzMuMDYgNzFMOTQuMDQgNzFBNC41IDQuNSAwIDAgMCA5Ny41NSA2OS4zMUwxMjQuMzUgMzUuODFBNC41IDQuNSAwIDAgMCAxMjAuODQgMjguNVoiLz48cGF0aCBmaWxsPSJ1cmwoI2xtLWIpIiBjbGlwLXBhdGg9InVybCgjbG0tYykiIGQ9Ik0xMjkuNyAyNkwxODYuMiAyNkwxMTcuNCAxMTJMMzMuNCAxMTJMNjMuOCA3NEw2My43IDcxTDEzMC4yIDI4LjVaIi8+PC9zdmc+DQo=" alt="" width="45" height="34"><span>Luminor<span class="brand-light"> Software</span></span></a><p>Entendemos seu processo. Criamos a solução. Automatizamos sua rotina.</p><ul class="footer-contact"><li><a href="mailto:rafael.valquer@gmail.com">rafael.valquer@gmail.com</a></li><li><a href="https://wa.me/5511999890795" target="_blank" rel="noopener noreferrer" data-whatsapp data-cta-location="footer">WhatsApp (11) 99989-0795</a></li></ul></div><nav class="footer-col" aria-label="Navegação do rodapé"><p class="footer-title">Navegação</p><a href="#solucoes">Soluções</a><a href="#metodo">Como funciona</a><a href="#processos">Exemplos</a><a href="#diferenciais">Sobre</a><a href="#faq">Dúvidas</a><a href="#contato">Contato</a></nav><nav class="footer-col" aria-label="Soluções"><p class="footer-title">Soluções</p><a href="/servicos/automacao-de-processos">Automação de processos</a><a href="/servicos/chatbot-whatsapp">Chatbot para WhatsApp</a><a href="/servicos/integracao-de-sistemas">Integração de sistemas</a><a href="/servicos/sistemas-sob-medida">Sistemas sob medida</a></nav><nav class="footer-col" aria-label="Segmentos e conteúdos"><p class="footer-title">Segmentos</p><a href="/segmentos/automacao-para-escritorios-de-advocacia">Escritórios de advocacia</a><a href="/segmentos/automacao-para-escritorios-de-contabilidade">Escritórios de contabilidade</a><a href="/segmentos/automacao-financeira-e-administrativa">Financeiro e administrativo</a><a href="/segmentos/chatbot-whatsapp-para-pequenas-empresas">Pequenas empresas</a><a href="/conteudos">Conteúdos</a></nav></div><div class="footer-bottom"><span>© <span id="year">2026</span> Luminor Software. Todos os direitos reservados.</span><div><a href="#politica-demonstracao">Privacidade</a><button type="button" id="cookie-settings">Preferências de cookies</button></div><span>Desenvolvido para evoluir.</span></div></div></footer>
+  <footer class="site-footer"><div class="wrap"><div class="footer-top"><div class="footer-brand"><a class="brand" href="#inicio" aria-label="Luminor Software — voltar ao início"><img class="brand-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjMxLjYxIDAgMTMxLjc4IDEwMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJMdW1pbm9yIFNvZnR3YXJlIj48dGl0bGU+THVtaW5vciBTb2Z0d2FyZTwvdGl0bGU+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJsbS1hIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjE0OCIgeTE9IjIiIHgyPSIyNCIgeTI9IjcyIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMEM4RDAiLz48c3RvcCBvZmZzZXQ9Ii41IiBzdG9wLWNvbG9yPSIjNkE1NUVDIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjQzIzQkU2Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImxtLWIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMTcwIiB5MT0iMzAiIHgyPSI0OCIgeTI9Ijk4Ij48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyRjZDRjAiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzZDMkJEOSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzRBMkZFMCIvPjwvbGluZWFyR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJsbS1jIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTc0IDcuNTFBMjAgMjAgMCAwIDEgODkuNjEgMEwxMjkuNjkgMEExMCAxMCAwIDAgMSAxMzcuNSAxNi4yNUwxMzQuOSAxOS41QTQgNCAwIDAgMCAxMzguMDIgMjZMMTUzLjM5IDI2QTEwIDEwIDAgMCAxIDE2MS4yIDQyLjI1TDEyMSA5Mi40OUEyMCAyMCAwIDAgMSAxMDUuMzkgMTAwTDYzLjgxIDEwMEExMCAxMCAwIDAgMSA1NiA4My43NUw1OC42IDgwLjVBNCA0IDAgMCAwIDU1LjQ4IDc0TDQxLjYxIDc0QTEwIDEwIDAgMCAxIDMzLjggNTcuNzVaTTk5Ljg2IDI4LjVBNC41IDQuNSAwIDAgMCA5Ni4zNSAzMC4xOUw2OS41NSA2My42OUE0LjUgNC41IDAgMCAwIDczLjA2IDcxTDk0LjA0IDcxQTQuNSA0LjUgMCAwIDAgOTcuNTUgNjkuMzFMMTI0LjM1IDM1LjgxQTQuNSA0LjUgMCAwIDAgMTIwLjg0IDI4LjVaIi8+PC9jbGlwUGF0aD48L2RlZnM+PHBhdGggZmlsbD0idXJsKCNsbS1hKSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNzQgNy41MUEyMCAyMCAwIDAgMSA4OS42MSAwTDEyOS42OSAwQTEwIDEwIDAgMCAxIDEzNy41IDE2LjI1TDEzNC45IDE5LjVBNCA0IDAgMCAwIDEzOC4wMiAyNkwxNTMuMzkgMjZBMTAgMTAgMCAwIDEgMTYxLjIgNDIuMjVMMTIxIDkyLjQ5QTIwIDIwIDAgMCAxIDEwNS4zOSAxMDBMNjMuODEgMTAwQTEwIDEwIDAgMCAxIDU2IDgzLjc1TDU4LjYgODAuNUE0IDQgMCAwIDAgNTUuNDggNzRMNDEuNjEgNzRBMTAgMTAgMCAwIDEgMzMuOCA1Ny43NVpNOTkuODYgMjguNUE0LjUgNC41IDAgMCAwIDk2LjM1IDMwLjE5TDY5LjU1IDYzLjY5QTQuNSA0LjUgMCAwIDAgNzMuMDYgNzFMOTQuMDQgNzFBNC41IDQuNSAwIDAgMCA5Ny41NSA2OS4zMUwxMjQuMzUgMzUuODFBNC41IDQuNSAwIDAgMCAxMjAuODQgMjguNVoiLz48cGF0aCBmaWxsPSJ1cmwoI2xtLWIpIiBjbGlwLXBhdGg9InVybCgjbG0tYykiIGQ9Ik0xMjkuNyAyNkwxODYuMiAyNkwxMTcuNCAxMTJMMzMuNCAxMTJMNjMuOCA3NEw2My43IDcxTDEzMC4yIDI4LjVaIi8+PC9zdmc+DQo=" alt="" width="45" height="34"><span>Luminor<span class="brand-light"> Software</span></span></a><p>Entendemos seu processo. Criamos a solução. Automatizamos sua rotina.</p><ul class="footer-contact"><li><a href="mailto:rafael.valquer@gmail.com">rafael.valquer@gmail.com</a></li><li><a href="https://wa.me/5511999890795" target="_blank" rel="noopener noreferrer" data-whatsapp data-cta-location="footer">WhatsApp (11) 99989-0795</a></li></ul></div><nav class="footer-col" aria-label="Navegação do rodapé"><p class="footer-title">Navegação</p><a href="#solucoes">Soluções</a><a href="#demonstracoes">Demonstrações</a><a href="#metodo">Como funciona</a><a href="#faq">Dúvidas</a><a href="#contato">Contato</a></nav><nav class="footer-col" aria-label="Soluções"><p class="footer-title">Soluções</p><a href="/servicos/automacao-de-processos">Automação de processos</a><a href="/servicos/chatbot-whatsapp">Chatbot para WhatsApp</a><a href="/servicos/integracao-de-sistemas">Integração de sistemas</a><a href="/servicos/sistemas-sob-medida">Sistemas sob medida</a></nav><nav class="footer-col" aria-label="Segmentos e conteúdos"><p class="footer-title">Segmentos</p><a href="/segmentos/automacao-para-escritorios-de-advocacia">Escritórios de advocacia</a><a href="/segmentos/automacao-para-escritorios-de-contabilidade">Escritórios de contabilidade</a><a href="/segmentos/automacao-financeira-e-administrativa">Financeiro e administrativo</a><a href="/segmentos/chatbot-whatsapp-para-pequenas-empresas">Pequenas empresas</a><a href="/conteudos">Conteúdos</a></nav></div><div class="footer-bottom"><span>© <span id="year">2026</span> Luminor Software. Todos os direitos reservados.</span><div><a href="#politica-demonstracao">Privacidade</a><button type="button" id="cookie-settings">Preferências de cookies</button></div><span>Desenvolvido para evoluir.</span></div></div></footer>
   <div class="cookie-banner" id="cookie-banner" hidden><p>As métricas opcionais só são ativadas se você autorizar. Você pode alterar sua escolha a qualquer momento. <a href="#politica-demonstracao">Saiba mais</a>.</p><div><button class="btn btn-secondary" id="cookies-reject">Somente essenciais</button><button class="btn btn-primary" id="cookies-accept">Aceitar métricas</button></div></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>

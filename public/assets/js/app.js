@@ -18,33 +18,7 @@
     window.matchMedia('(min-width:901px)').addEventListener('change',e=>{if(e.matches)menuClose()});
   }
 
-  // O exemplo interativo do hero (#automation-demo) vive em assets/js/experiences/.
-  function setupTeamExperience(){
-    const root=$('#team-experience');if(!root)return;
-    const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
-    const phases=['before','transition','after'];let index=0,playing=false,touched=false,timer=null,travel=[];
-    const copy={before:['Muita correria. Pouca clareza.','Informações dispersas, interrupções e tarefas repetitivas.','Cinco pessoas lidam com planilhas, mensagens e documentos espalhados.'],transition:['A rotina começa a se conectar.','As informações convergem para um fluxo de automação sob medida.','Documentos e solicitações convergem para uma automação central; as pessoas encontram suas estações.'],after:['Cada pessoa sabe onde focar.','Informação organizada, rotinas automatizadas e equipe com foco.','Cinco pessoas trabalham em estações organizadas e conectadas a uma automação central.']};
-    function controls(){root.dataset.playing=String(playing);$('#team-play').innerHTML=playing?'Pausar <span aria-hidden="true">Ⅱ</span>':index===2?'Rever mudança <span aria-hidden="true">↻</span>':index===0?'Ver a mudança <span aria-hidden="true">▶</span>':'Continuar <span aria-hidden="true">▶</span>';$$('[data-team-state]',root).forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.teamState===phases[index])))}
-    function setPhase(next){
-      const people=$$('.team-person',root),from=people.map(person=>getComputedStyle(person).transform);
-      travel.forEach(animation=>animation.cancel());travel=[];
-      index=next;const phase=phases[index];root.dataset.phase=phase;
-      $('#team-scene-title').textContent=copy[phase][0];$('#team-status').textContent=copy[phase][1];$('#team-scene').setAttribute('aria-label',copy[phase][2]);controls();
-      // Start at the exact position reached while running; no snap back to the route origin.
-      if(next===1&&playing&&!motion.matches){
-        travel=people.map((person,i)=>person.animate([{transform:from[i]},{transform:getComputedStyle(person).transform}],{duration:2700,easing:'cubic-bezier(.22,.7,.2,1)'}));
-      }
-    }
-    function pause(){clearTimeout(timer);playing=false;controls();root.getAnimations({subtree:true}).forEach(animation=>{animation.pause();animation.currentTime=animation.currentTime})}
-    function schedule(){timer=setTimeout(()=>{if(index<2){setPhase(index+1);schedule()}else pause()},index===0?4400:index===1?3100:4600)}
-    function play(){if(motion.matches){setPhase(2);pause();return}if(index===2)setPhase(0);playing=true;controls();root.getAnimations({subtree:true}).forEach(animation=>animation.play());schedule()}
-    $$('[data-team-state]',root).forEach(b=>b.addEventListener('click',()=>{touched=true;pause();setPhase(b.dataset.teamState==='before'?0:2)}));
-    $('#team-play').addEventListener('click',()=>{touched=true;if(playing)pause();else play()});
-    document.addEventListener('visibilitychange',()=>{if(document.hidden)pause()});
-    motion.addEventListener('change',()=>{if(motion.matches)pause()});
-    const observer=new IntersectionObserver(entries=>{for(const e of entries){if(!e.isIntersecting){pause();continue}if(e.intersectionRatio>=.35&&!touched&&!motion.matches){touched=true;play()}}},{threshold:[0,.35]});observer.observe(root);setPhase(0);
-  }
-
+  // As demonstrações interativas da homepage vivem em assets/js/experiences/.
   function setupSolutionActions(){$$('.solution-cta').forEach(btn=>btn.addEventListener('click',()=>{const name=btn.dataset.solution;$('#lead-interest').value=name;state.lastInterest=name;$('#contato').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});showToast('Selecionado: '+name)}));$$('[data-interest]').forEach(btn=>btn.addEventListener('click',()=>{$('#lead-interest').value=btn.dataset.interest}))}
   function validateLead(data){const errors=[];if(data.name.trim().length<2)errors.push('Informe seu nome.');if(data.company.trim().length<2)errors.push('Informe sua empresa.');const digits=data.phone.replace(/\D/g,'');if(digits.length<10||digits.length>13)errors.push('Informe um telefone com DDD válido.');if(data.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))errors.push('E-mail inválido.');if(data.problem.trim().length<12)errors.push('Descreva o desafio com pelo menos 12 caracteres.');if(!data.consent)errors.push('Autorize o uso dos dados para resposta.');return errors}
   function setupForm(){const form=$('#lead-form');if(!form)return;const status=$('#form-status');$('#submit-lead')?.addEventListener('click',()=>form.requestSubmit());form.addEventListener('submit',e=>{e.preventDefault();const fd=new FormData(form);const data={name:String(fd.get('name')||''),company:String(fd.get('company')||''),phone:String(fd.get('phone')||''),email:String(fd.get('email')||''),interest:String(fd.get('interest')||''),problem:String(fd.get('problem')||''),consent:fd.get('consent')==='on'};const errors=validateLead(data);status.className='form-status '+(errors.length?'error':'');status.textContent=errors.join(' ');if(errors.length){document.dispatchEvent(new CustomEvent('luminor:form-validation-error'));return}
@@ -58,6 +32,11 @@
   }
   // Sombra sutil no cabeçalho fixo depois que a página rola.
   function setupHeaderShadow(){const header=$('.site-header');if(!header)return;const update=()=>header.classList.toggle('is-scrolled',window.scrollY>8);update();window.addEventListener('scroll',update,{passive:true})}
-  function init(){const year=$('#year');if(year)year.textContent=new Date().getFullYear();if($('#menu-btn')&&$('#nav'))setupNav();setupHeaderShadow();setupTeamExperience();setupSolutionActions();setupContacts();setupForm()}
+  // Entrada suave dos cartões e da trilha do método ao entrarem na tela (só transform e opacidade).
+  function setupReveal(){const cards=$$('.solutions .solution-card,.method-principles'),track=$('.method-track');const all=[...cards,track].filter(Boolean);if(!all.length)return;
+    if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){all.forEach(el=>el.classList.add('is-visible'));return}
+    document.documentElement.classList.add('has-reveal');cards.forEach((el,i)=>{el.setAttribute('data-reveal','');el.style.transitionDelay=(i%4)*70+'ms'});
+    const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting)continue;const el=entry.target;el.classList.add('is-visible');observer.unobserve(el);if(el.hasAttribute('data-reveal'))setTimeout(()=>{el.style.transitionDelay=''},900)}},{threshold:.15});all.forEach(el=>observer.observe(el))}
+  function init(){const year=$('#year');if(year)year.textContent=new Date().getFullYear();if($('#menu-btn')&&$('#nav'))setupNav();setupHeaderShadow();setupReveal();setupSolutionActions();setupContacts();setupForm()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();

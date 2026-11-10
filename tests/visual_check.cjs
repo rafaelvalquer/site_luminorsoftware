@@ -70,8 +70,13 @@ async function checkContrast(page, state) {
       await page.locator('[data-chip="Contrato"]').click();
       await page.locator('[data-dist="organizado"]').click();
       await checkContrast(page, `dashboard empty state, ${width}`);
-      await page.keyboard.press('Escape');
+      // Galeria: automação de processos em repouso e concluída.
+      await page.locator('[data-gallery-tab="automacao"]').click();
+      await checkContrast(page, `process runner idle, ${width}`);
+      await page.locator('#runner-run').click();
+      await checkContrast(page, `process runner finished, ${width}`);
       // Laboratório de integrações (área escura): repouso, falha simulada e nova tentativa concluída.
+      await page.locator('[data-gallery-tab="integracao"]').click();
       await page.locator('#integration-lab').scrollIntoViewIfNeeded();
       await checkContrast(page, `integration lab idle, ${width}`);
       await page.locator('#lab-failure').click();
@@ -86,10 +91,6 @@ async function checkContrast(page, state) {
         await page.locator('[data-demo-step="3"]').click();
         if(scenario==='documentos') await page.locator('[data-document="nf208"]').click();
         await checkContrast(page,`Result ${scenario}, ${width}`);
-      }
-      for(const phase of ['before','after']){
-        await page.locator(`[data-team-state="${phase}"]`).click();
-        await checkContrast(page,`Team ${phase}, ${width}`);
       }
       await page.locator('.faq-items summary').first().click();
       await checkContrast(page, `FAQ ${width}`);

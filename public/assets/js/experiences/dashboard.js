@@ -1,5 +1,6 @@
 // Experiência 02 — painel interativo.
-// Resultado compacto na última etapa do fluxo (#scenario-outcome) e painel completo em <dialog>.
+// Resultado compacto na última etapa do fluxo (#scenario-outcome) e painel completo na galeria
+// de demonstrações (#dashboard-panel). O mesmo controlador também funciona dentro de um <dialog>.
 // Indicadores, gráficos e lista saem sempre de computeMetrics(), a mesma fonte de dados.
 import { computeMetrics, getDashboard, todayRecords, recordDetails, statusLabel, formatMoney, PERIODS, LAST_DAY } from './scenarios.js';
 import { $, $$, el, svg, icon, replaceChildrenKeepingFocus } from './dom.js';
@@ -27,7 +28,7 @@ export function createCompactOutcome(outcome, { onExplore = () => {} } = {}) {
   ];
   const footer = (note, noteAttrs = {}) => el('div', { class: 'outcome-footer' },
     el('p', { class: 'outcome-note', ...noteAttrs, text: note }),
-    el('button', { type: 'button', class: 'outcome-explore', 'data-dashboard-open': true, 'data-focus-key': 'explore', 'aria-haspopup': 'dialog' }, 'Explorar o painel', icon('arrow')));
+    el('button', { type: 'button', class: 'outcome-explore', 'data-dashboard-open': true, 'data-focus-key': 'explore' }, 'Ver painel completo', icon('arrow')));
 
   function planilhas() {
     const metrics = computeMetrics('planilhas', { period });
@@ -116,8 +117,9 @@ export function createCompactOutcome(outcome, { onExplore = () => {} } = {}) {
   };
 }
 
-// ===== Painel completo (<dialog>) =====
-export function createDashboardDialog(dialog, { track = () => {} } = {}) {
+// ===== Painel completo (na página ou em <dialog>) =====
+export function createDashboardPanel(dialog, { track = () => {} } = {}) {
+  const modal = typeof dialog.showModal === 'function';
   const body = $('#dashboard-app', dialog);
   const sync = $('[data-dash-sync]', dialog);
   const state = { scenario: 'planilhas', period: 'semana', category: 'todas', status: 'todos', selected: null, limit: LIST_PAGE };
@@ -152,13 +154,13 @@ export function createDashboardDialog(dialog, { track = () => {} } = {}) {
       parts.kpis,
       el('div', { class: 'dash-grid' },
         el('section', { class: 'dash-card dash-chart', 'aria-labelledby': 'dash-chart-title' },
-          el('div', { class: 'dash-card-head' }, el('div', {}, el('h3', { id: 'dash-chart-title', text: d.chartTitle }), parts.chartSub)),
+          el('div', { class: 'dash-card-head' }, el('div', {}, el('h4', { id: 'dash-chart-title', text: d.chartTitle }), parts.chartSub)),
           parts.chart, parts.axis),
         el('section', { class: 'dash-card dash-distribution', 'aria-labelledby': 'dash-dist-title' },
-          el('div', { class: 'dash-card-head' }, el('h3', { id: 'dash-dist-title', text: d.distributionTitle }), parts.distClear),
+          el('div', { class: 'dash-card-head' }, el('h4', { id: 'dash-dist-title', text: d.distributionTitle }), parts.distClear),
           parts.distribution)),
       el('section', { class: 'dash-card dash-records', 'aria-labelledby': 'dash-list-title' },
-        el('div', { class: 'dash-card-head' }, el('h3', { id: 'dash-list-title', text: `Lista de ${d.noun[1]}` }), parts.chips),
+        el('div', { class: 'dash-card-head' }, el('h4', { id: 'dash-list-title', text: `Lista de ${d.noun[1]}` }), parts.chips),
         parts.summary, parts.list, parts.more),
     );
     fresh = true;
@@ -285,15 +287,15 @@ export function createDashboardDialog(dialog, { track = () => {} } = {}) {
   const filterEvent = action => track('dashboard_filter', { scenario: state.scenario, component: 'dashboard', action });
 
   function onClick(event) {
-    if (event.target === dialog) { close(); return; }
+    if (modal && event.target === dialog) { close(); return; }
     const control = event.target.closest('button,a');
     if (!control || !dialog.contains(control)) return;
     const d = dashboard();
-    if (control.hasAttribute('data-dash-close')) { close(); return; }
+    if (modal && control.hasAttribute('data-dash-close')) { close(); return; }
     if (control.hasAttribute('data-dash-cta')) {
       const interest = document.getElementById('lead-interest');
       if (interest) interest.value = d.interest;
-      close({ restoreFocus: false });
+      if (modal) close({ restoreFocus: false });
       return;
     }
     if (control.dataset.dashScenario) {
@@ -345,13 +347,12 @@ export function createDashboardDialog(dialog, { track = () => {} } = {}) {
     opener = from;
     state.period = Object.hasOwn(PERIODS, period) ? period : 'semana';
     setScenario(scenario);
-    if (!dialog.open) dialog.showModal();
-    $('[data-dash-close]', dialog)?.focus();
+    if (modal && !dialog.open) { dialog.showModal(); $('[data-dash-close]', dialog)?.focus(); }
   }
 
   function close({ restoreFocus = true } = {}) {
     if (!restoreFocus) opener = null;
-    if (dialog.open) dialog.close();
+    if (modal && dialog.open) dialog.close();
   }
 
   // Esc fecha pelo próprio <dialog>; em todos os casos o foco volta para quem abriu o painel.
@@ -361,12 +362,14 @@ export function createDashboardDialog(dialog, { track = () => {} } = {}) {
   }
 
   dialog.addEventListener('click', onClick);
-  dialog.addEventListener('close', onClose);
+  if (modal) dialog.addEventListener('close', onClose);
+  // Na página o painel fica sempre montado; no <dialog> ele é montado ao abrir.
+  else setScenario(state.scenario);
 
   return {
     open,
     close,
-    getState: () => ({ ...state, open: dialog.open }),
-    destroy() { dialog.removeEventListener('click', onClick); dialog.removeEventListener('close', onClose); if (dialog.open) dialog.close(); },
+    getState: () => ({ ...state, open: modal ? dialog.open : true }),
+    destroy() { dialog.removeEventListener('click', onClick); dialog.removeEventListener('close', onClose); if (modal && dialog.open) dialog.close(); },
   };
 }

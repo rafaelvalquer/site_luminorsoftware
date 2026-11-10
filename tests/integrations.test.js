@@ -99,11 +99,13 @@ test('experiências: sem rede, sem código dinâmico e sem HTML montado com text
 
 test('integrações: o HTML sem JavaScript mostra o mesmo exemplo principal', () => {
   const html = readFileSync(new URL('../public/index.html', import.meta.url), 'utf8');
-  const start = html.indexOf('<section id="integracoes-lab"');
-  const section = html.slice(start, html.indexOf('</section>\n\n    <section id="metodo"', start));
-  assert(start > html.indexOf('id="solucoes"') && start < html.indexOf('id="metodo"'), 'entre as soluções e o método');
-  assert.match(section, /Seus sistemas podem<br><span class="lab-accent">trabalhar juntos\.<\/span>/);
-  assert(section.includes('Conectamos ferramentas e informações para evitar retrabalho e criar processos mais organizados.'));
+  const start = html.indexOf('<div class="gallery-panel" id="integracoes-lab"');
+  const end = html.indexOf('<section id="metodo"', start);
+  assert(start > 0 && end > start, 'painel de integração na galeria de demonstrações');
+  const section = html.slice(start, end);
+  assert(start > html.indexOf('id="demonstracoes"') && start > html.indexOf('id="solucoes"'), 'dentro da galeria, depois das soluções');
+  assert(section.includes('role="tabpanel"') && section.includes('aria-labelledby="tab-integracao"'));
+  assert(section.includes('Selecione uma etapa para ver o que ela recebe, transforma e envia.'));
   const { nodes, record } = INTEGRATION_EXAMPLES.financeiro;
   for (const node of nodes) {
     for (const field of ['name', 'role', 'function', 'step']) assert(section.includes(`>${node[field]}<`), `${node.name}.${field}`);

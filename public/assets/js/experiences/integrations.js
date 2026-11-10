@@ -241,6 +241,8 @@ export function setupIntegrationLab(root, { track = () => {} } = {}) {
   return {
     getState: () => ({ example: key, selected, mode, frame: index, status: current().status, record: current().record }),
     pendingTimers: () => timers.pending(),
+    /** Conclui na hora uma simulação em andamento (aba trocada ou página oculta). */
+    finish,
     destroy() { timers.clear(); lifecycle.destroy(); },
   };
 }

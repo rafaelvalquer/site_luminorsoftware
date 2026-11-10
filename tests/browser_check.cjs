@@ -24,10 +24,14 @@ const { pathToFileURL } = require('node:url');
       await page.goto(pathToFileURL(resolve(root, 'PREVIA_AUTONOMA.html')).href);
       if(width===320){await page.locator('#cookies-reject').focus();await page.keyboard.press('Enter')}else await page.locator('#cookies-reject').click();
       assert(await page.locator('#cookie-banner').isHidden());
-      assert.equal((await page.locator('h1').innerText()).replace(/\s+/g,' '), 'Seu negócio cresce. Seus processos precisam acompanhar.');
+      assert.equal((await page.locator('h1').innerText()).replace(/\s+/g,' '), 'Sistemas e automações que simplificam seu negócio.');
+      assert.deepEqual(await page.locator('main > section:not(#politica-demonstracao)').evaluateAll(sections => sections.map(s => s.id)), ['inicio', 'solucoes', 'demonstracoes', 'metodo', 'faq', 'contato']);
       assert.equal(await page.locator('.process-flow li').count(), 4);
-      assert.equal(await page.locator('.method-grid article').count(), 4);
-      assert.equal(await page.locator('.example-card').count(), 4);
+      assert.equal(await page.locator('.method-track li').count(), 4);
+      assert.equal(await page.locator('.solution-card').count(), 4);
+      assert.deepEqual(await page.locator('.solution-card .service-page-link').evaluateAll(links => links.map(a => a.getAttribute('href'))), ['/servicos/automacao-de-processos', '/servicos/sistemas-sob-medida', '/servicos/integracao-de-sistemas', '/servicos/chatbot-whatsapp']);
+      assert.deepEqual(await page.locator('[role="tab"]').evaluateAll(tabs => tabs.map(t => t.getAttribute('aria-selected'))), ['true', 'false', 'false']);
+      assert.equal(await page.locator('.gallery-panel:not([hidden])').count(), 1, 'Only the selected demonstration is shown');
       assert.equal(await page.locator('#automation-demo').getAttribute('data-playing'), 'false', 'Reduced motion disables automatic playback');
       assert.equal(await page.locator('#automation-demo').getAttribute('data-state'), 'reduced-motion');
       await page.locator('#demo-restart').click();
@@ -43,16 +47,17 @@ const { pathToFileURL } = require('node:url');
       await page.locator('[data-period="mes"]').click();
       assert.equal(await page.locator('.dashboard-kpis strong').first().innerText(),String(computeMetrics('planilhas',{period:'mes'}).total));
       await checkLayout();
-      // Painel completo: abre a partir do resultado, com o mesmo período e os mesmos números.
-      const dialog = page.locator('#dashboard-dialog');
+      // Painel completo: o resultado leva à aba "Sistema de gestão" da galeria, com o mesmo período e os mesmos números.
+      const dashPanel = page.locator('#dashboard-panel');
       const dashKpis = () => page.locator('.dash-kpi strong').allInnerTexts();
       const isFocused = locator => locator.evaluate(el => el === document.activeElement);
       await page.locator('.outcome-explore').click();
-      assert(await dialog.evaluate(el => el.open), 'Explore opens the dashboard');
-      assert(await isFocused(page.locator('[data-dash-close]')), 'Focus moves into the dashboard');
+      assert.equal(await page.locator('[data-gallery-tab="gestao"]').getAttribute('aria-selected'), 'true', 'Explore opens the management demo');
+      assert(await page.locator('#panel-gestao').isVisible());
+      assert(await isFocused(page.locator('#dashboard-title')), 'Focus moves to the dashboard');
       assert.equal(await page.locator('[data-dash-period="mes"]').getAttribute('aria-pressed'), 'true');
       assert.deepEqual(await dashKpis(), kpisFor('planilhas', { period: 'mes' }));
-      assert(await page.locator('.dash-shell').evaluate(el => el.scrollWidth <= el.clientWidth + 1), `Dashboard overflows at ${width}px`);
+      assert(await dashPanel.evaluate(el => el.scrollWidth <= el.clientWidth + 1), `Dashboard overflows at ${width}px`);
       if (width === 320 || width === 390 || width === 1440) {
         await page.locator('[data-dash-period="semana"]').click();
         assert.deepEqual(await dashKpis(), kpisFor('planilhas', { period: 'semana' }));
@@ -82,19 +87,16 @@ const { pathToFileURL } = require('node:url');
         await page.locator('[data-dash-more]').click();
         assert.equal(await page.locator('.dash-row').count(), 16);
         assert(await isFocused(page.locator('.dash-row').nth(8)), 'Show more moves focus to the first new record');
-        assert(await page.locator('.dash-shell').evaluate(el => el.scrollWidth <= el.clientWidth + 1), `Dashboard overflows at ${width}px`);
+        assert(await dashPanel.evaluate(el => el.scrollWidth <= el.clientWidth + 1), `Dashboard overflows at ${width}px`);
         await page.locator('[data-dash-scenario="atendimento"]').click();
         assert.deepEqual(await dashKpis(), kpisFor('atendimento', { period: 'mes' }));
-        if (width === 390 || width === 1440) await page.screenshot({ path: resolve(root, `screenshots/Luminor_Painel_${width}.png`) });
+        if (width === 390 || width === 1440) await page.locator('#panel-gestao').screenshot({ path: resolve(root, `screenshots/Luminor_Painel_${width}.png`) });
         await page.locator('[data-dash-cta]').click();
-        assert(!(await dialog.evaluate(el => el.open)), 'The CTA closes the dashboard');
         assert.equal(await page.locator('#lead-interest').inputValue(), 'Atendimento pelo WhatsApp');
+        assert.equal(new URL(page.url()).hash, '#contato', 'The dashboard CTA leads to the contact form');
         await page.locator('.outcome-explore').click();
         assert.equal(await page.locator('#dashboard-title').innerText(), 'Controle de pedidos');
       }
-      await page.keyboard.press('Escape');
-      assert(!(await dialog.evaluate(el => el.open)), 'Escape closes the dashboard');
-      await page.waitForFunction(() => document.activeElement?.classList.contains('outcome-explore'));
       if(width===390||width===1440) await page.locator('#automation-demo').screenshot({path:resolve(root,`screenshots/Luminor_Ganhos_Planilhas_${width}.png`)});
       await page.locator('[data-demo-scenario="documentos"]').click();
       assert.equal(await page.locator('#automation-demo').getAttribute('data-step'),'0');
@@ -126,19 +128,36 @@ const { pathToFileURL } = require('node:url');
       await page.locator('[data-demo-scenario="planilhas"]').click();
       await page.locator('[data-demo-step="3"]').click();
       assert.equal(await page.locator('[data-period="semana"]').getAttribute('aria-pressed'),'true');
-      assert.equal(await page.locator('.team-person').count(),5);
-      assert.equal(await page.locator('#team-experience').getAttribute('data-playing'),'false');
-      for(const phase of ['before','after']){
-        await page.locator(`[data-team-state="${phase}"]`).click();
-        assert.equal(await page.locator('#team-experience').getAttribute('data-phase'),phase);
-        if(width===390||width===1440) await page.locator('#team-experience').screenshot({path:resolve(root,`screenshots/Luminor_Equipe_${phase}_${width}.png`)});
-      }
-      await page.locator('#team-play').click();
-      assert.equal(await page.locator('#team-experience').getAttribute('data-phase'),'after');
+      // Galeria: abas com teclado (setas, Home e End) e um único painel visível.
+      await page.locator('[data-gallery-tab="automacao"]').click();
+      await page.locator('[data-gallery-tab="automacao"]').focus();
+      await page.keyboard.press('ArrowRight');
+      assert.equal(await page.locator('[data-gallery-tab="gestao"]').getAttribute('aria-selected'), 'true');
+      assert(await isFocused(page.locator('[data-gallery-tab="gestao"]')), 'Arrow keys move focus between tabs');
+      await page.keyboard.press('End');
+      assert(await page.locator('#integracoes-lab').isVisible());
+      await page.keyboard.press('Home');
+      assert(await page.locator('#panel-automacao').isVisible());
+      assert(await page.locator('#panel-gestao').isHidden());
+      // Automação de processos: com movimento reduzido a execução mostra o resultado na hora.
+      const runner = page.locator('#process-runner');
+      assert.equal(await runner.getAttribute('data-state'), 'idle');
+      assert.equal(await page.locator('#runner-restart').getAttribute('aria-disabled'), 'true');
+      await page.locator('#runner-run').click();
+      assert.equal(await runner.getAttribute('data-state'), 'finished');
+      assert.deepEqual(await page.locator('[data-runner-count]').allInnerTexts(), ['5', '4', '1']);
+      assert.equal(await page.locator('.runner-rows li[data-state="review"]').count(), 1);
+      assert((await page.locator('#runner-status').textContent()).startsWith('4 lançados'));
+      await page.locator('#runner-restart').focus();
+      await page.keyboard.press('Enter');
+      assert.equal(await runner.getAttribute('data-state'), 'finished', 'Restart under reduced motion shows the result again');
+      assert.equal(await page.evaluate(() => window.LuminorExperiences.pendingTimers()), 0);
+      if (width === 390 || width === 1440) await page.locator('#panel-automacao').screenshot({ path: resolve(root, `screenshots/Luminor_Galeria_Automacao_${width}.png`) });
       // Laboratório de integrações: com movimento reduzido cada simulação mostra o resultado na hora.
+      await page.locator('[data-gallery-tab="integracao"]').click();
       const lab = page.locator('#integration-lab');
       const labNodeStates = () => page.locator('.lab-node .lab-node-state span').allInnerTexts();
-      assert(await page.evaluate(() => { const s = ['solucoes', 'integracoes-lab', 'metodo'].map(id => document.getElementById(id)); return s[0].compareDocumentPosition(s[1]) & Node.DOCUMENT_POSITION_FOLLOWING && s[1].compareDocumentPosition(s[2]) & Node.DOCUMENT_POSITION_FOLLOWING; }), 'Integration lab sits between solutions and method');
+      assert(await page.evaluate(() => { const s = ['solucoes', 'demonstracoes', 'metodo'].map(id => document.getElementById(id)); return s[0].compareDocumentPosition(s[1]) & Node.DOCUMENT_POSITION_FOLLOWING && s[1].compareDocumentPosition(s[2]) & Node.DOCUMENT_POSITION_FOLLOWING; }), 'Demonstrations sit between solutions and method');
       assert.equal(await lab.getAttribute('data-state'), 'waiting');
       assert.deepEqual(await labNodeStates(), ['Aguardando', 'Aguardando', 'Aguardando', 'Aguardando']);
       await page.locator('#lab-run').click();
@@ -186,7 +205,7 @@ const { pathToFileURL } = require('node:url');
       await checkAnchorHeading('main');
       await page.locator('.site-header .brand').click();
       await checkAnchorHeading('inicio');
-      for (const id of ['solucoes', 'integracoes-lab', 'metodo', 'processos', 'simulador', 'faq', 'contato']) {
+      for (const id of ['solucoes', 'demonstracoes', 'metodo', 'faq', 'contato']) {
         await page.evaluate(id => { location.hash = id; }, id);
         await checkAnchorHeading(id);
       }
@@ -196,7 +215,7 @@ const { pathToFileURL } = require('node:url');
       }).map(el => el.className));
       assert.deepEqual(overflowing, [], `Overflow at ${width}px`);
       if (width === 390) {
-        for (const id of ['solucoes', 'metodo', 'processos', 'diferenciais', 'contato']) {
+        for (const id of ['solucoes', 'demonstracoes', 'metodo', 'faq', 'contato']) {
           await page.locator('#menu-btn').focus();
           await page.keyboard.press('Enter');
           assert.equal(await page.locator('#menu-btn').getAttribute('aria-expanded'), 'true');
@@ -216,18 +235,18 @@ const { pathToFileURL } = require('node:url');
           await link.click();
           await checkAnchorHeading(id);
         }
-        for (const button of await page.locator('.solution-cta').all()) {
-          await button.click();
-          assert.equal(await page.locator('#lead-interest').inputValue(), await button.getAttribute('data-solution'));
-          await checkAnchorHeading('contato');
-        }
-        for (const link of await page.locator('[data-interest]').all()) {
-          await link.click();
-          assert.equal(await page.locator('#lead-interest').inputValue(), await link.getAttribute('data-interest'));
+        for (const tab of ['automacao', 'gestao', 'integracao']) {
+          await page.locator(`[data-gallery-tab="${tab}"]`).click();
+          for (const link of await page.locator(`[data-gallery-panel="${tab}"] [data-interest]`).all()) {
+            await link.click();
+            assert.equal(await page.locator('#lead-interest').inputValue(), await link.getAttribute('data-interest'));
+            await checkAnchorHeading('contato');
+          }
         }
         const description='A equipe consolida planilhas toda semana.';
         await page.locator('#lead-problem').fill(description);
-        await page.locator('.team-bottom [data-interest]').click();
+        await page.locator('[data-gallery-tab="automacao"]').click();
+        await page.locator('[data-gallery-panel="automacao"] [data-interest]').click();
         assert.equal(await page.locator('#lead-interest').inputValue(),'Automação de processos internos');
         assert.equal(await page.locator('#lead-problem').inputValue(),description);
         await page.locator('#submit-lead').click();
@@ -314,8 +333,33 @@ const { pathToFileURL } = require('node:url');
     assert.equal(await demoState(), 'paused', 'A hidden tab pauses the flow');
     assert.equal(await pendingTimers(), 0);
     await setHidden(false);
+    // Automação da galeria com movimento: avança passo a passo, pausa fora da tela e em aba oculta.
+    const runnerState = () => animated.evaluate(() => window.LuminorExperiences.runnerState());
+    await animated.locator('#process-runner').scrollIntoViewIfNeeded();
+    await animated.locator('#runner-run').click();
+    await animated.waitForSelector('#process-runner[data-state="processing"]');
+    assert.equal(await animated.locator('#runner-run-label').innerText(), 'Pausar');
+    assert.equal(await animated.locator('#process-runner .runner-bar i').evaluate(el => getComputedStyle(el).animationName), 'runner-fill');
+    await animated.waitForSelector('.runner-rows li[data-state="done"]');
+    await setHidden(true);
+    const pausedAt = (await runnerState()).index;
+    assert.equal((await runnerState()).playing, false, 'A hidden tab pauses the automation');
+    assert.equal(await pendingTimers(), 0);
+    await setHidden(false);
+    await animated.waitForTimeout(800);
+    assert.equal((await runnerState()).index, pausedAt, 'Paused automation stays on the same step');
+    await animated.locator('#runner-run').click();
+    await animated.locator('[data-gallery-tab="gestao"]').click();
+    assert.equal((await runnerState()).playing, false, 'Leaving the tab pauses the automation');
+    assert.equal(await pendingTimers(), 0);
+    await animated.locator('[data-gallery-tab="automacao"]').click();
+    await animated.locator('#runner-run').click();
+    await animated.waitForSelector('#process-runner[data-state="finished"]', { timeout: 10000 });
+    assert.equal(await animated.locator('#runner-run-label').innerText(), 'Executar novamente');
+    assert.equal(await pendingTimers(), 0);
     // Laboratório com movimento: o pulso percorre a ligação ativa; trocar de exemplo cancela a simulação.
     const labState = () => animated.locator('#integration-lab').getAttribute('data-state');
+    await animated.locator('[data-gallery-tab="integracao"]').click();
     await animated.locator('#integration-lab').scrollIntoViewIfNeeded();
     await animated.locator('#lab-run').click();
     await animated.waitForSelector('.lab-link[data-state="active"]');
@@ -333,32 +377,21 @@ const { pathToFileURL } = require('node:url');
     await animated.locator('#lab-retry').click();
     await animated.waitForSelector('#integration-lab[data-state="success"]');
     assert.equal(await pendingTimers(), 0);
-    await animated.locator('#team-experience').scrollIntoViewIfNeeded();
-    await animated.waitForSelector('#team-experience[data-phase="before"][data-playing="true"]');
-    const start=await animated.locator('.person-1').evaluate(el=>getComputedStyle(el).transform);
-    await animated.waitForTimeout(250);
-    assert.notEqual(start,await animated.locator('.person-1').evaluate(el=>getComputedStyle(el).transform));
-    await animated.locator('#team-play').click();
-    assert.equal(await animated.locator('.person-1').evaluate(el=>getComputedStyle(el).animationPlayState),'paused','Pausing the team scene freezes CSS animations');
-    const paused=await animated.locator('.person-1').evaluate(el=>getComputedStyle(el).transform);
-    await animated.waitForTimeout(300);
-    assert.equal(paused,await animated.locator('.person-1').evaluate(el=>getComputedStyle(el).transform));
-    await animated.locator('#team-play').click();
-    await animated.waitForSelector('#team-experience[data-phase="transition"]');
-    await animated.waitForSelector('#team-experience[data-phase="after"][data-playing="false"]');
-    await animated.locator('#team-play').click();
-    assert.equal(await animated.locator('#team-experience').getAttribute('data-phase'),'before');
-    await animated.locator('h1').scrollIntoViewIfNeeded();
-    await animated.waitForSelector('#team-experience[data-playing="false"]');
-    await animated.locator('#team-experience').scrollIntoViewIfNeeded();
-    assert.equal(await animated.locator('#team-experience').getAttribute('data-playing'),'false','No automatic replay');
-    await animated.locator('#team-play').click();
-    await animated.emulateMedia({reducedMotion:'reduce'});
-    await animated.waitForSelector('#team-experience[data-playing="false"]');
+    // Trocar de aba durante uma simulação conclui o laboratório na hora.
+    await animated.locator('#lab-run').click();
+    assert.equal(await labState(), 'processing');
+    await animated.locator('[data-gallery-tab="automacao"]').click();
+    assert.equal(await labState(), 'success', 'Leaving the tab completes the simulation');
+    assert.equal(await pendingTimers(), 0);
+    // Entrada dos cartões e da trilha do método ao rolar.
+    await animated.locator('.method-track').scrollIntoViewIfNeeded();
+    await animated.waitForSelector('.method-track.is-visible');
+    await animated.locator('#solucoes .solution-card').first().scrollIntoViewIfNeeded();
+    await animated.waitForSelector('.solution-card.is-visible');
     await animated.close();
     assert.deepEqual(errors, []);
-    console.log('Menu, teclado, serviços, CTA da equipe e validação: OK');
-    console.log('Dashboard, canvas, tickets, filtros, resets e equipe animada: reprodução, pausa, replay, saída de viewport e movimento reduzido OK');
+    console.log('Menu, teclado, serviços, CTAs das demonstrações e validação: OK');
+    console.log('Dashboard, canvas, tickets, filtros, galeria, automação, laboratório: reprodução, pausa, replay, saída de viewport e movimento reduzido OK');
   } catch(error){ console.error(error); process.exitCode=1; } finally {
     await browser.close();
   }
