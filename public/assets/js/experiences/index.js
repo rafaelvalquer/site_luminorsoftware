@@ -1,8 +1,8 @@
 // Ponto de entrada das experiências interativas da página inicial (módulo nativo).
 import { setupAutomationFlow } from './automation-flow.js';
-import { createCompactOutcome } from './dashboard.js';
+import { createCompactOutcome, createDashboardDialog } from './dashboard.js';
 
-const mounted = [];
+const controllers = {};
 
 /** Eventos de uso das demonstrações; analytics.js decide se envia (consentimento e lista permitida). */
 function track(name, params = {}) {
@@ -10,14 +10,25 @@ function track(name, params = {}) {
 }
 
 function init() {
+  // Uma única montagem por página, mesmo que o módulo seja avaliado de novo.
+  if (window.LuminorExperiences) return;
+
+  const dialogRoot = document.getElementById('dashboard-dialog');
+  if (dialogRoot && typeof dialogRoot.showModal === 'function') controllers.dashboard = createDashboardDialog(dialogRoot, { track });
+
   const flowRoot = document.getElementById('automation-demo');
   const outcomeRoot = document.getElementById('scenario-outcome');
-  if (flowRoot && outcomeRoot) mounted.push(setupAutomationFlow(flowRoot, { outcome: createCompactOutcome(outcomeRoot), track }));
+  if (flowRoot && outcomeRoot) {
+    const onExplore = controllers.dashboard ? options => controllers.dashboard.open(options) : undefined;
+    controllers.flow = setupAutomationFlow(flowRoot, { outcome: createCompactOutcome(outcomeRoot, { onExplore }), track });
+    if (!controllers.dashboard) outcomeRoot.classList.add('no-explore');
+  }
 
-  // Leitura para testes e depuração: estado do fluxo e temporizadores ainda ativos.
+  // Leitura para testes e depuração: estado das experiências e temporizadores ainda ativos.
   window.LuminorExperiences = Object.freeze({
-    pendingTimers: () => mounted.reduce((sum, item) => sum + item.pendingTimers(), 0),
-    flowState: () => mounted[0]?.getState?.(),
+    pendingTimers: () => Object.values(controllers).reduce((sum, item) => sum + (item.pendingTimers?.() ?? 0), 0),
+    flowState: () => controllers.flow?.getState(),
+    dashboardState: () => controllers.dashboard?.getState(),
   });
 }
 

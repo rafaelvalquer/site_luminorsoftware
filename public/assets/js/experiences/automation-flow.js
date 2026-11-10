@@ -89,7 +89,13 @@ export function setupAutomationFlow(root, { outcome, track = () => {} }) {
   function render() {
     const { step } = state;
     root.dataset.step = String(step);
-    $('#scenario-outcome').hidden = step !== FLOW_LAST_STEP;
+    // O resultado continua ocupando espaço (invisível e inerte) para que a área não mude de altura durante a reprodução.
+    const outcomeRoot = $('#scenario-outcome');
+    const reserved = step !== FLOW_LAST_STEP;
+    outcomeRoot.hidden = false;
+    outcomeRoot.toggleAttribute('data-reserved', reserved);
+    outcomeRoot.inert = reserved;
+    outcomeRoot.setAttribute('aria-hidden', String(reserved));
     $$('[data-demo-step]', root).forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.demoStep) === step)));
     $('#demo-stage-copy').textContent = step === FLOW_LAST_STEP ? FLOW_SCENARIOS[selected].gain : FLOW_SCENARIOS[selected].captions[step];
     if (step !== 2 || !playing()) settlePhase();

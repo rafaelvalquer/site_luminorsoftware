@@ -95,3 +95,147 @@
   .demo-controls{width:100%}
   .demo-controls button{flex:1;justify-content:center}
 }
+
+/* ===== Experiência 02 — painel ===== */
+
+/* Resultado compacto: fora da última etapa ele só reserva a altura, sem aparecer nem receber foco. */
+.scenario-outcome[data-reserved]{visibility:hidden}
+.scenario-outcome[data-reserved] *{animation:none!important}
+
+/* Rodapé com o acesso ao painel completo. */
+.outcome-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
+.outcome-footer .outcome-note{margin:0;min-width:0}
+.outcome-explore{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;min-height:30px;padding:0 11px;border:1px solid var(--brand);border-radius:100px;background-color:var(--brand);color:var(--on-brand);font-size:10px;font-weight:750;transition:background-color .18s}
+.outcome-explore:hover{background-color:var(--brand-hover)}
+.outcome-explore .icon{width:12px;height:12px}
+.no-explore .outcome-explore{display:none}
+
+/* Painel completo em <dialog>: faixa escura com os controles e corpo claro com os dados. */
+.dashboard-dialog{width:min(1120px,calc(100vw - 32px));max-width:none;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);margin:auto;padding:0;border:0;border-radius:20px;background-color:var(--surface-alt);color:var(--text);box-shadow:0 40px 120px -30px rgba(22,11,46,.6);overflow:hidden}
+.dashboard-dialog::backdrop{background:rgba(22,11,46,.64)}
+.dash-shell{max-height:inherit;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
+.dash-titlebar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px 8px;background-color:var(--brand-dark);color:#FFFFFF}
+.dash-intro{padding:0 24px 4px;background-color:var(--brand-dark);color:#FFFFFF}
+.dash-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-bottom:8px}
+.dash-badge{padding:4px 10px;border-radius:100px;background-color:var(--accent);color:var(--brand-dark);font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.dash-sync{display:inline-flex;align-items:center;gap:7px;font-size:11px;color:rgba(255,255,255,.8)}
+.dash-sync-dot{position:relative;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.dash-sync-dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--accent);opacity:0}
+.dash-sync.is-syncing .dash-sync-dot::after{animation:sync-pulse .8s ease-out}
+@keyframes sync-pulse{from{opacity:.75;transform:scale(1)}to{opacity:0;transform:scale(3.2)}}
+.dash-titlebar h2{margin:0;font-size:clamp(20px,3vw,30px);line-height:1.15;letter-spacing:-.03em;color:#FFFFFF}
+.dash-intro p{margin:0;max-width:62ch;font-size:13px;line-height:1.55;color:rgba(255,255,255,.78)}
+.dash-close{display:grid;place-items:center;flex-shrink:0;width:40px;height:40px;border:1px solid rgba(255,255,255,.28);border-radius:50%;background:transparent;color:#FFFFFF;transition:background-color .18s}
+.dash-close:hover{background-color:rgba(255,255,255,.12)}
+.dash-close .icon{width:16px;height:16px}
+.dash-toolbar{position:sticky;top:0;z-index:2;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:12px 24px 16px;background-color:var(--brand-dark)}
+.dash-tabs,.dash-period{display:flex;gap:4px;padding:4px;border:1px solid rgba(255,255,255,.16);border-radius:100px;background-color:rgba(255,255,255,.07)}
+.dash-tabs button,.dash-period button{min-height:34px;padding:0 14px;border:0;border-radius:100px;background:transparent;color:rgba(255,255,255,.85);font-size:12px;font-weight:700;transition:background-color .18s,color .18s}
+.dash-tabs button:hover,.dash-period button:hover{background-color:rgba(255,255,255,.1)}
+.dash-tabs button[aria-pressed=true],.dash-period button[aria-pressed=true]{background-color:#FFFFFF;color:var(--brand-dark)}
+.dash-titlebar :focus-visible,.dash-toolbar :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.dash-body{padding:18px 24px 22px}
+.dash-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.dash-kpi{min-width:0;padding:14px 16px;border:1px solid var(--border);border-radius:12px;background-color:var(--surface)}
+.dash-kpi span{display:block;min-height:2.7em;font-size:12px;line-height:1.35;color:var(--muted)}
+.dash-kpi strong{display:block;margin-top:6px;font-size:28px;line-height:1;letter-spacing:-.04em;color:var(--text);font-variant-numeric:tabular-nums}
+.dash-kpi.is-changed strong{animation:kpi-change .6s ease-out}
+@keyframes kpi-change{from{opacity:.35;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.dash-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:14px;margin-bottom:14px}
+.dash-card{min-width:0;padding:18px;border:1px solid var(--border);border-radius:14px;background-color:var(--surface)}
+.dash-card-head{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px 14px;margin-bottom:14px}
+.dash-card h3{margin:0;font-size:15px;letter-spacing:-.01em}
+.dash-sub{margin:4px 0 0;font-size:12px;color:var(--muted)}
+
+/* Barras por dia: a altura vem de --v (0 a 1) e anima só com transform. */
+.dash-bars{display:flex;align-items:flex-end;gap:6px;height:150px;border-bottom:1px solid var(--border)}
+.dash-bars[data-period=mes],.dash-axis[data-period=mes]{gap:3px}
+.dash-bar{flex:1;min-width:0;height:100%;display:flex;align-items:flex-end}
+.dash-bar i{display:block;width:100%;height:100%;border-radius:4px 4px 0 0;background-color:var(--brand);transform-origin:bottom;transform:scaleY(var(--v,0));transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.dash-bar:last-child i{background-color:var(--accent)}
+.dash-bar.is-zero i{transform:scaleY(.02);background-color:var(--border)}
+.dash-axis{display:flex;gap:6px;margin-top:6px;overflow:hidden}
+.dash-axis span{flex:1;min-width:0;text-align:center;font-size:11px;color:var(--muted);white-space:nowrap}
+.dash-axis b{display:block;font-size:13px;color:var(--text);font-variant-numeric:tabular-nums}
+.dash-axis .is-today{color:var(--accent-text);font-weight:750}
+.dash-axis[data-period=mes] .is-today{direction:rtl}
+
+/* Distribuição: cada linha também é um filtro. */
+.dash-dist{display:grid;gap:6px}
+.dash-dist-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:7px 10px;width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background-color:var(--surface);color:var(--text);font-size:13px;text-align:left;transition:border-color .18s}
+.dash-dist-row:hover{border-color:var(--brand-border)}
+.dash-dist-row strong{font-size:14px;font-variant-numeric:tabular-nums}
+.dash-dist-row i{position:relative;grid-column:1/-1;display:block;height:6px;border-radius:3px;background-color:var(--brand-soft);overflow:hidden}
+.dash-dist-row i::after{content:"";position:absolute;inset:0;background-color:var(--brand);transform-origin:left;transform:scaleX(var(--share,0));transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.dash-dist-row[aria-pressed=true]{border-color:var(--brand);box-shadow:inset 3px 0 var(--brand);background-color:var(--brand-soft)}
+.dash-dist-row[aria-pressed=true] i{background-color:var(--surface)}
+.dash-dist-row[aria-pressed=true] .dash-dist-label::before{content:"✓ ";color:var(--brand);font-weight:800}
+.dash-link{padding:0;border:0;background:none;color:var(--brand);font-size:12px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+/* Lista com filtros rápidos e detalhes expansíveis. */
+.dash-chips{display:flex;flex-wrap:wrap;gap:6px}
+.dash-chips button{min-height:34px;padding:0 12px;border:1px solid var(--control-border);border-radius:100px;background-color:var(--surface);color:var(--muted);font-size:12px;font-weight:650}
+.dash-chips button[aria-pressed=true]{border-color:var(--brand);background-color:var(--brand);color:var(--on-brand)}
+.dash-summary{margin:0 0 10px;font-size:12px;color:var(--muted)}
+.dash-list{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.dash-row{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"id tags" "title tags" "meta value";align-items:center;gap:2px 12px;width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:10px;background-color:var(--surface);color:var(--text);text-align:left;transition:border-color .18s}
+.dash-row:hover{border-color:var(--brand-border)}
+.dash-row-id{grid-area:id;font-size:11px;color:var(--muted)}
+.dash-row-title{grid-area:title;font-size:14px;overflow-wrap:anywhere}
+.dash-row-meta{grid-area:meta;font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.dash-row-value{grid-area:value;justify-self:end;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.dash-tags{grid-area:tags;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:5px}
+.dash-status,.dash-flag{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:100px;font-size:11px;font-weight:700;white-space:nowrap;background-color:var(--surface-alt);color:var(--muted)}
+.dash-status.status-pendente,.dash-status.status-pendentes,.dash-status.status-recebido{background-color:var(--warning-soft);color:var(--warning)}
+.dash-status.status-analise,.dash-status.status-andamento{background-color:var(--brand-soft);color:var(--brand)}
+.dash-status.status-concluido,.dash-status.status-organizado,.dash-status.status-resolvidos{background-color:var(--success-soft);color:var(--success)}
+.dash-flag{background-color:var(--error-soft);color:var(--error)}
+.dash-flag>span{display:grid;place-items:center;width:14px;height:14px;border-radius:50%;background-color:var(--error);color:#FFFFFF;font-size:10px;font-weight:800}
+.dash-list li.is-open .dash-row{border-color:var(--brand-border);border-radius:10px 10px 0 0;background-color:var(--brand-soft)}
+.dash-row-detail{padding:14px;border:1px solid var(--brand-border);border-top:0;border-radius:0 0 10px 10px;background-color:var(--surface)}
+.dash-row-detail dl{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px 18px;margin:0}
+.dash-row-detail dl>div{min-width:0}
+.dash-row-detail dt{font-size:11px;color:var(--muted)}
+.dash-row-detail dd{margin:2px 0 0;font-size:13px;font-weight:650;color:var(--text);overflow-wrap:anywhere}
+.dash-detail-issue{margin:0 0 12px;padding:8px 10px;border-radius:8px;background-color:var(--error-soft);color:var(--error);font-size:12px}
+.dash-empty{display:grid;justify-items:start;gap:6px;padding:22px;border:1px dashed var(--control-border);border-radius:12px;background-color:var(--surface);color:var(--muted);font-size:13px}
+.dash-empty strong{font-size:15px;color:var(--text)}
+.dash-more{width:100%;min-height:40px;margin-top:10px;border:1px solid var(--border);border-radius:10px;background-color:var(--surface);color:var(--brand);font-size:13px;font-weight:700}
+.dash-more:hover{border-color:var(--brand-border)}
+
+.dash-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px 22px;border-top:1px solid var(--border);background-color:var(--surface)}
+.dash-footer p{margin:0;max-width:60ch;font-size:12px;line-height:1.55;color:var(--muted)}
+.dash-footer .btn{flex-shrink:0}
+
+@media(min-width:760px){
+  .dash-row{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) 104px minmax(150px,auto);grid-template-areas:"id meta value tags" "title meta value tags"}
+  .dashboard-dialog:not([data-scenario=planilhas]) .dash-row{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(150px,auto);grid-template-areas:"id meta tags" "title meta tags"}
+}
+@media(max-width:820px){.dash-grid{grid-template-columns:1fr}}
+@media(max-width:480px){
+  .dash-row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"id value" "title title" "meta meta" "tags tags";gap:3px 10px}
+  .dash-tags{justify-content:flex-start;margin-top:5px}
+}
+@media(max-width:700px){
+  .dashboard-dialog{width:100vw;height:100vh;height:100dvh;max-height:100vh;max-height:100dvh;border-radius:0}
+  /* No celular a barra do título fica fixa no topo, com o botão de fechar sempre à mão. */
+  .dash-titlebar{position:sticky;top:0;z-index:3;padding:12px 16px}
+  .dash-close{width:38px;height:38px}
+  .dash-intro{padding:0 16px 4px}
+  .dash-intro p{font-size:12px}
+  .dash-toolbar{position:static;padding:10px 16px 14px}
+  .dash-tabs{flex:1 1 100%}
+  .dash-tabs button{flex:1;padding:0 6px}
+  .dash-body{padding:14px 16px 18px}
+  .dash-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .dash-kpi{padding:12px}
+  .dash-kpi span{font-size:11px}
+  .dash-kpi strong{font-size:24px}
+  .dash-card{padding:14px}
+  .dash-bars{height:120px}
+  .dash-axis span{font-size:10px}
+  .dash-footer{flex-direction:column;align-items:stretch;padding:14px 16px 20px}
+  .dash-footer .btn{white-space:normal;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){.dashboard-dialog *,.dashboard-dialog *::after{animation:none!important;transition:none!important}}

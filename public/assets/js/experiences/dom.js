@@ -49,9 +49,3 @@ export function replaceChildrenKeepingFocus(container, ...children) {
   container.replaceChildren(...children.flat(Infinity).filter(Boolean));
   if (key) container.querySelector(`[data-focus-key="${CSS.escape(key)}"]`)?.focus({ preventScroll: true });
 }
-
-/** Formata reais sem depender da localidade do navegador. */
-export function money(value) {
-  const [int, cents] = Number(value).toFixed(2).split('.');
-  return `R$ ${int.replace(/\B(?=(\d{3})+(?!\d))/g, '.')},${cents}`;
-}

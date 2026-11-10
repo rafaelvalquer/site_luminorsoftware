@@ -58,6 +58,19 @@ async function checkContrast(page, state) {
         await checkContrast(page, `animation step ${step}, ${width}`);
         if (width === 1440) await page.locator('#automation-demo').screenshot({ path: resolve(root, `screenshots/Luminor_Claro_Etapa_${step}.png`) });
       }
+      // Painel completo: faixa escura, corpo claro, filtro ativo, detalhes de um registro e estado vazio.
+      await page.locator('.outcome-explore').click();
+      for (const scenario of ['planilhas', 'documentos', 'atendimento']) {
+        await page.locator(`[data-dash-scenario="${scenario}"]`).click();
+        await page.locator('[data-dist]').first().click();
+        await page.locator('.dash-row').first().click();
+        await checkContrast(page, `dashboard ${scenario}, ${width}`);
+      }
+      await page.locator('[data-dash-scenario="documentos"]').click();
+      await page.locator('[data-chip="Contrato"]').click();
+      await page.locator('[data-dist="organizado"]').click();
+      await checkContrast(page, `dashboard empty state, ${width}`);
+      await page.keyboard.press('Escape');
       for(const scenario of ['planilhas','documentos','atendimento']){
         await page.locator(`[data-demo-scenario="${scenario}"]`).click();
         await page.locator('[data-demo-step="3"]').click();
