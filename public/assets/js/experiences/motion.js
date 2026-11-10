@@ -69,5 +69,10 @@ export function createLifecycle() {
 /** Pausa ou retoma as animações CSS/Web Animations dentro de um elemento. */
 export function setAnimationsPaused(root, paused) {
   if (!root.getAnimations) return;
-  for (const animation of root.getAnimations({ subtree: true })) paused ? animation.pause() : animation.play();
+  for (const animation of root.getAnimations({ subtree: true })) {
+    if (!paused) { animation.play(); continue; }
+    animation.pause();
+    // pause() só congela no próximo quadro; reatribuir o tempo conclui a pausa na hora.
+    animation.currentTime = animation.currentTime;
+  }
 }

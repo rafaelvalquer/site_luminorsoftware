@@ -35,7 +35,7 @@
         travel=people.map((person,i)=>person.animate([{transform:from[i]},{transform:getComputedStyle(person).transform}],{duration:2700,easing:'cubic-bezier(.22,.7,.2,1)'}));
       }
     }
-    function pause(){clearTimeout(timer);playing=false;controls();root.getAnimations({subtree:true}).forEach(animation=>animation.pause())}
+    function pause(){clearTimeout(timer);playing=false;controls();root.getAnimations({subtree:true}).forEach(animation=>{animation.pause();animation.currentTime=animation.currentTime})}
     function schedule(){timer=setTimeout(()=>{if(index<2){setPhase(index+1);schedule()}else pause()},index===0?4400:index===1?3100:4600)}
     function play(){if(motion.matches){setPhase(2);pause();return}if(index===2)setPhase(0);playing=true;controls();root.getAnimations({subtree:true}).forEach(animation=>animation.play());schedule()}
     $$('[data-team-state]',root).forEach(b=>b.addEventListener('click',()=>{touched=true;pause();setPhase(b.dataset.teamState==='before'?0:2)}));

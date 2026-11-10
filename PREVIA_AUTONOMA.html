@@ -970,6 +970,101 @@ main{counter-reset:secao}
 /* Experiências interativas da página inicial: fluxo de automação, painel e arquitetura de integrações.
    Carregado depois de styles.css; usa os mesmos tokens da identidade V3. */
 
+/* ===== Experiência 01 — fluxo de automação ===== */
+
+/* Etapa 2: análise. A planilha continua legível e o que se repete fica em destaque. */
+.analysis-panel{position:absolute;left:24px;right:24px;bottom:16px;z-index:2;display:grid;gap:10px;padding:14px 16px;border:1px solid var(--brand-border);border-radius:14px;background:var(--surface);box-shadow:0 14px 34px -14px rgba(22,11,46,.28);opacity:0;transform:translateY(14px);transition:opacity .45s,transform .45s;pointer-events:none}
+.analysis-kicker{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:750;letter-spacing:.11em;text-transform:uppercase;color:var(--brand)}
+.analysis-kicker .icon{width:15px;height:15px}
+.analysis-tasks{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none;counter-reset:task}
+.analysis-tasks li{counter-increment:task;display:flex;align-items:center;gap:6px;padding:5px 10px 5px 5px;border-radius:100px;background:var(--brand-soft);color:var(--brand-dark);font-size:12px;font-weight:600}
+.analysis-tasks li::before{content:counter(task);display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--surface);color:var(--brand);font-size:10px;font-weight:800}
+.analysis-route{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}
+.analysis-route span:last-child{color:var(--text);font-weight:650}
+.analysis-route i{position:relative;flex:1;max-width:120px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--brand-border),var(--accent));background-color:var(--brand-border)}
+.analysis-route i::after{content:"";position:absolute;right:-1px;top:-3px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.process-visual[data-step="1"] .analysis-panel{opacity:1;transform:none}
+.process-visual[data-step="1"] .sheet-preview{filter:none;transform:rotate(0) scale(.97)}
+.process-visual[data-step="1"] .sheet-cursor{opacity:0}
+.process-visual[data-step="1"] .sheet-grid .cell-wait{background:var(--accent-soft);color:var(--accent-text);font-weight:650;box-shadow:inset 0 0 0 2px var(--accent)}
+.process-visual[data-step="1"] .manual-preview{filter:none}
+.process-visual[data-step="1"] .loose-document,.process-visual[data-step="1"] .loose-message{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,200,208,.16)}
+.sheet-cursor{transition:opacity .3s}
+.sheet-grid .cell-wait{transition:background-color .35s,color .35s,box-shadow .35s}
+
+/* Etapa 3: automação. Origem → regras → destino, com estado visível em cada nó. */
+.workflow-label{margin-bottom:16px}
+.workflow-track{align-items:flex-start}
+.workflow-node{position:relative;gap:5px;text-align:center;transition:opacity .35s}
+.workflow-node>.icon{margin-bottom:4px;transition:border-color .3s,box-shadow .3s,transform .3s}
+.workflow-node small{font-size:9px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.node-text{display:grid;gap:3px;justify-items:center}
+.node-text span{font-size:12px;font-weight:650;color:var(--text);max-width:118px;line-height:1.3}
+.workflow-node::after{content:"✓";position:absolute;top:-6px;left:calc(50% + 18px);display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:var(--brand-dark);font-size:11px;font-weight:800;opacity:0;transform:scale(.5);transition:opacity .3s,transform .3s}
+.flow-connector{margin:29px 6px 0;max-width:56px;background:var(--brand-border);transition:background-color .3s}
+.process-visual .flow-connector i{left:0;right:0;top:-3px;width:auto;height:7px;border-radius:0;background:none;box-shadow:none;opacity:0;animation:none}
+.flow-connector i::after{content:"";position:absolute;right:0;top:0;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(0,200,208,.22)}
+.process-visual[data-playing="true"] .workflow-preview[data-phase="source"] .flow-connector[data-connector="0"] i,
+.process-visual[data-playing="true"] .workflow-preview[data-phase="target"] .flow-connector[data-connector="1"] i{opacity:1;animation:data-packet .8s cubic-bezier(.45,0,.2,1) infinite}
+@keyframes data-packet{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+@keyframes data-packet-down{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+
+/* Estados: ativo (roxo), concluído (selo ✓ ciano) e aguardando (esmaecido). */
+.workflow-preview[data-phase="source"] [data-node="source"]>.icon,
+.workflow-preview[data-phase="rules"] [data-node="rules"]>.icon,
+.workflow-preview[data-phase="target"] [data-node="target"]>.icon{border-color:var(--brand);box-shadow:0 0 0 5px rgba(108,43,217,.14);transform:scale(1.06)}
+.workflow-preview[data-phase="rules"] [data-node="source"]::after,
+.workflow-preview[data-phase="target"] [data-node="source"]::after,
+.workflow-preview[data-phase="target"] [data-node="rules"]::after,
+.workflow-preview[data-phase="done"] [data-node]::after{opacity:1;transform:none}
+.workflow-preview[data-phase="source"] [data-node="rules"],
+.workflow-preview[data-phase="source"] [data-node="target"],
+.workflow-preview[data-phase="rules"] [data-node="target"]{opacity:.5}
+.workflow-preview[data-phase="rules"] [data-connector="0"],
+.workflow-preview[data-phase="target"] [data-connector="0"],
+.workflow-preview[data-phase="done"] .flow-connector{background:var(--accent)}
+
+.workflow-records{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:16px 0 0;padding:0;list-style:none}
+.workflow-records li{display:flex;align-items:center;gap:6px;padding:4px 10px;border:1px solid var(--border);border-radius:100px;background:var(--surface);color:var(--muted);font-size:11px;font-variant-numeric:tabular-nums;transition:color .3s,border-color .3s}
+.workflow-records li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--control-border);transition:background-color .3s}
+.workflow-records li[data-state="done"]{color:var(--text);border-color:var(--brand-border)}
+.workflow-records li[data-state="done"]::before{background:var(--accent)}
+.workflow-result{margin-top:14px;transition:opacity .35s}
+.workflow-preview:not([data-phase="done"]) .workflow-result{opacity:0}
+
+/* Controles: reproduzir/pausar e reiniciar. */
+.demo-narrative p{font-size:12px;min-height:3.2em}
+.demo-controls{display:flex;gap:6px;flex-shrink:0}
+.demo-restart{display:flex;align-items:center;gap:6px;padding:9px 10px;border:1px solid var(--border);border-radius:7px;background:var(--surface);color:var(--muted);font-size:10px;font-weight:650}
+.demo-restart:hover{border-color:var(--brand-border);color:var(--brand)}
+.process-visual[data-state="completed"] .chart-line{animation:draw-chart .9s ease-out both;stroke-dasharray:1}
+.process-visual[data-state="completed"] .document-card,.process-visual[data-state="completed"] .ticket-row{animation:result-arrive .6s ease-out both}
+
+/* Celular: fluxo vertical compacto, sem arrastar o diagrama. */
+@media(max-width:620px){
+  .workflow-preview{justify-content:flex-start;padding-top:20px}
+  .workflow-label{margin-bottom:12px}
+  .workflow-track{flex-direction:column;align-items:center}
+  .workflow-node{flex-direction:row;align-items:center;gap:12px;width:min(100%,232px);text-align:left}
+  .workflow-node>.icon{width:44px;height:44px;padding:11px;margin:0;flex-shrink:0}
+  .node-text{justify-items:start}
+  .node-text span{max-width:none}
+  .workflow-node::after{top:-5px;left:30px}
+  .flow-connector{width:min(100%,232px);height:22px;max-width:none;flex:none;margin:4px 0;background:linear-gradient(var(--brand-border),var(--brand-border)) 21px 0/2px 100% no-repeat;background-color:transparent}
+  .workflow-preview[data-phase="rules"] [data-connector="0"],
+  .workflow-preview[data-phase="target"] [data-connector="0"],
+  .workflow-preview[data-phase="done"] .flow-connector{background:linear-gradient(var(--accent),var(--accent)) 21px 0/2px 100% no-repeat;background-color:transparent}
+  .process-visual .flow-connector i{left:18px;right:auto;top:0;bottom:0;width:7px;height:auto}
+  .flow-connector i::after{top:auto;bottom:0}
+  .process-visual[data-playing="true"] .workflow-preview[data-phase="source"] .flow-connector[data-connector="0"] i,
+  .process-visual[data-playing="true"] .workflow-preview[data-phase="target"] .flow-connector[data-connector="1"] i{animation-name:data-packet-down}
+  .analysis-panel{left:12px;right:12px;bottom:12px;padding:12px}
+  .analysis-tasks li{font-size:11px}
+  .demo-narrative p{min-height:4.8em}
+  .demo-controls{width:100%}
+  .demo-controls button{flex:1;justify-content:center}
+}
+
 </style>
   <script>
 /* Canais comerciais informados pela empresa. */
@@ -1130,7 +1225,7 @@ window.LUMINOR_CONFIG = Object.freeze({
         travel=people.map((person,i)=>person.animate([{transform:from[i]},{transform:getComputedStyle(person).transform}],{duration:2700,easing:'cubic-bezier(.22,.7,.2,1)'}));
       }
     }
-    function pause(){clearTimeout(timer);playing=false;controls();root.getAnimations({subtree:true}).forEach(animation=>animation.pause())}
+    function pause(){clearTimeout(timer);playing=false;controls();root.getAnimations({subtree:true}).forEach(animation=>{animation.pause();animation.currentTime=animation.currentTime})}
     function schedule(){timer=setTimeout(()=>{if(index<2){setPhase(index+1);schedule()}else pause()},index===0?4400:index===1?3100:4600)}
     function play(){if(motion.matches){setPhase(2);pause();return}if(index===2)setPhase(0);playing=true;controls();root.getAnimations({subtree:true}).forEach(animation=>animation.play());schedule()}
     $$('[data-team-state]',root).forEach(b=>b.addEventListener('click',()=>{touched=true;pause();setPhase(b.dataset.teamState==='before'?0:2)}));
@@ -1164,17 +1259,46 @@ window.LUMINOR_CONFIG = Object.freeze({
 const __module_public_assets_js_experiences_scenarios_js = (() => {
 // Dados demonstrativos dos cenários do exemplo interativo. Nenhum registro representa cliente real.
 
+// Cada cenário descreve as quatro etapas: problema, análise, automação e resultado.
 const FLOW_SCENARIOS = {
-  planilhas: { file: 'controle_pedidos.xlsx', source: 'Planilhas', result: 'Aplicação', message: 'Dados consolidados. Equipe no controle.', columns: ['Pedido', 'Valor', 'Situação'], rows: [['#1048', 'R$ 320', 'Conferir'], ['#1049', 'R$ 180', 'Copiar'], ['#1050', 'R$ 460', 'Atualizar']], gain: 'As planilhas viram uma visão clara da operação. Explore o dashboard.' },
-  documentos: { file: 'documentos_da_equipe', source: 'Documentos', result: 'Registros', message: 'Informações extraídas. Revisão pela equipe.', gain: 'Cada documento encontra seu lugar. Selecione um cartão para ver os dados.' },
-  atendimento: { file: 'mensagens_de_clientes', source: 'WhatsApp', result: 'Equipe', message: 'Solicitações organizadas. Contexto com a equipe.', gain: 'Conversas viram tickets com contexto e responsável. Explore os filtros.' },
+  planilhas: {
+    file: 'controle_pedidos.xlsx', source: 'Planilhas', rules: 'Validar e consolidar', result: 'Aplicação',
+    message: 'Dados consolidados. Equipe no controle.',
+    columns: ['Pedido', 'Valor', 'Situação'], rows: [['#1048', 'R$ 320', 'Conferir'], ['#1049', 'R$ 180', 'Copiar'], ['#1050', 'R$ 460', 'Atualizar']],
+    analysis: { tasks: ['Copiar pedido', 'Conferir valor', 'Atualizar situação'], from: 'Planilha de pedidos', to: 'Sistema de pedidos' },
+    records: ['#1048', '#1049', '#1050'],
+    captions: [
+      'Pedidos copiados à mão entre planilhas, com conferência repetida a cada atualização.',
+      'Mapeamos o que se repete: copiar o pedido, conferir o valor e atualizar a situação.',
+      'Uma regra valida cada pedido e o envia ao sistema, sem nova digitação.',
+    ],
+    gain: 'As planilhas viram uma visão clara da operação. Explore o resultado.',
+  },
+  documentos: {
+    file: 'documentos_da_equipe', source: 'Documentos', rules: 'Classificar e extrair', result: 'Registros',
+    message: 'Informações extraídas. Revisão pela equipe.',
+    analysis: { tasks: ['Abrir cada arquivo', 'Copiar os campos', 'Arquivar na pasta certa'], from: 'E-mail e pastas', to: 'Registro organizado' },
+    records: ['NF 208', 'Contrato', 'NF 209'],
+    captions: [
+      'Notas, contratos e recibos chegam por canais diferentes e esperam alguém abrir.',
+      'Mapeamos o que se repete: abrir o arquivo, copiar os campos e arquivar.',
+      'Uma regra classifica cada documento e extrai os campos para revisão.',
+    ],
+    gain: 'Cada documento encontra seu lugar. Selecione um cartão para ver os dados.',
+  },
+  atendimento: {
+    file: 'mensagens_de_clientes', source: 'WhatsApp', rules: 'Classificar e encaminhar', result: 'Equipe',
+    message: 'Solicitações organizadas. Contexto com a equipe.',
+    analysis: { tasks: ['Ler cada mensagem', 'Identificar o assunto', 'Avisar quem responde'], from: 'WhatsApp', to: 'Fila da equipe' },
+    records: ['#1048', '#1049', '#1050'],
+    captions: [
+      'Mensagens se acumulam e ninguém sabe ao certo quem já respondeu.',
+      'Mapeamos o que se repete: ler, identificar o assunto e avisar quem responde.',
+      'Uma regra classifica cada conversa e cria o ticket com o responsável certo.',
+    ],
+    gain: 'Conversas viram tickets com contexto e responsável. Explore os filtros.',
+  },
 };
-
-const FLOW_CAPTIONS = [
-  'Informações espalhadas e a mesma tarefa feita várias vezes.',
-  'A Luminor entende a rotina e mapeia as etapas que se repetem.',
-  'Criamos um fluxo sob medida que conecta dados, ferramentas e pessoas.',
-];
 
 const DOCUMENTS = [
   { id: 'nf208', title: 'Nota fiscal 208', category: 'Nota fiscal', stage: 0, fields: [['Fornecedor', 'Empresa A'], ['Valor', 'R$ 320,00'], ['Próxima etapa', 'Extrair informações']] },
@@ -1191,7 +1315,7 @@ const TICKETS = [
   { id: '1051', title: 'Solicitar orçamento', owner: 'Ana', status: 'pendentes', label: 'Pendente', initial: 'A' },
 ];
 
-return { FLOW_SCENARIOS, FLOW_CAPTIONS, DOCUMENTS, TICKETS };
+return { FLOW_SCENARIOS, DOCUMENTS, TICKETS };
 })();
 const __module_public_assets_js_experiences_dom_js = (() => {
 // Auxiliares de DOM das experiências. Todo conteúdo dinâmico entra como texto, nunca como HTML.
@@ -1326,88 +1450,203 @@ function createLifecycle() {
 /** Pausa ou retoma as animações CSS/Web Animations dentro de um elemento. */
 function setAnimationsPaused(root, paused) {
   if (!root.getAnimations) return;
-  for (const animation of root.getAnimations({ subtree: true })) paused ? animation.pause() : animation.play();
+  for (const animation of root.getAnimations({ subtree: true })) {
+    if (!paused) { animation.play(); continue; }
+    animation.pause();
+    // pause() só congela no próximo quadro; reatribuir o tempo conclui a pausa na hora.
+    animation.currentTime = animation.currentTime;
+  }
 }
 
 return { reducedMotionQuery, prefersReducedMotion, createTimers, createLifecycle, setAnimationsPaused };
 })();
 const __module_public_assets_js_experiences_automation_flow_js = (() => {
-// Exemplo interativo do hero (#automation-demo): da rotina manual ao resultado.
-const { FLOW_SCENARIOS, FLOW_CAPTIONS } = __module_public_assets_js_experiences_scenarios_js;
-const { $, $$ } = __module_public_assets_js_experiences_dom_js;
+// Experiência 01 — fluxo de automação (#automation-demo): problema, análise, automação e resultado.
+const { FLOW_SCENARIOS } = __module_public_assets_js_experiences_scenarios_js;
+const { $, $$, el, icon } = __module_public_assets_js_experiences_dom_js;
 const { createTimers, createLifecycle, reducedMotionQuery } = __module_public_assets_js_experiences_motion_js;
 
-const iconHTML = id => `<svg class="icon" aria-hidden="true"><use href="#i-${id}"></use></svg>`;
-const safeText = s => String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+const FLOW_LAST_STEP = 3;
+/** Quanto tempo cada etapa fica na tela durante a reprodução (ms). */
+const STEP_DURATIONS = [2000, 2400, 3000];
+/** Fases internas da etapa de automação: origem, regras, destino e concluído. */
+const AUTOMATION_PHASES = [['source', 0], ['rules', 650], ['target', 1500], ['done', 2150]];
 
-function setupAutomationFlow(root, { outcome }) {
+const restingStatus = step => (step === 0 ? 'idle' : step === FLOW_LAST_STEP ? 'completed' : 'paused');
+
+/** Estado inicial da máquina: idle, ou reduced-motion quando a pessoa pediu menos movimento. */
+function initialFlowState(reduced = false) {
+  return { status: reduced ? 'reduced-motion' : 'idle', step: 0 };
+}
+
+/**
+ * Máquina de estados do fluxo (pura e testável).
+ * Estados: idle, running, paused, completed e reduced-motion; etapa sempre entre 0 e 3.
+ */
+function flowTransition(state, action) {
+  const reduced = state.status === 'reduced-motion';
+  switch (action.type) {
+    case 'play':
+      if (reduced) return { status: 'reduced-motion', step: FLOW_LAST_STEP };
+      if (state.status === 'running') return state;
+      return { status: 'running', step: state.step === FLOW_LAST_STEP ? 0 : state.step };
+    case 'pause':
+      return state.status === 'running' ? { status: 'paused', step: state.step } : state;
+    case 'tick':
+      if (state.status !== 'running') return state;
+      return state.step + 1 >= FLOW_LAST_STEP ? { status: 'completed', step: FLOW_LAST_STEP } : { status: 'running', step: state.step + 1 };
+    case 'goto': {
+      const step = Math.max(0, Math.min(FLOW_LAST_STEP, Math.trunc(Number(action.step)) || 0));
+      return { status: reduced ? 'reduced-motion' : restingStatus(step), step };
+    }
+    case 'restart':
+      return { status: reduced ? 'reduced-motion' : 'running', step: 0 };
+    case 'select':
+      return { status: reduced ? 'reduced-motion' : 'idle', step: 0 };
+    case 'motion':
+      if (action.reduced) return { status: 'reduced-motion', step: state.step };
+      return reduced ? { status: restingStatus(state.step), step: state.step } : state;
+    default:
+      return state;
+  }
+}
+
+function setupAutomationFlow(root, { outcome, track = () => {} }) {
   const life = createLifecycle();
   const timers = createTimers();
   const motion = reducedMotionQuery();
-  let selected = 'planilhas', step = 0, playing = false, touched = false;
+  const preview = $('.workflow-preview', root);
+  let state = initialFlowState(Boolean(motion?.matches));
+  let selected = 'planilhas';
+  let touched = false;
+  let userRun = false;
 
-  function playLabel() {
-    root.dataset.playing = String(playing);
-    $('#demo-play-label').textContent = playing ? 'Pausar' : step === 3 ? 'Rever transformação' : step === 0 ? 'Ver transformação' : 'Continuar';
-    $('#demo-play').setAttribute('aria-label', playing ? 'Pausar transformação' : step === 3 ? 'Rever transformação' : step === 0 ? 'Reproduzir transformação' : 'Continuar transformação');
-    $('#demo-play>span').textContent = playing ? 'Ⅱ' : step === 3 ? '↻' : '▶';
+  const playing = () => state.status === 'running';
+
+  function renderControls() {
+    const { step } = state;
+    root.dataset.state = state.status;
+    root.dataset.playing = String(playing());
+    $('#demo-play-label').textContent = playing() ? 'Pausar' : step === FLOW_LAST_STEP ? 'Rever transformação' : step === 0 ? 'Ver transformação' : 'Continuar';
+    $('#demo-play').setAttribute('aria-label', playing() ? 'Pausar transformação' : step === FLOW_LAST_STEP ? 'Rever transformação' : step === 0 ? 'Reproduzir transformação' : 'Continuar transformação');
+    $('#demo-play>span').textContent = playing() ? 'Ⅱ' : step === FLOW_LAST_STEP ? '↻' : '▶';
   }
-  function pause() { timers.clear(); playing = false; playLabel(); }
-  function setStep(next) {
-    step = next;
+
+  /** Mostra o estado final da etapa de automação (pausa, navegação manual ou movimento reduzido). */
+  function settlePhase() {
+    preview.dataset.phase = 'done';
+    $$('#demo-records li', root).forEach(item => { item.dataset.state = 'done'; });
+  }
+
+  /** Percorre origem → regras → destino; os registros mudam de estado um a um. */
+  function runAutomationPhases() {
+    const records = $$('#demo-records li', root);
+    records.forEach(item => { item.dataset.state = 'waiting'; });
+    for (const [phase, at] of AUTOMATION_PHASES) {
+      if (at === 0) preview.dataset.phase = phase;
+      else timers.after(at, () => { preview.dataset.phase = phase; });
+    }
+    records.forEach((item, i) => timers.after(AUTOMATION_PHASES[1][1] + 200 + i * 230, () => { item.dataset.state = 'done'; }));
+  }
+
+  function render() {
+    const { step } = state;
     root.dataset.step = String(step);
-    $('#scenario-outcome').hidden = step !== 3;
+    $('#scenario-outcome').hidden = step !== FLOW_LAST_STEP;
     $$('[data-demo-step]', root).forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.demoStep) === step)));
-    $('#demo-stage-copy').textContent = step === 3 ? FLOW_SCENARIOS[selected].gain : FLOW_CAPTIONS[step];
-    playLabel();
+    $('#demo-stage-copy').textContent = step === FLOW_LAST_STEP ? FLOW_SCENARIOS[selected].gain : FLOW_SCENARIOS[selected].captions[step];
+    if (step !== 2 || !playing()) settlePhase();
+    renderControls();
   }
-  function schedule() { timers.after(1800, () => { if (step < 3) { setStep(step + 1); schedule(); } else pause(); }); }
-  function play() {
-    if (motion?.matches) { setStep(3); pause(); return; }
-    if (step === 3) setStep(0);
-    playing = true; playLabel(); schedule();
+
+  /** Aplica uma ação: cancela a sequência anterior e, se estiver tocando, agenda a próxima etapa. */
+  function dispatch(action) {
+    const previous = state;
+    state = flowTransition(state, action);
+    if (state === previous) return;
+    timers.clear();
+    render();
+    if (playing()) {
+      if (state.step === 2) runAutomationPhases();
+      timers.after(STEP_DURATIONS[state.step], () => dispatch({ type: 'tick' }));
+    }
+    if (previous.status === 'running' && state.status === 'completed' && userRun) {
+      userRun = false;
+      track('demo_flow_complete', { scenario: selected });
+    }
   }
+
   function choose(name) {
-    pause();
     selected = name;
     root.dataset.scenario = name;
     const scenario = FLOW_SCENARIOS[name];
     $$('[data-demo-scenario]', root).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.demoScenario === name)));
     $('#demo-source-name').textContent = scenario.file;
     $('#demo-node-source').textContent = scenario.source;
+    $('#demo-node-rules').textContent = scenario.rules;
     $('#demo-node-result').textContent = scenario.result;
     $('#demo-result').textContent = scenario.message;
+    $('#demo-analysis-from').textContent = scenario.analysis.from;
+    $('#demo-analysis-to').textContent = scenario.analysis.to;
+    $('#demo-analysis-tasks').replaceChildren(...scenario.analysis.tasks.map(task => el('li', { text: task })));
+    $('#demo-records').replaceChildren(...scenario.records.map(record => el('li', { text: record, dataset: { state: 'done' } })));
     if (name === 'planilhas') {
       const cells = ['', 'A', 'B', 'C', '1', ...scenario.columns, ...scenario.rows.flatMap((row, i) => [String(i + 2), ...row])];
-      $('.sheet-grid', root).innerHTML = cells.map((cell, i) => `<span class="${i > 7 && i % 4 === 3 ? 'cell-wait' : ''}">${safeText(cell)}</span>`).join('');
+      $('.sheet-grid', root).replaceChildren(...cells.map((cell, i) => el('span', { class: i > 7 && i % 4 === 3 ? 'cell-wait' : false, text: cell })));
     }
-    $('#manual-preview').innerHTML = name === 'documentos'
-      ? ['Notas fiscais', 'Contrato_final_v3.pdf', 'Recibos', 'Pedido de compra'].map((label, i) => `<div class="loose-document loose-${i}">${iconHTML('layer')}<strong>${label}</strong><span>Conferir e organizar</span></div>`).join('')
+    const loose = name === 'documentos'
+      ? ['Notas fiscais', 'Contrato_final_v3.pdf', 'Recibos', 'Pedido de compra'].map((label, i) => el('div', { class: `loose-document loose-${i}` }, icon('layer'), el('strong', { text: label }), el('span', { text: 'Conferir e organizar' })))
       : name === 'atendimento'
-        ? ['Olá! Cadê meu pedido?', 'Pode agendar uma visita?', 'Preciso de um orçamento.', 'Alguém já respondeu?'].map((label, i) => `<div class="loose-message loose-${i}">${iconHTML('message')}<span>${label}</span></div>`).join('')
-        : '';
+        ? ['Olá! Cadê meu pedido?', 'Pode agendar uma visita?', 'Preciso de um orçamento.', 'Alguém já respondeu?'].map((label, i) => el('div', { class: `loose-message loose-${i}` }, icon('message'), el('span', { text: label })))
+        : [];
+    $('#manual-preview').replaceChildren(...loose);
     outcome.setScenario(name);
-    setStep(0);
+    dispatch({ type: 'select' });
   }
 
-  $$('[data-demo-scenario]', root).forEach(button => life.listen(button, 'click', () => { touched = true; choose(button.dataset.demoScenario); }));
-  $$('[data-demo-step]', root).forEach(button => life.listen(button, 'click', () => { touched = true; pause(); setStep(Number(button.dataset.demoStep)); }));
-  life.listen($('#demo-play'), 'click', () => { touched = true; if (playing) pause(); else play(); });
-  life.onPageHidden(pause);
-  life.onMotionChange(reduced => { if (reduced) pause(); });
+  function userPlayToggle() {
+    touched = true;
+    if (playing()) { dispatch({ type: 'pause' }); return; }
+    userRun = state.status !== 'reduced-motion';
+    if (userRun) track('demo_flow_start', { scenario: selected, action: 'play' });
+    dispatch({ type: 'play' });
+  }
+
+  $$('[data-demo-scenario]', root).forEach(button => life.listen(button, 'click', () => {
+    touched = true;
+    userRun = false;
+    choose(button.dataset.demoScenario);
+    track('demo_scenario_select', { scenario: button.dataset.demoScenario, component: 'automation_flow' });
+  }));
+  $$('[data-demo-step]', root).forEach(button => life.listen(button, 'click', () => {
+    touched = true;
+    userRun = false;
+    dispatch({ type: 'goto', step: button.dataset.demoStep });
+  }));
+  life.listen($('#demo-play'), 'click', userPlayToggle);
+  life.listen($('#demo-restart'), 'click', () => {
+    touched = true;
+    userRun = state.status !== 'reduced-motion';
+    if (userRun) track('demo_flow_start', { scenario: selected, action: 'restart' });
+    dispatch({ type: 'restart' });
+  });
+  life.onPageHidden(() => dispatch({ type: 'pause' }));
+  life.onMotionChange(reduced => dispatch({ type: 'motion', reduced }));
+  // Reprodução automática no máximo uma vez por visita; depois de qualquer interação, só manual.
   life.observe(root, entry => {
-    if (!entry.isIntersecting) { pause(); return; }
-    if (entry.intersectionRatio >= 0.35 && !touched && !motion?.matches) { touched = true; play(); }
+    if (!entry.isIntersecting) { dispatch({ type: 'pause' }); return; }
+    if (entry.intersectionRatio >= 0.35 && !touched && state.status === 'idle') { touched = true; dispatch({ type: 'play' }); }
   });
   choose('planilhas');
 
   return {
+    getState: () => ({ ...state, scenario: selected }),
     pendingTimers: () => timers.pending(),
     destroy() { timers.clear(); life.destroy(); outcome.destroy(); },
   };
 }
 
-return { setupAutomationFlow };
+return { FLOW_LAST_STEP, STEP_DURATIONS, AUTOMATION_PHASES, initialFlowState, flowTransition, setupAutomationFlow };
 })();
 const __module_public_assets_js_experiences_dashboard_js = (() => {
 // Resultado de cada cenário na última etapa do exemplo (#scenario-outcome).
@@ -1464,14 +1703,20 @@ const { createCompactOutcome } = __module_public_assets_js_experiences_dashboard
 
 const mounted = [];
 
+/** Eventos de uso das demonstrações; analytics.js decide se envia (consentimento e lista permitida). */
+function track(name, params = {}) {
+  try { window.LuminorAnalytics?.track(name, { page_type: 'home', ...params }); } catch { /* métricas nunca quebram a página */ }
+}
+
 function init() {
   const flowRoot = document.getElementById('automation-demo');
   const outcomeRoot = document.getElementById('scenario-outcome');
-  if (flowRoot && outcomeRoot) mounted.push(setupAutomationFlow(flowRoot, { outcome: createCompactOutcome(outcomeRoot) }));
+  if (flowRoot && outcomeRoot) mounted.push(setupAutomationFlow(flowRoot, { outcome: createCompactOutcome(outcomeRoot), track }));
 
-  // Leitura para testes e depuração: quantos temporizadores seguem ativos.
+  // Leitura para testes e depuração: estado do fluxo e temporizadores ainda ativos.
   window.LuminorExperiences = Object.freeze({
     pendingTimers: () => mounted.reduce((sum, item) => sum + item.pendingTimers(), 0),
+    flowState: () => mounted[0]?.getState?.(),
   });
 }
 
@@ -1530,7 +1775,7 @@ return {  };
           <ul class="hero-note"><li>Conversa direto pelo WhatsApp</li><li>Proposta depois de entender seu processo</li></ul>
           <div class="hero-footer"><div class="avatars" aria-hidden="true"><span><svg class="icon"><use href="#i-grid"/></svg></span><span><svg class="icon"><use href="#i-bot"/></svg></span><span><svg class="icon"><use href="#i-layer"/></svg></span></div><p>Do problema à solução.<br><strong>Tecnologia construída para sua operação.</strong></p></div>
         </div>
-        <section class="process-visual" id="automation-demo" data-step="0" data-playing="false" aria-labelledby="automation-title">
+        <section class="process-visual" id="automation-demo" data-step="0" data-state="idle" data-playing="false" aria-labelledby="automation-title">
           <div class="process-caption"><span class="status-dot"></span> DA SUA ROTINA À AUTOMAÇÃO <span class="demo-label">INTERATIVO</span></div>
           <h2 id="automation-title">Veja o trabalho mudar de ritmo.</h2>
           <div class="scenario-picker" role="group" aria-label="Escolha um processo para simular">
@@ -1540,17 +1785,17 @@ return {  };
           </div>
           <div class="transformation-stage">
             <div class="sheet-preview" aria-hidden="true"><div class="sheet-toolbar"><svg class="icon"><use href="#i-grid"/></svg><span id="demo-source-name">controle_pedidos.xlsx</span><span class="sheet-tag">MANUAL</span></div><div class="sheet-grid"><span></span><span>A</span><span>B</span><span>C</span><span>1</span><strong>Pedido</strong><strong>Valor</strong><strong>Situação</strong><span>2</span><span>#1048</span><span>R$ 320</span><span class="cell-wait">Conferir</span><span>3</span><span>#1049</span><span>R$ 180</span><span class="cell-wait">Copiar</span><span>4</span><span>#1050</span><span>R$ 460</span><span class="cell-wait">Atualizar</span></div><div class="sheet-cursor">↖ <span>Copiar. Conferir. Repetir.</span></div></div>
-            <div class="mapping-overlay" aria-hidden="true"><svg class="icon"><use href="#i-gear"/></svg><span>Conectando as etapas do seu processo</span><div class="mapping-dots"><i></i><i></i><i></i></div></div>
-            <div class="workflow-preview" aria-hidden="true"><span class="workflow-label">UM FLUXO CRIADO PARA SUA EMPRESA</span><div class="workflow-track"><div class="workflow-node"><svg class="icon"><use href="#i-grid"/></svg><span id="demo-node-source">Planilhas</span></div><div class="flow-connector"><i></i></div><div class="workflow-node core"><svg class="icon"><use href="#i-gear"/></svg><span>Automação</span></div><div class="flow-connector"><i></i></div><div class="workflow-node"><svg class="icon"><use href="#i-check"/></svg><span id="demo-node-result">Aplicação</span></div></div><div class="workflow-result"><span class="status-dot"></span><span id="demo-result">Dados consolidados. Equipe no controle.</span></div></div>
+            <div class="analysis-panel" aria-hidden="true"><span class="analysis-kicker"><svg class="icon"><use href="#i-cpu"/></svg>O que pode ser automatizado</span><ul class="analysis-tasks" id="demo-analysis-tasks"><li>Copiar pedido</li><li>Conferir valor</li><li>Atualizar situação</li></ul><div class="analysis-route"><span id="demo-analysis-from">Planilha de pedidos</span><i></i><span id="demo-analysis-to">Sistema de pedidos</span></div></div>
+            <div class="workflow-preview" aria-hidden="true" data-phase="done"><span class="workflow-label">UM FLUXO CRIADO PARA SUA EMPRESA</span><div class="workflow-track"><div class="workflow-node" data-node="source"><svg class="icon"><use href="#i-grid"/></svg><div class="node-text"><small>Origem</small><span id="demo-node-source">Planilhas</span></div></div><div class="flow-connector" data-connector="0"><i></i></div><div class="workflow-node core" data-node="rules"><svg class="icon"><use href="#i-gear"/></svg><div class="node-text"><small>Regras do processo</small><span id="demo-node-rules">Validar e consolidar</span></div></div><div class="flow-connector" data-connector="1"><i></i></div><div class="workflow-node" data-node="target"><svg class="icon"><use href="#i-check"/></svg><div class="node-text"><small>Destino</small><span id="demo-node-result">Aplicação</span></div></div></div><ol class="workflow-records" id="demo-records"><li data-state="done">#1048</li><li data-state="done">#1049</li><li data-state="done">#1050</li></ol><div class="workflow-result"><span class="status-dot"></span><span id="demo-result">Dados consolidados. Equipe no controle.</span></div></div>
                       <div id="manual-preview" class="manual-preview" aria-hidden="true"></div><div id="scenario-outcome" class="scenario-outcome" hidden></div>
           </div>
           <ol class="process-flow" aria-label="Etapas da transformação">
-            <li><button type="button" data-demo-step="0" aria-pressed="true"><span>01</span>Rotina</button></li>
+            <li><button type="button" data-demo-step="0" aria-pressed="true"><span>01</span>Problema</button></li>
             <li><button type="button" data-demo-step="1" aria-pressed="false"><span>02</span>Análise</button></li>
-            <li><button type="button" data-demo-step="2" aria-pressed="false"><span>03</span>Solução</button></li>
-            <li><button type="button" data-demo-step="3" aria-pressed="false"><span>04</span>Ganhos</button></li>
+            <li><button type="button" data-demo-step="2" aria-pressed="false"><span>03</span>Automação</button></li>
+            <li><button type="button" data-demo-step="3" aria-pressed="false"><span>04</span>Resultado</button></li>
           </ol>
-          <div class="demo-narrative"><p id="demo-stage-copy" role="status">Informações espalhadas e a mesma tarefa feita várias vezes.</p><button type="button" class="demo-play" id="demo-play" aria-label="Reproduzir transformação"><span aria-hidden="true">▶</span> <span id="demo-play-label">Ver transformação</span></button></div>
+          <div class="demo-narrative"><p id="demo-stage-copy" role="status">Informações espalhadas e a mesma tarefa feita várias vezes.</p><div class="demo-controls"><button type="button" class="demo-play" id="demo-play" aria-label="Reproduzir transformação"><span aria-hidden="true">▶</span> <span id="demo-play-label">Ver transformação</span></button><button type="button" class="demo-restart" id="demo-restart" aria-label="Reiniciar a transformação do começo"><span aria-hidden="true">↺</span> <span>Reiniciar</span></button></div></div>
           <p class="process-footnote">Explore as etapas e descubra um resultado diferente em cada cenário. Dados ilustrativos de soluções sob medida.</p>
           <noscript><p>Planilhas podem virar dashboards; documentos, um canvas organizado; e mensagens, uma lista de tickets. Ative o JavaScript para explorar os exemplos.</p></noscript>
         </section>
