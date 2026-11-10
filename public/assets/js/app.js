@@ -121,6 +121,8 @@
       const zones=[$('#contato'),$('.site-footer')].filter(Boolean);if('IntersectionObserver' in window&&zones.length){const visible=new Set();const observer=new IntersectionObserver(entries=>{for(const entry of entries)entry.isIntersecting?visible.add(entry.target):visible.delete(entry.target);link.classList.toggle('is-hidden',visible.size>0)},{threshold:.05});zones.forEach(zone=>observer.observe(zone))}}
     if(lines.length)el.innerHTML='<strong>Fale com a equipe</strong><p>'+lines.join(' &nbsp;·&nbsp; ')+'</p>'+(config.cnpj?`<p>CNPJ: ${safeText(config.cnpj)}</p>`:'');
   }
-  function init(){const year=$('#year');if(year)year.textContent=new Date().getFullYear();if($('#menu-btn')&&$('#nav'))setupNav();setupAutomationDemo();setupTeamExperience();setupSolutionActions();setupContacts();setupForm()}
+  // Sombra sutil no cabeçalho fixo depois que a página rola.
+  function setupHeaderShadow(){const header=$('.site-header');if(!header)return;const update=()=>header.classList.toggle('is-scrolled',window.scrollY>8);update();window.addEventListener('scroll',update,{passive:true})}
+  function init(){const year=$('#year');if(year)year.textContent=new Date().getFullYear();if($('#menu-btn')&&$('#nav'))setupNav();setupHeaderShadow();setupAutomationDemo();setupTeamExperience();setupSolutionActions();setupContacts();setupForm()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();

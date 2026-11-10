@@ -21,10 +21,10 @@ const { pathToFileURL } = require('node:url');
       await page.goto(pathToFileURL(resolve(root, 'PREVIA_AUTONOMA.html')).href);
       if(width===320){await page.locator('#cookies-reject').focus();await page.keyboard.press('Enter')}else await page.locator('#cookies-reject').click();
       assert(await page.locator('#cookie-banner').isHidden());
-      assert.equal(await page.locator('h1').innerText(), 'Automação de processos e sistemas sob medida para sua empresa');
+      assert.equal((await page.locator('h1').innerText()).replace(/\s+/g,' '), 'Seu negócio cresce. Seus processos precisam acompanhar.');
       assert.equal(await page.locator('.process-flow li').count(), 4);
       assert.equal(await page.locator('.method-grid article').count(), 4);
-      assert.equal(await page.locator('.example-card').count(), 3);
+      assert.equal(await page.locator('.example-card').count(), 4);
       assert.equal(await page.locator('#automation-demo').getAttribute('data-playing'), 'false', 'Reduced motion disables automatic playback');
       const checkLayout=async()=>{
         assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
@@ -105,11 +105,11 @@ const { pathToFileURL } = require('node:url');
       }).map(el => el.className));
       assert.deepEqual(overflowing, [], `Overflow at ${width}px`);
       if (width === 390) {
-        for (const id of ['solucoes', 'metodo', 'processos', 'simulador', 'faq', 'contato']) {
+        for (const id of ['solucoes', 'metodo', 'processos', 'diferenciais', 'contato']) {
           await page.locator('#menu-btn').focus();
           await page.keyboard.press('Enter');
           assert.equal(await page.locator('#menu-btn').getAttribute('aria-expanded'), 'true');
-          await page.locator(`#nav a[href="#${id}"]`).click();
+          await page.locator(`#nav a:not(.mobile-nav-cta)[href="#${id}"]`).click();
           assert.equal(await page.locator('#menu-btn').getAttribute('aria-expanded'), 'false');
           await checkAnchorHeading(id);
         }

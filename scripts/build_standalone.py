@@ -21,8 +21,8 @@ html=html.replace('<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48
 html=html.replace('<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">','')
 favicon=(p/'public/assets/img/favicon-192.png').read_bytes()
 html=html.replace('href="/assets/img/favicon-192.png"', 'href="data:image/png;base64,'+base64.b64encode(favicon).decode('ascii')+'"')
-logo=(p/'public/assets/img/luminor-logo-96.png').read_bytes()
-html=html.replace('src="/assets/img/luminor-logo-96.png"', 'src="data:image/png;base64,'+base64.b64encode(logo).decode('ascii')+'"')
+logo=(p/'public/assets/img/luminor-symbol.svg').read_bytes()
+html=html.replace('src="/assets/img/luminor-symbol.svg"', 'src="data:image/svg+xml;base64,'+base64.b64encode(logo).decode('ascii')+'"')
 html=html.replace('</main>','<section id="politica-demonstracao" class="wrap preview-privacy"><strong>Política de privacidade da demonstração</strong><p>Ao preencher o formulário, o WhatsApp abre com a mensagem pronta. Os dados só são enviados quando você confirma no WhatsApp. A política preliminar está em <code>public/privacidade.html</code> e requer validação jurídica antes da publicação.</p></section></main>')
 html=html.replace('name="robots" content="index,follow"','name="robots" content="noindex,nofollow"')
 import re
