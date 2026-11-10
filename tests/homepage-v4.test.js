@@ -29,6 +29,24 @@ test('homepage V4: capturas das demonstrações com dimensões, alt e carregamen
   }
 });
 
+test('demonstrações: eventos e parâmetros dentro da allowlist do Analytics', () => {
+  const analytics = readFileSync(new URL('../public/assets/js/analytics.js', import.meta.url), 'utf8');
+  const list = pattern => new Set(analytics.match(pattern)[1].match(/'[\w]+'/g).map(s => s.slice(1, -1)));
+  const allowed = list(/const allowed = new Set\(\[([^\]]+)\]/);
+  const keys = list(/for \(const key of \[([^\]]+)\]/);
+  let calls = 0;
+  for (const file of ['automation-flow.js', 'dashboard.js', 'integrations.js', 'gallery.js', 'process-runner.js']) {
+    const source = readFileSync(new URL(`../public/assets/js/experiences/${file}`, import.meta.url), 'utf8');
+    for (const [, name, params = ''] of source.matchAll(/track\('(\w+)'(?:,\s*\{([^}]*)\})?/g)) {
+      calls++;
+      assert(allowed.has(name), `${file}: ${name}`);
+      for (const [, key] of params.matchAll(/(\w+)\s*:/g)) assert(keys.has(key), `${file}: ${name}.${key}`);
+      for (const [, key] of params.matchAll(/(?:^|,)\s*(\w+)\s*(?=,|$)/g)) assert(keys.has(key), `${file}: ${name}.${key}`);
+    }
+  }
+  assert(calls >= 10, `track calls found: ${calls}`);
+});
+
 test('galeria: navegação por teclado entre as abas', () => {
   assert.deepEqual(GALLERY_TABS, ['automacao', 'gestao', 'integracao']);
   assert.equal(nextTab('automacao', 'ArrowRight'), 'gestao');

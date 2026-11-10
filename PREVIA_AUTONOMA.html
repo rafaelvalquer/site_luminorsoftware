@@ -1290,7 +1290,7 @@ window.LUMINOR_CONFIG = Object.freeze({
   <script>
 (() => {
   'use strict';
-  const allowed = new Set(['page_view','view_service','click_diagnostico','click_whatsapp','form_validation_error','generate_lead']);
+  const allowed = new Set(['page_view','view_service','click_diagnostico','click_whatsapp','form_validation_error','generate_lead','demo_flow_start','demo_flow_complete','demo_scenario_select','dashboard_filter','integration_simulate','integration_error_demo']);
   let active = false;
   let initialized = false;
   let pageViewSent = false;
@@ -1301,7 +1301,7 @@ window.LUMINOR_CONFIG = Object.freeze({
   function event(name, params = {}) {
     if (!allowed.has(name) || !active || !consent()) return false;
     const safe = {};
-    for (const key of ['page_type','service_slug','cta_location','contact_channel']) {
+    for (const key of ['page_type','service_slug','cta_location','contact_channel','scenario','component','action']) {
       if (params[key]) safe[key] = clean(params[key]);
     }
     if (name === 'page_view') {
