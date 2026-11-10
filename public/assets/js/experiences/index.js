@@ -1,6 +1,7 @@
 // Ponto de entrada das experiências interativas da página inicial (módulo nativo).
 import { setupAutomationFlow } from './automation-flow.js';
 import { createCompactOutcome, createDashboardDialog } from './dashboard.js';
+import { setupIntegrationLab } from './integrations.js';
 
 const controllers = {};
 
@@ -24,11 +25,15 @@ function init() {
     if (!controllers.dashboard) outcomeRoot.classList.add('no-explore');
   }
 
+  const labRoot = document.getElementById('integration-lab');
+  if (labRoot) controllers.lab = setupIntegrationLab(labRoot, { track });
+
   // Leitura para testes e depuração: estado das experiências e temporizadores ainda ativos.
   window.LuminorExperiences = Object.freeze({
     pendingTimers: () => Object.values(controllers).reduce((sum, item) => sum + (item.pendingTimers?.() ?? 0), 0),
     flowState: () => controllers.flow?.getState(),
     dashboardState: () => controllers.dashboard?.getState(),
+    labState: () => controllers.lab?.getState(),
   });
 }
 

@@ -1209,6 +1209,138 @@ main{counter-reset:secao}
 }
 @media(prefers-reduced-motion:reduce){.dashboard-dialog *,.dashboard-dialog *::after{animation:none!important;transition:none!important}}
 
+/* ===== Experiência 03 — laboratório de integrações (área escura) ===== */
+.integrations-lab{isolation:isolate;overflow:hidden;background-color:var(--brand-dark);color:#FFFFFF}
+.integrations-lab::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(55% 45% at 88% 0%,rgba(108,43,217,.42),transparent 70%),radial-gradient(40% 35% at 0% 100%,rgba(0,200,208,.13),transparent 70%)}
+.integrations-lab::after{color:rgba(255,255,255,.55)}
+.integrations-lab .overline{color:var(--accent)}
+.integrations-lab .mini-line{background:var(--accent)}
+.integrations-lab .section-heading h2{color:#FFFFFF}
+.integrations-lab .section-heading>p{color:rgba(255,255,255,.78)}
+.integrations-lab :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.lab-accent{color:var(--accent)}
+.lab{padding:22px;border:1px solid rgba(255,255,255,.12);border-radius:24px;background-color:#1A0F33}
+.lab:not(.is-ready) [data-lab-js]{visibility:hidden}
+.lab-top{display:flex;flex-wrap:wrap;align-items:flex-start;gap:12px}
+.lab-examples{display:flex;flex-wrap:wrap;gap:6px}
+.lab-examples button{min-height:36px;padding:0 14px;border:1px solid rgba(255,255,255,.2);border-radius:100px;background-color:transparent;color:rgba(255,255,255,.86);font-size:12px;font-weight:700;transition:background-color .18s,border-color .18s}
+.lab-examples button:hover{border-color:rgba(255,255,255,.45)}
+.lab-examples button[aria-pressed=true]{border-color:#FFFFFF;background-color:#FFFFFF;color:var(--brand-dark)}
+.lab-label{flex-shrink:0;margin-left:auto;border-color:rgba(0,200,208,.5);background-color:transparent;color:var(--accent)}
+
+/* Diagrama: cartões ligados por conectores SVG; o pulso anda só com transform. */
+.lab-diagram{--gap:56px;display:grid;grid-template-columns:repeat(var(--count,4),minmax(0,1fr));column-gap:var(--gap);margin:26px 0 0;padding:0;list-style:none}
+.lab-step{position:relative;min-width:0}
+.lab-link{position:absolute;top:50%;right:100%;width:var(--gap);height:16px;margin-top:-8px;overflow:hidden}
+.lab-wire{display:block;width:100%;height:100%;overflow:visible}
+.lab-wire line{fill:none;stroke:rgba(255,255,255,.3);stroke-width:2;stroke-dasharray:4 5}
+.lab-wire .wire-v{display:none}
+.lab-link[data-state=active] line{stroke:rgba(0,200,208,.55);stroke-dasharray:none}
+.lab-link[data-state=done] line{stroke:var(--accent);stroke-dasharray:none}
+.lab-link[data-state=blocked] line{stroke:#FF9B8F;stroke-dasharray:3 4}
+.lab-pulse{position:absolute;inset:0;opacity:0}
+.lab-pulse::after{content:"";position:absolute;top:50%;right:0;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(0,200,208,.22)}
+.lab-link[data-state=active] .lab-pulse{opacity:1;animation:lab-pulse-h .65s linear infinite}
+@keyframes lab-pulse-h{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+@keyframes lab-pulse-v{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+.lab-node{display:flex;flex-direction:column;align-items:flex-start;gap:3px;width:100%;height:100%;min-height:178px;padding:16px;border:1px solid rgba(255,255,255,.14);border-radius:16px;background-color:#241842;color:#FFFFFF;text-align:left;transition:border-color .2s,box-shadow .2s,transform .3s}
+button.lab-node:hover{border-color:rgba(255,255,255,.36)}
+.lab-node[data-kind=core]{border-color:rgba(150,104,240,.85);background-color:#2B1858}
+.lab-node[aria-pressed=true]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 18px 40px -20px rgba(0,200,208,.6)}
+.lab-node-icon{display:grid;place-items:center;flex-shrink:0;width:38px;height:38px;margin-bottom:8px;border-radius:11px;background-color:rgba(255,255,255,.08);color:var(--accent)}
+.lab-node[data-kind=core] .lab-node-icon{background-color:var(--brand);color:#FFFFFF}
+.lab-node-icon .icon{width:18px;height:18px}
+.lab-node-role{font-size:10px;font-weight:750;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.68)}
+.lab-node-name{font-size:15px;line-height:1.25}
+.lab-node-function{margin-bottom:12px;font-size:12px;line-height:1.45;color:rgba(255,255,255,.76)}
+.lab-node-state{display:inline-flex;align-items:center;gap:6px;margin-top:auto;padding:3px 9px 3px 5px;border-radius:100px;background-color:rgba(255,255,255,.08);color:rgba(255,255,255,.82);font-size:11px;font-weight:700}
+.lab-node-state i{display:grid;place-items:center;width:15px;height:15px;border:1.5px solid currentColor;border-radius:50%;font-size:9px;font-style:normal;font-weight:800;line-height:1}
+.lab-node[data-state=processing]{transform:translateY(-4px)}
+.lab-node[data-state=processing] .lab-node-state{color:var(--accent)}
+.lab-node[data-state=processing] .lab-node-state i{border-style:dashed;animation:lab-spin 1.2s linear infinite}
+.lab-node[data-state=success] .lab-node-state{color:#5BE3A4}
+.lab-node[data-state=success] .lab-node-state i::before{content:"✓"}
+.lab-node[data-state=error]{border-color:#FF9B8F}
+.lab-node[data-state=error] .lab-node-state{background-color:rgba(255,155,143,.14);color:#FFB0A6}
+.lab-node[data-state=error] .lab-node-state i::before{content:"!"}
+@keyframes lab-spin{to{transform:rotate(1turn)}}
+
+/* Detalhes da etapa e simulação passo a passo. */
+.lab-bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:16px;margin-top:22px}
+.lab-card{min-width:0;padding:20px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background-color:#20143D}
+.lab-kicker{font-size:10px;font-weight:750;letter-spacing:.12em;color:var(--accent)}
+.lab-card h3{margin:6px 0 0;font-size:20px;letter-spacing:-.02em;color:#FFFFFF}
+.lab-detail dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 18px;margin:16px 0 0}
+.lab-detail dl>div{min-width:0}
+.lab-detail dt{font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.64)}
+.lab-detail dd{margin:4px 0 0;font-size:14px;line-height:1.5;color:rgba(255,255,255,.9)}
+.lab-sim{display:flex;flex-direction:column;gap:14px}
+.lab-sim-head{display:grid;gap:8px}
+.lab-sim-head h3{margin:0}
+/* O selo de estado tem largura fixa: trocar o texto durante a simulação não muda a quebra de linha. */
+.lab-record{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;margin:0;font-size:12px;color:rgba(255,255,255,.74)}
+.lab-record strong{font-size:13px;color:#FFFFFF}
+.lab-record-state{width:12.5em;padding:3px 6px;border-radius:100px;background-color:rgba(255,255,255,.1);color:#FFFFFF;font-size:11px;font-weight:750;text-align:center;white-space:nowrap}
+.lab-record-state[data-state=processing]{color:var(--accent)}
+.lab-record-state[data-state=delivered]{color:#5BE3A4}
+.lab-record-state[data-state=pending]{color:#FFC266}
+.lab-actions{display:flex;flex-wrap:wrap;gap:8px}
+.lab-run,.lab-fail,.lab-retry{min-height:42px;padding:0 18px;border-radius:100px;font-size:13px;font-weight:750;transition:background-color .18s,border-color .18s}
+.lab-run{border:1px solid var(--accent);background-color:var(--accent);color:var(--brand-dark)}
+.lab-run:hover{background-color:#38D7DE}
+.lab-fail{border:1px solid rgba(255,255,255,.38);background-color:transparent;color:#FFFFFF}
+.lab-fail:hover{border-color:#FFFFFF}
+/* As duas camadas ocupam a mesma célula: a altura do cartão não muda durante a simulação. */
+.lab-layers{display:grid}
+.lab-layer{grid-area:1/1;min-width:0}
+.lab[data-mode=failure] .lab-timeline,.lab[data-mode=retry] .lab-timeline{visibility:hidden}
+.lab:not([data-mode=failure]):not([data-mode=retry]) .lab-failure{visibility:hidden}
+.lab-timeline{display:grid;align-content:start;gap:9px;margin:0;padding:0;list-style:none}
+.lab-timeline li{display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.45;color:rgba(255,255,255,.62)}
+.lab-row-mark{display:grid;place-items:center;flex-shrink:0;width:18px;height:18px;margin-top:1px;border:1.5px solid rgba(255,255,255,.35);border-radius:50%;font-size:10px;font-weight:800;line-height:1}
+.lab-timeline li[data-state=processing]{color:#FFFFFF}
+.lab-timeline li[data-state=processing] .lab-row-mark{border-style:dashed;border-color:var(--accent)}
+.lab-timeline li[data-state=success]{color:rgba(255,255,255,.92)}
+.lab-timeline li[data-state=success] .lab-row-mark{border-color:#5BE3A4;color:#5BE3A4}
+.lab-timeline li[data-state=success] .lab-row-mark::before{content:"✓"}
+.lab-timeline li[data-state=error]{color:#FFB0A6}
+.lab-timeline li[data-state=error] .lab-row-mark{border-color:#FF9B8F;color:#FF9B8F}
+.lab-timeline li[data-state=error] .lab-row-mark::before{content:"!"}
+.lab-failure{padding:14px 16px;border:1px solid rgba(255,194,102,.45);border-radius:14px;background-color:#2A1A33}
+.lab-failure h4{margin:0 0 8px;font-size:14px;color:#FFC266}
+.lab-failure ul{display:grid;gap:5px;margin:0 0 12px;padding-left:18px;font-size:13px;line-height:1.45;color:rgba(255,255,255,.9)}
+.lab-retry{min-height:38px;border:1px solid #FFC266;background-color:transparent;color:#FFC266}
+.lab-retry[aria-disabled=true]{opacity:.55;cursor:default}
+.lab-message{min-height:calc(3em + 13px);margin:0;padding-top:12px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;line-height:1.5;color:#FFFFFF}
+.lab[data-state=success] .lab-message{color:#5BE3A4}
+.lab[data-state=simulated-error] .lab-message{color:#FFC266}
+.lab-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.lab-note{margin:16px 0 0;font-size:12px;line-height:1.6;color:rgba(255,255,255,.68)}
+
+@media(max-width:900px){.lab-bottom{grid-template-columns:1fr}}
+@media(max-width:760px){
+  .lab{padding:16px;border-radius:18px}
+  .lab-examples button{padding:0 12px}
+  .lab-diagram{--gap:30px;grid-template-columns:1fr;row-gap:var(--gap);margin-top:20px}
+  .lab-link{top:auto;right:auto;bottom:100%;left:24px;width:16px;height:var(--gap);margin:0}
+  .lab-wire .wire-h{display:none}
+  .lab-wire .wire-v{display:inline}
+  .lab-pulse::after{top:auto;right:auto;bottom:0;left:50%;margin:0 0 0 -5px}
+  .lab-link[data-state=active] .lab-pulse{animation-name:lab-pulse-v}
+  .lab-node{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"icon role" "icon name" "icon function" "icon state";align-items:start;column-gap:12px;row-gap:2px;min-height:0;padding:14px}
+  .lab-node-icon{grid-area:icon;margin:0}
+  .lab-node-role{grid-area:role}
+  .lab-node-name{grid-area:name}
+  .lab-node-function{grid-area:function;margin-bottom:8px}
+  .lab-node-state{grid-area:state;justify-self:start;margin-top:0}
+  .lab-node[data-state=processing]{transform:translateX(4px)}
+  .lab-card{padding:16px}
+  .lab-detail dl{grid-template-columns:1fr}
+  .lab-actions button{flex:1 1 100%}
+  .lab-message{min-height:calc(6em + 13px)}
+}
+@media(prefers-reduced-motion:reduce){.integrations-lab *,.integrations-lab *::after{animation:none!important;transition:none!important}.lab-node[data-state=processing]{transform:none}}
+
 </style>
   <script>
 /* Canais comerciais informados pela empresa. */
@@ -2371,10 +2503,261 @@ function createDashboardDialog(dialog, { track = () => {} } = {}) {
 
 return { createCompactOutcome, createDashboardDialog };
 })();
+const __module_public_assets_js_experiences_integrations_js = (() => {
+// Experiência 03 — laboratório de integrações (#integracoes-lab).
+// Simulação educativa: nenhuma chamada de rede, nenhum dado real. As regras de cada etapa
+// e o tratamento de falhas mostrados aqui são exemplos; em cada projeto eles são definidos com a empresa.
+const { $, $$, el, svg, icon } = __module_public_assets_js_experiences_dom_js;
+const { createTimers, createLifecycle, prefersReducedMotion } = __module_public_assets_js_experiences_motion_js;
+
+const NODE_STATES = { waiting: 'Aguardando', processing: 'Processando', success: 'Concluído', error: 'Indisponível' };
+const RECORD_STATES = { waiting: 'Aguardando envio', processing: 'Em processamento', delivered: 'Entregue', pending: 'Pendente' };
+/** Duração de cada quadro, em milissegundos: envio por uma ligação e processamento em um nó. */
+const FRAME_DURATIONS = { transfer: 650, process: 800 };
+
+const automation = (fields) => ({ icon: 'gear', name: 'Automação Luminor', role: 'Regras', core: true, ...fields });
+
+const INTEGRATION_EXAMPLES = {
+  financeiro: {
+    label: 'Pedidos e financeiro', record: 'Pedido #1050 · R$ 460,00', failAt: 2,
+    nodes: [
+      { icon: 'grid', name: 'Sistema de pedidos', role: 'Origem', function: 'Registra cada venda', receives: 'Pedidos lançados pela equipe ou pela loja online.', transforms: 'Nada: o pedido segue como foi confirmado.', sends: 'Para a automação, quando o pedido é confirmado.', validates: 'Pedido confirmado e com cliente identificado.', step: 'Pedido #1050 confirmado no sistema de pedidos.' },
+      automation({ function: 'Valida e organiza os dados', receives: 'Cliente, itens, valor e forma de pagamento do pedido.', transforms: 'Confere o valor e monta o lançamento a receber no formato do financeiro.', sends: 'Lançamento para o controle financeiro.', validates: 'Valor maior que zero, cliente cadastrado e pedido ainda não lançado.', step: 'Automação confere o valor e monta o lançamento.' }),
+      { icon: 'shield', name: 'Controle financeiro', role: 'Destino', function: 'Registra o valor a receber', receives: 'Lançamento com cliente, valor e vencimento.', transforms: 'Registra o valor a receber e atualiza o saldo previsto.', sends: 'Movimentações para os relatórios.', validates: 'Vencimento informado e lançamento sem duplicidade.', step: 'Controle financeiro registra o valor a receber.' },
+      { icon: 'trend', name: 'Relatórios', role: 'Consulta', function: 'Mostra a visão consolidada', receives: 'Movimentações do controle financeiro.', transforms: 'Agrupa por período, cliente e situação.', sends: 'Para a equipe, em um painel de acompanhamento.', validates: 'Período e filtros definidos para cada relatório.', step: 'Relatórios atualizados com o novo pedido.' },
+    ],
+  },
+  clientes: {
+    label: 'Clientes e CRM', record: 'Cadastro · Empresa B', failAt: 2,
+    nodes: [
+      { icon: 'layer', name: 'Cadastro de clientes', role: 'Origem', function: 'Guarda os dados de cada cliente', receives: 'Cadastros feitos pela equipe ou pelo site.', transforms: 'Nada: o cadastro segue como foi salvo.', sends: 'Para a automação, a cada cadastro novo ou alterado.', validates: 'Campos obrigatórios preenchidos.', step: 'Cadastro da Empresa B salvo.' },
+      automation({ function: 'Padroniza e evita duplicidade', receives: 'Nome, contato e segmento do cliente.', transforms: 'Padroniza nomes e telefones e confere se o cliente já existe no CRM.', sends: 'Contato pronto para o CRM.', validates: 'Contato válido e cliente ainda não cadastrado no CRM.', step: 'Automação padroniza os dados e procura duplicidades.' }),
+      { icon: 'message', name: 'CRM', role: 'Destino', function: 'Acompanha o relacionamento', receives: 'Contato padronizado.', transforms: 'Cria ou atualiza o contato e define um responsável.', sends: 'Tarefa de primeiro contato para a equipe comercial.', validates: 'Responsável definido para cada contato.', step: 'CRM cria o contato com um responsável.' },
+    ],
+  },
+  estoque: {
+    label: 'Pedidos e estoque', record: 'Pedido #1049 · 3 itens', failAt: 2,
+    nodes: [
+      { icon: 'grid', name: 'Pedidos', role: 'Origem', function: 'Registra cada venda', receives: 'Pedidos confirmados com seus itens.', transforms: 'Nada: os itens seguem como foram vendidos.', sends: 'Para a automação, quando o pedido é confirmado.', validates: 'Pedido confirmado e com itens.', step: 'Pedido #1049 confirmado com 3 itens.' },
+      automation({ function: 'Traduz itens e quantidades', receives: 'Itens e quantidades do pedido.', transforms: 'Converte cada item para o código usado no estoque.', sends: 'Baixa de quantidades para o estoque.', validates: 'Item existente e quantidade disponível.', step: 'Automação confere os itens e as quantidades.' }),
+      { icon: 'layer', name: 'Estoque', role: 'Destino', function: 'Controla as quantidades', receives: 'Baixa por item e quantidade.', transforms: 'Atualiza o saldo de cada produto.', sends: 'Aviso quando um item fica abaixo do mínimo.', validates: 'O saldo não pode ficar negativo.', step: 'Estoque atualiza o saldo dos 3 itens.' },
+    ],
+  },
+  formulario: {
+    label: 'Formulário e sistema interno', record: 'Solicitação #208', failAt: 2,
+    nodes: [
+      { icon: 'mail', name: 'Formulário', role: 'Origem', function: 'Recebe solicitações', receives: 'Respostas enviadas pelo site.', transforms: 'Nada: as respostas seguem como foram enviadas.', sends: 'Para a automação, a cada envio.', validates: 'Campos obrigatórios e consentimento confirmados.', step: 'Solicitação #208 enviada pelo formulário.' },
+      automation({ function: 'Classifica e preenche', receives: 'Respostas do formulário.', transforms: 'Classifica o assunto e preenche os campos do sistema interno.', sends: 'Solicitação classificada para o sistema interno.', validates: 'Assunto reconhecido e dados completos.', step: 'Automação classifica o assunto da solicitação.' }),
+      { icon: 'cpu', name: 'Sistema interno', role: 'Destino', function: 'Organiza o trabalho da equipe', receives: 'Solicitação classificada.', transforms: 'Cria o registro e define a fila responsável.', sends: 'Aviso para a pessoa responsável.', validates: 'Fila definida para cada assunto.', step: 'Sistema interno cria o registro na fila certa.' },
+    ],
+  },
+  documentos: {
+    label: 'Documentos e registros', record: 'Nota fiscal 209', failAt: 2,
+    nodes: [
+      { icon: 'mail', name: 'Documentos', role: 'Origem', function: 'Chegam por e-mail ou upload', receives: 'Arquivos em PDF ou imagem.', transforms: 'Nada: o arquivo original é preservado.', sends: 'Para a automação, a cada arquivo recebido.', validates: 'Formato de arquivo aceito.', step: 'Nota fiscal 209 recebida por e-mail.' },
+      automation({ function: 'Identifica e extrai campos', receives: 'Arquivo do documento.', transforms: 'Identifica o tipo e extrai fornecedor, valor e data para revisão.', sends: 'Campos extraídos para a organização de registros.', validates: 'Campos legíveis; dúvidas seguem para revisão humana.', step: 'Automação identifica o tipo e extrai os campos.' }),
+      { icon: 'grid', name: 'Organização de registros', role: 'Destino', function: 'Arquiva com contexto', receives: 'Documento com os campos extraídos.', transforms: 'Arquiva na pasta certa e registra os campos.', sends: 'Registro disponível para consulta.', validates: 'Documento sem registro anterior.', step: 'Registro criado e arquivo organizado.' },
+    ],
+  },
+};
+
+const getExample = key => INTEGRATION_EXAMPLES[key] || INTEGRATION_EXAMPLES.financeiro;
+
+/** Estado de repouso de um exemplo: tudo aguardando. */
+function idleFrame(example) {
+  return {
+    nodes: example.nodes.map(() => 'waiting'), links: example.nodes.slice(1).map(() => 'idle'),
+    status: 'waiting', record: 'waiting', message: 'Escolha uma ação para ver o caminho da informação.', duration: 0,
+  };
+}
+
+/**
+ * Quadros da simulação. "success" percorre todos os nós; "failure" para no destino indisponível
+ * e deixa o registro pendente; "retry" parte desse ponto e conclui a entrega.
+ */
+function simulationFrames(example, mode = 'success') {
+  const { nodes, failAt } = example;
+  const states = nodes.map(() => 'waiting');
+  const links = nodes.slice(1).map(() => 'idle');
+  const frames = [];
+  const push = (message, duration, extra = {}) => frames.push({ nodes: [...states], links: [...links], status: 'processing', record: 'processing', message, duration, ...extra });
+  let start = 0;
+  if (mode === 'retry') {
+    for (let i = 0; i < failAt; i++) states[i] = 'success';
+    for (let i = 0; i < failAt - 1; i++) links[i] = 'done';
+    start = failAt;
+  }
+  for (let i = start; i < nodes.length; i++) {
+    if (i > 0) {
+      links[i - 1] = 'active';
+      push(mode === 'retry' && i === start ? `Nova tentativa de envio para ${nodes[i].name}.` : `Enviando para ${nodes[i].name}.`, FRAME_DURATIONS.transfer);
+    }
+    if (mode === 'failure' && i === failAt) {
+      states[i] = 'error';
+      links[i - 1] = 'blocked';
+      push(`${nodes[i].name} não respondeu. O registro fica pendente, aguardando uma nova tentativa.`, 0, { status: 'simulated-error', record: 'pending' });
+      return frames;
+    }
+    if (i > 0) links[i - 1] = 'done';
+    states[i] = 'processing';
+    push(nodes[i].step, FRAME_DURATIONS.process);
+    states[i] = 'success';
+  }
+  push(mode === 'retry'
+    ? `Nova tentativa concluída: ${example.record} chegou ao destino sem nova digitação.`
+    : `Integração concluída: ${example.record} passou por todas as etapas sem nova digitação.`, 0, { status: 'success', record: 'delivered' });
+  return frames;
+}
+
+// ===== Controlador =====
+function setupIntegrationLab(root, { track = () => {} } = {}) {
+  const timers = createTimers();
+  const lifecycle = createLifecycle();
+  const diagram = $('.lab-diagram', root);
+  const detail = $('#lab-detail', root);
+  const timeline = $('#lab-timeline', root);
+  const status = $('#lab-status', root);
+  const recordName = $('#lab-record-name', root);
+  const recordState = $('#lab-record-state', root);
+  let key = 'financeiro';
+  let selected = 1;
+  let frames = [];
+  let index = -1;
+  let mode = null;
+
+  const example = () => getExample(key);
+  const current = () => (index >= 0 ? frames[index] : idleFrame(example()));
+
+  function nodeButton(node, i) {
+    return el('button', { type: 'button', class: 'lab-node', 'data-lab-node': i, 'data-kind': node.core ? 'core' : null, 'aria-pressed': 'false', 'aria-controls': 'lab-detail' },
+      el('span', { class: 'lab-node-icon' }, icon(node.icon)),
+      el('span', { class: 'lab-node-role', text: node.role }),
+      el('strong', { class: 'lab-node-name', text: node.name }),
+      el('span', { class: 'lab-node-function', text: node.function }),
+      el('span', { class: 'lab-node-state' }, el('i', { 'aria-hidden': 'true' }), el('span', { text: NODE_STATES.waiting })));
+  }
+
+  function link(i) {
+    return el('span', { class: 'lab-link', 'data-lab-link': i, 'aria-hidden': 'true' },
+      svg('svg', { class: 'lab-wire', focusable: 'false' },
+        svg('line', { class: 'wire-h', x1: '0', y1: '50%', x2: '100%', y2: '50%' }),
+        svg('line', { class: 'wire-v', x1: '50%', y1: '0', x2: '50%', y2: '100%' })),
+      el('i', { class: 'lab-pulse' }));
+  }
+
+  /** Monta o diagrama e a linha do tempo do exemplo atual. */
+  function build() {
+    const { nodes } = example();
+    diagram.style.setProperty('--count', String(nodes.length));
+    diagram.replaceChildren(...nodes.map((node, i) => el('li', { class: 'lab-step' }, i > 0 ? link(i - 1) : null, nodeButton(node, i))));
+    timeline.replaceChildren(...nodes.map((node, i) => el('li', { 'data-lab-row': i, 'data-state': 'waiting' },
+      el('span', { class: 'lab-row-mark', 'aria-hidden': 'true' }), el('span', { text: node.step }))));
+    recordName.textContent = example().record;
+    root.dataset.example = key;
+  }
+
+  function renderDetail() {
+    const node = example().nodes[selected];
+    detail.replaceChildren(
+      el('span', { class: 'lab-kicker', text: `${node.role.toUpperCase()} · O QUE ACONTECE AQUI` }),
+      el('h3', { text: node.name }),
+      el('dl', {}, [['Recebe', node.receives], ['Transforma', node.transforms], ['Envia para', node.sends], ['Validações', node.validates]]
+        .map(([term, text]) => el('div', {}, el('dt', { text: term }), el('dd', { text })))),
+    );
+    $$('[data-lab-node]', diagram).forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.labNode) === selected)));
+  }
+
+  function renderFrame() {
+    const frame = current();
+    frame.nodes.forEach((state, i) => {
+      const node = $(`[data-lab-node="${i}"]`, diagram);
+      node.dataset.state = state;
+      $('.lab-node-state span', node).textContent = NODE_STATES[state];
+      $(`[data-lab-row="${i}"]`, timeline).dataset.state = state;
+    });
+    frame.links.forEach((state, i) => { $(`[data-lab-link="${i}"]`, diagram).dataset.state = state; });
+    root.dataset.state = frame.status;
+    root.dataset.mode = mode || 'idle';
+    recordState.textContent = RECORD_STATES[frame.record];
+    recordState.dataset.state = frame.record;
+    // A região de status só fala no início e no fim de uma simulação, para não narrar cada quadro.
+    if (index >= 0 && (frame.status !== 'processing' || index === 0)) status.textContent = frame.status === 'processing' ? 'Simulação em andamento.' : frame.message;
+    $('#lab-message', root).textContent = frame.message;
+    // aria-disabled em vez de disabled: o botão mantém o foco durante a nova tentativa.
+    $('#lab-retry', root).setAttribute('aria-disabled', String(frame.status !== 'simulated-error'));
+  }
+
+  function advance() {
+    if (index >= frames.length - 1) return;
+    index++;
+    renderFrame();
+    if (frames[index].duration) timers.after(frames[index].duration, advance);
+  }
+
+  function run(nextMode) {
+    timers.clear();
+    mode = nextMode;
+    frames = simulationFrames(example(), nextMode);
+    if (prefersReducedMotion()) { index = frames.length - 1; renderFrame(); }
+    else { index = -1; advance(); }
+    if (nextMode === 'failure') track('integration_error_demo', { scenario: key, component: 'integrations' });
+    else track('integration_simulate', { scenario: key, component: 'integrations', action: nextMode });
+  }
+
+  /** Conclui na hora (aba oculta, por exemplo), sem deixar temporizadores ativos. */
+  function finish() {
+    timers.clear();
+    if (frames.length && index < frames.length - 1) { index = frames.length - 1; renderFrame(); }
+  }
+
+  function chooseExample(next) {
+    if (!Object.hasOwn(INTEGRATION_EXAMPLES, next) || next === key) return;
+    timers.clear();
+    key = next;
+    selected = 1;
+    frames = [];
+    index = -1;
+    mode = null;
+    build();
+    renderDetail();
+    renderFrame();
+    status.textContent = '';
+    $$('[data-lab-example]', root).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.labExample === key)));
+    track('demo_scenario_select', { scenario: key, component: 'integrations' });
+  }
+
+  lifecycle.listen(root, 'click', event => {
+    const button = event.target.closest('button');
+    if (!button || !root.contains(button)) return;
+    if (button.dataset.labNode !== undefined) { selected = Number(button.dataset.labNode); renderDetail(); }
+    else if (button.dataset.labExample) chooseExample(button.dataset.labExample);
+    else if (button.id === 'lab-run') run('success');
+    else if (button.id === 'lab-failure') run('failure');
+    else if (button.id === 'lab-retry' && current().status === 'simulated-error') run('retry');
+  });
+  lifecycle.onPageHidden(finish);
+  lifecycle.onMotionChange(reduced => { if (reduced) finish(); });
+
+  build();
+  renderDetail();
+  renderFrame();
+  $$('[data-lab-js]', root).forEach(node => { node.hidden = false; });
+  root.classList.add('is-ready');
+
+  return {
+    getState: () => ({ example: key, selected, mode, frame: index, status: current().status, record: current().record }),
+    pendingTimers: () => timers.pending(),
+    destroy() { timers.clear(); lifecycle.destroy(); },
+  };
+}
+
+return { NODE_STATES, RECORD_STATES, FRAME_DURATIONS, INTEGRATION_EXAMPLES, getExample, idleFrame, simulationFrames, setupIntegrationLab };
+})();
 const __module_public_assets_js_experiences_index_js = (() => {
 // Ponto de entrada das experiências interativas da página inicial (módulo nativo).
 const { setupAutomationFlow } = __module_public_assets_js_experiences_automation_flow_js;
 const { createCompactOutcome, createDashboardDialog } = __module_public_assets_js_experiences_dashboard_js;
+const { setupIntegrationLab } = __module_public_assets_js_experiences_integrations_js;
 
 const controllers = {};
 
@@ -2398,11 +2781,15 @@ function init() {
     if (!controllers.dashboard) outcomeRoot.classList.add('no-explore');
   }
 
+  const labRoot = document.getElementById('integration-lab');
+  if (labRoot) controllers.lab = setupIntegrationLab(labRoot, { track });
+
   // Leitura para testes e depuração: estado das experiências e temporizadores ainda ativos.
   window.LuminorExperiences = Object.freeze({
     pendingTimers: () => Object.values(controllers).reduce((sum, item) => sum + (item.pendingTimers?.() ?? 0), 0),
     flowState: () => controllers.flow?.getState(),
     dashboardState: () => controllers.dashboard?.getState(),
+    labState: () => controllers.lab?.getState(),
   });
 }
 
@@ -2492,6 +2879,72 @@ return {  };
     <section id="solucoes" class="solutions section-pad"><div class="wrap"><div class="section-heading"><div><div class="overline"><span class="mini-line"></span> O QUE RESOLVEMOS</div><h2>O problema muda.<br><span class="muted">A solução acompanha.</span></h2></div><p>Não é sobre encaixar sua empresa em um software pronto. É sobre criar a tecnologia certa para a rotina que você precisa melhorar.</p></div>
       <div class="solutions-grid"><article class="solution-card" data-solution="Automação de processos internos"><div class="solution-head"><div class="solution-icon"><svg class="icon"><use href="#i-gear"/></svg></div><span>01 — PROCESSOS</span></div><h3>Automação de processos</h3><div class="solution-problem"><strong>Problema comum</strong>A equipe lança os mesmos dados em vários lugares e refaz conferências.</div><p>Eliminamos tarefas repetitivas, lançamentos manuais e retrabalho com fluxos que seguem as regras do seu processo.</p><a class="text-action service-page-link" href="/servicos/automacao-de-processos">Ver automação de processos <svg class="icon"><use href="#i-arrow"/></svg></a><button class="text-action solution-cta" data-solution="Automação de processos internos">Quero resolver isso <svg class="icon"><use href="#i-arrow-up"/></svg></button></article><article class="solution-card" data-solution="Sistemas sob medida"><div class="solution-head"><div class="solution-icon"><svg class="icon"><use href="#i-grid"/></svg></div><span>02 — SISTEMAS</span></div><h3>Sistemas sob medida</h3><div class="solution-problem"><strong>Problema comum</strong>Pedidos, estoque e relatórios ficam espalhados em planilhas.</div><p>Aplicações personalizadas para vendas, operação, estoque, relatórios e gestão, com os acessos que sua equipe precisa.</p><a class="text-action service-page-link" href="/servicos/sistemas-sob-medida">Ver sistemas sob medida <svg class="icon"><use href="#i-arrow"/></svg></a><button class="text-action solution-cta" data-solution="Sistemas sob medida">Quero resolver isso <svg class="icon"><use href="#i-arrow-up"/></svg></button></article><article class="solution-card" data-solution="Integração de sistemas"><div class="solution-head"><div class="solution-icon"><svg class="icon"><use href="#i-layer"/></svg></div><span>03 — INTEGRAÇÕES</span></div><h3>Integração de sistemas</h3><div class="solution-problem"><strong>Problema comum</strong>Informações são copiadas à mão de uma ferramenta para outra.</div><p>Conectamos as ferramentas que você já usa para evitar a duplicação manual de informações.</p><a class="text-action service-page-link" href="/servicos/integracao-de-sistemas">Ver integração de sistemas <svg class="icon"><use href="#i-arrow"/></svg></a><button class="text-action solution-cta" data-solution="Integração de sistemas">Quero resolver isso <svg class="icon"><use href="#i-arrow-up"/></svg></button></article><article class="solution-card" data-solution="Atendimento pelo WhatsApp"><div class="solution-head"><div class="solution-icon"><svg class="icon"><use href="#i-message"/></svg></div><span>04 — ATENDIMENTO</span></div><h3>Atendimento automatizado</h3><div class="solution-problem"><strong>Problema comum</strong>Mensagens se perdem e ninguém sabe quem já respondeu o cliente.</div><p>Organizamos mensagens, solicitações e rotinas do WhatsApp, com encaminhamento para a pessoa certa da equipe.</p><a class="text-action service-page-link" href="/servicos/chatbot-whatsapp">Ver chatbots para WhatsApp <svg class="icon"><use href="#i-arrow"/></svg></a><button class="text-action solution-cta" data-solution="Atendimento pelo WhatsApp">Quero resolver isso <svg class="icon"><use href="#i-arrow-up"/></svg></button></article></div><div class="solution-bottom"><span>CADA EMPRESA TEM UM PROCESSO. CADA SOLUÇÃO É SOB MEDIDA.</span><a href="#contato" data-event="click_diagnostico" data-cta-location="solutions">Seu processo é diferente? Vamos entender <svg class="icon"><use href="#i-arrow"/></svg></a></div>
     </div></section>
+
+    <section id="integracoes-lab" class="integrations-lab section-pad" aria-labelledby="integrations-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><div class="overline"><span class="mini-line"></span> LABORATÓRIO DE INTEGRAÇÕES</div><h2 id="integrations-title">Seus sistemas podem<br><span class="lab-accent">trabalhar juntos.</span></h2></div>
+          <p>Conectamos ferramentas e informações para evitar retrabalho e criar processos mais organizados.</p>
+        </div>
+        <div class="lab" id="integration-lab" data-example="financeiro" data-state="waiting" data-mode="idle">
+          <div class="lab-top">
+            <div class="lab-examples" role="group" aria-label="Exemplos de integração" data-lab-js>
+              <button type="button" data-lab-example="financeiro" aria-pressed="true" aria-label="Pedidos para o financeiro">Pedidos → Financeiro</button>
+              <button type="button" data-lab-example="clientes" aria-pressed="false" aria-label="Clientes para o CRM">Clientes → CRM</button>
+              <button type="button" data-lab-example="estoque" aria-pressed="false" aria-label="Pedidos para o estoque">Pedidos → Estoque</button>
+              <button type="button" data-lab-example="formulario" aria-pressed="false" aria-label="Formulário para o sistema interno">Formulário → Sistema interno</button>
+              <button type="button" data-lab-example="documentos" aria-pressed="false" aria-label="Documentos para a organização de registros">Documentos → Registros</button>
+            </div>
+            <span class="demo-label lab-label">SIMULAÇÃO</span>
+          </div>
+          <ol class="lab-diagram" aria-label="Caminho da informação">
+            <li class="lab-step"><div class="lab-node" data-lab-node="0" data-state="waiting"><span class="lab-node-icon"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg></span><span class="lab-node-role">Origem</span><strong class="lab-node-name">Sistema de pedidos</strong><span class="lab-node-function">Registra cada venda</span><span class="lab-node-state"><i aria-hidden="true"></i><span>Aguardando</span></span></div></li>
+            <li class="lab-step"><span class="lab-link" data-lab-link="0" data-state="idle" aria-hidden="true"><svg class="lab-wire" focusable="false"><line class="wire-h" x1="0" y1="50%" x2="100%" y2="50%"/><line class="wire-v" x1="50%" y1="0" x2="50%" y2="100%"/></svg><i class="lab-pulse"></i></span><div class="lab-node" data-lab-node="1" data-kind="core" data-state="waiting"><span class="lab-node-icon"><svg class="icon" aria-hidden="true"><use href="#i-gear"/></svg></span><span class="lab-node-role">Regras</span><strong class="lab-node-name">Automação Luminor</strong><span class="lab-node-function">Valida e organiza os dados</span><span class="lab-node-state"><i aria-hidden="true"></i><span>Aguardando</span></span></div></li>
+            <li class="lab-step"><span class="lab-link" data-lab-link="1" data-state="idle" aria-hidden="true"><svg class="lab-wire" focusable="false"><line class="wire-h" x1="0" y1="50%" x2="100%" y2="50%"/><line class="wire-v" x1="50%" y1="0" x2="50%" y2="100%"/></svg><i class="lab-pulse"></i></span><div class="lab-node" data-lab-node="2" data-state="waiting"><span class="lab-node-icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span><span class="lab-node-role">Destino</span><strong class="lab-node-name">Controle financeiro</strong><span class="lab-node-function">Registra o valor a receber</span><span class="lab-node-state"><i aria-hidden="true"></i><span>Aguardando</span></span></div></li>
+            <li class="lab-step"><span class="lab-link" data-lab-link="2" data-state="idle" aria-hidden="true"><svg class="lab-wire" focusable="false"><line class="wire-h" x1="0" y1="50%" x2="100%" y2="50%"/><line class="wire-v" x1="50%" y1="0" x2="50%" y2="100%"/></svg><i class="lab-pulse"></i></span><div class="lab-node" data-lab-node="3" data-state="waiting"><span class="lab-node-icon"><svg class="icon" aria-hidden="true"><use href="#i-trend"/></svg></span><span class="lab-node-role">Consulta</span><strong class="lab-node-name">Relatórios</strong><span class="lab-node-function">Mostra a visão consolidada</span><span class="lab-node-state"><i aria-hidden="true"></i><span>Aguardando</span></span></div></li>
+          </ol>
+          <div class="lab-bottom">
+            <section class="lab-card lab-detail" id="lab-detail" aria-label="Detalhes da etapa selecionada">
+              <span class="lab-kicker">REGRAS · O QUE ACONTECE AQUI</span>
+              <h3>Automação Luminor</h3>
+              <dl><div><dt>Recebe</dt><dd>Cliente, itens, valor e forma de pagamento do pedido.</dd></div><div><dt>Transforma</dt><dd>Confere o valor e monta o lançamento a receber no formato do financeiro.</dd></div><div><dt>Envia para</dt><dd>Lançamento para o controle financeiro.</dd></div><div><dt>Validações</dt><dd>Valor maior que zero, cliente cadastrado e pedido ainda não lançado.</dd></div></dl>
+            </section>
+            <section class="lab-card lab-sim" aria-labelledby="lab-sim-title">
+              <div class="lab-sim-head">
+                <h3 id="lab-sim-title">Simulação passo a passo</h3>
+                <p class="lab-record"><span>Registro: <strong id="lab-record-name">Pedido #1050 · R$ 460,00</strong></span> <span id="lab-record-state" class="lab-record-state" data-state="waiting">Aguardando envio</span></p>
+              </div>
+              <div class="lab-actions" data-lab-js>
+                <button type="button" id="lab-run" class="lab-run">Simular integração</button>
+                <button type="button" id="lab-failure" class="lab-fail">Ver como uma falha é tratada</button>
+              </div>
+              <div class="lab-layers">
+                <ol id="lab-timeline" class="lab-layer lab-timeline" aria-label="Etapas do registro">
+                  <li data-lab-row="0" data-state="waiting"><span class="lab-row-mark" aria-hidden="true"></span><span>Pedido #1050 confirmado no sistema de pedidos.</span></li>
+                  <li data-lab-row="1" data-state="waiting"><span class="lab-row-mark" aria-hidden="true"></span><span>Automação confere o valor e monta o lançamento.</span></li>
+                  <li data-lab-row="2" data-state="waiting"><span class="lab-row-mark" aria-hidden="true"></span><span>Controle financeiro registra o valor a receber.</span></li>
+                  <li data-lab-row="3" data-state="waiting"><span class="lab-row-mark" aria-hidden="true"></span><span>Relatórios atualizados com o novo pedido.</span></li>
+                </ol>
+                <div class="lab-layer lab-failure" aria-labelledby="lab-failure-title">
+                  <h4 id="lab-failure-title">Como uma falha pode ser tratada</h4>
+                  <ul>
+                    <li>O destino não respondeu, então o registro não é descartado.</li>
+                    <li>Ele fica marcado como pendente, com o motivo anotado.</li>
+                    <li>Uma nova tentativa pode ser agendada, por exemplo após 1, 5 e 15 minutos.</li>
+                    <li>Se a falha continuar, alguém da equipe é avisado para agir.</li>
+                  </ul>
+                  <button type="button" id="lab-retry" class="lab-retry" aria-disabled="true">Simular nova tentativa</button>
+                </div>
+              </div>
+              <p id="lab-message" class="lab-message">Escolha uma ação para ver o caminho da informação.</p>
+              <p id="lab-status" class="lab-sr" role="status"></p>
+            </section>
+          </div>
+          <p class="lab-note">Simulação educativa com dados fictícios, sem conexão com sistemas reais. Validações, novas tentativas e acompanhamento de falhas são definidos em cada projeto, de acordo com o processo e as ferramentas envolvidas.</p>
+          <noscript><p class="lab-note">Outros exemplos: cadastro de clientes para o CRM, pedidos para o estoque, formulário para o sistema interno e documentos para a organização de registros.</p></noscript>
+        </div>
+      </div>
+    </section>
 
     <section id="metodo" class="method section-pad"><div class="wrap"><div class="section-heading"><div><div class="overline"><span class="mini-line"></span> COMO FUNCIONA</div><h2>Primeiro, seu processo.<br><span class="gradient-text">Depois, a tecnologia.</span></h2></div><p>A solução nasce do entendimento do seu negócio. Mapeamos a rotina e construímos o que faz sentido para quem trabalha nela.</p></div><div class="method-grid"><article><span class="method-index">01</span><div class="method-icon"><svg class="icon"><use href="#i-message"/></svg></div><h3>Entendemos seu negócio</h3><p>Conhecemos a rotina, as pessoas envolvidas, as ferramentas e os gargalos do dia a dia.</p></article><article><span class="method-index">02</span><div class="method-icon"><svg class="icon"><use href="#i-grid"/></svg></div><h3>Identificamos o que pode melhorar</h3><p>Mapeamos as tarefas manuais e definimos onde automação, sistema ou integração fazem diferença.</p></article><article><span class="method-index">03</span><div class="method-icon"><svg class="icon"><use href="#i-gear"/></svg></div><h3>Desenvolvemos a solução</h3><p>Construímos a aplicação, a automação ou a integração de acordo com o processo e o escopo combinado.</p></article><article><span class="method-index">04</span><div class="method-icon"><svg class="icon"><use href="#i-check"/></svg></div><h3>Implantamos e acompanhamos</h3><p>Testamos o fluxo, orientamos quem vai usar e acompanhamos os ajustes depois da entrega.</p></article></div></div></section>
     <section id="processos" class="process-examples section-pad"><div class="wrap"><div class="section-heading"><div><div class="overline"><span class="mini-line"></span> EXEMPLOS PRÁTICOS</div><h2>O que se repete aí<br><span class="muted">pode virar automação.</span></h2></div><p>Situações comuns no dia a dia de uma empresa e o que cada uma pode virar quando o processo ganha a ferramenta certa.</p></div><div class="examples-grid"><article class="example-card"><span class="example-index">EXEMPLO 01</span><h3>Pedidos</h3><div class="example-before"><h4>Antes</h4><p>Pedidos registrados manualmente, entre mensagens, cadernos e planilhas.</p></div><div class="example-after"><h4>Depois</h4><p>Sistema de pedidos centralizado, com situação e histórico de cada venda.</p></div><a class="text-action" href="#contato" data-interest="Sistemas sob medida">Tenho um processo assim <svg class="icon"><use href="#i-arrow"/></svg></a></article><article class="example-card"><span class="example-index">EXEMPLO 02</span><h3>Relatórios</h3><div class="example-before"><h4>Antes</h4><p>Relatórios montados à mão em planilhas, toda semana, a partir de várias fontes.</p></div><div class="example-after"><h4>Depois</h4><p>Painel com os dados organizados e atualizados para acompanhar a operação.</p></div><a class="text-action" href="#contato" data-interest="Automação de processos internos">Tenho um processo assim <svg class="icon"><use href="#i-arrow"/></svg></a></article><article class="example-card"><span class="example-index">EXEMPLO 03</span><h3>Informações entre sistemas</h3><div class="example-before"><h4>Antes</h4><p>Informações copiadas de uma plataforma para outra, com risco de erro e atraso.</p></div><div class="example-after"><h4>Depois</h4><p>Integração automatizada que envia os dados para onde precisam estar.</p></div><a class="text-action" href="#contato" data-interest="Integração de sistemas">Tenho um processo assim <svg class="icon"><use href="#i-arrow"/></svg></a></article><article class="example-card"><span class="example-index">EXEMPLO 04</span><h3>Atendimento</h3><div class="example-before"><h4>Antes</h4><p>Atendimento sem organização: pedidos de clientes se perdem nas conversas.</p></div><div class="example-after"><h4>Depois</h4><p>Solicitações registradas com histórico e uma pessoa responsável por cada uma.</p></div><a class="text-action" href="#contato" data-interest="Atendimento pelo WhatsApp">Tenho um processo assim <svg class="icon"><use href="#i-arrow"/></svg></a></article></div><p class="examples-note">Reconheceu alguma dessas situações? Conte como o trabalho acontece na sua empresa.<small>Exemplos ilustrativos. Não representam resultados de clientes específicos.</small></p></div></section>

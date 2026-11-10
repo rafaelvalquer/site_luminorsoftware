@@ -135,6 +135,38 @@ const { pathToFileURL } = require('node:url');
       }
       await page.locator('#team-play').click();
       assert.equal(await page.locator('#team-experience').getAttribute('data-phase'),'after');
+      // Laboratório de integrações: com movimento reduzido cada simulação mostra o resultado na hora.
+      const lab = page.locator('#integration-lab');
+      const labNodeStates = () => page.locator('.lab-node .lab-node-state span').allInnerTexts();
+      assert(await page.evaluate(() => { const s = ['solucoes', 'integracoes-lab', 'metodo'].map(id => document.getElementById(id)); return s[0].compareDocumentPosition(s[1]) & Node.DOCUMENT_POSITION_FOLLOWING && s[1].compareDocumentPosition(s[2]) & Node.DOCUMENT_POSITION_FOLLOWING; }), 'Integration lab sits between solutions and method');
+      assert.equal(await lab.getAttribute('data-state'), 'waiting');
+      assert.deepEqual(await labNodeStates(), ['Aguardando', 'Aguardando', 'Aguardando', 'Aguardando']);
+      await page.locator('#lab-run').click();
+      assert.equal(await lab.getAttribute('data-state'), 'success');
+      assert.deepEqual(await labNodeStates(), ['Concluído', 'Concluído', 'Concluído', 'Concluído']);
+      assert.equal(await page.locator('#lab-record-state').innerText(), 'Entregue');
+      assert((await page.locator('#lab-status').textContent()).startsWith('Integração concluída'));
+      await page.locator('#lab-failure').click();
+      assert.equal(await lab.getAttribute('data-state'), 'simulated-error');
+      assert.deepEqual(await labNodeStates(), ['Concluído', 'Concluído', 'Indisponível', 'Aguardando']);
+      assert.equal(await page.locator('#lab-record-state').innerText(), 'Pendente');
+      assert(await page.locator('.lab-failure').isVisible(), 'The failure explanation appears');
+      assert(await page.locator('.lab-timeline').isHidden());
+      await page.locator('#lab-retry').focus();
+      await page.keyboard.press('Enter');
+      assert.equal(await lab.getAttribute('data-state'), 'success');
+      assert(await page.locator('#lab-retry').evaluate(el => el === document.activeElement), 'Retry keeps keyboard focus');
+      await page.locator('[data-lab-node="0"]').focus();
+      await page.keyboard.press('Enter');
+      assert.equal(await page.locator('#lab-detail h3').innerText(), 'Sistema de pedidos');
+      assert.equal(await page.locator('[data-lab-node="0"]').getAttribute('aria-pressed'), 'true');
+      await page.locator('[data-lab-example="clientes"]').click();
+      assert.equal(await page.locator('.lab-node').count(), 3);
+      assert.equal(await lab.getAttribute('data-state'), 'waiting');
+      assert.equal(await page.locator('#lab-detail h3').innerText(), 'Automação Luminor');
+      assert.equal(await page.evaluate(() => window.LuminorExperiences.pendingTimers()), 0);
+      if (width === 390 || width === 1440) await page.locator('#integracoes-lab').screenshot({ path: resolve(root, `screenshots/Luminor_Integracoes_${width}.png`) });
+      await page.locator('[data-lab-example="financeiro"]').click();
       const brokenAnchors = await page.locator('a[href^="#"]').evaluateAll(links => links.filter(link => !document.getElementById(link.hash.slice(1))).map(link => link.hash));
       assert.deepEqual(brokenAnchors, []);
       assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto', 'Reduced motion disables smooth anchor scrolling');
@@ -154,7 +186,7 @@ const { pathToFileURL } = require('node:url');
       await checkAnchorHeading('main');
       await page.locator('.site-header .brand').click();
       await checkAnchorHeading('inicio');
-      for (const id of ['solucoes', 'metodo', 'processos', 'simulador', 'faq', 'contato']) {
+      for (const id of ['solucoes', 'integracoes-lab', 'metodo', 'processos', 'simulador', 'faq', 'contato']) {
         await page.evaluate(id => { location.hash = id; }, id);
         await checkAnchorHeading(id);
       }
@@ -269,6 +301,36 @@ const { pathToFileURL } = require('node:url');
     await animated.emulateMedia({ reducedMotion: 'reduce' });
     await animated.waitForSelector('#automation-demo[data-playing="false"]');
     await animated.emulateMedia({reducedMotion:'no-preference'});
+    // Aba oculta: o fluxo pausa e nenhum temporizador continua ativo.
+    const setHidden = hidden => animated.evaluate(value => {
+      if (value) Object.defineProperty(document, 'hidden', { value: true, configurable: true }); else delete document.hidden;
+      document.dispatchEvent(new Event('visibilitychange'));
+    }, hidden);
+    await animated.locator('#demo-play').click();
+    assert.equal(await demoState(), 'running');
+    await setHidden(true);
+    assert.equal(await demoState(), 'paused', 'A hidden tab pauses the flow');
+    assert.equal(await pendingTimers(), 0);
+    await setHidden(false);
+    // Laboratório com movimento: o pulso percorre a ligação ativa; trocar de exemplo cancela a simulação.
+    const labState = () => animated.locator('#integration-lab').getAttribute('data-state');
+    await animated.locator('#integration-lab').scrollIntoViewIfNeeded();
+    await animated.locator('#lab-run').click();
+    await animated.waitForSelector('.lab-link[data-state="active"]');
+    assert.equal(await animated.locator('.lab-link[data-state="active"] .lab-pulse').evaluate(el => getComputedStyle(el).animationName), 'lab-pulse-h');
+    assert(await pendingTimers() > 0);
+    await animated.locator('[data-lab-example="estoque"]').click();
+    assert.equal(await labState(), 'waiting', 'Switching example cancels the simulation');
+    assert.equal(await pendingTimers(), 0, 'No timer survives an example switch');
+    await animated.locator('#lab-failure').click();
+    assert.equal(await labState(), 'processing');
+    await setHidden(true);
+    assert.equal(await labState(), 'simulated-error', 'A hidden tab completes the simulation at once');
+    assert.equal(await pendingTimers(), 0);
+    await setHidden(false);
+    await animated.locator('#lab-retry').click();
+    await animated.waitForSelector('#integration-lab[data-state="success"]');
+    assert.equal(await pendingTimers(), 0);
     await animated.locator('#team-experience').scrollIntoViewIfNeeded();
     await animated.waitForSelector('#team-experience[data-phase="before"][data-playing="true"]');
     const start=await animated.locator('.person-1').evaluate(el=>getComputedStyle(el).transform);

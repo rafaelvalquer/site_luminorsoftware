@@ -71,6 +71,16 @@ async function checkContrast(page, state) {
       await page.locator('[data-dist="organizado"]').click();
       await checkContrast(page, `dashboard empty state, ${width}`);
       await page.keyboard.press('Escape');
+      // Laboratório de integrações (área escura): repouso, falha simulada e nova tentativa concluída.
+      await page.locator('#integration-lab').scrollIntoViewIfNeeded();
+      await checkContrast(page, `integration lab idle, ${width}`);
+      await page.locator('#lab-failure').click();
+      await checkContrast(page, `integration lab failure, ${width}`);
+      await page.locator('#lab-retry').click();
+      await checkContrast(page, `integration lab retry, ${width}`);
+      await page.locator('[data-lab-node="2"]').click();
+      await page.locator('#lab-run').click();
+      await checkContrast(page, `integration lab success, ${width}`);
       for(const scenario of ['planilhas','documentos','atendimento']){
         await page.locator(`[data-demo-scenario="${scenario}"]`).click();
         await page.locator('[data-demo-step="3"]').click();
