@@ -1,0 +1,251 @@
+{
+  "label": "baseline",
+  "base": "http://localhost:4173/",
+  "date": "2026-11-10T23:02:53.486Z",
+  "viewports": {
+    "desktop": {
+      "totals": {
+        "visible": 1238,
+        "explanatory": 772,
+        "demo": 300,
+        "controls": 109,
+        "form": 57
+      },
+      "sections": {
+        "inicio": {
+          "visible": 150,
+          "explanatory": 60,
+          "demo": 83,
+          "controls": 7,
+          "form": 0
+        },
+        "solucoes": {
+          "visible": 205,
+          "explanatory": 171,
+          "demo": 0,
+          "controls": 34,
+          "form": 0
+        },
+        "integracoes-lab": {
+          "visible": 202,
+          "explanatory": 20,
+          "demo": 182,
+          "controls": 0,
+          "form": 0
+        },
+        "metodo": {
+          "visible": 106,
+          "explanatory": 106,
+          "demo": 0,
+          "controls": 0,
+          "form": 0
+        },
+        "processos": {
+          "visible": 178,
+          "explanatory": 162,
+          "demo": 0,
+          "controls": 16,
+          "form": 0
+        },
+        "simulador": {
+          "visible": 108,
+          "explanatory": 69,
+          "demo": 35,
+          "controls": 4,
+          "form": 0
+        },
+        "diferenciais": {
+          "visible": 95,
+          "explanatory": 95,
+          "demo": 0,
+          "controls": 0,
+          "form": 0
+        },
+        "faq": {
+          "visible": 80,
+          "explanatory": 36,
+          "demo": 0,
+          "controls": 44,
+          "form": 0
+        },
+        "contato": {
+          "visible": 114,
+          "explanatory": 53,
+          "demo": 0,
+          "controls": 4,
+          "form": 57
+        }
+      },
+      "order": [
+        {
+          "id": "inicio",
+          "heading": "Seu negócio cresce. Seus processos precisam acompanhar.",
+          "height": 1054
+        },
+        {
+          "id": "solucoes",
+          "heading": "O problema muda.A solução acompanha.",
+          "height": 1006
+        },
+        {
+          "id": "integracoes-lab",
+          "heading": "Seus sistemas podemtrabalhar juntos.",
+          "height": 1266
+        },
+        {
+          "id": "metodo",
+          "heading": "Primeiro, seu processo.Depois, a tecnologia.",
+          "height": 774
+        },
+        {
+          "id": "processos",
+          "heading": "O que se repete aípode virar automação.",
+          "height": 1244
+        },
+        {
+          "id": "simulador",
+          "heading": "Do corre-correao trabalho com foco.",
+          "height": 1348
+        },
+        {
+          "id": "diferenciais",
+          "heading": "O software precisafuncionar para quem usa.",
+          "height": 723
+        },
+        {
+          "id": "faq",
+          "heading": "Algumas dúvidasantes de começar.",
+          "height": 861
+        },
+        {
+          "id": "contato",
+          "heading": "Conte o que está tomando tempo da sua equipe. Vamos encontrar uma solução.",
+          "height": 1028
+        }
+      ],
+      "pageHeight": 9813
+    },
+    "mobile": {
+      "totals": {
+        "visible": 1238,
+        "explanatory": 772,
+        "demo": 300,
+        "controls": 109,
+        "form": 57
+      },
+      "sections": {
+        "inicio": {
+          "visible": 150,
+          "explanatory": 60,
+          "demo": 83,
+          "controls": 7,
+          "form": 0
+        },
+        "solucoes": {
+          "visible": 205,
+          "explanatory": 171,
+          "demo": 0,
+          "controls": 34,
+          "form": 0
+        },
+        "integracoes-lab": {
+          "visible": 202,
+          "explanatory": 20,
+          "demo": 182,
+          "controls": 0,
+          "form": 0
+        },
+        "metodo": {
+          "visible": 106,
+          "explanatory": 106,
+          "demo": 0,
+          "controls": 0,
+          "form": 0
+        },
+        "processos": {
+          "visible": 178,
+          "explanatory": 162,
+          "demo": 0,
+          "controls": 16,
+          "form": 0
+        },
+        "simulador": {
+          "visible": 108,
+          "explanatory": 69,
+          "demo": 35,
+          "controls": 4,
+          "form": 0
+        },
+        "diferenciais": {
+          "visible": 95,
+          "explanatory": 95,
+          "demo": 0,
+          "controls": 0,
+          "form": 0
+        },
+        "faq": {
+          "visible": 80,
+          "explanatory": 36,
+          "demo": 0,
+          "controls": 44,
+          "form": 0
+        },
+        "contato": {
+          "visible": 114,
+          "explanatory": 53,
+          "demo": 0,
+          "controls": 4,
+          "form": 57
+        }
+      },
+      "order": [
+        {
+          "id": "inicio",
+          "heading": "Seu negócio cresce. Seus processos precisam acompanhar.",
+          "height": 1859
+        },
+        {
+          "id": "solucoes",
+          "heading": "O problema muda.A solução acompanha.",
+          "height": 2199
+        },
+        {
+          "id": "integracoes-lab",
+          "heading": "Seus sistemas podemtrabalhar juntos.",
+          "height": 2342
+        },
+        {
+          "id": "metodo",
+          "heading": "Primeiro, seu processo.Depois, a tecnologia.",
+          "height": 1490
+        },
+        {
+          "id": "processos",
+          "heading": "O que se repete aípode virar automação.",
+          "height": 2085
+        },
+        {
+          "id": "simulador",
+          "heading": "Do corre-correao trabalho com foco.",
+          "height": 1248
+        },
+        {
+          "id": "diferenciais",
+          "heading": "O software precisafuncionar para quem usa.",
+          "height": 1245
+        },
+        {
+          "id": "faq",
+          "heading": "Algumas dúvidasantes de começar.",
+          "height": 1103
+        },
+        {
+          "id": "contato",
+          "heading": "Conte o que está tomando tempo da sua equipe. Vamos encontrar uma solução.",
+          "height": 1661
+        }
+      ],
+      "pageHeight": 16185
+    }
+  }
+}
