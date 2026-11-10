@@ -1,0 +1,179 @@
+{
+  "label": "final",
+  "base": "http://localhost:4173/",
+  "date": "2026-11-10T23:30:28.080Z",
+  "viewports": {
+    "desktop": {
+      "totals": {
+        "visible": 590,
+        "explanatory": 310,
+        "demo": 137,
+        "controls": 85,
+        "form": 58
+      },
+      "sections": {
+        "inicio": {
+          "visible": 112,
+          "explanatory": 34,
+          "demo": 70,
+          "controls": 8,
+          "form": 0
+        },
+        "solucoes": {
+          "visible": 104,
+          "explanatory": 88,
+          "demo": 0,
+          "controls": 16,
+          "form": 0
+        },
+        "demonstracoes": {
+          "visible": 119,
+          "explanatory": 39,
+          "demo": 67,
+          "controls": 13,
+          "form": 0
+        },
+        "metodo": {
+          "visible": 82,
+          "explanatory": 82,
+          "demo": 0,
+          "controls": 0,
+          "form": 0
+        },
+        "faq": {
+          "visible": 65,
+          "explanatory": 21,
+          "demo": 0,
+          "controls": 44,
+          "form": 0
+        },
+        "contato": {
+          "visible": 108,
+          "explanatory": 46,
+          "demo": 0,
+          "controls": 4,
+          "form": 58
+        }
+      },
+      "order": [
+        {
+          "id": "inicio",
+          "heading": "Sistemas e automações que simplificam seu negócio.",
+          "height": 926
+        },
+        {
+          "id": "solucoes",
+          "heading": "Tecnologia criadapara a sua rotina.",
+          "height": 852
+        },
+        {
+          "id": "demonstracoes",
+          "heading": "Veja a tecnologiafuncionando.",
+          "height": 1120
+        },
+        {
+          "id": "metodo",
+          "heading": "Do diagnósticoà rotina automatizada.",
+          "height": 742
+        },
+        {
+          "id": "faq",
+          "heading": "Dúvidasantes de começar.",
+          "height": 841
+        },
+        {
+          "id": "contato",
+          "heading": "Qual tarefa está tomando tempo da sua equipe?",
+          "height": 1028
+        }
+      ],
+      "pageHeight": 5988
+    },
+    "mobile": {
+      "totals": {
+        "visible": 590,
+        "explanatory": 310,
+        "demo": 137,
+        "controls": 85,
+        "form": 58
+      },
+      "sections": {
+        "inicio": {
+          "visible": 112,
+          "explanatory": 34,
+          "demo": 70,
+          "controls": 8,
+          "form": 0
+        },
+        "solucoes": {
+          "visible": 104,
+          "explanatory": 88,
+          "demo": 0,
+          "controls": 16,
+          "form": 0
+        },
+        "demonstracoes": {
+          "visible": 119,
+          "explanatory": 39,
+          "demo": 67,
+          "controls": 13,
+          "form": 0
+        },
+        "metodo": {
+          "visible": 82,
+          "explanatory": 82,
+          "demo": 0,
+          "controls": 0,
+          "form": 0
+        },
+        "faq": {
+          "visible": 65,
+          "explanatory": 21,
+          "demo": 0,
+          "controls": 44,
+          "form": 0
+        },
+        "contato": {
+          "visible": 108,
+          "explanatory": 46,
+          "demo": 0,
+          "controls": 4,
+          "form": 58
+        }
+      },
+      "order": [
+        {
+          "id": "inicio",
+          "heading": "Sistemas e automações que simplificam seu negócio.",
+          "height": 1582
+        },
+        {
+          "id": "solucoes",
+          "heading": "Tecnologia criadapara a sua rotina.",
+          "height": 2113
+        },
+        {
+          "id": "demonstracoes",
+          "heading": "Veja a tecnologiafuncionando.",
+          "height": 1714
+        },
+        {
+          "id": "metodo",
+          "heading": "Do diagnósticoà rotina automatizada.",
+          "height": 1104
+        },
+        {
+          "id": "faq",
+          "heading": "Dúvidasantes de começar.",
+          "height": 993
+        },
+        {
+          "id": "contato",
+          "heading": "Qual tarefa está tomando tempo da sua equipe?",
+          "height": 1559
+        }
+      ],
+      "pageHeight": 9988
+    }
+  }
+}

@@ -13,7 +13,14 @@ npm test
 npm run build
 ```
 
-`npm test` cobre API local, metadados, sitemap, páginas, consentimento e mensuração. `npm run build` regenera `public/sitemap.xml`. Para atualizar as páginas estáticas comerciais e artigos a partir do conteúdo-fonte do gerador, execute `node scripts/create_seo_pages.mjs`. Para gerar a prévia independente: `python scripts/build_standalone.py`.
+`npm test` cobre API local, metadados, sitemap, páginas, consentimento e mensuração. `npm run build` regenera `public/sitemap.xml`. Para atualizar as páginas estáticas comerciais e artigos a partir do conteúdo-fonte do gerador, execute `node scripts/create_seo_pages.mjs`. Para gerar a prévia independente: `npm run build:preview` (gera `PREVIA_AUTONOMA.html`, usada por `tests/browser_check.cjs`).
+
+A homepage segue o redesign V4 (visual-first): hero com demonstração, quatro soluções com capturas das próprias simulações, galeria "Veja a tecnologia funcionando." (automação, sistema de gestão e integração), método, FAQ e contato. As demonstrações ficam em `public/assets/js/experiences/` (módulos ES nativos, sem build). Com o servidor local ativo:
+
+- `node scripts/capture_demo_shots.cjs` regenera as capturas WebP de `public/assets/img/demos/`;
+- `node tests/homepage_text_audit.cjs <rótulo> <pasta>` conta o texto visível por seção e salva capturas da página.
+
+Linha de base e resultados: `docs/REDESIGN_V4_BASELINE.md` e `docs/REDESIGN_V4_RESULTADOS.md`.
 
 O GitHub Actions executa verificações Chromium de consentimento, responsividade, movimento reduzido e contraste. Para rodar localmente com Playwright e Chrome instalados, use `tests/site_consent_browser.cjs`, `tests/browser_check.cjs` e `tests/visual_check.cjs`.
 
