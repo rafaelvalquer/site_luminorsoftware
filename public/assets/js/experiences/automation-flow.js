@@ -97,7 +97,10 @@ export function setupAutomationFlow(root, { outcome, track = () => {} }) {
     outcomeRoot.inert = reserved;
     outcomeRoot.setAttribute('aria-hidden', String(reserved));
     $$('[data-demo-step]', root).forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.demoStep) === step)));
-    $('#demo-stage-copy').textContent = step === FLOW_LAST_STEP ? FLOW_SCENARIOS[selected].gain : FLOW_SCENARIOS[selected].captions[step];
+    // Durante a reprodução a legenda muda em silêncio; leitores de tela ouvem só a navegação manual e o resultado final.
+    const copy = $('#demo-stage-copy');
+    copy.setAttribute('aria-live', playing() ? 'off' : 'polite');
+    copy.textContent = step === FLOW_LAST_STEP ? FLOW_SCENARIOS[selected].gain : FLOW_SCENARIOS[selected].captions[step];
     if (step !== 2 || !playing()) settlePhase();
     renderControls();
   }
