@@ -28,7 +28,7 @@ function init() {
   if (window.LuminorExperiences) return;
   const galleryRoot = document.getElementById('tech-gallery');
   const panelRoot = document.getElementById('dashboard-panel');
-  if (panelRoot) controllers.dashboard = createDashboardPanel(panelRoot, { track });
+  if (panelRoot) controllers.dashboard = createDashboardPanel(panelRoot, { track, pageSize: 5 });
   const runnerRoot = document.getElementById('process-runner');
   if (runnerRoot) controllers.runner = setupProcessRunner(runnerRoot, { track });
   const labRoot = document.getElementById('integration-lab');

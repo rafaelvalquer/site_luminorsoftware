@@ -435,6 +435,10 @@ button.lab-node:hover{border-color:rgba(255,255,255,.36)}
 .app-window-dark .app-window-bar i{background-color:rgba(255,255,255,.22)}
 .app-window .lab{border:0;border-radius:0}
 .app-window .dashboard-panel{border-radius:0}
+/* Painel na galeria: indicadores compactos. */
+.dashboard-panel .dash-kpi{padding:12px 14px}
+.dashboard-panel .dash-kpi span{min-height:2.7em;font-size:11.5px}
+.dashboard-panel .dash-kpi strong{margin-top:4px;font-size:24px}
 
 /* Demonstração: automação de processos */
 .runner{padding:20px 24px 22px;background-color:var(--surface)}

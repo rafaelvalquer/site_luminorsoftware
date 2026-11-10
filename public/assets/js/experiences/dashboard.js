@@ -118,11 +118,11 @@ export function createCompactOutcome(outcome, { onExplore = () => {} } = {}) {
 }
 
 // ===== Painel completo (na página ou em <dialog>) =====
-export function createDashboardPanel(dialog, { track = () => {} } = {}) {
+export function createDashboardPanel(dialog, { track = () => {}, pageSize = LIST_PAGE } = {}) {
   const modal = typeof dialog.showModal === 'function';
   const body = $('#dashboard-app', dialog);
   const sync = $('[data-dash-sync]', dialog);
-  const state = { scenario: 'planilhas', period: 'semana', category: 'todas', status: 'todos', selected: null, limit: LIST_PAGE };
+  const state = { scenario: 'planilhas', period: 'semana', category: 'todas', status: 'todos', selected: null, limit: pageSize };
   let opener = null;
   let parts = null;
   let fresh = true;
@@ -258,7 +258,7 @@ export function createDashboardPanel(dialog, { track = () => {} } = {}) {
     }
     const remaining = metrics.records.length - state.limit;
     parts.more.hidden = remaining <= 0;
-    parts.more.textContent = remaining > 0 ? `Mostrar mais ${Math.min(remaining, LIST_PAGE)} (${remaining} restantes)` : '';
+    parts.more.textContent = remaining > 0 ? `Mostrar mais ${Math.min(remaining, pageSize)} (${remaining} restantes)` : '';
   }
 
   /** Recalcula a partir da mesma fonte e atualiza só as partes necessárias. */
@@ -279,7 +279,7 @@ export function createDashboardPanel(dialog, { track = () => {} } = {}) {
 
   function setScenario(name) {
     state.scenario = getDashboard(name).key;
-    Object.assign(state, { category: 'todas', status: 'todos', selected: null, limit: LIST_PAGE });
+    Object.assign(state, { category: 'todas', status: 'todos', selected: null, limit: pageSize });
     build();
     update();
   }
@@ -307,12 +307,12 @@ export function createDashboardPanel(dialog, { track = () => {} } = {}) {
     if (control.dataset.dashPeriod) {
       if (control.dataset.dashPeriod === state.period) return;
       state.period = control.dataset.dashPeriod;
-      state.limit = LIST_PAGE;
+      state.limit = pageSize;
       filterEvent('period');
     } else if (control.dataset.dist !== undefined) {
       const key = filterKey(d.distribution);
       state[key] = state[key] === control.dataset.dist ? allValue(d.distribution) : control.dataset.dist;
-      state.limit = LIST_PAGE;
+      state.limit = pageSize;
       filterEvent(key);
     } else if (control.hasAttribute('data-dash-clear-dist')) {
       state[filterKey(d.distribution)] = allValue(d.distribution);
@@ -322,17 +322,17 @@ export function createDashboardPanel(dialog, { track = () => {} } = {}) {
       return;
     } else if (control.dataset.chip !== undefined) {
       state[filterKey(d.chips)] = control.dataset.chip;
-      state.limit = LIST_PAGE;
+      state.limit = pageSize;
       filterEvent(filterKey(d.chips));
     } else if (control.hasAttribute('data-dash-clear')) {
-      Object.assign(state, { category: 'todas', status: 'todos', limit: LIST_PAGE });
+      Object.assign(state, { category: 'todas', status: 'todos', limit: pageSize });
       update();
       parts.chips.querySelector('button')?.focus({ preventScroll: true });
       filterEvent('clear');
       return;
     } else if (control.hasAttribute('data-dash-more')) {
       const first = state.limit;
-      state.limit += LIST_PAGE;
+      state.limit += pageSize;
       update();
       parts.list.children[first]?.querySelector('button')?.focus({ preventScroll: true });
       return;
